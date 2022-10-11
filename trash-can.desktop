@@ -1,5 +1,5 @@
 [Desktop Entry]
 Type=Application
 Exec=pcmanfm-qt trash:///
-Icon=user-trash
-Name=Cestino (Vuoto)
+Icon=user-trash-full
+Name=Cestino (3 oggetti)
