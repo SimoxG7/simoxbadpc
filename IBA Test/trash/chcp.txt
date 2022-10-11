@@ -1,0 +1,9 @@
+chcp
+
+default 850
+
+
+chcp 65001
+
+
+cp1252

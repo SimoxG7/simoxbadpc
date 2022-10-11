@@ -1,0 +1,92 @@
+CREATE TABLE ingredient (
+    id serial PRIMARY KEY,
+    name varchar(50) UNIQUE NOT NULL CHECK (name <> '')
+);
+
+CREATE TABLE cocktail (
+    id serial PRIMARY KEY,
+    name varchar(50) UNIQUE NOT NULL CHECK (name <> ''),
+    --ingredient integer REFERENCES ingredient(id),
+    category varchar(50) NOT NULL CHECK (category IN ('The Unforgettables', 'Contemporary Classics', 'New Era Drinks')),
+    method text NOT NULL,
+    garnish text,
+    history text,
+    note text,
+    simoxrate smallint NOT NULL,
+    link varchar(100) UNIQUE NOT NULL,
+    imageurl varchar(100) UNIQUE NOT NULL
+);
+
+CREATE TABLE ci_relation (
+    c_id int REFERENCES cocktail(id),
+    i_id int REFERENCES ingredient(id),
+    i_quantity varchar(50) NOT NULL,
+    PRIMARY KEY (c_id, i_id)
+);
+
+--CREATE TABLE category (
+    name varchar(50) PRIMARY KEY CHECK (name IN ('The Unforgettables', 'Contemporary Classics', 'New Era Drinks'))
+);
+
+SELECT ingredient.name, cocktail.name
+FROM ingredient 
+JOIN ci_relation ON i_id = ingredient.id
+JOIN cocktail ON cocktail.id = c_id;
+
+
+SELECT ingredient.name
+FROM ingredient 
+JOIN ci_relation ON i_id = ingredient.id
+JOIN cocktail ON cocktail.id = c_id
+WHERE cocktail.name  = 'Paradise';
+
+SELECT cocktail.name
+FROM ingredient 
+JOIN ci_relation ON i_id = ingredient.id
+JOIN cocktail ON cocktail.id = c_id
+WHERE ingredient.name  = 'Sweet Red Vermouth';
+
+-- group by cocktail
+
+CREATE MATERIALIZED VIEW materialized_relation AS 
+SELECT cocktail.name AS cocktail_name, ingredient.name AS ingredient_name, i_quantity as ingredient_quantity
+FROM cocktail
+JOIN ci_relation ON cocktail.id = ci_relation.c_id
+JOIN ingredient ON ingredient.id = ci_relation.i_id;
+
+
+
+SELECT id, GROUP_CONCAT(data)
+ FROM yourtable
+ GROUP BY id
+ 
+SELECT cocktail.name, string_agg(ingredient.name, ', ') AS ingredients
+FROM cocktail 
+JOIN ci_relation ON cocktail.id = ci_relation.c_id
+JOIN ingredient ON ingredient.id = ci_relation.i_id
+GROUP BY cocktail.name;
+
+
+--perfection
+
+CREATE MATERIALIZED VIEW perfect_viewer AS
+SELECT cocktail.name, string_agg(ingredient.name, ', ') AS ingredients
+FROM cocktail 
+JOIN ci_relation ON cocktail.id = ci_relation.c_id
+JOIN ingredient ON ingredient.id = ci_relation.i_id
+GROUP BY cocktail.name, cocktail.id
+ORDER BY cocktail.id;
+
+
+
+CREATE MATERIALIZED VIEW perfect_viewer_with_quantity AS
+SELECT cocktail.name, string_agg(ingredient.name || ' - ' || ci_relation.i_quantity, ', ') AS ingredients_and_quantities
+FROM cocktail 
+JOIN ci_relation ON cocktail.id = ci_relation.c_id
+JOIN ingredient ON ingredient.id = ci_relation.i_id
+GROUP BY cocktail.name, cocktail.id
+ORDER BY cocktail.id;
+
+
+
+

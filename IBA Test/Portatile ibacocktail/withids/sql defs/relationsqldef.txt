@@ -1,0 +1,1 @@
+INSERT INTO cocktailingredient_relation(c_id, i_id) VALUES 

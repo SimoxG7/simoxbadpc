@@ -1,0 +1,43 @@
+cocktails (ingredienti, nome, difficoltà di reperimento di ingredienti basata su singolo ingrediente, ricetta, note), menu (contemporary, unforgettables, new era), ingredienti (nome, difficoltà a reperirlo)
+
+cocktail -> 
+	contains ingredient
+	search by name
+	search by rate
+	search by menu
+	numingredients
+
+in terminale o file output (output.txt)
+
+
+
+add iba link
+se lista vuota -> stampa "nessun drink corrisponde", se non vuota stampa "ecco la lista dei drink"
+cambiare ingredient da next a nextline
+
+
+<name>, <category>
+INGREDIENTS
+<q1> - <ing1>
+...
+<qn> - <ingn>
+METHOD
+<text>
+GARNISH
+<N/A or text>
+HISTORY
+<N/A or text>
+NOTE
+<N/A or text>
+
+/-/
+
+
+
+
+GARNISH
+N/A
+HISTORY
+N/A
+NOTE
+N/A

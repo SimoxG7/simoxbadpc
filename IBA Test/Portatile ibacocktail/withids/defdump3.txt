@@ -1,0 +1,921 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 13.5 (Ubuntu 13.5-0ubuntu0.21.10.1)
+-- Dumped by pg_dump version 13.5 (Ubuntu 13.5-0ubuntu0.21.10.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: ibacocktails; Type: SCHEMA; Schema: -; Owner: simox
+--
+
+CREATE SCHEMA ibacocktails;
+
+
+ALTER SCHEMA ibacocktails OWNER TO simox;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: ci_relation; Type: TABLE; Schema: ibacocktails; Owner: simox
+--
+
+CREATE TABLE ibacocktails.ci_relation (
+    c_id integer NOT NULL,
+    i_id integer NOT NULL,
+    i_quantity character varying(50) NOT NULL
+);
+
+
+ALTER TABLE ibacocktails.ci_relation OWNER TO simox;
+
+--
+-- Name: cocktail; Type: TABLE; Schema: ibacocktails; Owner: simox
+--
+
+CREATE TABLE ibacocktails.cocktail (
+    id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    category character varying(50) NOT NULL,
+    method text NOT NULL,
+    garnish text,
+    history text,
+    note text,
+    simoxrate smallint NOT NULL,
+    link character varying(100) NOT NULL,
+    imageurl character varying(100) NOT NULL,
+    CONSTRAINT cocktail_category_check CHECK (((category)::text = ANY ((ARRAY['The Unforgettables'::character varying, 'Contemporary Classics'::character varying, 'New Era Drinks'::character varying])::text[]))),
+    CONSTRAINT cocktail_name_check CHECK (((name)::text <> ''::text))
+);
+
+
+ALTER TABLE ibacocktails.cocktail OWNER TO simox;
+
+--
+-- Name: cocktail_id_seq; Type: SEQUENCE; Schema: ibacocktails; Owner: simox
+--
+
+CREATE SEQUENCE ibacocktails.cocktail_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE ibacocktails.cocktail_id_seq OWNER TO simox;
+
+--
+-- Name: cocktail_id_seq; Type: SEQUENCE OWNED BY; Schema: ibacocktails; Owner: simox
+--
+
+ALTER SEQUENCE ibacocktails.cocktail_id_seq OWNED BY ibacocktails.cocktail.id;
+
+
+--
+-- Name: ingredient; Type: TABLE; Schema: ibacocktails; Owner: simox
+--
+
+CREATE TABLE ibacocktails.ingredient (
+    id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    CONSTRAINT ingredient_name_check CHECK (((name)::text <> ''::text))
+);
+
+
+ALTER TABLE ibacocktails.ingredient OWNER TO simox;
+
+--
+-- Name: ingredient_id_seq; Type: SEQUENCE; Schema: ibacocktails; Owner: simox
+--
+
+CREATE SEQUENCE ibacocktails.ingredient_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE ibacocktails.ingredient_id_seq OWNER TO simox;
+
+--
+-- Name: ingredient_id_seq; Type: SEQUENCE OWNED BY; Schema: ibacocktails; Owner: simox
+--
+
+ALTER SEQUENCE ibacocktails.ingredient_id_seq OWNED BY ibacocktails.ingredient.id;
+
+
+--
+-- Name: perfect_viewer; Type: MATERIALIZED VIEW; Schema: ibacocktails; Owner: simox
+--
+
+CREATE MATERIALIZED VIEW ibacocktails.perfect_viewer AS
+ SELECT cocktail.name,
+    string_agg((ingredient.name)::text, ', '::text) AS ingredients
+   FROM ((ibacocktails.cocktail
+     JOIN ibacocktails.ci_relation ON ((cocktail.id = ci_relation.c_id)))
+     JOIN ibacocktails.ingredient ON ((ingredient.id = ci_relation.i_id)))
+  GROUP BY cocktail.name, cocktail.id
+  ORDER BY cocktail.id
+  WITH NO DATA;
+
+
+ALTER TABLE ibacocktails.perfect_viewer OWNER TO simox;
+
+--
+-- Name: perfect_viewer_with_quantity; Type: MATERIALIZED VIEW; Schema: ibacocktails; Owner: simox
+--
+
+CREATE MATERIALIZED VIEW ibacocktails.perfect_viewer_with_quantity AS
+ SELECT cocktail.name,
+    string_agg((((ingredient.name)::text || ' - '::text) || (ci_relation.i_quantity)::text), ', '::text) AS ingredients_and_quantities
+   FROM ((ibacocktails.cocktail
+     JOIN ibacocktails.ci_relation ON ((cocktail.id = ci_relation.c_id)))
+     JOIN ibacocktails.ingredient ON ((ingredient.id = ci_relation.i_id)))
+  GROUP BY cocktail.name, cocktail.id
+  ORDER BY cocktail.id
+  WITH NO DATA;
+
+
+ALTER TABLE ibacocktails.perfect_viewer_with_quantity OWNER TO simox;
+
+--
+-- Name: cocktail id; Type: DEFAULT; Schema: ibacocktails; Owner: simox
+--
+
+ALTER TABLE ONLY ibacocktails.cocktail ALTER COLUMN id SET DEFAULT nextval('ibacocktails.cocktail_id_seq'::regclass);
+
+
+--
+-- Name: ingredient id; Type: DEFAULT; Schema: ibacocktails; Owner: simox
+--
+
+ALTER TABLE ONLY ibacocktails.ingredient ALTER COLUMN id SET DEFAULT nextval('ibacocktails.ingredient_id_seq'::regclass);
+
+
+--
+-- Data for Name: ci_relation; Type: TABLE DATA; Schema: ibacocktails; Owner: simox
+--
+
+COPY ibacocktails.ci_relation (c_id, i_id, i_quantity) FROM stdin;
+1	1	45 ml
+1	2	30 ml
+1	3	22.5 ml
+1	4	15 ml
+2	5	30 ml
+2	6	30 ml
+2	7	30 ml
+3	8	30 ml
+3	9	30 ml
+3	10	A splash
+4	11	30 ml
+4	12	30 ml
+4	13	30 ml
+5	11	45 ml
+5	14	15 ml
+5	3	15 ml
+5	15	1 Bar Spoon
+6	16	45 ml
+6	17	15 ml
+6	18	60 ml
+6	19	1 dash
+6	20	Top up
+7	21	52.5 ml
+7	22	2 teaspoons
+7	3	22.5 ml
+7	23	22.5 ml
+8	20	100 ml
+8	24	50 ml
+9	25	30 ml
+9	5	30 ml
+9	26	30 ml
+9	3	20 ml
+10	27	50 ml
+10	28	20 ml
+11	27	45 ml
+11	29	90 ml
+11	3	15 ml
+11	30	2 dashes
+11	31	Up to taste
+11	32	Up to taste
+11	33	Up to taste
+12	34	45 ml
+12	8	30 ml
+12	9	30 ml
+13	11	50 ml
+13	3	25 ml
+13	35	12,5 ml
+13	36	15 ml
+14	37	52,5
+14	14	7,5 ml
+14	38	1 Bar Spoon
+14	3	15 ml
+14	39	1 Bar Spoon
+14	40	2 Dashes
+15	41	60 ml
+15	19	15 ml
+15	42	15 ml
+15	43	50 ml
+16	44	60 ml
+16	45	1 (cut into small wedges)
+16	46	4 Teaspoons
+17	47	40 ml
+17	14	10 ml
+17	3	10 ml
+17	48	2 Dashes
+18	49	90 ml
+18	5	10 ml
+18	50	2 dashes
+18	51	Few drops (Optional)
+18	52	1
+19	11	45 ml
+19	53	15 ml
+19	3	15 ml
+19	54	Few Drops
+20	11	30 ml
+20	55	30 ml
+20	56	30 ml
+20	3	30 ml
+20	57	1 dash
+21	58	40 ml
+21	55	15 ml
+21	19	15 ml
+21	59	30 ml
+22	25	50 ml
+22	60	120ml
+22	19	10 ml
+23	61	60 ml
+23	19	20 ml
+23	62	2 Bar Spoons
+24	63	60 ml
+24	64	100 ml
+25	11	60 ml
+25	65	10 ml
+26	27	50 ml
+26	66	30 ml
+26	35	10 ml
+26	67	1
+27	68	50 ml
+27	69	Fill up
+28	11	30 ml
+28	3	15 ml
+28	35	15 ml
+28	70	60 ml
+29	5	35 ml
+29	71	35 ml
+30	27	45 ml
+30	72	15 ml
+30	18	15 ml
+31	11	45 ml
+31	3	30 ml
+31	39	10 ml
+31	10	Splash
+32	17	20 ml
+32	26	20 ml
+32	23	20 ml
+32	7	10 ml
+33	73	20 ml
+33	74	20 ml
+33	7	20 ml
+34	75	45 ml
+34	9	45 ml
+34	68	7.5 ml
+35	76	60 ml
+35	77	40 ml
+35	14	15 ml
+35	78	15 ml
+36	5	40 ml
+36	79	120 ml
+36	80	Dash (optional)
+37	81	30 ml
+37	82	15 ml
+37	83	15 ml
+37	14	1 Bar Spoon
+37	19	22.5 ml
+37	39	15 ml
+37	54	Few Drops (Optional)
+38	84	50 ml
+38	85	120 ml
+38	86	50 ml (Chilled)
+38	87	1 teaspoon
+39	11	45 ml
+39	3	30 ml
+39	39	15 ml
+39	10	60 ml
+40	88	90 ml
+40	89	10 ml
+41	11	22.5 ml
+41	90	22.5 ml
+41	14	22.5 ml
+41	19	22.5 ml
+42	91	30 ml
+42	92	20 ml
+42	3	15 ml
+43	27	15 ml
+43	93	15 ml
+43	94	15 ml
+43	11	15 ml
+43	55	15 ml
+43	95	30 ml
+43	96	20 ml
+43	69	Top up
+44	97	30 ml
+44	98	30 ml
+44	99	15 ml
+44	100	15 ml
+44	19	30 ml
+44	39	7.5 ml
+45	101	50 ml
+45	9	20 ml
+45	1	1 dash
+46	102	50 ml
+46	26	20 ml
+46	103	15 ml
+47	75	45 ml
+47	9	45 ml
+47	104	1 Bar Spoon
+47	48	2 Dashes
+48	25	45 ml
+48	18	45 ml
+48	14	7.5 ml
+48	105	5 ml
+49	106	75 ml
+49	20	75 ml
+50	107	60 ml
+50	108	4
+50	109	1 tsp
+50	43	2 tsp
+51	110	45 ml
+51	19	20 ml
+51	111	6 pcs
+51	46	2 tsp
+51	10	Top up
+52	21	45 ml
+52	23	45 ml
+52	57	1 Table Spoon
+52	105	1 Table Spoon
+53	112	45 ml
+53	64	120 ml
+53	113	10 ml
+54	114	22.5 ml
+54	115	22.5 ml
+54	116	22.5 ml
+54	19	22.5 ml
+55	11	30 ml
+55	8	30 ml
+55	9	30 ml
+56	117	60 ml
+56	96	22.5 ml
+56	118	30 ml
+56	54	Few Drops
+56	119	15 ml
+57	120	6/8 pcs
+57	121	45 ml
+57	19	22.5 ml
+57	39	30 ml
+57	1	2 Dashes
+57	122	60 ml
+58	34	45 ml
+58	123	1
+58	1	Few Dashes
+58	124	Few Dashes
+59	125	50 ml
+59	126	5 ml
+59	127	A pinch
+59	128	100 ml
+60	107	30 ml
+60	129	30 ml
+60	116	30 ml
+60	3	30 ml
+61	11	30 ml
+61	12	20 ml
+61	23	15 ml
+62	130	60 ml
+62	131	7.5 ml
+62	3	22.5 ml
+62	22	22.5 ml
+62	132	2-3 quarter size
+63	25	50 ml
+63	133	30 ml
+63	18	50 ml
+64	134	60 ml
+64	3	30 ml
+64	39	20 ml
+64	54	1 Raw
+65	135	45 ml
+65	136	15 ml
+65	137	30 ml
+66	138	15 ml
+66	139	45 ml
+66	140	10 ml
+67	11	45 ml
+67	19	15 ml
+67	3	15 ml
+67	35	30 ml
+67	141	60 ml
+67	142	30ml
+67	143	3 Dashes
+67	144	2 Drops
+67	10	Top up
+68	27	25 ml
+68	3	25 ml
+68	89	15 ml
+68	145	10 ml
+68	146	Top up
+69	147	45 ml
+69	148	25ml
+70	5	50 ml
+70	57	10 ml
+70	123	1
+70	149	2 Dashes
+71	27	40 ml
+71	59	120 ml
+71	77	30 ml
+72	27	40 ml
+72	150	20 ml
+72	23	40 ml
+72	59	40 ml
+73	5	50 ml
+73	26	20 ml
+73	3	20 ml
+74	11	30 ml
+74	151	15 ml
+74	55	7.5 ml
+74	152	7.5 ml
+74	18	120 ml
+74	19	15 ml
+74	105	10 ml
+74	50	A dash
+75	75	60 ml
+75	3	30 ml
+75	39	15 ml
+75	120	5/6
+75	54	Few Drops (Optional)
+76	153	50 ml
+76	154	15 ml
+76	19	15 ml
+76	155	10 ml
+76	156	2 thin Slices
+77	20	90 ml
+77	116	60 ml
+77	157	Splash
+78	5	50 ml
+78	158	20 ml
+79	159	30 ml
+79	11	30 ml
+79	19	15 ml
+79	1	2 Dashes
+79	160	Top up
+80	93	45ml
+80	23	90 ml
+80	105	15 ml
+81	84	50 ml
+81	9	25 ml
+81	90	15 ml
+81	1	2 Dashes
+82	161	60 ml
+82	162	30 ml
+82	163	30 ml
+83	47	30 ml
+83	65	30 ml
+83	14	1/2 Bar Spoon
+83	57	1/4 Bar Spoon
+83	48	3 Dashes
+84	164	45 ml
+84	165	22.5 ml
+84	166	15 ml
+84	167	15 ml
+84	54	10ml (Optional)
+85	11	45 ml
+85	27	15 ml
+85	56	7.5 ml
+86	101	30 ml
+86	5	30 ml
+86	168	30 ml
+86	169	1 Bar Spoon
+86	149	2 Dashes
+87	107	45 ml
+87	3	25 ml
+87	35	20 ml
+87	170	20 ml
+88	11	40 ml
+88	26	30 ml
+88	3	20 ml
+89	94	30 ml
+89	17	15 ml
+89	26	15 ml
+89	19	15 ml
+90	171	45 ml
+90	172	45 ml
+90	173	30 ml
+90	113	20 ml
+90	83	15 ml
+90	174	15 ml
+90	175	1 tsp
+90	50	1 dash
+90	176	6 drops
+\.
+
+
+--
+-- Data for Name: cocktail; Type: TABLE DATA; Schema: ibacocktails; Owner: simox
+--
+
+COPY ibacocktails.cocktail (id, name, category, method, garnish, history, note, simoxrate, link, imageurl) FROM stdin;
+1	Trinidad Sour	New Era Drinks	Pour all ingredients into a cocktail shaker, shake well with ice, strain into a chilled cocktail glass.	NULL	NULL	NULL	3	https://iba-world.com/trinidad-sour/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-24-Trinidad-Sour.jpg
+2	Alexander	The Unforgettables	Pour all ingredients into cocktail shaker filled with ice cubes. Shake and strain into a chilled cocktail glass.	Sprinkle fresh ground nutmeg on top.	The Alexander cocktail was born in London in 1922 by Hery Mc Elhone, at Ciro's Club in honor of a famous bride, at the beginning it was called Panama, Gin was used instead of Cognac and light cocoa cream instead of dark. Throughout its history, Alexander has given rise to many other variations: 1) Grasshopper: This variant is also part of the Iba list and involves the use of creme de menthe verde instead of cognac. 2) Alexandra: Use the light cocoa cream instead of the dark one and replace the nutmeg with cocoa. 3) Alexander's Sister: Use creme de menthe instead of creme de cacao. 4) Alejandro: Replace cognac with rum.	NULL	3	https://iba-world.com/alexander/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-01-Alexander.jpg
+3	Americano	The Unforgettables	Mix the ingredients directly in an old fashioned glass filled with ice cubes. Add a splash of Soda Water. Stir gently.	Garnish with half orange slice and a lemon zest.	The story of the Americano dates back to the second half of the 1800s in Gaspare Campari's bar in Milan. Over the years the cocktail acquires notoriety thanks to some homages from the world of cinema, including James Bond (007 Casino Royale) whose favorite cocktail was, precisely, the Americano. The nickname “American” was born when Primo Carnera, a giant Italian boxer, became world heavyweight champion at Madison Square Garden in New York.  When Carnera returned to Italy with the title, he was greeted with this very Italian cocktail which, for the occasion, was called “Americano”. The Americano entered the IBA Cocktail List only in 1987 but, in reality, it was a cocktail that spread all over Italy during the 1930s.	NULL	6	https://iba-world.com/americano/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-02-Americano.jpg
+4	Angel Face	The Unforgettables	Pour all ingredients into cocktail shaker filled with ice cubes. Shake and strain into a chilled cocktail glass.	NULL	Although the origin of the cocktail is not known, the main hypotheses assume that it was born in the twenties of the twentieth century in France: this thesis would prove the presence of calvados, a liqueur commonly used in France and, in particular, in that period, as an epidemic of phylloxera in European vineyards had limited the production of brandy. On this basis, one of the most frequent hypotheses has it that the cocktail was created by Harry MacElhone, founder of Harry's New York Bar in Paris on July 19, 1919, in honor of the celebrations for the victory of the First World War. The first reliable evidence, however, dates back to 1930 when Harry Craddock included the Angel Face among the recipes of his book “Savoy cocktail book”. Some sources indicate that the name derives from that of an American gangster active during Prohibition; less likely the dedication to Rick Blaine, the protagonist of Casablanca played by Humphrey Bogart, as the film follows the first testimonies (1942).	NULL	3	https://iba-world.com/angel-face/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-03-Angel-Face.jpg
+5	Aviation	The Unforgettables	Add all ingredients into a cocktail shaker. Shake with cracked ice and strain into a chilled cocktail glass.	Optional Maraschino Cherry.	Aviation was created in New York at the Walkick hotel by the head bartender Hugo Ensslin while he was writing his book “Recipes for Mixed Drinks” (1916) one of the last cocktail books published before the start of American Prohibition. Lately David Wondrich found the aviation recipe in a 1911 magazine, so the recipe is thought to have been born earlier then 1916. In his book Ensslin also indicates the type of Gin to be used ‘El Bart Gin “and the recipe is made up in addition to gin, with lemon juice, maraschino Luxardo and Creme di Violette. The recipe is found again in Harry Craddock's 1930 Savoy Cocktail Book but without the Creme de Violette, this probably due to the difficulty of finding the violet cream during the post-war period In the 1960s it was still unavailable and therefore, simply, the basic ingredient of the Aviation cocktail was discontinued and the bartenders definitively gave up the characteristic blue color of the drink. The IBA proposes it today in its original version with the creme de violette which is now on the market again. This fragrant ingredient not only gave the mix a sweetly floral taste, but also gave it a beautiful sky blue color.	NULL	4	https://iba-world.com/692/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-04-Aviation.jpg
+6	Barracuda	New Era Drinks	Pour all ingredients into cocktail shaker except the Prosecco, shake well with ice, strain into chilled highball glass filled with ice and top up with Prosecco.	Pineapple and Cherry, optional mint sprig for additional aroma.	NULL	NULL	4	https://iba-world.com/barracuda/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-01-Barracuda.jpg
+7	Bee's Knees	New Era Drinks	Stir honey with lemon and orange juices until it dissolves, add gin and shake with ice. Strain into a chilled cocktail glass.	Optionally garnish with a lemon or orange zest.	NULL	NULL	10	https://iba-world.com/bees-knees/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-03-Bees-Knees.jpg
+8	Bellini	Contemporary Classics	Pour peach puree into the mixing glass with ice, add the Prosecco wine. Stir gently and pour in a chilled flute glass.	NULL	NULL	Puccini – Fresh Mandarin Orange Juice; Rossini – Fresh Strawberry Puree; Tintoretto – Fresh Pomegranate Juice.	5	https://iba-world.com/bellini/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-01-Bellini-scaled.jpg
+9	Between the Sheets	The Unforgettables	Add all ingredients into a cocktail shaker. Shake with ice and strain into a chilled cocktail glass.	NULL	NULL	NULL	3	https://iba-world.com/between-the-sheets/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-05-Between-The-Sheets.jpg
+10	Black Russian	Contemporary Classics	Pour the ingredients into the old fashioned glass filled with ice cubes. Stir gently.	NULL	NULL	White Russian – Float fresh cream on the top and stir in slowly.	8	https://iba-world.com/black-russian/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-02-Black-Russian-scaled.jpg
+11	Bloody Mary	Contemporary Classics	Stir gently all the ingredients in a mixing glass with ice, pour into rocks glass.	Celery, Lemon Wedge (Optional)	NULL	If requested served with ice, pour into highball glass.	5	https://iba-world.com/bloody-mary/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-03-Bloody-Marry-scaled.jpg
+12	Boulevardier	The Unforgettables	Pour all ingredients into mixing glass with ice cubes. Stir well. Strain into a chilled cocktail glass.	Garnish with orange zest, optionally a lemon zest.	NULL	NULL	5	https://iba-world.com/boulevardier/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-06-Boulevardier.jpg
+36	Horse's Neck	Contemporary Classics	Pour Cognac and ginger ale directly into a highball glass with ice cubes. Stir gently. If preferred, add dashes of Angostura Bitter.	Garnish with a rind of one lemon spiral.	NULL	NULL	4	https://iba-world.com/horses-neck/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-14-Horse_s-Neck-scaled.jpg
+13	Bramble	New Era Drinks	Pour all ingredients into a cocktail shaker except the Creme de Mure, shake well with ice, strain into chilled old fashioned glass filled with crushed ice, then pour the blackberry liqueur (Creme de Mure) over the top of the drink, in a circular motion.	Garnish optionally with a lemon slice and blackberries.	NULL	NULL	6	https://iba-world.com/bramble/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-02-Bramble.jpg
+14	Brandy Crusta	The Unforgettables	Mix together all ingredients with ice cubes in a mixing glass and strain into prepared slim cocktail glass.	Rub a slice of orange (or lemon) around the rim of the glass and dip it in pulverized white sugar, so that the sugar will adhere to the edge of the glass. Carefully curling place the orange/lemon peel around the inside of the glass.	NULL	NULL	1	https://iba-world.com/brandy-crusta/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-07-Brandy-Crusta.jpg
+15	Canchanchara	New Era Drinks	Mix honey with water and lime juice and spread the mixture on the bottom and sides of the glass. Add cracked ice, and then the rum. End by energetically stirring from bottom to top.	Lime wedge.	NULL	NULL	7	https://iba-world.com/cachanchara/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-04-Cachanchara.jpg
+16	Caipirinha	Contemporary Classics	Place lime and sugar into a double old fashioned glass and muddle gently. Fill the glass with cracked ice and add Cachaça. Stir gently to involve ingredients.	NULL	NULL	Caipiroska – Instead of Cachaça use Vodka;	6	https://iba-world.com/caipirinha/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-04-Caipirinha-scaled.jpg
+17	Casino	The Unforgettables	Pour all ingredients into cocktails shaker, shake well with ice, strain into chilled rocks glass with ice.	Garnish with lemon zest and a maraschino cherry.	NULL	NULL	5	https://iba-world.com/casino/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-08-Casino.jpg
+18	Champagne Cocktail	Contemporary Classics	Place the sugar cube with 2 dashes of bitters in a large Champagne glass, add the cognac. Pour gently chilled Champagne.	Garnish with orange zest and maraschino cherry.	NULL	NULL	2	https://iba-world.com/champagne-cocktail/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-05-Champagne-Cocktail-scaled.jpg
+19	Clover Club	The Unforgettables	Pour all ingredients into cocktails shaker, shake well with ice, strain into chilled cocktail glass.	Fresh raspberries.	NULL	NULL	7	https://iba-world.com/clover-club/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-09-Clover-Club.jpg
+20	Corpse Reviver #2	Contemporary Classics	Pour all ingredients into shaker with ice. Shake well and strain in chilled cocktail glass.	Garnish with orange zest.	NULL	NULL	2	https://iba-world.com/corpse-reviver-2/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-07-Corpse-Reviver2-scaled.jpg
+21	Cosmopolitan	Contemporary Classics	Add all ingredients into a cocktail shaker filled with ice. Shake well and strain into a large cocktail glass.	Garnish with a lemon twist.	NULL	NULL	2	https://iba-world.com/cosmopolitan/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-06-Cosmopolitan-scaled.jpg
+22	Cuba Libre	Contemporary Classics	Build all ingredients in a highball glass filled with ice.	Garnish with lime wedge.	NULL	NULL	10	https://iba-world.com/cuba-libre/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-08-Cuba-Libre-scaled.jpg
+23	Daiquiri	The Unforgettables	In a cocktail shaker add all ingredients. Stir well to dissolve the sugar. Add ice and shake. Strain into chilled cocktail glass.	NULL	NULL	NULL	10	https://iba-world.com/daiquiri/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-10-Daiquiri.jpg
+24	Dark ‘n' stormy	New Era Drinks	In a highball glass filled with ice pour the ginger beer and top floating with the Rum.	Garnish with a lime wedge or slice.	NULL	NULL	7	https://iba-world.com/dark-n-stormy/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-05-DarkNStormy.jpg
+25	Dry Martini	The Unforgettables	Pour all ingredients into mixing glass with ice cubes. Stir well. Strain into chilled martini cocktail glass.	Squeeze oil from lemon peel onto the drink, or garnish with green olives if requested.	NULL	NULL	7	https://iba-world.com/dry-martini/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-11-Dry-Martini.jpg
+26	Espresso Martini	New Era Drinks	Pour all ingredients into cocktail shaker, shake well with ice, strain into chilled cocktail glass.	NULL	NULL	NULL	8	https://iba-world.com/espresso-martini/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-06-Espresso-Martini.jpg
+27	Fernandito	New Era Drinks	Pour the Fernet Branca into a double old fashioned glass with ice, fill the glass up with Cola. Gently stir.	NULL	NULL	NULL	9	https://iba-world.com/fernandito/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-07-Fernandito.jpg
+28	French 75	Contemporary Classics	Pour all the ingredients, except Champagne, into a shaker. Shake well and strain into a Champagne flute. Top up with Champagne. Stir gently.	NULL	NULL	NULL	7	https://iba-world.com/french-75/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-09-French-75-scaled.jpg
+29	French Connection	Contemporary Classics	Pour all ingredients directly into an old fashioned glass filled with ice cubes. Stir gently.	NULL	NULL	NULL	5	https://iba-world.com/french-connection/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-10-French-Connection-scaled.jpg
+30	French Martini	New Era Drinks	Pour all ingredients into cocktail shaker, shake well with ice, strain into chilled cocktail glass.	Squeeze oil from lemon peel onto the drink.	NULL	NULL	6	https://iba-world.com/french-martini/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-08-French-Martini.jpg
+31	Gin Fizz	The Unforgettables	Shake all ingredients with ice except soda water. Pour into thin tall Tumbler glass , top with a splash soda water.	Garnish with a lemon slice, optional lemon zest.	NULL	Serve without ice.	10	https://iba-world.com/gin-fizz/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-12-Gin-Fizz.jpg
+32	Golden Dream	Contemporary Classics	Pour all ingredients into shaker filled with ice. Shake briskly for few seconds. Strain into chilled cocktail glass.	NULL	NULL	NULL	5	https://iba-world.com/golden-dream/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-11-Golden-Dream-scaled.jpg
+33	Grasshopper	Contemporary Classics	Pour all ingredients into shaker filled with ice. Shake briskly for few seconds. Strain into chilled cocktail glass.	Mint leaf (optional).	NULL	NULL	3	https://iba-world.com/grasshopper/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-12-Grasshopper-scaled.jpg
+34	Hanky Panky	The Unforgettables	Pour all ingredients into mixing glass with ice cubes. Stir well. Strain into chilled cocktail glass.	Orange zest.	NULL	NULL	5	https://iba-world.com/hanky-panky/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-13-Hanky-Panky.jpg
+35	Hemingway Special	Contemporary Classics	Pour all ingredients into a shaker with ice. Shake well and strain into a large cocktail glass.	NULL	NULL	NULL	4	https://iba-world.com/hemingway-special/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-13-Hemingway-Special-scaled.jpg
+37	Illegal	New Era Drinks	Pour all ingredients into the shaker. Shake vigorously with ice. Strain into a chilled cocktail glass, or “on the rocks” in a traditional clay or terracotta mug.	NULL	NULL	NULL	1	https://iba-world.com/illegal/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-09-Illegal.jpg
+38	Irish Coffee	Contemporary Classics	Warm black coffee is poured into a pre-heated Irish coffee glass. Whiskey and at least one teaspoon of sugar is added and stirred until dissolved. Fresh thick chilled cream is carefully poured over the back of a spoon held just above the surface of the coffee. The layer of cream will float on the coffee without mixing. Plain sugar can be replaced with sugar syrup.	NULL	NULL	NULL	9	https://iba-world.com/irish-coffee/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-15-Irish-Coffee-scaled.jpg
+39	John Collins	The Unforgettables	Pour all ingredients directly into a highball filled with ice. Stir gently.	Garnish with a lemon slice and maraschino cherry.	NULL	Use ‘Old Tom' Gin for Tom Collins.	10	https://iba-world.com/john-collins/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-14-John-Colins.jpg
+40	KIR	Contemporary Classics	Pour Creme de Cassis into glass, top up with white wine.	NULL	NULL	KIR Royal – Use Champagne instead of white wine.	4	https://iba-world.com/kir/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-16-Kir-scaled.jpg
+41	Last word	The Unforgettables	Add all ingredients into a cocktail shaker. Shake with ice and strain into a chilled cocktail glass.	NULL	NULL	NULL	3	https://iba-world.com/last-word/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-15-Last-World.jpg
+42	Lemon drop Martini	New Era Drinks	Pour all ingredients into cocktail shaker, shake well with ice, strain into chilled cocktail glass.	Garnish with sugar rim around the glass.	NULL	NULL	5	https://iba-world.com/lemon-drop-martini/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-10-Lemon-Drop-Martini.jpg
+43	Long Island Ice Tea	Contemporary Classics	Add all ingredients into a highball glass filled with ice. Stir gently.	Lemon Slice (Optional).	NULL	NULL	3	https://iba-world.com/long-island-ice-tea/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-17-Long-Island-Iced-Tea-scaled.jpg
+44	Mai-Tai	Contemporary Classics	Add all ingredients into a shaker with ice. Shake and pour into a double rocks glass or a highball glass.	Garnish with pineapple spear, mint leaves, and lime peel.	NULL	The Martinique molasses rum used by Trader Vic was not an Agricole rum but a type of “rummy” from molasses.	1	https://iba-world.com/mai-tai/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-18-Mai-Tai-scaled.jpg
+45	Manhattan	The Unforgettables	Pour all ingredients into mixing glass with ice cubes. Stir well. Strain into a chilled cocktail glass.	Garnish with a cocktail cherry.	NULL	NULL	6	https://iba-world.com/manhattan/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-16-Manhattan.jpg
+46	Margarita	Contemporary Classics	Add all ingredients into a shaker with ice. Shake and strain into a chilled cocktail glass.	Half salt rim (Optional).	NULL	NULL	5	https://iba-world.com/margarita/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-19-Margarita-1-scaled.jpg
+47	Martinez	The Unforgettables	Pour all ingredients into mixing glass with ice cubes. Stir well. Strain into a chilled cocktail glass.	Lemon zest.	NULL	NULL	4	https://iba-world.com/martinez/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-17-Martinez.jpg
+48	Mary Pickford	The Unforgettables	Pour all ingredients into a cocktail shaker, shake well with ice, strain into a chilled cocktail glass.	NULL	NULL	NULL	5	https://iba-world.com/mary-pickford/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-18-Mary-Pickford.jpg
+49	Mimosa	Contemporary Classics	Pour orange juice into a flute glass and gently pour the sparkling wine. Stir gently.	Garnish with an orange twist (optional).	NULL	Also known as Buck's Fizz.	10	https://iba-world.com/mimosa/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-20-Mimosa-scaled.jpg
+50	Mint Julep	Contemporary Classics	In Julep Stainless Steel Cup gently muddle the mint with sugar and water. Fill the glass with cracked ice, add the Bourbon and stir well until the cup frosts.	Garnish with a mint sprig.	NULL	NULL	9	https://iba-world.com/mint-julep/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-21-Mint-Julep-scaled.jpg
+51	Mojito	Contemporary Classics	Mix mint springs with sugar and lime juice. Add splash of soda water and fill the glass with ice. Pour the rum and top with soda water. Light stir to involve all ingredients.	Garnish with sprigs of mint and slice of lime.	NULL	NULL	10	https://iba-world.com/mojito/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-22-Mojito-scaled.jpg
+52	Monkey Gland	The Unforgettables	Pour all ingredients into a cocktail shaker, shake well with ice, strain into a chilled cocktail glass.	NULL	NULL	NULL	5	https://iba-world.com/monkey-gland/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-19-Monkey-Gland.jpg
+53	Moscow Mule	Contemporary Classics	In a Mule Cup or rocks glass, combine the vodka and ginger beer. Add lime juice and gently stir to involve all ingredients.	Garnish with a lime slice.	NULL	NULL	8	https://iba-world.com/moscow-mule/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-23-Moscow-Mule-scaled.jpg
+54	Naked and Famous	New Era Drinks	Pour all ingredients into cocktail shaker, shake well with ice, strain into chilled cocktail glass.	NULL	NULL	NULL	2	https://iba-world.com/naked-and-famous/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-11-Naked-and-Famous.jpg
+55	Negroni	The Unforgettables	Pour all ingredients directly into a chilled old fashioned glass filled with ice, Stir gently.	Garnish with a half orange slice.	NULL	NULL	7	https://iba-world.com/negroni/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-20-Negroni.jpg
+56	New York Sour	New Era Drinks	Pour all ingredients into the shaker. Shake vigorously with ice. Strain into a chilled rocks glass filled with ice. Float the wine on top.	Garnish with lemon or orange zest with cherry.	NULL	NULL	8	https://iba-world.com/new-york-sour/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-12-NewYorkSour.jpg
+57	Old Cuban	New Era Drinks	Pour all ingredients into cocktail shaker except the wine, shake well with ice, strain into chilled elegant cocktail glass. Top up with the sparkling wine.	Garnish with mint springs.	NULL	NULL	7	https://iba-world.com/old-cuban/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-13-Old-Cuban.jpg
+58	Old Fashioned	The Unforgettables	Place sugar cube in old fashioned glass and saturate with bitter, add few dashes of plain water. Muddle until dissolved. Fill the glass with ice cubes and add whiskey. Stir gently.	Garnish with an orange slice or zest, and a cocktail cherry.	NULL	NULL	9	https://iba-world.com/old-fashioned/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-21-Old-Fashioned.jpg
+59	Paloma	New Era Drinks	Poor the tequila into a highball glass, squeeze the lime juice. Add ice and salt, fill up pink grapefruit soda. Stir gently.	Garnish with a slice of lime.	NULL	NULL	9	https://iba-world.com/paloma/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-14-Paloma.jpg
+60	Paper Plane	New Era Drinks	Pour all ingredients into cocktail shaker, shake well with ice, strain into chilled cocktail glass.	NULL	NULL	NULL	5	https://iba-world.com/paper-plane/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-15-Paper-Plane.jpg
+61	Paradise	The Unforgettables	Pour all ingredients into cocktail shaker, shake well with ice, strain into chilled cocktail glass.	NULL	NULL	NULL	6	https://iba-world.com/paradise/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-22-Paradise.jpg
+62	Penicillin	New Era Drinks	Muddle fresh ginger in a shaker and add the remaining ingredients, except for the Islay single malt whiskey. Fill the shaker with ice and shake. Double-strain into a chilled old fashioned glass with ice. Float the single malt whisky on top.	Garnish with candied ginger.	NULL	NULL	4	https://iba-world.com/penicillin/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-16-Penicillin.jpg
+63	Pina Colada	Contemporary Classics	Blend all the ingredients with ice in an electric blender, pour into a large glass, and serve with straws.	Garnish with a slice of pineapple with a cocktail cherry.	NULL	Historically a few drops of fresh lime juice were added to taste. 4 slices of fresh pineapple can be used instead of juice.	8	https://iba-world.com/pina-colada/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-24-Pina-Colada-scaled.jpg
+64	Pisco Sour	Contemporary Classics	Add all ingredients into a shaker with ice. Shake and strain into a chilled goblet glass.	Few dashes of Amargo bitters on top as an aromatic garnish.	NULL	NULL	6	https://iba-world.com/pisco-sour/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-25-Pisco-Sour-scaled.jpg
+65	Planter's Punch	The Unforgettables	Pour all ingredients directly in a small tumbler or a typical terracotta glass.	Garnish with orange zest.	NULL	Add dilution up to taste, it can be given by water, ice or fresh juices.	4	https://iba-world.com/planters-punch/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-23-Planters-Punch.jpg
+66	Porto Flip	The Unforgettables	Pour all ingredients into a cocktail shaker, shake well with ice, strain into a chilled cocktail glass.	Sprinkle with fresh ground nutmeg.	NULL	NULL	5	https://iba-world.com/porto-flip/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-24-Porto-Flip.jpg
+67	Ramos Fizz	The Unforgettables	Pour all ingredients except soda water in a cocktail shaker with ice, Shake for two minutes, double strain in a glass, pour the drink back in the shaker, and hard shake without ice for one minute. Strain into a highball glass, top up with soda.	NULL	The drink was invented by Henry Ramos in 1888, at his bar Meyer's Table d'Hôtel Internationale in New Orleans. The Ramos Fizz was originally shaken for 12 minutes by a crew of 30 bartenders who passed the shaker from one to another.	NULL	6	https://iba-world.com/ramos-fizz/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-25-Ramos-Fizz.jpg
+68	Russian Spring Punch	New Era Drinks	Pour all ingredients into a cocktail shaker except the sparkling wine, shake well with ice, strain into a chilled tall tumbler glass filled with ice, and top up with sparkling wine.	Garnish with blackberries and optionally a lemon slice as well.	NULL	NULL	5	https://iba-world.com/russian-spring-punch/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-17-Russian-Spring-Punch-1.jpg
+69	Rusty Nail	The Unforgettables	Pour all ingredients directly into an old fashioned glass filled with ice. Stir gently.	Garnish with lemon zest.	NULL	NULL	5	https://iba-world.com/rusty-nail/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-26-Rusty-Nail.jpg
+70	Sazerac	The Unforgettables	Rinse a chilled old-fashioned glass with the absinthe, add crushed ice and set it aside. Stir the remaining ingredients over ice in a mixing glass. Discard the ice and any excess absinthe from the prepared glass, strain the mixed drink into the glass.	Garnish with lemon zest.	NULL	The original recipe changed after the American Civil War, Rye Whiskey substituted Cognac as it became hard to obtain.	3	https://iba-world.com/sazerac/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-27-Sazerac.jpg
+71	Sea Breeze	Contemporary Classics	Build all ingredients in a highball glass filled with ice.	Garnish with orange zest and cherry.	NULL	NULL	4	https://iba-world.com/sea-breeze/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-26-Sea-Breeze-scaled.jpg
+72	Sex on the Beach	Contemporary Classics	Build all ingredients in a highball glass filled with ice.	Garnish with a half orange slice.	NULL	NULL	4	https://iba-world.com/sex-on-the-beach/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-27-Sex-On-The-Beach-scaled.jpg
+73	Sidecar	The Unforgettables	Pour all ingredients into a cocktail shaker, shake well with ice, strain into a chilled cocktail glass.	NULL	NULL	NULL	5	https://iba-world.com/sidecar/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-28-Side-Car-1.jpg
+74	Singapore Sling	Contemporary Classics	Pour all ingredients into a cocktail shaker filled with ice cubes. Shake well. Strain into Hurricane glass.	Garnish with pineapple and maraschino cherry.	NULL	NULL	1	https://iba-world.com/singapore-sling/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-28-Singapore-Sling-scaled.jpg
+75	Southside	New Era Drinks	Pour all ingredients into a cocktail shaker, shake well with ice, double-strain into chilled cocktail glass.	Garnish with mint springs.	NULL	If egg white is used shake vigorously.	10	https://iba-world.com/southside/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-18-South-Side-1.jpg
+76	Spicy Fifty	New Era Drinks	Pour all ingredients into a cocktail shaker, shake well with ice, double-strain into chilled cocktail glass.	Garnish with a red chili pepper.	NULL	NULL	1	https://iba-world.com/spicy-fifty/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-19-Spicy-Fifty-1.jpg
+77	Spritz	New Era Drinks	Build all ingredients into a wine glass filled with ice. Stir gently.	Garnish with a slice of orange.	NULL	There are other versions of the Spritz that use Campari, Cynar or Select instead of Aperol.	9	https://iba-world.com/spritz/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-20-Spritz_ok.jpg
+78	Stinger	The Unforgettables	Pour all ingredients into mixing glass with ice cubes. Stir well. Strain into chilled martini cocktail glass.	Optional mint leave.	NULL	NULL	2	https://iba-world.com/stinger/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-29-Stinger.jpg
+79	Suffering Bastard	New Era Drinks	Pour all ingredients into a cocktail shaker except the ginger beer, shake well with ice, Pour unstrained into a Collins glass or in the original Suffering Bastard mug and top up with ginger beer.	Garnish with mint springs and optionally an orange slice as well.	NULL	NULL	5	https://iba-world.com/suffering-bastard/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-21-Suffering-Bastard.jpg
+80	Tequila Sunrise	Contemporary Classics	Pour tequila and orange juice directly into highball glass filled with ice cubes. Add the grenadine syrup to create chromatic effect (sunrise), do not stir.	Garnish with half orange slice or an orange zest.	NULL	NULL	5	https://iba-world.com/tequila-sunrise/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-29-Tequila-Sunrise-scaled.jpg
+81	Tipperary	New Era Drinks	Pour all ingredients into mixing glass with ice cubes. Stir well. Strain into chilled martini cocktail glass.	Garnish with a slice of orange.	NULL	NULL	5	https://iba-world.com/tipperary/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-22-Tipperary.jpg
+82	Tommy's Margarita	New Era Drinks	Pour all ingredients into a cocktail shaker, shake well with ice, strain into a chilled rocks glass filled with ice.	Garnish with a lime slice.	NULL	NULL	4	https://iba-world.com/tommys-margarita/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-23-Tommy-Margarita.jpg
+83	Tuxedo	The Unforgettables	Pour all ingredients into mixing glass with ice cubes. Stir well. Strain into chilled martini cocktail glass.	Garnish with cherry and lemon zest.	NULL	NULL	3	https://iba-world.com/tuxedo/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-30-Tuxedo.jpg
+84	VE.N.TO	New Era Drinks	Pour all ingredients into the shaker. Shake vigorously with ice. Strain into a chilled small tumbler glass filled with ice.	Garnish with lemon zest and white grapes.	NULL	If desired water can be replaced by chamomile infusion in the honey mix.	3	https://iba-world.com/ve-n-to/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-26-VE.N.TO_-1.jpg
+85	Vesper	Contemporary Classics	Pour all ingredients into a cocktail shaker filled with ice cubes. Shake and strain into a chilled cocktail glass.	Lemon zest.	NULL	NULL	5	https://iba-world.com/vesper/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-30-Vesper-scaled.jpg
+86	Vieux Carre	The Unforgettables	Pour all ingredients into mixing glass with ice cubes. Stir well. Strain into a chilled cocktail glass.	Garnish with orange zest and maraschino cherry.	NULL	NULL	2	https://iba-world.com/vieux-carre/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-31-Vieus-Carre.jpg
+87	Whiskey Sour	The Unforgettables	Pour all ingredients into a cocktail shaker filled with ice. Shake well. Strain into cobbler glass. If served “On the rocks”, strain ingredients into an old fashioned glass filled with ice.	Garnish with a half orange slice and maraschino cherry, optionally use orange zest.	NULL	If egg white is used shake little harder to release and incorporate the foam from the egg white.	10	https://iba-world.com/whiskey-sour/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-32-Whiskey-Sour.jpg
+88	White Lady	The Unforgettables	Pour all ingredients into a cocktail shaker, shake well with ice, strain into a chilled cocktail glass.	NULL	NULL	NULL	7	https://iba-world.com/white-lady/	https://iba-world.com/wp-content/uploads/2021/02/IBA-TU-33-White-Lady.jpg
+89	Yellow Bird	New Era Drinks	Pour all ingredients into a cocktail shaker, shake well with ice, strain into chilled cocktail glass.	NULL	NULL	NULL	5	https://iba-world.com/yellow-bird/	https://iba-world.com/wp-content/uploads/2021/02/IBA-NE-25-Yellow-Bird.jpg
+90	Zombie	Contemporary Classics	Add all ingredients into an electric blender with 170 grams of cracked ice. With pulse bottom blend for a few seconds. Serve in a tall tumbler glass.	Garnish with mint leaves.	NULL	Donn's Mix: 2 parts of fresh yellow grapefruit and 1 part of cinnamon syrup.	2	https://iba-world.com/zombie/	https://iba-world.com/wp-content/uploads/2021/02/IBA-CC-31-Zombie-scaled.jpg
+\.
+
+
+--
+-- Data for Name: ingredient; Type: TABLE DATA; Schema: ibacocktails; Owner: simox
+--
+
+COPY ibacocktails.ingredient (id, name) FROM stdin;
+1	Angostura Bitters
+2	Orgeat Syrup 
+3	Fresh Lemon Juice
+4	Rye Whisky
+5	Cognac
+6	Creme de Cacao (Brown)
+7	Fresh Cream
+8	Bitter Campari
+9	Sweet Red Vermouth
+10	Soda Water
+11	Gin
+12	Apricot Brandy
+13	Calvados
+14	Maraschino Luxardo
+15	Creme de Violette
+16	Gold Rum
+17	Galliano
+18	Fresh Pineapple Juice
+19	Fresh Lime Juice
+20	Prosecco
+21	Dry Gin
+22	Honey Syrup
+23	Fresh Orange Juice
+24	White Peach Puree
+25	White Rum
+26	Triple Sec
+27	Vodka
+28	Coffee Liqueur
+29	Tomato Juice
+30	Worcestershire Sauce
+31	Tabasco
+32	Celery Salt
+33	Pepper 
+34	Bourbon or Rye Whiskey
+35	Sugar Syrup
+36	Creme de Mure
+37	ml Brandy
+38	Curacao
+39	Simple Syrup
+40	Aromatic Bitters
+41	Cuban Aguardiente
+42	Raw Honey
+43	Water
+44	Cachaça
+45	Lime 
+46	White Cane Sugar
+47	Old Tom Gin
+48	Orange Bitters
+49	Chilled Champagne
+50	Angostura bitters
+51	Grand Marnier
+52	Sugar cube
+53	Raspberry Syrup
+54	Egg White
+55	Cointreau
+56	Lillet Blanc
+57	Absinthe
+58	Vodka Citron
+59	Cranberry Juice
+60	Coca Cola
+61	White Cuban Ron
+62	Superfine Sugar
+63	Goslings Rum
+64	Ginger Beer
+65	Dry Vermouth
+66	Kahlúa
+67	Espresso (strong)
+68	Fernet Branca
+69	Cola
+70	Champagne
+71	Amaretto
+72	Raspberry Liqueur
+73	Creme de Cacao (White)
+74	Creme de Menthe (Green)
+75	London Dry Gin
+76	Rum
+77	Grapefruit Juice
+78	Fresh Lime
+79	Ginger Ale
+80	Angostura Bitters 
+81	Espadin Mezcal
+82	Jamaica Overproof White Rum
+83	Falernum
+84	Irish Whiskey
+85	Hot coffee
+86	Fresh cream
+87	Sugar
+88	Dry White Wine
+89	Creme de Cassis
+90	Green Chartreuse
+91	Vodka Citron 
+92	Triple Sec 
+93	Tequila
+94	White rum
+95	Fresh Lemon juice
+96	Simple syrup
+97	Amber Jamaican Rum
+98	Martinique Molasses Rhum
+99	Orange Curacao
+100	Orgeat Syrup (Almond)
+101	Rye Whiskey
+102	Tequila 100% Agave
+103	Freshly Squeezed Lime Juice
+104	Maraschino Liqueur
+105	Grenadine Syrup
+106	Fresh orange juice
+107	Bourbon Whiskey
+108	Fresh Mint sprigs
+109	Powdered Sugar
+110	White Cuban Ron (Rum)
+111	Mint Sprigs
+112	Smirnoff Vodka
+113	Fresh lime juice
+114	Mezcal
+115	Yellow Chartreuse
+116	Aperol
+117	Rye Whiskey or Bourbon
+118	Fresh lemon juice
+119	Red wine (Shiraz or Malbech)
+120	Mint Leaves
+121	Aged Rum
+122	Brut Champagne or Prosecco
+123	Sugar Cube
+124	Plain Water
+125	100% Agave Tequila
+126	Fresh lime
+127	Salt
+128	Pink Grapefruit Soda
+129	Amaro Nonino
+130	Blended Scotch Whisky
+131	Lagavulin 16y Whisky
+132	Sliced Fresh Ginger
+133	Coconut Cream
+134	Pisco
+135	Jamaican Rum
+136	Lime Juice
+137	Sugar Cane Juice
+138	Brandy
+139	Red Tawny Port Wine
+140	Egg Yolk
+141	Cream
+142	Egg white
+143	Orange Flower Water
+144	Vanilla Extract
+145	Sugar syrup
+146	Sparkling wine
+147	Scotch Whisky
+148	Drambuie
+149	Peychaud's Bitters
+150	Peach Schnapps
+151	Cherry liqueur
+152	DOM Bénédictine
+153	Vodka Vanilla
+154	Elderflower Cordial
+155	Monin Honey Syrup
+156	Red Chili Pepper
+157	Soda water
+158	White Creme de Menthe
+159	Cognac or Brandy
+160	Ginger beer
+161	Tequila Agave 100% Reposado
+162	Fresh Lime Juice (Persiano)
+163	Agave Syrup (1/2 Water + 1/2 Agave Nectar)
+164	White Smooth Grappa
+165	Fresh lemon Juice
+166	Honey mix (replace water with chamomile)
+167	Chamomile cordial
+168	Sweet Vermouth
+169	Bénédictine
+170	Egg White (Optional)
+171	Jamaican dark rum
+172	Gold Puerto Rican rum
+173	Demerara Rum
+174	Donn's Mix
+175	Grenadine syrup
+176	Pernod
+\.
+
+
+--
+-- Name: cocktail_id_seq; Type: SEQUENCE SET; Schema: ibacocktails; Owner: simox
+--
+
+SELECT pg_catalog.setval('ibacocktails.cocktail_id_seq', 90, true);
+
+
+--
+-- Name: ingredient_id_seq; Type: SEQUENCE SET; Schema: ibacocktails; Owner: simox
+--
+
+SELECT pg_catalog.setval('ibacocktails.ingredient_id_seq', 177, true);
+
+
+--
+-- Name: ci_relation ci_relation_pkey; Type: CONSTRAINT; Schema: ibacocktails; Owner: simox
+--
+
+ALTER TABLE ONLY ibacocktails.ci_relation
+    ADD CONSTRAINT ci_relation_pkey PRIMARY KEY (c_id, i_id);
+
+
+--
+-- Name: cocktail cocktail_imageurl_key; Type: CONSTRAINT; Schema: ibacocktails; Owner: simox
+--
+
+ALTER TABLE ONLY ibacocktails.cocktail
+    ADD CONSTRAINT cocktail_imageurl_key UNIQUE (imageurl);
+
+
+--
+-- Name: cocktail cocktail_link_key; Type: CONSTRAINT; Schema: ibacocktails; Owner: simox
+--
+
+ALTER TABLE ONLY ibacocktails.cocktail
+    ADD CONSTRAINT cocktail_link_key UNIQUE (link);
+
+
+--
+-- Name: cocktail cocktail_name_key; Type: CONSTRAINT; Schema: ibacocktails; Owner: simox
+--
+
+ALTER TABLE ONLY ibacocktails.cocktail
+    ADD CONSTRAINT cocktail_name_key UNIQUE (name);
+
+
+--
+-- Name: cocktail cocktail_pkey; Type: CONSTRAINT; Schema: ibacocktails; Owner: simox
+--
+
+ALTER TABLE ONLY ibacocktails.cocktail
+    ADD CONSTRAINT cocktail_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ingredient ingredient_name_key; Type: CONSTRAINT; Schema: ibacocktails; Owner: simox
+--
+
+ALTER TABLE ONLY ibacocktails.ingredient
+    ADD CONSTRAINT ingredient_name_key UNIQUE (name);
+
+
+--
+-- Name: ingredient ingredient_pkey; Type: CONSTRAINT; Schema: ibacocktails; Owner: simox
+--
+
+ALTER TABLE ONLY ibacocktails.ingredient
+    ADD CONSTRAINT ingredient_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ci_relation ci_relation_c_id_fkey; Type: FK CONSTRAINT; Schema: ibacocktails; Owner: simox
+--
+
+ALTER TABLE ONLY ibacocktails.ci_relation
+    ADD CONSTRAINT ci_relation_c_id_fkey FOREIGN KEY (c_id) REFERENCES ibacocktails.cocktail(id);
+
+
+--
+-- Name: ci_relation ci_relation_i_id_fkey; Type: FK CONSTRAINT; Schema: ibacocktails; Owner: simox
+--
+
+ALTER TABLE ONLY ibacocktails.ci_relation
+    ADD CONSTRAINT ci_relation_i_id_fkey FOREIGN KEY (i_id) REFERENCES ibacocktails.ingredient(id);
+
+
+--
+-- Name: perfect_viewer; Type: MATERIALIZED VIEW DATA; Schema: ibacocktails; Owner: simox
+--
+
+REFRESH MATERIALIZED VIEW ibacocktails.perfect_viewer;
+
+
+--
+-- Name: perfect_viewer_with_quantity; Type: MATERIALIZED VIEW DATA; Schema: ibacocktails; Owner: simox
+--
+
+REFRESH MATERIALIZED VIEW ibacocktails.perfect_viewer_with_quantity;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
