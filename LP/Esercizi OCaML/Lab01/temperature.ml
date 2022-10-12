@@ -37,6 +37,17 @@ let p_temp ppf t =
     | Reaumur -> Format.fprintf ppf "%6.1f°Re" t.value
     | Romer -> Format.fprintf ppf "%6.1f°Ro" t.value;;
 
+let rec p_temp_generic ppf p pl =
+  function 
+    [] -> Format.fprintf ppf "]\n"
+    | hd::[] -> Format.fprintf ppf "%a ]\n" p hd
+    | hd::tl -> Format.fprintf ppf "%a, " p hd; pl ppf tl;;
+
+(* 
+let rec p_temp_list ppf = 
+  p_temp_generic ppf p_temp p_temp_list;;
+*)
+
 let rec p_temp_list ppf =
   function 
     [] -> Format.fprintf ppf "]\n"
