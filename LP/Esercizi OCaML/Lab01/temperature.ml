@@ -72,6 +72,20 @@ in others (any2c t) [] cons;;
 
 Format.printf "%a :- [ %a " p_temp { value = 18. ; tu = Celsius } p_temp_list (others {value = 18.; tu = Celsius});;
 
+let rec row t res = 
+  function 
+    [] -> List.rev res
+    | a_unit::tl -> ((c2any t a_unit)::res) tl;;
+
+let rec columns n acc = 
+  function 
+    [] -> List.rev acc
+    | hd::tl -> (columns n (((row(any2c { value = n; tu = hd}) [] cons)::acc)) tl);;
+
+let table n = columns n [] cons ;;
+
+Format.printf "[ \n%a" p_temp_table (table 42.);;
+
 
 
 
