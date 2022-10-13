@@ -1,0 +1,40 @@
+bandit0:
+ssh bandit0@bandit.labs.overthewire.org -p 2220
+
+bandit0->bandit1:
+password in readme: NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL 
+ls 
+nano readme 
+
+bandit1->bandit2:
+ls
+more - 
+rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi
+
+bandit2->bandit3:
+nano "spaces in this file name"
+aBZ0W5EmUfAf7kHTQeOwd8bauFJ2lAiG
+
+bandit3->bandit4:
+cd inhere
+ls -a 
+2EW7BBsr6aMMoJ2HjW067dm8EgX26xNe
+
+bandit4->bandit5:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
