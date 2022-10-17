@@ -37,6 +37,11 @@ cat /var/lib/dpkg/info/bandit7.password
 z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S
 
 bandit7->bandit8:
+ssh bandit7@bandit.labs.overthewire.org -p 2220
+grep millionth data.txt 
+TESKZC0XvTetK0S9xNwm25STk5iWrBvP
+
+bandit8->bandit9:
 
 
 
