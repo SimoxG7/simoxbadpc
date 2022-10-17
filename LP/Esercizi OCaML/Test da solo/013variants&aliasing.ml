@@ -8,7 +8,7 @@ type int_option = Nothing | Aninteger of int;;
 Nothing;;
 Aninteger 7;;
 
-(* tipi mutualmente ricorsiiv devono essere dichiarati usando la keyword and *)
+(* tipi mutualmente ricorsivi devono essere dichiarati usando la keyword and *)
 type card = Card of regular | Joker
   and regular = { suit : card_suit; name : card_name; }
   and card_suit = Heart | Club | Spade | Diamond 
