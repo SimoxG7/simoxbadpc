@@ -1,0 +1,4 @@
+
+embryoio level4:
+//per creare variabile d'ambiente:
+export NAME=VALUE
