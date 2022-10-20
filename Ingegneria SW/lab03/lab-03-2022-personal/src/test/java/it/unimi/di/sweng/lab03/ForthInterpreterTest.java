@@ -71,4 +71,20 @@ public class ForthInterpreterTest {
     }).isInstanceOf(IllegalArgumentException.class).hasMessage("Token error '++5'");
   }
 
+  @Test
+  public void checkUnderflow() {
+
+    assertThatThrownBy(() -> {
+      interpreter.input("1 +");
+    }).isInstanceOf(IllegalArgumentException.class).hasMessage("Stack Underflow");
+  }
+
+  @Test
+  public void multCheck() {
+    interpreter.input("1 2 *");
+    assertThat(interpreter.toString()).isEqualTo("2 <- Top");
+    interpreter.input("1 2 * 5 *");
+    assertThat(interpreter.toString()).isEqualTo("10 <- Top");
+  }
+
 }

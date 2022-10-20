@@ -1,7 +1,5 @@
 package it.unimi.di.sweng.lab03;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.ArrayList;
 
 public class ForthInterpreter implements Interpreter {
@@ -20,21 +18,26 @@ public class ForthInterpreter implements Interpreter {
         if (!program.equals("")) {
             String[] data = program.replaceAll("\\s+", " ").split(" "); //removing whitespaces and formatting string
 
-            for (int i = 0; i < data.length; i++) {
+            for (String datum : data) {
                 try {
-                    stack.add(Integer.parseInt(data[i]));
+                    stack.add(Integer.parseInt(datum));
                     index++;
                 } catch (NumberFormatException e) {
-                    if (data[i].equals("+")) { //or a binary op
+                    if (datum.equals("+")) { //or a binary op
+                        if (underflow()) throw new IllegalArgumentException("Stack Underflow");
                         stack.set(index - 2, stack.get(index - 2) + stack.get(index - 1));
-                        stack.remove(index-1);
+                        stack.remove(index - 1);
                         index--;
                     } else {
-                        throw new IllegalArgumentException("Token error '" + data[i] + "'");
+                        throw new IllegalArgumentException("Token error '" + datum + "'");
                     }
                 }
             }
         }
+    }
+
+    private boolean underflow() {
+        return stack.size() <= 1;
     }
 
     private void reset() {
@@ -45,8 +48,8 @@ public class ForthInterpreter implements Interpreter {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        for (int i = 0; i < stack.size(); i++) {
-            s.append(stack.get(i) + " ");
+        for (Integer i : stack) {
+            s.append(i).append(" ");
         }
         s.append("<- Top");
         return s.toString();
