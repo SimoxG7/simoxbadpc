@@ -23,13 +23,27 @@ public class ForthInterpreter implements Interpreter {
                     stack.add(Integer.parseInt(datum));
                     index++;
                 } catch (NumberFormatException e) {
-                    if (datum.equals("+")) { //or a binary op
-                        if (underflow()) throw new IllegalArgumentException("Stack Underflow");
-                        stack.set(index - 2, stack.get(index - 2) + stack.get(index - 1));
-                        stack.remove(index - 1);
-                        index--;
-                    } else {
-                        throw new IllegalArgumentException("Token error '" + datum + "'");
+                    switch (datum) {
+                        case "+":
+                            binaryOp("+");
+                            break;
+                        case "-":
+                            binaryOp("-");
+                            break:
+                        case "*":
+                            binaryOp("*");
+                            break;
+                        case "/":
+                            binaryOp("/");
+                            break;
+                        case "swap":
+                            binaryOp("swap");
+                            break;
+                        case "dup":
+                            unaryOp("dup");
+                            break;
+                        default:
+                            throw new IllegalArgumentException("Token error '" + datum + "'");
                     }
                 }
             }
@@ -38,6 +52,14 @@ public class ForthInterpreter implements Interpreter {
 
     private boolean underflow() {
         return stack.size() <= 1;
+    }
+
+    private void binaryOp(String op) {
+        
+    }
+
+    private void unaryOp(String op) {
+        //TODO
     }
 
     private void reset() {
