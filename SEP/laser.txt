@@ -2,3 +2,14 @@
 embryoio level4:
 //per creare variabile d'ambiente:
 export NAME=VALUE
+
+embryoio level5:
+creo file dove serve:
+cd /tmp
+touch etvckh
+vi etvckh 
+scrivo password
+:wq
+cd /challenge
+./embryoio_level5 < /tmp/etvckh
+
