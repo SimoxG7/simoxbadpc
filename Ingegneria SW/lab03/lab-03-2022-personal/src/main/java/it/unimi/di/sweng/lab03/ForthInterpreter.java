@@ -29,7 +29,7 @@ public class ForthInterpreter implements Interpreter {
                             break;
                         case "-":
                             binaryOp("-");
-                            break:
+                            break;
                         case "*":
                             binaryOp("*");
                             break;
@@ -55,11 +55,42 @@ public class ForthInterpreter implements Interpreter {
     }
 
     private void binaryOp(String op) {
-        
+        switch (op) {
+            case "+":
+                stack.set(index-2, stack.get(index-2) + stack.get(index-1));
+                index--;
+                stack.remove(index);
+                break;
+            case "-":
+                stack.set(index-2, stack.get(index-2) - stack.get(index-1));
+                index--;
+                stack.remove(index);
+                break;
+            case "*":
+                stack.set(index-2, stack.get(index-2) * stack.get(index-1));
+                index--;
+                stack.remove(index);
+                break;
+            case "/":
+                stack.set(index-2, stack.get(index-2) / stack.get(index-1));
+                index--;
+                stack.remove(index);
+                break;
+            case "swap":
+                int temp = stack.get(index-2);
+                stack.set(index-2, stack.get(index-1));
+                stack.set(index-1, temp);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid operand.");
     }
 
     private void unaryOp(String op) {
-        //TODO
+        if (op.equals("dup")) {
+            stack.set(index++, stack.get(index-1));
+        } else {
+            throw new IllegalArgumentException("Invalid operand");
+        }
     }
 
     private void reset() {
