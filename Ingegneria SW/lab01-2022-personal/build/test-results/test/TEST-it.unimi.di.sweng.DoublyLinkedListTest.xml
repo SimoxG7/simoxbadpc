@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="it.unimi.di.sweng.DoublyLinkedListTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-10-13T07:10:44" hostname="simoxbadpc" time="0.147">
+  <properties/>
+  <testcase name="testExample()" classname="it.unimi.di.sweng.DoublyLinkedListTest" time="0.12"/>
+  <testcase name="testShiftExceptionalSituation()" classname="it.unimi.di.sweng.DoublyLinkedListTest" time="0.009"/>
+  <testcase name="testPopExceptionalSituation()" classname="it.unimi.di.sweng.DoublyLinkedListTest" time="0.002"/>
+  <testcase name="testPushPop()" classname="it.unimi.di.sweng.DoublyLinkedListTest" time="0.003"/>
+  <testcase name="testPushShift()" classname="it.unimi.di.sweng.DoublyLinkedListTest" time="0.002"/>
+  <testcase name="testUnshiftPop()" classname="it.unimi.di.sweng.DoublyLinkedListTest" time="0.001"/>
+  <testcase name="testUnshiftShift()" classname="it.unimi.di.sweng.DoublyLinkedListTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

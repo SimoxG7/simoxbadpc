@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="it.unimi.di.sweng.lab02.BowlingTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-10-13T16:23:20" hostname="simoxbadpc" time="0.142">
+  <properties/>
+  <testcase name="allOnesGame()" classname="it.unimi.di.sweng.lab02.BowlingTest" time="0.106"/>
+  <testcase name="oneStrikeGame()" classname="it.unimi.di.sweng.lab02.BowlingTest" time="0.002"/>
+  <testcase name="gutterGame()" classname="it.unimi.di.sweng.lab02.BowlingTest" time="0.002"/>
+  <testcase name="notSpareGame()" classname="it.unimi.di.sweng.lab02.BowlingTest" time="0.002"/>
+  <testcase name="oneSpareGame()" classname="it.unimi.di.sweng.lab02.BowlingTest" time="0.002"/>
+  <testcase name="lastFrameStrikeGame()" classname="it.unimi.di.sweng.lab02.BowlingTest" time="0.002"/>
+  <testcase name="notStrikeGame()" classname="it.unimi.di.sweng.lab02.BowlingTest" time="0.002"/>
+  <testcase name="perfectGame()" classname="it.unimi.di.sweng.lab02.BowlingTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
