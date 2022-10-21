@@ -87,4 +87,42 @@ public class ForthInterpreterTest {
     assertThat(interpreter.toString()).isEqualTo("10 <- Top");
   }
 
+  @Test
+  public void subDivCheck() {
+    interpreter.input("1 2 -");
+    assertThat(interpreter.toString()).isEqualTo("-1 <- Top");
+    interpreter.input("1 2 /");
+    assertThat(interpreter.toString()).isEqualTo("0 <- Top");
+  }
+
+  @Test
+  public void dupCheck() {
+    interpreter.input("1 2 3 dup");
+    assertThat(interpreter.toString()).isEqualTo("1 2 3 3 <- Top");
+  }
+
+  @Test
+  public void swapCheck() {
+    interpreter.input("1 2 3 swap");
+    assertThat(interpreter.toString()).isEqualTo("1 3 2 <- Top");
+  }
+
+  @Test
+  public void dropCheck() {
+    interpreter.input("1 2 3 drop");
+    assertThat(interpreter.toString()).isEqualTo("1 2 <- Top");
+  }
+
+  @Test
+  public void ultimateTestNoExc() {
+    interpreter.input("1 2 + 3 * 4 dup 5 + drop swap");
+    assertThat(interpreter.toString()).isEqualTo("4 9 <- Top");
+  }
+
+  @Test
+  public void ultimateTestExc() {
+    assertThatThrownBy(() -> {
+      interpreter.input("1 2 + 3 * drop swap");
+    }).isInstanceOf(IllegalArgumentException.class).hasMessage("Stack Underflow");
+  }
 }

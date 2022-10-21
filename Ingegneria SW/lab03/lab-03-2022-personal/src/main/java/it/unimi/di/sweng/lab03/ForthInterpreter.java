@@ -42,6 +42,9 @@ public class ForthInterpreter implements Interpreter {
                         case "dup":
                             unaryOp("dup");
                             break;
+                        case "drop":
+                            unaryOp("drop");
+                            break;
                         default:
                             throw new IllegalArgumentException("Token error '" + datum + "'");
                     }
@@ -61,13 +64,16 @@ public class ForthInterpreter implements Interpreter {
     }
 
     private void unaryOp(String op) {
+        underflow(1);
         if (op.equals("dup")) {
-            stack.set(index++, stack.get(index - 1));
+            stack.add(stack.get(index++ - 1));
+        } else if (op.equals("drop")) {
+            stack.remove(index-1);
+            index--;
         } else {
             throw new IllegalArgumentException("Invalid operand");
         }
     }
-
 
     private void reset() {
         stack = new ArrayList<>();
@@ -75,11 +81,14 @@ public class ForthInterpreter implements Interpreter {
     }
 
 
-    private boolean underflow() {
-        return stack.size() <= 1;
+    private void underflow(int arity) {
+        if (stack.size() < arity) {
+            throw new IllegalArgumentException("Stack Underflow");
+        }
     }
 
     private void binaryOp(String op) {
+        underflow(2);
         switch (op) {
             case "+":
                 stack.set(index - 2, stack.get(index - 2) + stack.get(index - 1));
