@@ -1,14 +1,17 @@
 package it.unimi.di.sweng.lab03;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ForthInterpreter implements Interpreter {
     private ArrayList<Integer> stack;
     private int index;
+    private HashMap<String, String[]> dict;
 
     public ForthInterpreter() {
         this.stack = new ArrayList<>();
         this.index = 0;
+        this.dict = new HashMap<>();
     }
 
     @Override
@@ -18,39 +21,71 @@ public class ForthInterpreter implements Interpreter {
         if (!program.equals("")) {
             String[] data = program.replaceAll("\\s+", " ").split(" "); //removing whitespaces and formatting string
 
-            for (String datum : data) {
-                try {
-                    stack.add(Integer.parseInt(datum));
-                    index++;
-                } catch (NumberFormatException e) {
-                    switch (datum) {
-                        case "+":
-                            binaryOp("+");
-                            break;
-                        case "-":
-                            binaryOp("-");
-                            break;
-                        case "*":
-                            binaryOp("*");
-                            break;
-                        case "/":
-                            binaryOp("/");
-                            break;
-                        case "swap":
-                            binaryOp("swap");
-                            break;
-                        case "dup":
-                            unaryOp("dup");
-                            break;
-                        case "drop":
-                            unaryOp("drop");
-                            break;
-                        default:
+            interpret(data);
+        }
+    }
+
+    private void interpret(String[] data) {
+        int dataindex = 0;
+
+        for (String datum : data) {
+            System.out.println(index);
+            try {
+                stack.add(Integer.parseInt(datum));
+                index++;
+            } catch (NumberFormatException e) {
+                switch (datum) {
+                    case "+":
+                        binaryOp("+");
+                        break;
+                    case "-":
+                        binaryOp("-");
+                        break;
+                    case "*":
+                        binaryOp("*");
+                        break;
+                    case "/":
+                        binaryOp("/");
+                        break;
+                    case "swap":
+                        binaryOp("swap");
+                        break;
+                    case "dup":
+                        unaryOp("dup");
+                        break;
+                    case "drop":
+                        unaryOp("drop");
+                        break;
+                    case ":":
+                        dataindex = wordDefinition(data, dataindex);
+                        break;
+                    default:
+                        if (dict.containsKey(datum)) {
+                            subLevelOperation(datum);
+                        } else {
                             throw new IllegalArgumentException("Token error '" + datum + "'");
-                    }
+                        }
                 }
             }
+            dataindex++;
         }
+    }
+
+    private void subLevelOperation(String datum) {
+        String[] operation = dict.get(datum);
+        interpret(operation);
+        index++;
+    }
+
+    private int wordDefinition(String[] data, int dataindex) {
+        dataindex++;
+        String key = data[index++];
+        StringBuilder command = new StringBuilder();
+        while (!data[dataindex].equals(";")) {
+            command.append(data[dataindex++]).append(" ");
+        }
+        dict.put(key, command.toString().split(" "));
+        return dataindex;
     }
 
     @Override
@@ -76,8 +111,9 @@ public class ForthInterpreter implements Interpreter {
     }
 
     private void reset() {
-        stack = new ArrayList<>();
-        index = 0;
+        this.stack = new ArrayList<>();
+        this.index = 0;
+        this.dict = new HashMap<>();
     }
 
 

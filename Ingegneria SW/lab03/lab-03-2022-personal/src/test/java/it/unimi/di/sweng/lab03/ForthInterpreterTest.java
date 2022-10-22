@@ -125,4 +125,10 @@ public class ForthInterpreterTest {
       interpreter.input("1 2 + 3 * drop swap");
     }).isInstanceOf(IllegalArgumentException.class).hasMessage("Stack Underflow");
   }
+
+  @Test
+  public void wordTest() {
+    interpreter.input(": raddoppia 2 * ; 5 raddoppia dup raddoppia");
+    assertThat(interpreter.toString()).isEqualTo("10 20 <- Top");
+  }
 }
