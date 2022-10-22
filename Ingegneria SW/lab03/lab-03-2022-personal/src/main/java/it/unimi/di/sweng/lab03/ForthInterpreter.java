@@ -1,7 +1,6 @@
 package it.unimi.di.sweng.lab03;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class ForthInterpreter implements Interpreter {
@@ -176,33 +175,32 @@ public class ForthInterpreter implements Interpreter {
     private void binaryOp(String op) {
         underflow(2);
         switch (op) {
-            case "+":
+            case "+" -> {
                 stack.set(index - 2, stack.get(index - 2) + stack.get(index - 1));
                 index--;
                 stack.remove(index);
-                break;
-            case "-":
+            }
+            case "-" -> {
                 stack.set(index - 2, stack.get(index - 2) - stack.get(index - 1));
                 index--;
                 stack.remove(index);
-                break;
-            case "*":
+            }
+            case "*" -> {
                 stack.set(index - 2, stack.get(index - 2) * stack.get(index - 1));
                 index--;
                 stack.remove(index);
-                break;
-            case "/":
+            }
+            case "/" -> {
                 stack.set(index - 2, stack.get(index - 2) / stack.get(index - 1));
                 index--;
                 stack.remove(index);
-                break;
-            case "swap":
+            }
+            case "swap" -> {
                 int temp = stack.get(index - 2);
                 stack.set(index - 2, stack.get(index - 1));
                 stack.set(index - 1, temp);
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid operand.");
+            }
+            default -> throw new IllegalArgumentException("Invalid operand.");
         }
     }
 }
