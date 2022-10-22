@@ -1,6 +1,7 @@
 package it.unimi.di.sweng.lab03;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class ForthInterpreter implements Interpreter {
@@ -27,9 +28,8 @@ public class ForthInterpreter implements Interpreter {
 
     private void interpret(String[] data) {
         int dataindex = 0;
-
-        for (String datum : data) {
-            System.out.println(index);
+        while (dataindex < data.length){
+            String datum = data[dataindex];
             try {
                 stack.add(Integer.parseInt(datum));
                 index++;
@@ -57,6 +57,7 @@ public class ForthInterpreter implements Interpreter {
                         unaryOp("drop");
                         break;
                     case ":":
+                        dataindex++;
                         dataindex = wordDefinition(data, dataindex);
                         break;
                     default:
@@ -73,13 +74,47 @@ public class ForthInterpreter implements Interpreter {
 
     private void subLevelOperation(String datum) {
         String[] operation = dict.get(datum);
-        interpret(operation);
-        index++;
+        //interpret(operation);
+        for (String step : operation) {
+            try {
+                stack.add(Integer.parseInt(step));
+                index++;
+            } catch (NumberFormatException e) {
+                switch (step) {
+                    case "+":
+                        binaryOp("+");
+                        break;
+                    case "-":
+                        binaryOp("-");
+                        break;
+                    case "*":
+                        binaryOp("*");
+                        break;
+                    case "/":
+                        binaryOp("/");
+                        break;
+                    case "swap":
+                        binaryOp("swap");
+                        break;
+                    case "dup":
+                        unaryOp("dup");
+                        break;
+                    case "drop":
+                        unaryOp("drop");
+                        break;
+                    default:
+                        if (dict.containsKey(step)) {
+                            subLevelOperation(step);
+                        } else {
+                            throw new IllegalArgumentException("Token error '" + step + "'");
+                        }
+                }
+            }
+        }
     }
 
     private int wordDefinition(String[] data, int dataindex) {
-        dataindex++;
-        String key = data[index++];
+        String key = data[dataindex++];
         StringBuilder command = new StringBuilder();
         while (!data[dataindex].equals(";")) {
             command.append(data[dataindex++]).append(" ");
