@@ -64,12 +64,27 @@ public class ForthInterpreter implements Interpreter {
                         if (dict.containsKey(datum)) {
                             subLevelOperation(datum);
                         } else {
-                            throw new IllegalArgumentException("Token error '" + datum + "'");
+                            if (wellFormatted(datum)) {
+                                throw new IllegalArgumentException("Undefined word '" + datum + "'");
+                            } else {
+                                throw new IllegalArgumentException("Token error '" + datum + "'");
+                            }
                         }
                 }
             }
             dataindex++;
         }
+    }
+
+    private boolean wellFormatted(String datum) {
+        boolean containsnumber = false;
+        char[] chars = datum.toCharArray();
+        for (char c : chars) {
+            if (Character.isDigit(c)) {
+                containsnumber = true;
+            }
+        }
+        return !containsnumber;
     }
 
     private void subLevelOperation(String datum) {

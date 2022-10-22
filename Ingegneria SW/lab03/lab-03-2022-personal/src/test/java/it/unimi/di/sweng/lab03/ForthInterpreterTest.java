@@ -131,4 +131,17 @@ public class ForthInterpreterTest {
     interpreter.input(": raddoppia 2 * ; 5 raddoppia dup raddoppia");
     assertThat(interpreter.toString()).isEqualTo("10 20 <- Top");
   }
+
+  @Test
+  public void finalTest() {
+    assertThatThrownBy(() -> {
+      interpreter.input("pippo");
+    }).isInstanceOf(IllegalArgumentException.class).hasMessage("Undefined word 'pippo'");
+    assertThatThrownBy(() -> {
+      interpreter.input("1 2 pippo");
+    }).isInstanceOf(IllegalArgumentException.class).hasMessage("Undefined word 'pippo'");
+    assertThatThrownBy(() -> {
+      interpreter.input("1 : raddoppia 2 * ; raddoppi raddoppia");
+    }).isInstanceOf(IllegalArgumentException.class).hasMessage("Undefined word 'raddoppi'");
+  }
 }
