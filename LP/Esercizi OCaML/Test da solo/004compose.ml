@@ -5,6 +5,7 @@ let compose' (f, g) x = f (g x);;
 let succ = fun x -> x+1;;
 
 let plus1 = compose succ;;
+
 (** this won't work because compose' has 2 arguments (a couple and a single) *)
 let plus1' = compose' succ;;
 

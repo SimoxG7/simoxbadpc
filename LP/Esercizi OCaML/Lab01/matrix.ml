@@ -1,8 +1,12 @@
-type matrix = {l:int; h:int; mutable values: int array array}
+type matrix = {l:int; h:int; mutable values: int array array};;
 
 let zeroes l h = {l = l; h = h; values = Array.make_matrix l h 0};;
 
-let identity l = [|[|1; 0; 0|];[|0; 1; 0|];[|0; 0; 1|]|];;
+let identity l = {
+  l = l;
+  h = l;
+  values = [|[||]|]
+};;
 
 let a = zeroes 2 2;;
 
