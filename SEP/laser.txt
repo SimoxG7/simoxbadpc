@@ -13,3 +13,6 @@ scrivo password
 cd /challenge
 ./embryoio_level5 < /tmp/etvckh
 
+embryoio level7:
+env -i your_command
+
