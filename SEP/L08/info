@@ -1,0 +1,17 @@
+compilare con:
+gcc -z execstack -g myFirstInjection.c -o myFirstInjection 
+
+eseguire -> a volte funziona correttamente, a volte no e otteniamo "Illegal instruction" e "Segmentation fault"
+
+lanciare gdb -q myFirstInjection -> scrivere run myFirstInjection   
+
+se faulta, scrivere su carta il RIP address e il messaggio di errore
+
+0x00007fffffffd951 / seg fault 
+
+scrivere il comando gdb: info proc map 
+e individuare la regione in cui vi è l'istruzione faultata 
+
+ora scrivere i comandi gdb: x/s $rip and x/i $rip 
+
+
