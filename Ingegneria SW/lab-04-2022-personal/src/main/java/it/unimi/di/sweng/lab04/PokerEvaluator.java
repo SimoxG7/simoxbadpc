@@ -12,8 +12,13 @@ public class PokerEvaluator implements ChainedHandEvaluator{
     ChainedHandEvaluator next;
     private Map<Rank, Integer> map;
 
+    public PokerEvaluator (ChainedHandEvaluator next) {
+        this.next = next;
+    }
+
     @Override
-    public HandRank handEvaluator(Iterator<Card> it) {
+    public HandRank handEvaluator(PokerHand ph) {
+        Iterator<Card> it = ph.iterator();
         map = new HashMap<>();
         while (it.hasNext()) {
             Rank r = it.next().getRank();
@@ -21,6 +26,8 @@ public class PokerEvaluator implements ChainedHandEvaluator{
             else map.put(r, 1);
         }
         if (map.containsValue(4)) return HandRank.FOUR_OF_A_KIND;
-        return next.handEvaluator(it);
+        else {
+            return this.next.handEvaluator(ph);
+        }
     }
 }

@@ -39,6 +39,12 @@ public class PokerHandTest {
   }
 
   @Test
+  public void straightFlushTest() {
+    PokerHand p = new PokerHand("5H 6H 7H 8H 9H");
+    assertThat(p.getRank()).isEqualTo(HandRank.STRAIGHT_FLUSH);
+  }
+
+  @Test
   public void flushTest() {
 
     Deck d = new Deck();

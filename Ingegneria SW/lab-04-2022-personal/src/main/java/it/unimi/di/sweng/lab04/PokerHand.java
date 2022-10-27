@@ -23,8 +23,15 @@ public class PokerHand implements Iterable<Card>{
         Scanner sc = new Scanner(cards);
         while (sc.hasNext()){
             String str = sc.next();
-            Rank r = stringToRank(str.charAt(0) + "");
-            Suit s = stringToSuit(str.charAt(1) + "");
+            Rank r;
+            Suit s;
+            if (str.length() == 2) {
+                r = stringToRank(str.charAt(0) + "");
+                s = stringToSuit(str.charAt(1) + "");
+            } else {
+                r = stringToRank(str.charAt(0) + "" + str.charAt(1));
+                s = stringToSuit(str.charAt(2) + "");
+            }
             Card card = Card.get(r, s);
             cs.push(card);
         }
@@ -40,7 +47,7 @@ public class PokerHand implements Iterable<Card>{
         vars.put("S", suits[3]);
 
         if (vars.containsKey(c)) return vars.get(c);
-        else throw new IllegalArgumentException("Invalid Suit arg.");
+        else throw new IllegalArgumentException("Invalid Suit arg '" + c + "'.");
     }
 
     private Rank stringToRank(String c) {
@@ -55,27 +62,20 @@ public class PokerHand implements Iterable<Card>{
         vars.put("K", ranks[12]);
 
         if (vars.containsKey(c)) return vars.get(c);
-        else throw new IllegalArgumentException("Invalid Suit arg.");
+        else throw new IllegalArgumentException("Invalid Rank arg '" + c + "'.");
     }
 
-    public HandRank getRank(){
+    public HandRank getRank() {
+        return new StraigthFlushEvaluator(new PokerEvaluator(new FlushEvaluator(new HighCardEvaluator()))).handEvaluator(this);
 
-        PokerEvaluator p = new PokerEvaluator();
-        FlushHand f = new FlushHand();
-        HighCard c = new HighCard();
-        p.next=f;
-        f.next = c;
-
-        return p.handEvaluator(this.iterator());
     }
-
 
     @Override
     public java.lang.String toString() {
         StringBuilder sb = new StringBuilder();
         Iterator t = this.iterator();
         while(t.hasNext()){
-            sb.append(t.next().toString());
+            sb.append(t.next().toString()).append(", ");
         }
         return sb.toString();
     }
@@ -85,4 +85,5 @@ public class PokerHand implements Iterable<Card>{
     public Iterator<Card> iterator() {
         return cs.iterator();
     }
+
 }

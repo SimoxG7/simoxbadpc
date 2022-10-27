@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="it.unimi.di.sweng.lab04.PokerHandTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-10-27T16:27:31" hostname="simoxbadpc" time="0.161">
+<testsuite name="it.unimi.di.sweng.lab04.PokerHandTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-10-27T18:22:41" hostname="simoxbadpc" time="0.055">
   <properties/>
-  <testcase name="noInputOrEmptyInputTest()" classname="it.unimi.di.sweng.lab04.PokerHandTest" time="0.161">
-    <failure message="org.opentest4j.AssertionFailedError: &#10;expected: &quot;&quot;&#10; but was: &quot;TWO of DIAMONDSTHREE of DIAMONDSFOUR of DIAMONDS&quot;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: 
-expected: &quot;&quot;
- but was: &quot;TWO of DIAMONDSTHREE of DIAMONDSFOUR of DIAMONDS&quot;
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:78)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
-	at it.unimi.di.sweng.lab04.PokerHandTest.noInputOrEmptyInputTest(PokerHandTest.java:23)
+  <testcase name="straightFlushTest()" classname="it.unimi.di.sweng.lab04.PokerHandTest" time="0.055">
+    <failure message="java.lang.NullPointerException: Cannot invoke &quot;java.lang.Integer.intValue()&quot; because the return value of &quot;java.util.Map.get(Object)&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;java.lang.Integer.intValue()&quot; because the return value of &quot;java.util.Map.get(Object)&quot; is null
+	at it.unimi.di.sweng.lab04.StraigthFlushEvaluator.handEvaluator(StraigthFlushEvaluator.java:41)
+	at it.unimi.di.sweng.lab04.PokerHand.getRank(PokerHand.java:69)
+	at it.unimi.di.sweng.lab04.PokerHandTest.straightFlushTest(PokerHandTest.java:44)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -103,6 +99,7 @@ expected: &quot;&quot;
 	at java.base/java.lang.Thread.run(Thread.java:831)
 </failure>
   </testcase>
-  <system-out><![CDATA[]]></system-out>
+  <system-out><![CDATA[{HEARTS=5}
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

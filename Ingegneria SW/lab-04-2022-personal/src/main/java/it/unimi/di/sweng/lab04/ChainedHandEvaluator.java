@@ -6,9 +6,5 @@ import java.util.Iterator;
 
 public interface ChainedHandEvaluator {
 
-
-    HandRank handEvaluator(Iterator<Card> it);
-
-
-
+    HandRank handEvaluator(PokerHand ph);
 }
