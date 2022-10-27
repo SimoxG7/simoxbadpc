@@ -1,0 +1,29 @@
+per compilare lo shellcode:
+
+gcc qualcosa...
+
+.intelsyntaxnoprefix
+
+gcc -nostdlib -static -o fileExecutable sourceFile
+
+eseguire con il file eseguibile il comando: objdump -M intel -d executableFile
+
+fa disassembly della sezione .text del file .elf . 
+
+per estrarre lo shellcode lo estraiamo con:
+
+objcopy --dump-section .text=RawFile executableFile // o --dump-section
+
+per ottenere il code iniettabile.
+
+dentro al rawfile avremo quella serie di byte. 
+
+per verificare il contenuto del rawfile usiamo: hd RawFile //hexdump RawFile
+
+poi fare: cat rawfile - | ./myFirstInjection 
+
+
+
+
+
+
