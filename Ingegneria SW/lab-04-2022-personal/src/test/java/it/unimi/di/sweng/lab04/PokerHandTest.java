@@ -19,7 +19,7 @@ public class PokerHandTest {
 
   @Test
   public void noInputOrEmptyInputTest() {
-    PokerHand p = new PokerHand("");
+    PokerHand p = new PokerHand("2D 3D 4D");
     assertThat(p.toString()).isEqualTo("");
   }
 
