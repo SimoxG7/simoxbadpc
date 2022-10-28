@@ -4,14 +4,11 @@ import ca.mcgill.cs.stg.solitaire.cards.Card;
 import ca.mcgill.cs.stg.solitaire.cards.Rank;
 import ca.mcgill.cs.stg.solitaire.cards.Suit;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class StraigthFlushEvaluator implements  ChainedHandEvaluator {
 
     private final ChainedHandEvaluator next;
-    private Map<Suit, Integer> mapSuits;
-    private Map<Rank, Integer> mapRanks;
 
 
     public StraigthFlushEvaluator(ChainedHandEvaluator next) {
@@ -20,25 +17,28 @@ public class StraigthFlushEvaluator implements  ChainedHandEvaluator {
 
     @Override
     public HandRank handEvaluator(PokerHand ph) {
-        this.mapSuits = new HashMap<>();
-        this.mapRanks = new HashMap<>();
+        Map<Suit, Integer> mapSuits = new HashMap<>();
         Iterator<Card> it = ph.iterator();
-        Rank[] values = Rank.values();
+        ArrayList<Rank> values = new ArrayList<>(Arrays.asList(Rank.values()));
+        ArrayList<Rank> rankvalues = new ArrayList<>();
         while (it.hasNext()) {
             Card c = it.next();
             Suit s = c.getSuit();
             Rank r = c.getRank();
             if (mapSuits.containsKey(s)) mapSuits.put(s, mapSuits.get(s)+1);
             else mapSuits.put(s, 1);
-            if (mapRanks.containsKey(r)) mapRanks.put(r, mapRanks.get(r)+1);
-            else mapRanks.put(r, 1);
+            rankvalues.add(r);
         }
-        System.out.println(mapSuits);
         if (mapSuits.containsValue(5)) {
-            int consec = 0;
-            //TODO
-            for (int i = 0; i < mapRanks.size()-1; i++) {
-                if (mapRanks.get(values[i]) == 1 && mapRanks.get(values[i+1]) == 1) consec++;
+            Collections.sort(rankvalues);
+            int previndex = values.indexOf(rankvalues.get(0));
+            for (int i = 1; i < rankvalues.size(); i++) {
+                Rank current = rankvalues.get(i);
+                int index = values.indexOf(current);
+                if (index != previndex+1) {
+                    return next.handEvaluator(ph);
+                }
+                previndex = index;
             }
             return HandRank.STRAIGHT_FLUSH;
         }

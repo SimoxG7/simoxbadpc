@@ -10,7 +10,6 @@ import java.util.Map;
 public class PokerEvaluator implements ChainedHandEvaluator{
 
     ChainedHandEvaluator next;
-    private Map<Rank, Integer> map;
 
     public PokerEvaluator (ChainedHandEvaluator next) {
         this.next = next;
@@ -19,7 +18,7 @@ public class PokerEvaluator implements ChainedHandEvaluator{
     @Override
     public HandRank handEvaluator(PokerHand ph) {
         Iterator<Card> it = ph.iterator();
-        map = new HashMap<>();
+        Map<Rank, Integer> map = new HashMap<>();
         while (it.hasNext()) {
             Rank r = it.next().getRank();
             if (map.containsKey(r)) map.put(r, map.get(r) +1);

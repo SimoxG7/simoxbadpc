@@ -5,9 +5,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public class PokerHand implements Iterable<Card>{
+public class PokerHand implements Iterable<Card>, Comparable<Object> {
 
-    private CardStack cs;
+    private final CardStack cs;
 
     public PokerHand(int nCards, Deck d){
         cs = new CardStack();
@@ -26,18 +26,24 @@ public class PokerHand implements Iterable<Card>{
             Rank r;
             Suit s;
             if (str.length() == 2) {
-                r = stringToRank(str.charAt(0) + "");
-                s = stringToSuit(str.charAt(1) + "");
+                r = parseRank(str.charAt(0) + "");
+                s = parseSuit(str.charAt(1) + "");
             } else {
-                r = stringToRank(str.charAt(0) + "" + str.charAt(1));
-                s = stringToSuit(str.charAt(2) + "");
+                r = parseRank(str.charAt(0) + "" + str.charAt(1));
+                s = parseSuit(str.charAt(2) + "");
             }
             Card card = Card.get(r, s);
             cs.push(card);
         }
     }
 
-    private Suit stringToSuit(String c) {
+    public PokerHand(List<Card> list) {
+        cs = new CardStack();
+        Iterator<Card> it = list.iterator();
+        while (it.hasNext()) cs.push(it.next());
+    }
+
+    private Suit parseSuit(String c) {
         Map<String, Suit> vars = new HashMap<>();
         Suit[] suits = Suit.values();
 
@@ -50,7 +56,7 @@ public class PokerHand implements Iterable<Card>{
         else throw new IllegalArgumentException("Invalid Suit arg '" + c + "'.");
     }
 
-    private Rank stringToRank(String c) {
+    private Rank parseRank(String c) {
         Map<String, Rank> vars = new HashMap<>();
         Rank[] ranks = Rank.values();
 
@@ -73,9 +79,8 @@ public class PokerHand implements Iterable<Card>{
     @Override
     public java.lang.String toString() {
         StringBuilder sb = new StringBuilder();
-        Iterator t = this.iterator();
-        while(t.hasNext()){
-            sb.append(t.next().toString()).append(", ");
+        for (Card card : this) {
+            sb.append(card.toString()).append(", ");
         }
         return sb.toString();
     }
@@ -86,4 +91,15 @@ public class PokerHand implements Iterable<Card>{
         return cs.iterator();
     }
 
+    @Override
+    public int compareTo(@NotNull Object o) {
+        if (o instanceof PokerHand other) {
+            HandRank thisrank = this.getRank();
+            HandRank otherrank = other.getRank();
+            ArrayList<HandRank> hrvalues = new ArrayList<>(Arrays.asList(HandRank.values()));
+            int thisindex = hrvalues.indexOf(thisrank);
+            int otherindex = hrvalues.indexOf(otherrank);
+            return thisindex - otherindex;
+        } else throw new IllegalArgumentException("Not a PokerHand object.");
+    }
 }

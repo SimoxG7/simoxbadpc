@@ -19,8 +19,14 @@ public class PokerHandTest {
 
   @Test
   public void noInputOrEmptyInputTest() {
-    PokerHand p = new PokerHand("2D 3D 4D");
+    PokerHand p = new PokerHand("");
     assertThat(p.toString()).isEqualTo("");
+  }
+
+  @Test
+  public void straightFlushTest() {
+    PokerHand p = new PokerHand("5H 6H 7H 8H 9H");
+    assertThat(p.getRank()).isEqualTo(HandRank.STRAIGHT_FLUSH);
   }
 
   @Test
@@ -39,12 +45,6 @@ public class PokerHandTest {
   }
 
   @Test
-  public void straightFlushTest() {
-    PokerHand p = new PokerHand("5H 6H 7H 8H 9H");
-    assertThat(p.getRank()).isEqualTo(HandRank.STRAIGHT_FLUSH);
-  }
-
-  @Test
   public void flushTest() {
 
     Deck d = new Deck();
@@ -54,7 +54,7 @@ public class PokerHandTest {
     d.push(Card.get(Rank.FIVE, Suit.CLUBS));
     d.push(Card.get(Rank.SIX, Suit.CLUBS));
     d.push(Card.get(Rank.SEVEN, Suit.CLUBS));
-    d.push(Card.get(Rank.EIGHT, Suit.CLUBS));
+    d.push(Card.get(Rank.NINE, Suit.CLUBS));
     PokerHand p = new PokerHand(5, d);
     assertThat(p.getRank()).isEqualTo(HandRank.FLUSH);
   }
