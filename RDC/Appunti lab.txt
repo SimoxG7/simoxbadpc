@@ -1,0 +1,102 @@
+Lezione 01 - 28/10/22
+
+Packet tracer -> Strumento di Cisco (Networking Academy) per training su amministrazione di reti, configurazione apparati, servizi, controllo degli accessi.
+
+Socket Java -> Interfaccia per l'accesso ai servizi di rete 
+	- programmazione di applicazioni distribuite (event-driven).
+	- insieme di classi oer l'accesso ai servizi del trasporto all'interno di applicazioni.
+	- di alto livello -> invisibili molti dettagli di sistema.
+
+
+Packet tracer lavora a livello 2 e 3 dello standard OSI (Network 3 e Data Link 2) [in TCP/IP: Internet 3 e Data Link 2].
+Socket lavora a livello 4 dello standard OSI e di Internet.
+
+Cisco Packet Tracer -> Emulatore di reti -> Permette di disegnare la nostra rete e assicurarci del suo funzionamento con notevole realismo. 
+
+Router (Livello 3), Switch (Livello 2).
+
+In CPT ci sono anche i modelli che Cisco crea irl (indicati dal codice sotto al dispositivo).
+
+Applicazioni distribuite: riguardano il livello 4 (Socket). 
+
+Socket Java danno solo accesso al trasporto; altre socket danno accesso anche a livelli minori come network (Socket C).
+
+Materiale -> Slide del docente, contenuti relativi alle lezioni (Ariel: file .pkt, sorgenti Java, audio/video relativi a svolgimento di esercizi, lezioni registrate), dispensa Packet Tracer.
+
+Anche syllabus (calendario delle lezioni dipende dalla parte di teoria).
+
+Esame (CPR: calcolo parametri di rete, + PT: configurazione pacchetti di rete, + JS: sviluppo di applicazione distribuita) -> voto = ((0.25CPR + 0.25PT + 0.5JS) * 0.4) + (Teoria * 0.6) ; //tutte nello stesso appello (che branco di clown sti prof) 
+
+Iniziamo con qualcosa di packet tracer (8.2.0).
+
+Livello Fisico: cablature, cavi cross e straight, hub
+Livello Data-Link: 
+	- bridge, switch, configurazione VLAN 
+	...
+	
+Configurazione Cisco: Options -> Preferences -> Miscellaneous 
+	Configurazione opzioni uso memoria: Auto Clear Event List
+	Per fare fronte a blocchi applicazione: Auto File Backup Interval 
+	
+Logical -> Spazio non ha caratteristiche, ci possiamo mettere ciò che vogliamo.
+Physical -> Posso rappresentare una rete fisica e collegarmi a reti esterne che ancora non possediamo. 
+
+In alto strumento di selezione per selezionare. In basso a sinistra per scegliere End Device, Connection, Network Devices, Components; ciascuno con altre sottocategorie (nella lista che compare sotto).
+
+Lente di ingrandimento -> informazioni extra sul dispositivo.
+
+Strumento di delete -> Cancella dispositivo.
+
+Icona 5 -> Per aggiungere note. 
+
+Palette di dialogo con possibile selezione di forma e colore -> per evidenziare zone della rete che sono insieme ad esempio. 
+
+Aggiungiamo ripetitore Hub (permette di modificarfe il segnale). Hover sul dispositivo e mostra informazioni (o ci clicco sopra e mostra com'è fisicamente). All'interno ha 6 moduli (6 possibili tipi di porte). Le porte sono classificate con due o tre lettere (CFE -> Copper Fast Ethernet). Posso spegnere la corrente e poi aggiungere/rimuovere moduli nelle porte.
+
+Per collegare Hub andiamo in Connection.
+
+Posizioni da destra a sinistra (livello fisico) 0,1,2,3,...
+
+Connessione automatica è pericolosa. Tra router e router ad esempio crea in automatico una connessione seriale (passa un bit alla volta in rete). Per vedere cosa stiamo collegando -> Options -> Preferences -> Interface -> Always show port labels in logical space.
+
+Doppio cerchio (uno in, uno out) -> Fibra ottica.
+
+Triangoli rossi -> non va la connessione (verdi -> va).
+
+Hub è apparato plug-and-play, non necessita configurazione. Router invece necessita di configurazione.
+
+Porta ha anche numero espresso. 
+
+Da visione fisica -> config -> interface che ci serve -> posso accenderla. 
+
+
+
+Lezione 02 - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
