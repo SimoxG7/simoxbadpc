@@ -16,12 +16,6 @@ let encode list =
 
 
 
-
-
-
-
-
-
 (* let encode list = 
   let rec aux count acc  = function 
     | [] -> []
