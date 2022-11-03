@@ -14,6 +14,9 @@ public class SelettoreCartaMazzetto implements SelettoreCarta {
 
     @Override
     public Card chooseCard(Partita partita, List<Card> mano, Giocatore giocatore) {
-        return null;
+        for (Giocatore giocatoreDiverso : partita) {
+            if (giocatoreDiverso == giocatore) continue;
+            //todo
+        }
     }
 }
