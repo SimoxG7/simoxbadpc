@@ -1,0 +1,9 @@
+gcc -nostdlib -static -o fileExecutable sourceFile
+
+objcopy --dump-section .text=rawFile executableFile
+
+cat rawfile | ./myFirstInjection 
+
+
+
+
