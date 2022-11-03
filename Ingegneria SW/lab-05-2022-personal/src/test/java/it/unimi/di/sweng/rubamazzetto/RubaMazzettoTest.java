@@ -178,12 +178,6 @@ public class RubaMazzettoTest {
         sim.turno(partita, new SelettoreCartaTavolo(null));
         lor.turno(partita, new SelettoreCartaMazzetto(null));
 
-        /*
-        for (Giocatore g: partita) {
-            g.turno(partita, new SelettoreCartaMazzetto(null));
-        }
-        */
-
         assertThat(tav.toString()).isEqualTo("3 -> TWO of SPADES, THREE of DIAMONDS, FOUR of CLUBS, ");
         assertThat(lor.getMazzettoTop()).isEqualTo(Rank.ACE);
         assertThat(lor.getPunti()).isEqualTo(3);

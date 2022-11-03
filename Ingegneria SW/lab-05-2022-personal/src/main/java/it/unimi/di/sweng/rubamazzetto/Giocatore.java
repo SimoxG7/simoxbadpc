@@ -53,7 +53,7 @@ public class Giocatore {
       mazzettoTop = c.getRank();
     } else if (rankToGiocatore.containsKey(c.getRank())) {
       Giocatore g = rankToGiocatore.get(c.getRank());
-      punti += g.getPunti();
+      punti += g.getPunti() + 1;
       g.azzera();
       mano.remove(c);
       mazzettoTop = c.getRank();
