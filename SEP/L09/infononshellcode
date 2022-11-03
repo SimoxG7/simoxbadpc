@@ -4,6 +4,8 @@ objcopy --dump-section .text=rawFile executableFile
 
 cat rawfile | ./myFirstInjection 
 
+se uso mov r10, 10 anzichè mov r10, 1000 dovrei avere segmentation fault, perchè trovo un forbidden byte (0a -> newline \n)
+
 
 
 
