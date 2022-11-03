@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -214,6 +213,12 @@ public class RubaMazzettoTest {
         assertThat(tav.toString()).isEqualTo("3 -> TWO of SPADES, THREE of DIAMONDS, FIVE of CLUBS, ");
         assertThat(sim.getMazzettoTop()).isEqualTo(Rank.ACE);
         assertThat(sim.getPunti()).isEqualTo(3);
+    }
+
+    @Test
+    public void testDistribuisciMano() {
+        Partita partita = new Partita();
+        //todo
     }
 
 }

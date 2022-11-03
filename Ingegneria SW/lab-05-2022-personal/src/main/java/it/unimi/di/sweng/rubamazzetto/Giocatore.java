@@ -8,7 +8,7 @@ import java.util.*;
 public class Giocatore {
 
   private final String nome;
-  private List<Card> mano = new ArrayList<>();
+  private final List<Card> mano = new ArrayList<>();
   private Rank mazzettoTop;
 
   private int punti;

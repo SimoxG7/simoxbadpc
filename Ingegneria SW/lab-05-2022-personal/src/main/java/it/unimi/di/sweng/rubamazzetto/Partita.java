@@ -38,9 +38,20 @@ public class Partita implements Iterable<Giocatore> {
 
   public void distribuisciMano(int num) {
     // PRE CONDIZIONI
-    assert num <= 3;
+    //assert num <= 3;
 
+    if (num > 3) throw new IllegalArgumentException("Can't give more than 3 cards per person.");
     // TODO: distribuisce fino a num carte per giocatore con il vincolo di dare a tutti lo stesso numero di carte
+
+    for (int i = 0; i < num; i++) {
+      if (deckSize() < giocatori.size()) return;
+      for (Giocatore giocatore : giocatori) {
+        if (giocatore.numCards() > 3) throw new IllegalStateException("Giocatore non può avere più di 3 carte.");
+        distribuisciCarta();
+        //todo
+      }
+    }
+
 
     // POST CONDIZIONI
     for (Giocatore giocatore : giocatori) {
@@ -82,7 +93,7 @@ public class Partita implements Iterable<Giocatore> {
       s.append("\n");
     }
     s.append("Tavolo: ");
-    s.append(tavolo.toString());
+    s.append(tavolo);
     s.append("\n");
     s.append("Finita: ");
     s.append(isFinita());
