@@ -144,9 +144,11 @@ public class RubaMazzettoTest {
             g.turno(partita, new SelettoreCartaTavolo(null));
         }
 
-        assertThat(tav.toString()).isEqualTo("4 -> TWO of SPADES, THREE of DIAMONDS, FOUR of CLUBS, ");
+        assertThat(tav.toString()).isEqualTo("3 -> TWO of SPADES, THREE of DIAMONDS, FOUR of CLUBS, ");
         assertThat(lor.getMazzettoTop()).isEqualTo(Rank.ACE);
         assertThat(lor.getPunti()).isEqualTo(2);
     }
+
+
 
 }

@@ -15,6 +15,12 @@ public class SelettoreCartaTavolo implements SelettoreCarta {
 
     @Override
     public Card chooseCard(Partita partita, List<Card> mano, Giocatore giocatore) {
-        return null;
+        Tavolo tavolo = partita.getTavolo();
+        for (Card card : mano) {
+            if (tavolo.inMostra(card)) {
+                return card;
+            }
+        }
+        return next.chooseCard(partita, mano, giocatore);
     }
 }
