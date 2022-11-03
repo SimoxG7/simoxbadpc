@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -216,4 +215,9 @@ public class RubaMazzettoTest {
         assertThat(sim.getPunti()).isEqualTo(3);
     }
 
+    @Test
+    public void testDistribuisciMano() {
+        Partita partita = new Partita();
+        //todo
+    }
 }
