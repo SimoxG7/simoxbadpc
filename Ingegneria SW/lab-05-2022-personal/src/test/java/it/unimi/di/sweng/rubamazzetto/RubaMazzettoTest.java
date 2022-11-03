@@ -149,6 +149,45 @@ public class RubaMazzettoTest {
         assertThat(lor.getPunti()).isEqualTo(2);
     }
 
+    @Test
+    public void testChainMazzetto() {
+        Partita partita = new Partita();
+
+        Tavolo tav = partita.getTavolo();
+
+        ArrayList<Card> carte_tav = new ArrayList<>();
+
+        for (Card card : tav) {
+            carte_tav.add(card);
+        }
+
+        for (Card card : carte_tav) {
+            tav.prendi(card);
+        }
+
+        tav.metti(Card.get(Rank.ACE, Suit.HEARTS));
+        tav.metti(Card.get(Rank.TWO, Suit.SPADES));
+        tav.metti(Card.get(Rank.THREE, Suit.DIAMONDS));
+        tav.metti(Card.get(Rank.FOUR, Suit.CLUBS));
+
+        Giocatore lor = new Giocatore("Lorenzo",partita);
+        lor.daiCarta(Card.get(Rank.ACE, Suit.SPADES));
+        Giocatore sim = new Giocatore("Simone",partita);
+        sim.daiCarta(Card.get(Rank.ACE, Suit.DIAMONDS));
+
+        sim.turno(partita, new SelettoreCartaTavolo(null));
+        lor.turno(partita, new SelettoreCartaMazzetto(null));
+
+        /*
+        for (Giocatore g: partita) {
+            g.turno(partita, new SelettoreCartaMazzetto(null));
+        }
+        */
+
+        assertThat(tav.toString()).isEqualTo("3 -> TWO of SPADES, THREE of DIAMONDS, FOUR of CLUBS, ");
+        assertThat(lor.getMazzettoTop()).isEqualTo(Rank.ACE);
+        assertThat(lor.getPunti()).isEqualTo(3);
+    }
 
 
 }
