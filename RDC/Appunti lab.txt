@@ -165,6 +165,17 @@ Vado su Add simple PDU e assegno il pacchetto al pc per farlo inviare all'altro 
 
 Assegnare ad ogni EndSystem un IP.
 
+Se due dispositivi hanno lo stesso IP, il source non manderà nemmeno il pacchetto, perchè penserà che sia destinato a sè stesso (e dunque è già arrivato). 
+
+
+
+
+----------------------------------------------------------------------------------------------------
+
+Lezione 3 - 08/11/22 
+
+
+
 
 
 
