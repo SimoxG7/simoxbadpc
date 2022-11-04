@@ -28,8 +28,36 @@ let rec map f = function
 
 let b = map is_prime a;;
 
-let rec unify a b acc = match a with 
+let make_couple a b = (a, b);;
+
+let unify a b =
+  let rec aux a b acc = match a with 
   | [] -> acc
-  | h::t -> acc 
+  | ha::ta -> match b with 
+    | [] -> acc 
+    | hb::tb -> aux ta tb ((make_couple ha hb)::acc)
+in List.rev (aux a b []);;
+;;
+
+let c = unify a b;;
+
+let primes_only list =
+  let rec aux acc =  function
+    | [] -> acc
+    | h::t -> if (is_prime h) then aux (h::acc) t else aux acc t
+  in List.rev (aux [] list) 
+;;
+
+let d = primes_only a;;
+
+
+
+
+
+
+
+
+
+
 
 
