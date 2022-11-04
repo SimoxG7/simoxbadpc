@@ -69,9 +69,141 @@ Porta ha anche numero espresso.
 
 Da visione fisica -> config -> interface che ci serve -> posso accenderla. 
 
+---------------------------------------------------------------------------------------------------------------------
+
+Lezione 02 - 04/11/22
+
+Lavoriamo su packet tracer. Icone: Hub, switch, router, bridge. Che differenza c'è fra le connessioni? (Occhio a usare la scelta automatica delle connessioni).
+
+Router -> dal francese, vuol dire strada. 
+
+Link possono essere rappresentati tramite un cavo dritto o un cavo cross. 
+
+Cavi con terminatore RJ-45 -> cavi di rete. 
+
+Esistono anche i repeater (ripetono il segnale).
+
+Twisted pair cable -> 8 cavetti in rame (8 colori -> 4 di colore e 4 associati di colore+bianco).
+
+Fibra ottica -> all'interno viaggia un segnale luminoso, ma anche il sole emette luce, per cui se i cavi della fibra ottica vengono esposti alla luce, possono subire un'alterazione dei dati che vengono trasferiti. A tale scopo, la superficie della fibra è specchiata, in modo tale da avere un'isolazione dalle interferenze esterne. 
+
+I cavi in rame hanno anch'essi una doppia guaina per isolare il segnale, ma non è efficiente a livello di isolazione come la fibra ottica, infatti i cavi in rame sono più influenzabili dai campi elettromagnetici esterni.
+
+Hub ha più interfacce di rete, in cui può entrare un cavo con terminatore RJ-45. // (PT-Hub su PT)
+
+Un Hub non ha nessuna intelligenza se non quella hardware. Hub fa broadcast, su qualunque delle interfacce fa il segnale. Il repeater hub prende il segnale, lo ripulisce e lo manda su tutte le interfacce tranne quella da cui è arrivato il dato. 
+
+Bridge e switch lavorano invece a livello data-link, ovvero il livello in cui realizzo un servizio connection-oriented con un dispositivo che è "adiacente" al nostro. Bridge e switch sanno fare indirizzamento di livello 2, ovvero indirizzare/identificare in reti punto-punto l'apparato che sta dall'altro lato del cavo, in reti broadcast ogni apparato che sta nella LAN (con indirizzi di livello 2). A livello 2 vengono anche implementate le politiche di accesso al mezzo (per evitare sovrapposizione di segnali). 
+
+//interferenze sinusoidali -> due sinusoidi si alterano a vicenda, sporcando il segnale. 
+
+Bridge -> come un ponte ha solo due estremi -> ha solo due slot, può collegare soltanto due apparati in maniera diretta.
+
+Switch può invece avere molte porte. 
+
+Bridge collega solo reti omogenee, switch collega anche reti non omogenee. 
+
+Un bridge collega solo reti che usano protocolli di livello data-link (2) omogenei.
+
+PT: Options -> Preferences -> General -> Always show port labels. 
+
+Collegamento seriale ha "zigzag", non vuole vedere che viene usato il collegamento seriale (?). 
+
+Cablature: UTP: 
+	- pin 1 (arancione+bianco) e 2 (arancione) -> invio
+	- pin 3 (verde+bianco) e 6 (verde) -> ricezione 
+	
+Solo questi 4 cavi degli 8 vengono usati nelle reti ethernet e fast ethernet. 
+
+Tra apparati di livello diverso usiamo cavi straight, cross altrimenti (ad esempio tra pc e router -> cross). Tra apparati di livello 1-2 -> cross. 
+
+PIN:
+Straight:			Crossed: 
+1- WO				WG
+2- O				G
+3- WG				WO
+4- BL				WBR
+5- WBL				BR	
+6- G				O
+7- WBR				BL
+8- BR 				WBL
+
+(W -> white, O -> orange, G -> green, BL -> blue, BR -> brown).
+
+In questo modo in collegamento con cavi crossed i pin di invio 1 e 2 (WO e O) entrano nei pin di ricezione 3 e 6 (WG e G), che sono rispettivamente 1 e 2 in porta di ricezione. [...] 
+
+Esercizio sulle cablature: per ogni possibile coppia di dispositivi, li connettiamo. 
+
+				Hub 		Switch		Router 		Workstation
+Hub				Cross		Cross		Straight 	Straight	
+Switch			Cross		Cross		Straight	Straight 
+Router			Straight	Straight	Cross		Cross	
+Workstation		Straight 	Straight 	Cross		Cross
+
+PC ha solo due porte: Bluetooth e fast ethernet. Entrambe le porte hanno un MAC address (Medium Access, sottolivello del data-link), usato per identificare un dispositivo presente nella LAN. 
+
+Connettere due bridge con cavo cross genera i cerchi arancioni sulle porte, che poi diventano verdi da soli (?). 
+
+Bridge ha apparato di livello 2. I due bridge alla connessione si parlano e si accordano. Questo richiede tempo, pertanto alla connessione necessitano di "un tempo di setup". //questo usando il realtime, se usiamo simulation invece possiamo avanzare di evento in evento (o tornare indietro) e far andare avanti il tempo con continuità evento per evento.
+I bridge (o switch) si scambiano messaggi di livello 2. 
+
+Interfaccia dei router deve essere attivata, altrimenti non funzionano. 
+
+Numerazione interfacce: prima cifra -> numero di slot fisico della scheda, seguita da / , seconda cifra -> numero di posizione di quel tipo di interfaccia sulla scheda. Slot si contano da destra a sinistra. 
+
+Router è dispositivo che pretende che su ognuna delle sue interfacce di rete vi sia una rete diversa, il che implica che al router vada detto quale rete è su quale interfaccia. 
 
 
-Lezione 02 - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
