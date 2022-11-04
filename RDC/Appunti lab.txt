@@ -153,9 +153,17 @@ Numerazione interfacce: prima cifra -> numero di slot fisico della scheda, segui
 
 Router è dispositivo che pretende che su ognuna delle sue interfacce di rete vi sia una rete diversa, il che implica che al router vada detto quale rete è su quale interfaccia. 
 
+Usare nella shell: ping (localhost) 
 
+Come argomento ping prende l'indirizzo di qualche cosa, ad esempio: ping www.unimi.it
 
+In Simulation possiamo scegliere quali eventi vogliamo che vengano mostrati nella lista degli eventi. Scegliamo ICMP (richieste e replys).
 
+Diamo indirizzi a oggetto di livello 3 -> Config -> interfaccia -> 192.168.0.1 (ad esempio). 
+
+Vado su Add simple PDU e assegno il pacchetto al pc per farlo inviare all'altro pc (P). Schiacciando sul "messaggio" si possono vedere le informazioni del PDU.
+
+Assegnare ad ogni EndSystem un IP.
 
 
 
