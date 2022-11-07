@@ -1,0 +1,46 @@
+    .intel_syntax noprefix
+    .global _start
+     
+    .section .text
+     
+    _start:
+            lea     rax, hello
+     
+            xor     rcx, rcx
+    startLoop1:
+            mov     rbx, rcx
+            add     rbx, rax
+            push    [rbx]
+            cmp     rcx, 11
+            je      endLoop1
+            inc rcx
+            jmp     startLoop1
+    endLoop1:
+     
+            xor     rcx, rcx
+    startLoop2:
+            mov     rbx, rcx
+            add     rbx, rax
+            pop     [rbx]
+            cmp     rcx, 11
+            je      endLoop2
+            inc     rcx
+            jmp     startLoop2
+    endLoop2:
+     
+            # write message
+            mov     rsi, rax
+            mov     rax, 1
+            mov     rdi, 1
+            lea     rsi, hello
+            mov     rdx, 12         # lunghezza
+            syscall
+     
+    exit:
+            mov     rax, 60
+            xor     rdi, rdi
+            syscall
+     
+    .section .data 
+            .align 4
+            hello:  .ascii "hello world!"
