@@ -1,10 +1,10 @@
 #!/bin/bash
 
-temp=$2
-
 if [ -z "$2" ] 
 then
 	temp="4500"
+else 
+	temp=$2
 fi
 
 on="redshift -m randr -O $temp"
@@ -23,6 +23,11 @@ elif [ $1 == "off" ]
 then
 	echo "Temperature set to default (6500)."
 	$off
+elif [[ $1 == ?(-)+([0-9]) ]] 
+then 
+	temp=$1 
+	echo "Temperature set to $temp."
+	$on 
 else 
 	echo "Unrecognized argument."
 fi
