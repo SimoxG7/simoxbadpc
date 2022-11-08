@@ -200,7 +200,26 @@ Router sono apparati intelligenti che costano molto. Switch invece non sono inte
 
 Router ha processo di apprendimento. 
 
-Non attaccare mai i PC alle interfacce dei router.
+Non attaccare mai i PC alle interfacce dei router direttamente (passare per switch, in modo di formare LAN).
+
+Per vedere la tabella di routing di un router -> inspect sul router -> routing table. 
+
+Slide 18 esercizi.
+
+ICMP -> solo ping.
+
+Bridge è apparato di livello 2 -> La sua ARP table è vuota (non capisce livello 3), ma la sua MAC table si può riempire invece. Con i passaggi di pacchetti il Bridge "impara" e riempie la sua MAC table. 
+
+3 bridge o 3 switch a triangolo -> fanno anello e continuano a far girare messaggi -> rompono l'anello non attivando una delle interfacce. 
+
+
+
+
+
+----------------------------------------------------------------------------------------------
+
+Lezione 4 - 11/11/22
+
 
 
 
