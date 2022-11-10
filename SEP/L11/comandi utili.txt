@@ -1,0 +1,14 @@
+compilare: //rimuovere protezioni contro bufferoverflow del compilatore
+	gcc -fno-stack-protector -z execstack -g		
+	//-g serve per debuggare
+
+disable ASLR: //rimuovere protezioni del SO 
+	echo 0 > /proc/sys/kernel/randomize_va_space 
+	sudo sysctl -w kernel.randomize_va_space=0 
+	
+enable core dump: //abilita il dump della memoria quando il programma faulta 
+	ulimit -c unlimited
+	
+viewing core dump:
+	gdb -q executable core 
+	
