@@ -24,8 +24,8 @@ public class Sfidante implements GiocatoreBJ {
 
   @Override
   public void carteIniziali() {
-    mazziere.daiCarta();
-    mazziere.daiCarta();
+    mano.add(mazziere.daiCarta());
+    mano.add(mazziere.daiCarta());
   }
 
   @Override
