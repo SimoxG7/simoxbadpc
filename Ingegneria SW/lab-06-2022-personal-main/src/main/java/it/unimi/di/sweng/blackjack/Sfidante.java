@@ -21,11 +21,9 @@ public class Sfidante implements GiocatoreBJ {
     this.strategia = strategia;
   }
 
-  //TODO i vari metodi richiesti per aderire all'interfaccia GiocatoreBJ
-
   @Override
   public void carteIniziali() {
-
+    
   }
 
   @Override

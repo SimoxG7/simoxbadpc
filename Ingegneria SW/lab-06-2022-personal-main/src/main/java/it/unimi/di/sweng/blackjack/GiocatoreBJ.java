@@ -1,11 +1,8 @@
 package it.unimi.di.sweng.blackjack;
 
 import ca.mcgill.cs.stg.solitaire.cards.Card;
-import ca.mcgill.cs.stg.solitaire.cards.Rank;
 
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 
 public interface GiocatoreBJ {
 
@@ -18,7 +15,6 @@ public interface GiocatoreBJ {
   String getName();
 
   default int getPunti() {
-    // TODO quanto valgono le carte? Occhio agli assi!
     int tot = 0;
     Iterator<Card> iterator = this.getCards();
     while (iterator.hasNext()) {
@@ -33,8 +29,8 @@ public interface GiocatoreBJ {
           tot+=10;
           break;
         default:
-          List<Rank> values = Arrays.asList(Rank.values());
-          int index = values.indexOf(card.getRank());
+          //List<Rank> values = Arrays.asList(Rank.values());
+          int index = card.getRank().ordinal();
           tot += index +1;
       }
     }
