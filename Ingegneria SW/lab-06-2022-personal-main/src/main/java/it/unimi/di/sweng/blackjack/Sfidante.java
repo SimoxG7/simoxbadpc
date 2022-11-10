@@ -10,10 +10,11 @@ public class Sfidante implements GiocatoreBJ {
   final private String name;
   final private List<Card> mano = new ArrayList<>();
   private Strategia strategia;
-
+  private Mazziere mazziere;
 
   public Sfidante(String name, Mazziere banco) {
     this.name = name;
+    this.mazziere = banco;
   }
 
   public void setStrategia(Strategia strategia) {
@@ -23,12 +24,14 @@ public class Sfidante implements GiocatoreBJ {
 
   @Override
   public void carteIniziali() {
-    
+    mazziere.daiCarta();
+    mazziere.daiCarta();
   }
 
   @Override
   public void gioca() {
-
+    if (this.getPunti() < 17) this.mano.add(this.mazziere.daiCarta());
+    if (this.getPunti() < 17) gioca();
   }
 
   @Override

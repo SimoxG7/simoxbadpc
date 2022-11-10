@@ -16,7 +16,7 @@ public class MultiMazzoTest {
     @Test
     public void testMultiMazzoNotNull() {
 
-        assertThat(new MultiMazzo(5)).isNotEqualTo(null);
+        assertThat(new MultiMazzo(6)).isNotEqualTo(null);
     }
 
 }

@@ -11,9 +11,9 @@ public class Mazziere implements GiocatoreBJ {
     private final List<Card> mano;
     private final MultiMazzo multiMazzo;
 
-    public Mazziere(int numPlayers) {
+    public Mazziere() {
         mano = new ArrayList<>();
-        multiMazzo = new MultiMazzo(numPlayers+1);
+        multiMazzo = new MultiMazzo(6);
     }
 
     @Override
@@ -22,9 +22,14 @@ public class Mazziere implements GiocatoreBJ {
         mano.add(multiMazzo.draw());
     }
 
+    protected Card daiCarta() {
+        return multiMazzo.draw();
+    }
+
     @Override
     public void gioca() {
-        //TODO
+        if (this.getPunti() < 17) this.mano.add(this.multiMazzo.draw());
+        if (this.getPunti() < 17) gioca();
     }
 
     @Override
