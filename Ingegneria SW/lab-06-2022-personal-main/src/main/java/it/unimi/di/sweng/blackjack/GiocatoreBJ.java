@@ -6,6 +6,7 @@ import ca.mcgill.cs.stg.solitaire.cards.Rank;
 import java.util.Iterator;
 
 public interface GiocatoreBJ {
+
   void carteIniziali();
 
   void gioca();
