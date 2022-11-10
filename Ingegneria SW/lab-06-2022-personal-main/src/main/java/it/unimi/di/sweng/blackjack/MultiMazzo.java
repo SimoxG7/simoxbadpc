@@ -21,7 +21,7 @@ public class MultiMazzo implements DeckInterface  {
   @Override
   public Card draw() {
     if (this.isEmpty()) return null;
-    if (nextToUse > multiMazzo.size()) nextToUse = 0;
+    if (nextToUse >= multiMazzo.size()) nextToUse = 0;
     if (!multiMazzo.get(nextToUse).isEmpty()) return multiMazzo.get(nextToUse++).draw();
     else {
       nextToUse++;
