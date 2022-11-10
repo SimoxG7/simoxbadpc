@@ -8,12 +8,10 @@ import java.util.List;
 
 
 public class MultiMazzo implements DeckInterface  {
-  private List<Deck> multiMazzo;
-  private final int numMazzi;
+  private final List<Deck> multiMazzo;
   private int nextToUse;
 
   public MultiMazzo(int numMazzi) {
-    this.numMazzi = numMazzi;
     this.nextToUse = 0;
     //definire un costruttore che crei un mazzo composto da numMazzi mescolato casualmente
     multiMazzo = new ArrayList<>();
@@ -25,7 +23,10 @@ public class MultiMazzo implements DeckInterface  {
     if (this.isEmpty()) return null;
     if (nextToUse > multiMazzo.size()) nextToUse = 0;
     if (!multiMazzo.get(nextToUse).isEmpty()) return multiMazzo.get(nextToUse++).draw();
-    else return this.draw();
+    else {
+      nextToUse++;
+      return this.draw();
+    }
   }
 
   @Override
