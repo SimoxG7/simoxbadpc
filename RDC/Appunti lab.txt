@@ -220,6 +220,15 @@ Bridge è apparato di livello 2 -> La sua ARP table è vuota (non capisce livell
 
 Lezione 4 - 11/11/22
 
+Slide 2 del file PT1. 5 PC tutti collegati a uno switch.
+
+Attivo ICMP per vedere i ping. 
+
+Gli switch imparando dove sono situati gli endpoint possono rompere i domini di collisione. 
+
+Algoritmo di Dijkstra -> ottimo per calcolare il miglior cammino in un grafo, ma ha la necessità di conoscere l'intera topologia del grafo. Ha costo di n² (n^2), dove n è il numero di nodi del grafo. 
+
+
 
 
 
