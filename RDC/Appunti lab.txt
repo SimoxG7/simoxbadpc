@@ -226,7 +226,61 @@ Attivo ICMP per vedere i ping.
 
 Gli switch imparando dove sono situati gli endpoint possono rompere i domini di collisione. 
 
-Algoritmo di Dijkstra -> ottimo per calcolare il miglior cammino in un grafo, ma ha la necessità di conoscere l'intera topologia del grafo. Ha costo di n² (n^2), dove n è il numero di nodi del grafo. 
+Algoritmo di Dijkstra -> ottimo per calcolare il miglior cammino in un grafo, ma ha la necessità di conoscere l'intera topologia del grafo. Ha costo di n² (n^2), dove n è il numero di nodi del grafo. Viene usato in addressing (?). 
+
+Hub, Switch e Bridge sono apparati plug-n-play. Per rimanere a livello due, ma avere due reti distinte logicamente (giallo e blu), dobbiamo istruire gli switch. Click sullo switch -> tab configurazione -> Switching -> VLAN database. Nel database ci sono già valori predefiniti (1 -> default). Gli altri sono dei protocolli di livello 2 (fddi fiber con topologia ad anello).
+
+Le VLAN hanno due valori -> un indice numerico e un nome. 
+
+Una buona pratica nel dare il nome alle VLAN è quella di aggiungere nel nome l'identificare numerico della VLAN.
+
+Spesso si associano delle VLAN a dei colori. 
+
+Istruisco tutti gli switch aggiungendo al loro VLAN database le VLAN espresse tramite il relativo numero e il relativo nome. 
+
+(Options -> Interface -> Always show port labels in logical workspace ON).
+
+Poi bisogna dire che all'interfaccia dello switch possono accedere solo frame che fanno parte della vlan dello specifico numero. 
+
+Cambiate le VLAN accettate dall'interfaccia, lo switch si riconfigurerà. 
+
+Ancora non funzione il passaggio tra i due switch perchè gli switch sono anche loro con una VLAN (1, default). 
+
+Devo dire che il link collegato alla fastethernet del link permette l'accesso ai frame arancioni e viceversa sull'altro switch. 
+
+Per far passare anche i frame blu però devo anche poter utilizzare altre porte in più.
+
+Protocollo 802.1Q modifica il protocollo ethernet in modo tale che le ethernet hanno un formato del frame leggermente diverso nel quale viene aggiunto un Header 802.1Q. Questo header contiene anche il VLAN ID. 
+
+Standard 802.1Q -> protocollo di trunking. 
+
+Dallo switch -> config -> interface -> cambio il protocollo in protocollo di trunking. 
+
+ARP è protocollo di livello 2 e mezzo (capisce sia indirizzi di livello 2 che di livello 3). 
+
+Apparati di rete hanno il loro Sistema Operativo -> IOS -> possiamo andare a lavorare direttamente al prompt di shell del nostro apparato dalla sezione CLI (Command Line Interface). 
+
+CLI ha due livelli di accesso: utente (consente la visualizzazione della configurazione, ha simbolo di > nel prompt) e privilegiato (consente la modifica della configurazione, ha simbolo di # nel prompt). 
+
+Al prompt di uno switch -> ? -> fa vedere comandi a disposizione si uno switch. 
+
+disable -> fa tornare in modalità utente, enable -> fa entrare in modalità privilegiata. 
+ping -> ICMP, manda un messaggio echo. 
+traceroute -> sfrutta icmp per capire il percorso eseguito da un pacchetto. 
+show -> fa vedere la configurazione 
+
+"comando ?" -> opzioni del comando 
+
+show interfaces fastEthernet 0/1   			/7fa vedere caratteristiche dell'interfaccia 0/1
+
+
+
+------------------------------------------------------------------------------------------------------
+
+Lezione 05 - 
+
+
+
 
 
 
