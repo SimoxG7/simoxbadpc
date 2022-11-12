@@ -1,0 +1,5 @@
+ocamlc -c MatrixADT.mli
+ocamlc -c Matrix.ml
+
+ocamlc -o main Matrix.cmo main.ml |&more 
+
