@@ -7,7 +7,7 @@ let l3 = 0::l1;;
 List.nth l3 5;; 
 
 (*per vedere se elemento è nella lista*)
-let alist = [0;1;2;3;4;5;6;7;8:9:10];;
+let alist = [0;1;2;3;4;5;6;7;8;9;10];;
 let rec is_in l x = if (l == []) then false else x == List.hd(l) || is_in(List.tl l) x;;
 is_in alist 5;; (*true*)
 is_in alist 12;; (*false*)
