@@ -11,6 +11,7 @@ end
 module MyStack : MyStackADT = struct
   
   type 'a stack = 'a list;;
+  
   let empty = [];;
   
   let push x s = x::s;;
