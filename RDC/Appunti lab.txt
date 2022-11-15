@@ -334,6 +334,75 @@ write memory -> scrive la running configuration in memoria
 
 do command -> per eseguire comando con modalità differente da quella attuale
 
+VLAN virtuali da CLI:
+
+vlan ?
+
+vlan database ?
+
+facendo vlan database cambia anche il prompt, che dice che sono entrato in un sottomodulo, che può contenere diversi comandi. 
+
+prompt diventa Switch# -> Switch(vlan)# 
+
+vlan database è però deprecato, quindi non lo usiamo.
+
+per creare le vlan usiamo il comando configure terminal 
+
+configure terminal / conf t / configure in terminal 
+
+prompt diventa Switch(config) 
+
+show non c'è, diventa necessario scrivere "do show" 
+
+se eseguo vlan ? -> dice che chiede il vlan id 
+
+vlan 10 ? -> vlan 10 -> entro in un nuovo sottomodulo.
+
+name orange_10
+
+exit -> ora il cambiamento viene effettuato ed è visibile nel vlan database. 
+
+vlan 11 -> name cyan_11 -> exit 
+
+do show vlan -> mostra il vlan database
+
+le vlan sul pc servono in modalità access, non trunk. 
+
+interfaces fastEthernet ?
+
+interface fastEthernet 0/1 
+
+shutdown 
+
+no shutdown 
+
+switchport ? 
+
+switchport mode ? 
+
+switchport mode access 
+
+switchport access vlan ? -> vuole id del vlan 
+
+switchport access vlan 10 -> exit
+
+interface fastEthernet 1/1 -> switchport mode access -> switchport access vlan 11 -> exit 
+
+eccetera sull'altro switch 
+
+per l'interfaccia che deve fare trunking bisogna fare switchport trunk allowed vlan 10 11 (oppure) switchport trunk allowed vlan add 20 
+
+interface fastEthernet 3/1 -> switchport mode trunk -> eccetera
+
+posso anche fare switchport trunk allowed vlan remove x 
+
+
+
+
+-------------------------------------------------------------------------------------------------
+
+Lezione 06 - 15/11/22
+
 
 
 
