@@ -260,7 +260,7 @@ ARP è protocollo di livello 2 e mezzo (capisce sia indirizzi di livello 2 che d
 
 Apparati di rete hanno il loro Sistema Operativo -> IOS -> possiamo andare a lavorare direttamente al prompt di shell del nostro apparato dalla sezione CLI (Command Line Interface). 
 
-CLI ha due livelli di accesso: utente (consente la visualizzazione della configurazione, ha simbolo di > nel prompt) e privilegiato (consente la modifica della configurazione, ha simbolo di # nel prompt). 
+CLI ha due livelli di accesso: utente (consente la visualizzazione della configurazione, ha simbolo di > nel prompt) e privilegiato (consente la modifica della configurazione, ha simbolo di # nel prompt). //i due livelli di accesso hanno due password differenti 
 
 Al prompt di uno switch -> ? -> fa vedere comandi a disposizione si uno switch. 
 
@@ -277,7 +277,51 @@ show interfaces fastEthernet 0/1   			/7fa vedere caratteristiche dell'interfacc
 
 ------------------------------------------------------------------------------------------------------
 
-Lezione 05 - 
+Lezione 05 - 15/11/22 
+
+Interfaccia grafica per LAN virtuali attraverso CLI (termine dell'ultima lezione). Router non sono plug-n-play, tipicamente necessitano di una configurazione prima di poter funzionare. 
+
+Abbiamo 3 modi per configurare un apparato: 
+- Interfaccia grafica (pensata per utenti non esperti o pratici).
+- Command line IOS (Internet-working Operative System, proprietario di Cisco, ma anche altre aziende hanno OS analoghi). Consente di riconfigurare un'ifc lasciando operative le altre.
+- tftp (Trivial File Transfer Protocol, scaricamento di file editato off-line, tipicamente gli amministratore di rete tengono dei file di configurazione già testati e funzionanti).
+.
+
+Posso entrare in modalità privilegiata solo se sono già in modalità utente (come sudo in Linux, devo già essere dentro come utente) (> -> utente, # -> privilegiata). . 
+
+Comandi in CLI di switch: 
+? -> comandi disponibili 
+show ? -> help per il comando show 
+
+Filtro di simulazione -> Misc -> STP 
+
+In una rete con loop tra switch, dei dati potrebbero girare indefinitivamente. Grazie a STP (Spanning Tree Protocol) gli switch cercano di scoprire quali apparati hanno vicino. Dopo un certo punto due link diventeranno verdi, ma il loop non permetterà al terzo switch di avere link verde -> un'interfaccia a caso verrà disabilitata per interrompere il loop. In questo modo il pacchetto prenderà però una strada più lunga facendo ad esempio un hop in più tra gli switch. 
+
+Nella realtà gli amministratori di rete creano dei loop, poichè in caso di guasto di uno switch continuo ad avere una rete funzionante (al guasto dello switch non vi è più loop e lo STP permette che l'interfaccia dello switch in precedenza disabilitato verrà resa funzionante. 
+
+show permette di vedere anche la MAC address table. 
+
+Secure shell (ssh) e Secure Socket Layer (ssl) vengono usati per comunicazione cifrata. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
