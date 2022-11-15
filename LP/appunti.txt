@@ -1,0 +1,41 @@
+Lezione senza quad: 
+
+Concorrenza:
+Messaggi sono asincroni in erlang -> problematica gestione dei messaggi
+
+Errors in concurrency: Meccanismo per garantire che il server a cui vogliamo mandare messaggi sia attivo, cambiando la prospettiva con cui lavoriamo. 
+
+Quando due processi sono in relazione, colleghiamo un attore con un altro attore e otteniamo una funzione BIF link che viene usata per monitorare. Alla morte di un oggetto B linkato ad A, viene inviato un messaggio che notifica A della morte di B. Esempio di messaggio: ('EXIT', B, why) .
+
+Abbiamo una nozione di "liveness" tra i due attori. 
+
+esempio: [slide 3/14] -> allo spawn si linka al padre, attende un messaggio, esegue la funzione e poi end. 
+
+Links: sono una sorta di meccanismo di propagazione degli errori utile a collegare gli attori. Processo che muore manda un segnale all'altro processo. Insieme di processi linkati a un dato processo viene detto link set (insieme dei link?). 
+
+Segnali di uscita: generati da un processo alla morte (dalla vm di Erlang); i segnali sono broadcastati a tutti i processi del link set; il segnale di uscita contiene un argomento esprimente il perchè il processo sia morto - exit(Reason).
+
+Se la morte del processo è "naturale", la ragione di uscita è "normal". 
+
+Segnali di uscita possono essere mandati tramite exit(Pid, X) //il sender qua non muore, fa una finta morte.
+
+Un processo non di sistema che riceve un segnale di uscita muore anch'esso. Un processo di sistema riceve il segnale come un normale messaggio nella propria mailbox. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
