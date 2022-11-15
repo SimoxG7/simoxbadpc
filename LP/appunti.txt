@@ -21,6 +21,33 @@ Segnali di uscita possono essere mandati tramite exit(Pid, X) //il sender qua no
 
 Un processo non di sistema che riceve un segnale di uscita muore anch'esso. Un processo di sistema riceve il segnale come un normale messaggio nella propria mailbox. 
 
+process_flag(trap_exit, true) -> trasforma un processo in un processo di sistema. In erlang è possibile settare alcune flag per i processi. 
+
+[slide 5/14] 
+
+Ci sono 3 possibili casistiche nel sistema:
+
+- Non mi importa se un processo che ho creato crasha
+	Pid = spawn(fun() -> ... end) 
+- Voglio morire se il processo che creo crasha
+	Pid = spawn_link(fun() -> ... end) 
+- Voglio gestire gli errori se un processo che ho creato crasha
+	process_flag(trap_exits, true)
+	Pid = spawn_link(fun() -> ... end) 
+.
+
+[slide 6/14] -> A processo privilegiato, B diventa privilegiato o meno in base al bool, C prende un messaggio. (C deriva da B, B deriva da A). 
+
+[Slide 8/14] (processo di sistema ha il cerchio attorno)
+
+[slide 11/14] -> con kill in realtà muoiono tutti, anche i processi di sistema. 
+
+Link sono simmetrici -> se A muore, B riceve un segnale di uscita e viceversa. Per prevenire la morte di un processo bisogna renderlo un processo di sistema, che non è sempre una scelta desiderabile. 
+
+A tale scopo esistono i monitor, che sono dei link asimmetrici -> in una sola direzione (monodirezionale). 
+
+A può creare un monitor per B chiamando: erlang:monitor(process, B). Se B muore senza una ragione di uscita, viene dato il messaggio 'DOWN' -> {'DOWN', Ref, process, B, reason} mandato ad A (Ref è il riferimento al monitor).
+
 
 
 
