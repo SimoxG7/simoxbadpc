@@ -303,15 +303,36 @@ show permette di vedere anche la MAC address table.
 
 Secure shell (ssh) e Secure Socket Layer (ssl) vengono usati per comunicazione cifrata. 
 
+show in fa 0/1 -> mostra interfaccia fastethernet 0/1 
 
+enable -> vado in modalità privilegiata.
+disable -> torno in modalità utente. 
 
+ctrl-shift-6 per fare l'abort dell'esecuzione di un comando. (ctrl-alt-6 per linux) 
 
+show ? -> in modalità privilegiata fa ovviamente vedere più roba. 
 
+show access-lists -> mostra le ACL usate per controllare il traffico su una interfaccia. 
 
+show boot -> configurazione di cosa fa l'apparato al boot. 
 
+show interfaces fa 0/1 
 
+show running-config -> per vedere la configurazione di startup dell'apparato. 
 
+show snmp -> simple network management protocol -> incapsula i comandi della CLI per farli arrivare al dispositivo (?) 
 
+show spanning-tree -> mostra la topologia ad albero costruita seguendo lo STP. 
+
+? in modalità privilegiata -> per vedere tutti i comandi possibili in modalità privilegiata. 
+
+exit / logout / disable -> fanno uscire dalla modalità privilegiata 
+
+per annullare un comando sbagliato possiamo fare -> no command 
+
+write memory -> scrive la running configuration in memoria 
+
+do command -> per eseguire comando con modalità differente da quella attuale
 
 
 
