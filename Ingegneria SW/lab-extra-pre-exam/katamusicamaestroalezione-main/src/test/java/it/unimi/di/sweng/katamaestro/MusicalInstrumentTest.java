@@ -11,7 +11,37 @@ public class MusicalInstrumentTest {
 
     @Test
     public void testTrumpet() {
-        MusicalInstrument horn = new Trumpet();
-        assertThat(horn.play()).isEqualTo("pepepe");
+        MusicalInstrument sut = new Trumpet();
+        assertThat(sut.play()).isEqualTo("pepepe");
+    }
+
+    @Test
+    public void testHorn() {
+        MusicalInstrument sut = new Horn();
+        assertThat(sut.play()).isEqualTo("papapa");
+    }
+
+    @Test
+    public void testWaterGlass() {
+        WaterGlass sut = new WaterGlass();
+        assertThat(sut.tap()).isEqualTo("diding");
+    }
+
+    @Test
+    public void testIronRod() {
+        GermanPercussion sut = new IronRod();
+        assertThat(sut.spiel()).isEqualTo("tatang");
+    }
+
+    @Test
+    public void testWaterGlassMI() {
+        MusicalInstrument sut = new WaterGlassMI();
+        assertThat(sut.play()).isEqualTo("diding");
+    }
+
+    @Test
+    public void testIronRodMI() {
+        MusicalInstrument sut = new GermanPercussionMI(new IronRod());
+        assertThat(sut.play()).isEqualTo("tatang");
     }
 }
