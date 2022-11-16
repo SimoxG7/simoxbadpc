@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+}
+
+group 'it.unimi.di.sweng.katamaestro'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains:annotations:23.0.0"
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    testImplementation 'org.assertj:assertj-core:3.22.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        exceptionFormat = 'full'
+        showStandardStreams = true
+        events = ["passed", "failed", "skipped"]
+    }
+}
+
+
+javadoc {
+    options.tags = ['pre:a:Preconditions:', 'post:a:Postconditions:']
+    options.addStringOption('Xdoclint:none','-quiet')
+}
