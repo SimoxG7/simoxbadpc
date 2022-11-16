@@ -44,4 +44,19 @@ public class MusicalInstrumentTest {
         MusicalInstrument sut = new GermanPercussionMI(new IronRod());
         assertThat(sut.play()).isEqualTo("tatang");
     }
+
+    @Test
+    public void testOrchestra() {
+        MusicalInstrument m1 = new Trumpet();
+        MusicalInstrument m2 = new GermanPercussionMI(new IronRod());
+        MusicalInstrument m3 = new WaterGlassMI();
+
+        Orchestra sut = new Orchestra();
+        
+        sut.add(m1);
+        sut.add(m2);
+        sut.add(m3);
+
+        assertThat(sut.play()).isEqualTo("pepepe\ntatang\ndiding");
+    }
 }

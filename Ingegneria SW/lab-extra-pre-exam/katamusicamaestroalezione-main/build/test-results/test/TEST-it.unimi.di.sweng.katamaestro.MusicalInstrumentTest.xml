@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="it.unimi.di.sweng.katamaestro.MusicalInstrumentTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-11-16T19:26:47" hostname="simoxbadpc" time="0.232">
+<testsuite name="it.unimi.di.sweng.katamaestro.MusicalInstrumentTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-11-16T20:20:15" hostname="simoxbadpc" time="0.172">
   <properties/>
-  <testcase name="testTrumpet()" classname="it.unimi.di.sweng.katamaestro.MusicalInstrumentTest" time="0.174"/>
+  <testcase name="testTrumpet()" classname="it.unimi.di.sweng.katamaestro.MusicalInstrumentTest" time="0.123"/>
   <testcase name="testHorn()" classname="it.unimi.di.sweng.katamaestro.MusicalInstrumentTest" time="0.006"/>
-  <testcase name="testIronRodMI()" classname="it.unimi.di.sweng.katamaestro.MusicalInstrumentTest" time="0.009"/>
-  <testcase name="testWaterGlassMI()" classname="it.unimi.di.sweng.katamaestro.MusicalInstrumentTest" time="0.007"/>
-  <testcase name="testWaterGlass()" classname="it.unimi.di.sweng.katamaestro.MusicalInstrumentTest" time="0.006"/>
+  <testcase name="testOrchestra()" classname="it.unimi.di.sweng.katamaestro.MusicalInstrumentTest" time="0.009"/>
+  <testcase name="testIronRodMI()" classname="it.unimi.di.sweng.katamaestro.MusicalInstrumentTest" time="0.002"/>
+  <testcase name="testWaterGlassMI()" classname="it.unimi.di.sweng.katamaestro.MusicalInstrumentTest" time="0.003"/>
+  <testcase name="testWaterGlass()" classname="it.unimi.di.sweng.katamaestro.MusicalInstrumentTest" time="0.003"/>
   <testcase name="testIronRod()" classname="it.unimi.di.sweng.katamaestro.MusicalInstrumentTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
