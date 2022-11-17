@@ -28,7 +28,7 @@ void force(char* filename) {
         original = fopen(filename, "r");
         
         FILE *new;
-        char* newfilename = strcat("new", i);
+        char* newfilename = strcat("new", (char)i);
         new = fopen(newfilename, "w");
 
         char c = fgetc(original);

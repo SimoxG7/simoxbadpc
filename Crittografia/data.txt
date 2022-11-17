@@ -1,1 +1,2 @@
 Hello Simox!
+This is a secret message for you using the Cesar encryption method.
