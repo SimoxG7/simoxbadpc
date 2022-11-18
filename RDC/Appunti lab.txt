@@ -462,6 +462,8 @@ Broadcast, netmask, 2 indirizzi apparati per:
 	- Indirizzi apparati (primo e ultimo): 215.151.59.1, 215.151.59.254 	
  
 
+CIDR -> Classless -> indirizzo di base di rete è x.y.w.z/n -> n indica i bit usati per netID, indipendentemente dalla classe. In indirizzo base gli ultimi 32-n bit devono essere '0'.
+
 
 
 
