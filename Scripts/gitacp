@@ -10,7 +10,7 @@ fi
 
 
 add="git add --all"
-commit="git commit -m \"xdddd\""
+commit="git commit -m \"$msg\""
 push="git push"
 
 $add
