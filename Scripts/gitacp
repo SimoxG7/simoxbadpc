@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [ -z "$1" ] 
+then
+	echo "missing commit message"
+	exit 1
+else 
+	msg=$1
+fi
+
+add="git add --all"
+#commit="git commit -m \"$msg\""
+#push="git push"
+
+$add
+$commit
+$push
+
+exit 0
+
+
+
+
+

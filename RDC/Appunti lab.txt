@@ -401,7 +401,8 @@ posso anche fare switchport trunk allowed vlan remove x
 
 -------------------------------------------------------------------------------------------------
 
-Lezione 06 - 15/11/22
+Lezione 06 - 18/11/22
+
 
 
 
