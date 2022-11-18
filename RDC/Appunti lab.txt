@@ -429,6 +429,41 @@ Indirizzi particolari:
 
 Se usiamo x bit per netID e y (32-x) bit per hostID, allora la netmask è composta da x bit a '1' seguiti da y bit a '0'. 
 
+Entry delle tabelle di instradamento: <dest, netmask, oif, metric, flags> -> facendo bitwise AND fra pkt.dest e netmask -> ottengo dest . 
+
+altrimenti 2^32 linee nelle routing table -> mediamente n/2 per trovare ciò che voglio in tabella disordinata -> 2^31 .
+
+Possiamo diminuire questo numero ragionando su come viaggiamo normalmente -> gerarchia di livelli di apparati. 
+
+Esercizi:
+- 127.128.129.192 -> 0111 1111 . 1000 0000 . 1000 0001. 1100 0000 
+- 20.148.67.123 -> 0001 0100 . 1001 0100 . 0100 0011 . 0111 1011 
+- 218.160.179.60 -> 1101 1010 . 1010 0000 . 1011 0011 . 0011 1100 
+- 87.194.104.77 -> 0101 0111 . 1100 0010 . 1011 1000. 0100 1101 
+
+- 0101 1011 . 0111 0110 . 0010 1111 . 1001 1111 -> 91.118.47.159
+- 0000 1100 . 1000 1000 . 0111 0010 . 0011 0111 -> 12.136.114.55
+- 1110 0111 . 0010 0110 . 0110 0100 . 0110 0000 -> 231.38.100.96
+
+Broadcast, netmask, 2 indirizzi apparati per:
+- 15.0.0.0 -> classe A (0...) :
+	- Broadcast: 15.255.255.255 
+	- Netmask: 255.0.0.0 (tira fuori solo netID con AND bitwise, maschera le differenze tra gli apparati)
+	- Indirizzi apparati (primo e ultimo): 15.0.0.1, 15.255.255.254 
+	
+- 137.149.0.0 -> classe B (10...) :  
+	- Broadcast: 137.149.255.255 
+	- Netmask: 255.255.0.0 (tira fuori solo netID con AND bitwise, maschera le differenze tra gli apparati)
+	- Indirizzi apparati (primo e ultimo): 137.149.0.1, 137.149.255.254 
+
+- 215.151.59.0 -> classe C (110...) :  
+	- Broadcast: 215.151.59.255 
+	- Netmask: 255.255.255.0 (tira fuori solo netID con AND bitwise, maschera le differenze tra gli apparati)
+	- Indirizzi apparati (primo e ultimo): 215.151.59.1, 215.151.59.254 	
+ 
+
+
+
 
 
 
