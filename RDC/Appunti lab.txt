@@ -464,13 +464,13 @@ Broadcast, netmask, 2 indirizzi apparati per:
 
 CIDR -> Classless -> indirizzo di base di rete è x.y.w.z/n -> n indica i bit usati per netID, indipendentemente dalla classe. In indirizzo base gli ultimi 32-n bit devono essere '0'.
 
+Togliamo il confine stabilito dalle classi, il "confine" della rete è determinato dal /n in CIDR.
 
 
 
+--------------------------------------------------------------------------------------------------
 
-
-
-
+Lezione 07 - 22/11/22
 
 
 
