@@ -8,9 +8,10 @@ else
 	msg=$1
 fi
 
+
 add="git add --all"
-#commit="git commit -m \"$msg\""
-#push="git push"
+commit="git commit -m \"xdddd\""
+push="git push"
 
 $add
 $commit
