@@ -8,16 +8,11 @@ else
 	msg=$1
 fi
 
+echo "Adding all files, commit with message: '$msg', pushing to remote repo."
 
-add="git add --all"
-commit="git commit -m \"$msg\""
-echo $commit
-push="git push"
-
-$add
-#$commit
+git add --all
 git commit -m "$msg"
-$push
+git push
 
 exit 0
 
