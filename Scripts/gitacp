@@ -8,11 +8,13 @@ else
 	msg=$1
 fi
 
-echo "Adding all files, commit with message: '$msg', pushing to remote repo."
-
+echo "Adding all files..."
 git add --all
+echo "Add complete. Committing with message: '$msg'..."
 git commit -m "$msg"
+echo "Commit completed. Pushing to remote repo..."
 git push
+echo "Push completed. All operations completed."
 
 exit 0
 
