@@ -11,10 +11,12 @@ fi
 
 add="git add --all"
 commit="git commit -m \"$msg\""
+echo $commit
 push="git push"
 
 $add
-$commit
+#$commit
+git commit -m "$msg"
 $push
 
 exit 0
