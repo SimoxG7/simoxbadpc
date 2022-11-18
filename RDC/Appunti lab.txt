@@ -403,6 +403,37 @@ posso anche fare switchport trunk allowed vlan remove x
 
 Lezione 06 - 18/11/22
 
+Argomento della lezione è IP addressing (IPv4). 
+
+Indirizzo di network -> 32 bit unsigned. Dotted notation: es: 159.149.139.9 . Indirizzo deve essere globalmente unico. 
+5 Schemi di assegnazione degli indirizzi:
+- class-based subnetting vs classless addressing (CIDR)	
+- subnetting
+- network address translation (NAT)
+e poi IPv6. 
+
+Class-based addressing: indirizzo IP contiene network ID + host ID. //bit meno significativi -> indicano host, più significativi indicano rete:
+- hostID = 0 -> stessa rete 
+- netID = 0 -> l'host indicato sulla stessa rete della source 
+- tutti '1' -> broadcast sulla rete della sorgente 
+- hostID tutti '1' -> broadcast sulla rete destinataria 
+
+5 classi di indirizzi: [slide] 
+
+Indirizzi particolari:
+- 0.0.0.0 -> questo network 
+- 255.255.255.255 -> broadcast su questo network (TTL=1 ???)
+- <netID>.<00...00> -> indirizzo base della rete 
+- <netID>.<11...11> -> broadcast sulla rete target 
+- tutti i valori intermedi possono essere usati per gli apparati
+
+Se usiamo x bit per netID e y (32-x) bit per hostID, allora la netmask è composta da x bit a '1' seguiti da y bit a '0'. 
+
+
+
+
+
+
 
 
 
