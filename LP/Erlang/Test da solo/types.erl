@@ -1,4 +1,4 @@
-A = 16#FF.
+A = 16#FF. %-> base 16 -> numero FF
 B = $A.
 atomo.
 'Walter Cazzola'.
