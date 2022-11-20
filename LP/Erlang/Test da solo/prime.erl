@@ -1,10 +1,8 @@
 -module(prime).
--export([primes/1, is_prime/1]).
+-export([is_prime/1, primes/1]).
 
-is_prime(N, curr) when N < curr -> if (N rem curr == 0) -> false true -> is_prime(N, curr+1);
-is_prime(_, _) -> false.
-    
-is_prime(N) -> is_prime(N, 2).
+is_prime(N) when N>1 -> length([Y || Y <- lists:seq(2, trunc(math:sqrt(N))), ((N rem Y) == 0)]) == 0;
+is_prime(_) -> false.
 
-primes(N) when N > 1 -> [X || X <- is_prime(N)];
+primes(N) when N>1 -> [X || X <- lists:seq(2, N), is_prime(X)];
 primes(_) -> [].
