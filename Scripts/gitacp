@@ -14,7 +14,7 @@ echo "Add complete. Committing with message: '$msg'..."
 git commit -m "$msg"
 echo "Commit completed. Pushing to remote repo..."
 git push
-echo "Push completed. All operations completed."
+echo "Push completed. Exiting with code 0."
 
 exit 0
 
