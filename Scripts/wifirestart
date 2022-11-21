@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo ifconfig wlp12s0 down 
+sudo ifconfig wlp12s0 up
+
