@@ -1,0 +1,11 @@
+modes:
+
+- single -> john mypassword --single
+- wordlist -> john mypassword --wordlist=file.txt 
+- incremental 
+- external 
+
+
+
+
+
