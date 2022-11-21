@@ -4,16 +4,19 @@
 
 % You can also extend the collection of expressions to add conditionals: if ((2+3)-4) then 4 else ~((2*3)+(3*4)) where the value returned is the “then” value if the “if” expression evaluates to 0, and it is the “else” value otherwise.
 
+% evalexpr:eval("~((2*3)+(3*4))").
+
 -module(evalexpr).
--export([eval/1, main/1]).
+-export([eval/1]).
 
-eval(Expr) -> Expr.
+eval(Expr) -> to_erl_expr(Expr, []).
 
-main(_) ->
-  {ok, [X]} = io:fread("Insert expression:", "~p"),
-  print(X).
+to_erl_expr([], Acc) -> Acc;
+to_erl_expr([H|T], Acc) -> to_erl_expr(string:tokens([H|T], "()"), Acc).
 
-print(X) -> io:format("~p~n", [X]).
+%todo: usare find
+
+
 
 
 
