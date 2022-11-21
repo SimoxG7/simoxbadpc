@@ -5,10 +5,15 @@
 % You can also extend the collection of expressions to add conditionals: if ((2+3)-4) then 4 else ~((2*3)+(3*4)) where the value returned is the “then” value if the “if” expression evaluates to 0, and it is the “else” value otherwise.
 
 -module(evalexpr).
--export([eval/1]).
+-export([eval/1, main/1]).
 
 eval(Expr) -> Expr.
 
+main(_) ->
+  {ok, [X]} = io:fread("Insert expression:", "~p"),
+  print(X).
+
+print(X) -> io:format("~p~n", [X]).
 
 
 
