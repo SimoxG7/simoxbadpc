@@ -485,6 +485,12 @@ Le classi C poichè poco volute e utilizzate sono state raggruppate in insiemi d
 - 202.0.0.0 - 203.255.255.255 -> Asia e Australia
 .
 
+Questa cosa facilita anche l'instradamento dai parte dei router -> se sono in NA e vedo un pacchetto con destinazione 194.x.x.x -> so già che devo instradare verso l'EU, mi basta guardare il primo ottetto; la maschera è come se fosse /8.
+
+Sulle regioni possiamo fare reti di classe C -> ultimo ottetto per hostID -> 256*256 (ottetto 1 e 2) -> 131072 possibili classi C per ogni regione, quindi circa 33554432 indirizzi di host. 
+
+
+
 
 
 
