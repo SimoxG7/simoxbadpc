@@ -472,12 +472,18 @@ Togliamo il confine stabilito dalle classi, il "confine" della rete è determina
 
 Lezione 07 - 22/11/22
 
+Usare un routing classless conviene. 
 
+Indirizzo base di rete: z.y.w.z/n, dove n indica il numero di bit per netID, indipendetemente dalla classe. Nell'indirizzo base gli ultimi 32-n bit devono essere 0.
 
+Es: 137.87.47.96/28 -> 32-28 -> 4 bit di hostid -> x.x.x.96 -> x.x.x. 0110 | 0000 (primi 4 sono ancora per netID, ultimi 4 sono per hostID). La rete può ospitare 2^4 apparati -1 (per quella indicante la rete) -1 (per quella indicante il broadcast sulla rete). 
 
-
-
-
+Le classi C poichè poco volute e utilizzate sono state raggruppate in insiemi da usare come spazio contiguo di indirizzi:
+- 194.0.0.0 - 195.255.255.255 -> Europa
+- 198.0.0.0 - 199.255.255.255 -> Nord America 
+- 200.0.0.0 - 201.255.255.255 -> Centro-Sud America 
+- 202.0.0.0 - 203.255.255.255 -> Asia e Australia
+.
 
 
 
