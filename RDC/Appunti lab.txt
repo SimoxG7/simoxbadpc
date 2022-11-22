@@ -489,15 +489,93 @@ Questa cosa facilita anche l'instradamento dai parte dei router -> se sono in NA
 
 Sulle regioni possiamo fare reti di classe C -> ultimo ottetto per hostID -> 256*256 (ottetto 1 e 2) -> 131072 possibili classi C per ogni regione, quindi circa 33554432 indirizzi di host. 
 
+Esempio su slide 12/44 -> maschera produce sempre l'indirizzo che è ricordato nella routing table come indirizzo base. In EU tutti devono sapere dove quell'indirizzo debba andare. La cardinalità dei gruppi è sempre una potenza di 2. 
 
+Esercizio: indirizzamento a livello 3 dell'apparato: 111.162.136.87 (/12) 
+apparato 111.162.136.87 /12 -> 12 bit 1 -> mask = 1111 1111 . 1111 0000 . 0000 0000 . 0000 0000 = 255.240.0.0 (mask)
+perciò: 
+	0110 1111 . 1010 | 0010 . 1000 1000 . 0000 1100 = 111.162.136.87 /12 (apparato)
+	1111 1111 . 1111 | 0000 . 0000 0000 . 0000 0000 = 255.240.0.0 (maschera) 
+	0110 1111 . 1010 | 0000 . 0000 0000 . 0000 0000 = 111.160.0.0 (indirizzo base della rete)
+	0110 1111 . 1010 | 1111 . 1111 1111 . 1111 1111 = 111.175.255.255 (broadcast). 
+	Range di apparati: 111.160.0.1 - 111.175.255.254 
+	
+Esercizio: indirizzamento a livello 3 dell'apparato 206.191.1.207 /25 
+Apparato -> 206.191.1.207 -> 25 bit a 1 di maschera 
+	1100 1010 . 1011 1111 . 0000 0001 . 1 | 100 1011 = 206.191.1.207 /25 (apparato) 
+	1111 1111 . 1111 1111 . 1111 1111 . 1 | 000 0000 = 255.255.255.128 (mask) 
+	1100 1010 . 1011 1111 . 0000 0001 . 1 | 000 0000 = 206.191.1.128 /25 (indirizzo base) 
+	1100 1010 . 1011 1111 . 0000 0001 . 1 | 111 1111 = 206.191.1.255 (broadcast)
+	Range: 206.191.1.129 - 206.191.1.254 
 
+Esercizio: indirizzamento a livello 3 dell'apparato 57.47.77.159/11 
+11 bit a 1 di maschera 
+	0011 1011 . 001 | 0 1111 . 0100 1101 . 1001 1111 = 57.47.77.159 /11 (apparato)
+	1111 1111 . 111 | 0 0000 . 0000 0000 . 0000 0000 = 255.224.0.0 /11 (mask)
+	0011 1011 . 001 | 0 0000 . 0000 0000 . 0000 0000 = 57.32.0.0 /11 (base)	
+	0011 1011 . 001 | 1 1111 . 1111 1111 . 1111 1111 = 57.63.255.255 (broadcast) 
+	Range: 57.32.0.0 - 57.63.255.255 
+.
 
+Esercizio: indirizzamento a livello 3: 4 apparati: 
+137.116.36.31, 137.116.32.205, 137.116.39.43, 137.116.35.112 -> trovare indirizzo base per rete minima. 
+Hanno tutte i primi 2 ottetti uguali, guardo il terzo ottetto di tutti:
+	36 -> 0010 0100 
+	32 -> 0010 0000 
+	39 -> 0010 0111 
+	35 -> 0010 0011 
+	la parte comune sono 5 bit -> 0010 0 | 000 -> indirizzo base con terzo ottetto -> 32 -> 5 bit di netID, 3 di hostID ->
+	mask è di 16+5 bit -> 21 bit 
+	137.116.32.0 /21 -> indirizzo base 
+	255.255.248.0 -> mask
+	137.116.39.255 -> broadcast
+.
 
+Router pretende che le sue interfacce abbiano ciascuna una rete diversa. Bisogna anche tenere un indirizzo extra da usare come gateway. 
+Perciò tutti i dispositivi sono: end systems + gateway + broadcast + base. Per ogni subnet scegliere potenza di 2 minima per indirizzare tutti i dispositivi. 
 
+In PT assegnare gli opportuni indirizzi a interfacce router e ricordarsi di mettere a ON l'interfaccia. Le interfacce di un router devono essere tutte su reti diverse. 
 
+Per ogni host: assegnare l'opportuno indirizzo all'interfaccia di rete, indicare come indirizzo gateway l'indirizzo del router associato all'interfaccia appartenente alla stessa subnet dell'host. 
 
+Virtualmente solo 30 dimensioni possibili di rete -> 30 punti di taglio da x.y.w.z/1 a x.y.w.z/30 . 
 
+Slide 19/44. 
 
+Best practice: il gateway ha sempre il primo oppure sempre l'ultimo indirizzo usabile.
+
+Tabella:
+INFO 				| 
+INDIRIZZO BASE 		| 
+INDIRIZZO BROADCAST | 
+INDIRIZZO GATEWAY 	| 
+PRIMO IP 			| 
+ULTIMO IP 			| 
+NETMASK 			| 
+//WILDCARD 			| 
+NOTE 				| 	
+
+Es: 2 host connessi da cavo cross: rete 10.0.0.0/29
+INFO 				| 2 pc 
+INDIRIZZO BASE 		| 10.0.0.0/29 
+INDIRIZZO BROADCAST | 10.0.0.7
+INDIRIZZO GATEWAY 	| //in questo caso non vi è alcun gateway -> dovremmo dare l'indirizzo di un router 
+PRIMO IP 			| 10.0.0.1 
+ULTIMO IP 			| 10.0.0.6
+NETMASK 			| 255.255.255.248
+//WILDCARD 			| 
+NOTE 				| 3 bit -> 6 indirizzi 
+
+Es: 4 host + 1 hub, rete 192.168.90.0/27 -> 192.168.90.0
+INFO 				| 4 host, 1 hub 
+INDIRIZZO BASE 		| 192.168.90.0/27
+INDIRIZZO BROADCAST | 192.168.90.31 
+INDIRIZZO GATEWAY 	| (*) 
+PRIMO IP 			| 192.168.90.1
+ULTIMO IP 			| 192.168.90.30 
+NETMASK 			| 255.255.255.224
+//WILDCARD 			| 
+NOTE 				| 
 
 
 

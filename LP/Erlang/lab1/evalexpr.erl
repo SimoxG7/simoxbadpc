@@ -12,7 +12,9 @@
 eval(Expr) -> to_erl_expr(Expr, []).
 
 to_erl_expr([], Acc) -> Acc;
-to_erl_expr([H|T], Acc) -> to_erl_expr(string:tokens([H|T], "()"), Acc).
+to_erl_expr([H|T], Acc) -> to_erl_expr(is_number(H), H, T, Acc).
+
+  
 
 %todo: usare find
 
