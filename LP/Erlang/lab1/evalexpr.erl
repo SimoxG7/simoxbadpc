@@ -7,14 +7,23 @@
 % evalexpr:eval("~((2*3)+(3*4))").
 
 -module(evalexpr).
--export([eval/1]).
+-export([eval/1, stack_pop/1, stack_push/2]).
 
 eval(Expr) -> to_erl_expr(Expr, []).
 
 to_erl_expr([], Acc) -> Acc;
-to_erl_expr([H|T], Acc) -> to_erl_expr(is_number(H), H, T, Acc).
+to_erl_expr([H|T], _) -> string:split([H|T], "(", all).
 
-  
+stack_push(Stack, Elem) -> [Elem|Stack].
+
+stack_pop([]) -> empty;
+stack_pop([H|T]) -> {H,T}. 
+
+
+
+
+
+
 
 %todo: usare find
 
