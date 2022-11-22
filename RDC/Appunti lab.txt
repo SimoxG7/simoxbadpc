@@ -566,7 +566,7 @@ NETMASK 			| 255.255.255.248
 //WILDCARD 			| 
 NOTE 				| 3 bit -> 6 indirizzi 
 
-Es: 4 host + 1 hub, rete 192.168.90.0/27 -> 192.168.90.0
+Es: 4 host + 1 hub, rete 192.168.90.0/27 -> 192.168.90.0, 4° ottetto con 3 bit di netID e 5 di hostID
 INFO 				| 4 host, 1 hub 
 INDIRIZZO BASE 		| 192.168.90.0/27
 INDIRIZZO BROADCAST | 192.168.90.31 
@@ -575,7 +575,24 @@ PRIMO IP 			| 192.168.90.1
 ULTIMO IP 			| 192.168.90.30 
 NETMASK 			| 255.255.255.224
 //WILDCARD 			| 
-NOTE 				| 
+NOTE 				| 4 apparati + indirizzo base + broadcast -> 6 valori -> 3 bit necessari 
+
+INFO 				| 
+INDIRIZZO BASE 		| 
+INDIRIZZO BROADCAST | 
+INDIRIZZO GATEWAY 	| 
+PRIMO IP 			| 
+ULTIMO IP 			| 
+NETMASK 			| 
+//WILDCARD 			| 
+NOTE 				| 	
+
+
+
+
+-------------------------------------------------------------------------------------
+
+Lezione 08 - 
 
 
 
