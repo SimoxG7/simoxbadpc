@@ -544,7 +544,7 @@ Slide 19/44.
 
 Best practice: il gateway ha sempre il primo oppure sempre l'ultimo indirizzo usabile.
 
-Tabella:
+Tabella progettazione reti:
 INFO 				| 
 INDIRIZZO BASE 		| 
 INDIRIZZO BROADCAST | 
@@ -592,7 +592,12 @@ NOTE 				|
 
 -------------------------------------------------------------------------------------
 
-Lezione 08 - 
+Lezione 08 - 25/11/22
+
+Subnetting -> suddivisione logica di reti grandi -> per ridurre dimensioni tabelle instradamento interne a organizzazione. (Astrazione interna, dall'esterno non si notano differenze).
+
+
+
 
 
 
