@@ -6,22 +6,7 @@ import java.util.Scanner;
 
 public class ReverseIndex {
 
-    private class WordOccurrence {
-
-        private final String word;
-        private List<Integer> list;
-        public WordOccurrence(String word, List<Integer> list) {
-            this.word = word;
-            this.list = List.copyOf(list);
-        }
-
-        public void addOccurrence(int index) {
-            list.add(index);
-        }
-
-    }
-
-    private List<WordOccurrence> words = new ArrayList<>();
+    private final List<WordOccurrence> words = new ArrayList<>();
 
     public void readDoc(String s) {
         Scanner scanner = new Scanner(s);
@@ -31,15 +16,20 @@ public class ReverseIndex {
             while (lineScanner.hasNext()) {
                 String word = lineScanner.next();
                 boolean contains = false;
+                WordOccurrence wordOccurrence = null;
                 for (WordOccurrence wo : words) {
-                    if (wo.word.equals(word)) contains = false;
+                    if (wo.getWord().equals(word)) {
+                        contains = true;
+                        wordOccurrence = wo;
+                        break;
+                    }
                 }
                 if (contains) {
-                    words.get(words.indexOf(word)).addOccurrence(index);
+                    words.get(words.indexOf(wordOccurrence)).addOccurrence(index);
                 } else {
                     List<Integer> newList = new ArrayList<>();
                     newList.add(index);
-                    words.add(new WordOccurrence(word, List.copyOf(newList)));
+                    words.add(new WordOccurrence(word, newList));
                 }
             }
             index++;
@@ -48,6 +38,13 @@ public class ReverseIndex {
 
     public String getResult() {
         StringBuilder sb = new StringBuilder();
-        while ()
+        for (WordOccurrence wordOccurrence : words) {
+            sb.append(wordOccurrence.getWord());
+            sb.append(" ");
+            sb.append(wordOccurrence.list().toString());
+            sb.append("\n");
+        }
+        sb.deleteCharAt(sb.length()-1);
+        return sb.toString();
     }
 }
