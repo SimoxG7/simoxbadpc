@@ -666,15 +666,102 @@ Con euristica non si lasciano buchi, ma con regola dell'allineamento possono cre
 
 Può capitare che l'euristica faccia anche applicare la regola dell'allineamento (è una proprietà dell'aritmetica binaria), ma non è detto che succeda.
 
+Recap di alcune proprietà:
+- La parte di hostID dell'indirizzo base deve essere composta solo da bit a 0. 
+- Il primo indirizzo usabile è sempre dispari; l'ultimo indirizzo usabile è sempre pari. 
+- L'indirizzo broadcast è sempre dispari. 
+- I netID delle diverse sottoreti, espressi in binario, sono sempre tutti differenti e non sovrapponibili in almeno un bit. 
+
+Ordinamento usato dagli amministratori: longest prefix matching -> prima le reti con la n più grande. 
 
 
+Esercizio [Slide 42/44]:
+10.11.160.0/24 -> rete di PMI, composta da:
+- A -> Amministrazione -> 25 host
+- G -> Gestione ordini -> 14 host 
+- K -> Marketing -> 28 host
+- M -> Magazzino -> 9 host
+- R -> Reparto produzione -> 58 host 
 
-
+Con euristica:
+	Ordine di quali reti sono più grandi: R (58), K (28), A (25), G (14), M (9), a ciascuna vanno aggiunti: base, gateway, broadcast.
+	 
+	R: -> 58+3 -> 61 -> 2^6 = 64 -> 6 bit -> /26
+		base: 10.11.160. 00 | 00 0000 -> 10.11.160.0 /26
+		netmask: 255.255.255. 11 | 00 0000 -> 255.255.255.96 
+		broadcast: 10.11.160. 00 | 11 1111 -> 10.11.160.63 
+		gateway: 10.11.160.62 
+		range: 10.11.160.0 - 10.11.160.62 
 	
+	K: -> 28+3 -> 31 -> 2^5 = 32 -> 5 bit -> /27
+		base: 10.11.160. 010|0 0000 -> 10.11.160.64/27
+		netmask: 255.255.255. 111|0 0000 -> 255.255.255.224
+		broadcast: 10.11.160. 010|1 1111 -> 10.11.160.95
+		gateway: 10.11.160.94
+		range: 10.11.160.65 - 10.11.160.93
+	
+	A: -> 25+3 -> 28 -> 2^5 = 32 -> 5 bit -> /27
+		base: 10.11.160. 011|0 0000 -> 10.11.160.96/27
+		netmask: 255.255.255. 111|0 0000 -> 255.255.255.224
+		broadcast: 10.11.160. 011|1 1111 -> 10.11.160.127 
+		gateway: 10.11.160.126
+		range: 10.11.160.97 - 10.11.160.125 
+	
+	G: -> 14+3 -> 17 -> > 2^4 -> 2^5 -> 32 -> 5 bit -> /27
+		base: 10.11.160. 100|0 0000 -> 10.11.160.128/27
+		netmask: 255.255.255. 111|0 0000 -> 255.255.255.224
+		broadcast: 10.11.160. 100|1 1111 -> 10.11.160.159
+		gateway: 10.11.160.158
+		range: 10.11.160.129 - 10.11.160.157
+	
+	M: -> 9+3 -> 12 -> 2^4 -> 16 -> 4 bit -> /28
+		base: 10.11.160. 1010 | 0000 -> 10.11.160.160/28
+		netmask: 255.255.255. 1111 | 0000 -> 255.255.255.240
+		broadcast: 10.11.160. 1010 | 1111 -> 10.11.160.175
+		gateway: 10.11.160.174
+		range: 10.11.160.161 - 10.11.160.173
+	
+Con regola dell'allineamento:
+	A: -> 25+3 -> 28 -> 5 bit -> /27
+		base: 10.11.160.000|0 0000 -> 10.11.160.0/27
+		netmask: 255.255.255. 111|0 0000 -> 255.255.255.224
+		broadcast: 10.11.160. 000|1 1111 -> 10.11.160.31 
+		gateway: 10.11.160.1
+		range: 10.11.160.2 - 10.11.160.30 
+		
+	G: -> 14+3 -> 17 -> 5 bit -> /27
+		base: 10.11.160. 001|0 0000 -> 10.11.160.32/27
+		netmask: 255.255.255. 111|0 0000 -> 255.255.255.224 
+		broadcast: 10.11.160. 001|1 1111 -> 10.11.160.63
+		gateway: 10.11.160.33
+		range: 10.11.160.34 - 10.11.160.62 
+		
+	K: -> 28+3 -> 32 -> 5 bit -> /27
+		base: 10.11.160. 010|0 0000 -> 10.11.160.64/27
+		netmask: 255.255.255. 111|0 0000 -> 255.255.255.224
+		broadcast: 10.11.160. 010|1 1111 -> 10.11.160.95 
+		gateway: 10.11.160.65 
+		range: 10.11.160.66 - 10.11.160.94
+		
+	M: -> 9+3 -> 12 -> 4 bit -> /28
+		base: 10.11.160. 0110 | 0000 -> 10.11.160.96/28 
+		netmask: 255.255.255. 1111 | 0000 -> 255.255.255.240 
+		broadcast: 10.11.160. 0110 | 1111 -> 10.11.160.111
+		gateway: 10.11.160.97
+		range: 10.11.160.98 - 10.11.160.110 
+		
+	R: -> 58+3 -> 61 -> 6 bit -> /26 
+		base: 10.11.160. 10|00 0000 -> 10.11.160.128/26
+		netmask: 255.255.255. 11|00 0000 -> 255.255.255.192
+		broadcast: 10.11.160. 10|11 1111 -> 10.11.160.191 
+		gateway: 10.11.160.129
+		range: 10.11.160.130 - 10.11.160.190
+		
 
+-----------------------------------------------------------------------------------------------------------------
 
-
-
+Lezione 09 - 
+	
 
 
 
