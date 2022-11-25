@@ -596,6 +596,45 @@ Lezione 08 - 25/11/22
 
 Subnetting -> suddivisione logica di reti grandi -> per ridurre dimensioni tabelle instradamento interne a organizzazione. (Astrazione interna, dall'esterno non si notano differenze).
 
+Subnet mask -> tutti i bit a 1 per network e subnet address; tutti i bit a 0 per host address. A un router in questa rete interessa avere tante entry quante lo stesso numero di bit a 0.
+
+<network address, 0> -> rete remota 
+<0, host address> -> host in rete locale
+<0, subnet address, 0> -> host in un'altra subnet della stessa rete locale
+<0, 0, host address> -> host in subnet locale 
+
+Esempio: rete di classe B 162.148.0.0/16 -> 65534 host. 
+Per dividerla in sottoreti ognuna comprendnete massimo 100 host: 
+per hostID necessito di 7 bit -> 128 host possibili (-2).
+per netID rimangono 16-7 bit -> 9 bit -> 512 sottoreti possiibili.
+
+Dimensionamento sottoreti: [Slide 31/44]
+Rete 192.168.20.96/27 -> 4° ottetto: 011 | 0 0000 
+Subnet verde: 4 host + 1 router + broadcast + rete -> 7 indirizzi -> 3 bit
+	4° ottetto: 011 | 00 | 000 , zona centrale è per il subnetID
+	netmask: 1111 1111 . 1111 1111 . 1111 1111 . 111 | 11 | 000 -> 255.255.255.248
+	base: 192.168.20. 011 | 00 | 000/29 -> 192.168.20.96/29 
+	broadcast: 192.168.20. 011 | 00 | 111 -> 192.168.20.103
+	Range: 192.168.20.97 - 192.168.20.102
+	
+Subnet arancione: 2 host + 1 router + broadcast + base -> 5 indirizzi -> 3 bit -> sarà /29 
+	4° ottetto: 011 | 01 | 00 
+	netmask: 255.255.255. 111 | 11 | 000 -> 255.255.255.248 
+	base: 192.168.20. 011 | 01 | 000 /29 -> 192.168.20.104/29
+	broadcast: 192.168.20. 011 | 01 | 111 -> 192.168.20.111
+	range: 192.168.20.105 - 192.168.20.110 
+	
+
+
+
+
+
+
+
+
+
+
+
 
 
 
