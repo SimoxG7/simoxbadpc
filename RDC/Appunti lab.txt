@@ -625,8 +625,50 @@ Subnet arancione: 2 host + 1 router + broadcast + base -> 5 indirizzi -> 3 bit -
 	range: 192.168.20.105 - 192.168.20.110 
 	
 
+Altro esempio: indirizzo base 192.168.20.96/27
+Subnet S1 con 5 apparati, subnet S2 con 14 apparati (inclusi router) 
+S1: 5 apparati + broadcast + base -> 7 indirizzi -> 3 bit 
+	netmask: 255.255.255.248 (poichè /29)
+	base: 192.168.20. 011 | 00 | 000 -> 192.168.20.96 
+	broadcast: 192.168.20. 011 | 00 | 111 -> 192.168.20.103
+	gateway: 192.168.20.97
+	range: 192.168.20.98 - 192.168.20.102 
+	
+/*
+S2: 14 apparati + broadcast + base -> 16 indirizzi -> 4 bit -> (/28) 
+	netmask: 255.255.255. 111 | 1 | 0000 -> 255.255.255.240 
+	base: 192.168.20. 011 | 01 | 000 -> 192.168.20.104 /28 //così non va bene!
+	broadcast: 192.168.20. 111 | 1 | 1111 -> 192.168.20.119
+	gateway: 192.168.20.105 
+	range: 192.168.20.106 - 192.168.20.118
+*/
+	
+ma non funziona così -> tutti indirizzi all'interno della stessa rete devono avere la stessa netid e stessa quantità di subnetID bits. In quel caso due host in S2 appaiono in due reti diverse!
+
+Regola dell'allineamento: Una rete di dimensione 2^n (ovvero che contenga 2^n indirizzi) può iniziare solo a intervalli regolari multipli di 2^n (a posizioni pari a k*2^n per k >= 0); ovvero il primo indirizzo disponibile nello host address range deve essere composto da tutti 0 negli ultimi n bit per qualsiasi sottorete. 
+
+S2 diventa: (bisogna farla iniziare a un multiplo di 2)
+S2: 14 apparati + broadcast + base -> 16 indirizzi -> 4 bit -> (/28) 
+	netmask: 255.255.255. 111 | 1 | 0000 -> 255.255.255.240 
+	base: 192.168.20. 011 | 1 | 000 -> 192.168.20.112 /28
+	broadcast: 192.168.20. 111 | 1 | 1111 -> 192.168.20.127
+	gateway: 192.168.20.113
+	range: 192.168.20.114 - 192.168.20.126 
+.
+
+Alternativa: euristica -> (come fare una valigia) -> si inizia dalla subnet più grande e via via procedendo in ordine decrescente. 
+
+Prima farei S2, poi S1. 
+
+Bestpractice: se hanno stessa dimensione -> si va in ordine alfabetico (a parità di lunghezza di maschera, vado in ordine alfabetico). 
+
+Con euristica non si lasciano buchi, ma con regola dell'allineamento possono crearsi buchi. 
 
 
+
+
+
+	
 
 
 
