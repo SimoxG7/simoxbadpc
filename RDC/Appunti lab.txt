@@ -664,11 +664,15 @@ Bestpractice: se hanno stessa dimensione -> si va in ordine alfabetico (a parit�
 
 Con euristica non si lasciano buchi, ma con regola dell'allineamento possono crearsi buchi. 
 
+Può capitare che l'euristica faccia anche applicare la regola dell'allineamento (è una proprietà dell'aritmetica binaria), ma non è detto che succeda.
+
 
 
 
 
 	
+
+
 
 
 
