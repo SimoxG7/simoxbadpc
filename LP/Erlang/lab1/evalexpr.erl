@@ -7,17 +7,49 @@
 % evalexpr:eval("~((2*3)+(3*4))").
 
 -module(evalexpr).
--export([eval/1, stack_pop/1, stack_push/2]).
+-export([eval/1, pop/1, is_open/1, is_op/1]).
 
-eval(Expr) -> to_erl_expr(Expr, []).
+eval(Expr) -> parse(Expr, []).
 
-to_erl_expr([], Acc) -> Acc;
-to_erl_expr([H|T], _) -> string:split([H|T], "(", all).
+create_stack() -> [].
 
-stack_push(Stack, Elem) -> [Elem|Stack].
+push(Value, Stack) -> [Value|Stack].
 
-stack_pop([]) -> empty;
-stack_pop([H|T]) -> {H,T}. 
+pop([]) -> empty;
+pop([Value|Stack]) -> {Value, Stack}.
+
+parse([H|T], Acc) -> parse(is_op(H), is_num(H), is_open(H), is_close(H), H, T, Acc).
+
+parse(_, _, _, _, _, _, _) -> false.
+
+charlist_to_num([H|T]) -> [H|T].
+
+is_close(C) -> C == ')'.
+is_open(C) -> C == '('.
+
+is_num(C) -> (C >= 48) and (C =< 57).
+
+is_op(C) -> lists:member(C, ['+', '-', '/', '*', '~']).
+
+% member(_, []) -> false;
+% member(C, [H|T]) -> member(C == H, C, T).
+
+% member(true, _, _) -> true;
+% member(false, C, T) -> member(C, T).
+
+
+
+% trovo parentesi aperta, parso finchè non trovo operatore, poi il resto è elemento finchè non diventa parentesi chiusa.
+
+
+% add_to_stack([H|T], []) -> add_to_stack(T, push(H, create_stack()));
+% add_to_stack([], Stack) -> Stack;
+% add_to_stack([H|T], Stack) -> add_to_stack(T, push(H, Stack)).
+
+
+
+
+
 
 
 
