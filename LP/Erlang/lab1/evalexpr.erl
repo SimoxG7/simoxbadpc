@@ -9,18 +9,28 @@
 -module(evalexpr).
 -export([eval/1, pop/1, is_open/1, is_op/1]).
 
-eval(Expr) -> parse(Expr, []).
+eval(Expr) -> eval_formatted(parse(Expr, [], [])).
 
 create_stack() -> [].
 
+push(Value, []) -> push(Value, create_stack());
 push(Value, Stack) -> [Value|Stack].
 
 pop([]) -> empty;
 pop([Value|Stack]) -> {Value, Stack}.
 
-parse([H|T], Acc) -> parse(is_op(H), is_num(H), is_open(H), is_close(H), H, T, Acc).
+parse([H|T], OpStack, NumStack) -> parse(is_op(H), [H|T], Stack).
 
-parse(_, _, _, _, _, _, _) -> false.
+parse(false, [H|T], Stack) -> parse
+
+% parse([H|T], OpStack, NumStack) -> parse(is_op(H), is_num(H), is_open(H), is_close(H), H, T, OpStack, NumStack).
+
+% parse(true, _, _, _, H, T, OpStack, NumStack) -> parse(T, push(H, OpStack), NumStack).
+% parse(_, true, _, _, H, T, OpStack, NumStack) -> parse(T, push(H, OpStack), NumStack).
+% parse(true, _, _, _, H, T, OpStack, NumStack) -> parse(T, push(H, OpStack), NumStack).
+% parse(true, _, _, _, H, T, OpStack, NumStack) -> parse(T, push(H, OpStack), NumStack).
+
+
 
 charlist_to_num([H|T]) -> [H|T].
 
