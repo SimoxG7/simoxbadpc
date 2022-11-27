@@ -19,7 +19,9 @@ S:::::::::::::::SS i::::::im::::m   m::::m   m::::m oo:::::::::::oox:::::x    x:
  SSSSSSSSSSSSSSS   iiiiiiiimmmmmm   mmmmmm   mmmmmm   ooooooooooo xxxxxxx      xxxxxxx
 
 This program is a sudoku solver. Insert the sudoku puzzle in the matrix below. 
-(Will work on a filereader when I'll have time)
+When I'll have time I'll add:
+- An option to read the matrix from file.
+- An option to parameterize the dimension of the sudoku.
 
 ASCII Art generated from: https://patorjk.com/software/taag/#p=testall&f=Crawford2&t=Simox
 
