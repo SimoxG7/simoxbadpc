@@ -28,6 +28,7 @@ ASCII Art generated from: https://patorjk.com/software/taag/#p=testall&f=Crawfor
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <time.h>
 
 #define ANSI_COLOR_RED     "\x1b[31m"
 #define ANSI_COLOR_YELLOW  "\x1b[33m"
@@ -40,10 +41,10 @@ bool is_cell_ok(int table[9][9], int x, int y, int num);
 bool is_row_ok(int table[9][9], int row, int num);
 bool is_column_ok(int table[9][9], int column, int num);
 bool is_square_ok(int table[9][9], int squarex, int squarey, int num);
-bool is_solved(int table[9][9]);
-bool find_not_valued_cell(int table[9][9], int *row, int *col);
+bool is_solved(int table[9][9], int* cont);
+bool find_not_valued_cell(int table[9][9], int* row, int* col);
 void pretty_printer_before(int table[9][9]);
-void pretty_printer_after(int table[9][9]);
+void pretty_printer_after(int table_before[9][9], int table_after[9][9]);
 void basic_printer(int table[9][9]);
 void test(int table[9][9]);
 
@@ -62,6 +63,9 @@ int main(void) {
     { 0, 0, 3, 1, 0, 0, 0, 5, 0 }
   };
 
+  int cont = 0, *cont_ptr;
+  cont_ptr = &cont;
+
   //accessing with pointers: *(*(matrix + row) + column)); //ranging from 0 to 8
 
   int table_copy[9][9];
@@ -75,15 +79,23 @@ int main(void) {
   //test(table);
 
   printf("Trying to solve this table: \n");
-  basic_printer(table_copy);
-  printf("\n");
+  pretty_printer_before(table_copy);
+  printf("\nStarting to compute the solution...\n\n");
 
-  if(is_solved(table)) {
-    printf("Found solution!\n");
-    basic_printer(table);
+  clock_t begin = clock();
+  double time_spent;
+
+  if(is_solved(table, cont_ptr)) {
+    clock_t end = clock();
+    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    printf("Found solution!\n\n");
+    pretty_printer_after(table_copy, table);
   } else {
-    printf("There is no solution for the table.\n");
+    clock_t end = clock();
+    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    printf("There is no solution for the table.\n\n");
   }
+  printf("The program made %d attempts to find values for the table and ran for %f seconds.\n\n", *cont_ptr, time_spent);
  return 0; 
 }
 
@@ -124,8 +136,9 @@ bool is_square_ok(int table[9][9], int squarex, int squarey, int num) {
 }
 
 //recursive function used to apply the backtracking and solving the puzzle
-bool is_solved(int table[9][9]) {
+bool is_solved(int table[9][9], int* cont_ptr) {
   int row, col, num;
+  (*cont_ptr)++;
   
   //if there is no cell with a 0, then the puzzle is solved. The call to 
   //this function modifies the row and col values through pointers, so that 
@@ -142,7 +155,7 @@ bool is_solved(int table[9][9]) {
       *(*(table + row) + col) = num;
       //if it returns true, break the recursion (the true is given from the 
       //previous lines of code, in which no unvalued cell is found)
-      if (is_solved(table)) return true;
+      if (is_solved(table, cont_ptr)) return true;
     }
     //the cell is not ok for the number, resetting to 0. With the use of 
     //pointers this makes the backtracking reset the previous attemps of 
@@ -166,14 +179,53 @@ bool find_not_valued_cell(int table[9][9], int *row, int *col) {
 
 //pretty printer for unsolved table
 void pretty_printer_before(int table[9][9]) {
-  for (int i = 0; i < 9; i++) {
-    
+  for (int x = 0; x < 9; x++) {
+    for (int y = 0; y < 9; y++) {
+      if (*(*(table + x) + y) == 0) {
+        printf(ANSI_COLOR_RED "?" ANSI_COLOR_RESET);
+      } else {
+        printf(ANSI_COLOR_YELLOW "%d" ANSI_COLOR_RESET, *(*(table + x) + y));
+      }
+      if (y != 8) printf(" | ");
+    }
+    printf("\n");
+    if (x != 8) {
+      for (int k = 0; k < 8; k++) {
+        if ((k + 1) % 3 == 0) printf("- ■ ");
+        else if ((x + 1) % 3 == 0 && x != 8) printf("- ■ "); //todo? fix?
+        else printf("-   ");
+      } 
+      printf("- \n");
+    }
   }
 }
 
+
 //pretty printer for solved table
-void pretty_printer_after(int table[9][9]) {
-  return;
+void pretty_printer_after(int table_before[9][9], int table_after[9][9]) {
+  for (int x = 0; x < 9; x++) {
+    for (int y = 0; y < 9; y++) {
+      
+      if (*(*(table_before + x) + y) == *(*(table_after + x) + y)) {
+        printf(ANSI_COLOR_YELLOW "%d" ANSI_COLOR_RESET, *(*(table_after + x) + y));
+      } else if (*(*(table_before + x) + y) != *(*(table_after + x) + y)) {
+        printf(ANSI_COLOR_BLUE "%d" ANSI_COLOR_RESET, *(*(table_after + x) + y));
+      } else { //should never go in the else branch
+        printf(ANSI_COLOR_YELLOW "%d" ANSI_COLOR_RESET, *(*(table_after + x) + y));
+        printf(ANSI_COLOR_RED "?" ANSI_COLOR_RESET);
+      }
+      if (y != 8) printf(" | ");
+    }
+    printf("\n");
+    if (x != 8) {
+      for (int k = 0; k < 8; k++) {
+        if ((k + 1) % 3 == 0) printf("- ■ ");
+        else if ((x + 1) % 3 == 0 && x != 8) printf("- ■ "); //todo? fix?
+        else printf("-   ");
+      } 
+      printf("- \n");
+    }
+  }
 }
 
 //basic printer created for debugging
