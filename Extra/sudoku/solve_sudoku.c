@@ -37,8 +37,8 @@ ASCII Art generated from: https://patorjk.com/software/taag/#p=display&f=Doh&t=S
 #define ANSI_COLOR_BLUE    "\x1b[34m" 
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
-#define MAX_LENGTH 25
-#define SQUARE_SIZE 5
+#define MAX_LENGTH 9
+#define SQUARE_SIZE 3
 
 //each function has a small description in their implementantions (under the main)
 
@@ -64,8 +64,10 @@ int main(void) {
   //don't print a perfect output.
   //insert the puzzle here
 
-  //5x5
   /*
+  //i do not suggest to run this, it takes up to hours to finish the computation
+  //(even on good machines).
+  //5x5
   int table[MAX_LENGTH][MAX_LENGTH] = {
     {16, 23, 7, 0, 0, 24, 0, 4, 0, 0, 0, 10, 0, 0, 0, 1, 0, 18, 0, 0, 8, 21, 14, 0, 17},
     {0, 0, 20, 0, 0, 19, 15, 16, 0, 0, 0, 0, 0, 5, 24, 4, 0, 2, 14, 23, 0, 0, 18, 0, 7},
@@ -95,7 +97,10 @@ int main(void) {
   };
   */
 
-  
+  /*
+  //this specific table makes 14579935 recursive calls. 
+  //takes around 12 seconds on a Ryzen 5 3600 machine to finish.
+  //takes around 27 seconds on a Intel Core Duo machine to finish.
   //4x4
   int table[MAX_LENGTH][MAX_LENGTH] = {
     {0, 15, 0, 1, 0, 2, 10, 14, 12, 0, 0, 0, 0, 0, 0, 0},
@@ -115,9 +120,12 @@ int main(void) {
     {0, 9, 1, 6, 0, 14, 0, 11, 0, 0, 2, 0, 0, 0, 10, 8},
     {0, 14, 0, 0, 0, 13, 9, 0, 4, 12, 11, 8, 0, 0, 2, 0}
   };
+  */
   
-
-  /*
+  
+  //this specific table makes 119595 recursive calls.
+  //takes around 0.0352 seconds on a Ryzen 5 3600 machine.
+  //takes around 0.1121 seconds on a Intel Core Duo machine.
   //3x3
   int table[MAX_LENGTH][MAX_LENGTH] = {
     { 8, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -130,10 +138,9 @@ int main(void) {
     { 0, 1, 0, 0, 0, 4, 0, 0, 0 },
     { 0, 0, 3, 1, 0, 0, 0, 5, 0 }
   };
-  */
+  
 
-  int cont = 0,
-      *cont_ptr;
+  int cont = 0, *cont_ptr;
   cont_ptr = &cont;
 
   //accessing with pointers: *(*(matrix + row) + column)); //ranging from 0 to 8
@@ -152,7 +159,7 @@ int main(void) {
 
   printf("Trying to solve this table: \n");
   pretty_printer_before_no_squares(table_copy);
-  printf("\nStarting to compute the solution...\n\n");
+  printf("Computing the solution...\n\n");
 
   clock_t begin = clock();
   double time_spent;
