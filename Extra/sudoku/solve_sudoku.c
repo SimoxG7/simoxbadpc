@@ -23,7 +23,7 @@ When I'll have time I'll add:
 - An option to read the matrix from file.
 - An option to parameterize the dimension of the sudoku.
 
-ASCII Art generated from: https://patorjk.com/software/taag/#p=testall&f=Crawford2&t=Simox
+ASCII Art generated from: https://patorjk.com/software/taag/#p=display&f=Doh&t=Simox
 
 */
 
