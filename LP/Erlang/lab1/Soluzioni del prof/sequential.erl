@@ -1,5 +1,5 @@
 -module(sequential).
--export([is_palindrome/1, is_an_anagram/2]).
+-export([is_palindrome/1, is_an_anagram/2, factors/1, is_perfect/1]).
 
 % case insensitive, togliamo anche la punteggiatura. 
 
@@ -21,8 +21,36 @@ is_an_anagram(A, A, _) -> true; %caso in cui sono lo stesso oggetto
 is_an_anagram(_, _, []) -> false;
 is_an_anagram(S, _, [H|T]) -> is_an_anagram(S, string:casefold(lists:sort(H)), T).
 
+%usiamo i generatori, thunks -> thunks.erl
 
-%usiamo i generatori, thunks
+factors(N) -> factors(N, [], thunks:primes()).
+
+factors(N, R, _) when N =< 1 -> lists:reverse(R);
+factors(N, R, [N|_]) -> lists:reverse([N|R]);
+factors(N, R, [H|_]=L) when (N rem H == 0) -> factors(N div H, [H|R], L);
+factors(N, R, [_|T]) -> factors(N, R, T()).
+
+is_perfect(N) -> lists:foldr(fun(X, Y) -> X + Y end, 0, divisors(N, [], thunks:from(1))) == N.
+
+divisors(N, Acc, [N|_]) -> lists:reverse(Acc);
+divisors(N, Acc, [H|T]) when (N rem H == 0) -> divisors(N, [H|Acc], T());
+divisors(N, Acc, [_|T]) -> divisors(N, Acc, T()).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

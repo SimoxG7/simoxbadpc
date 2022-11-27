@@ -31,7 +31,7 @@ first(N, [X|P]) -> [X|first(N-1, P())].
 
 %55:23
 
-
+%per testare il thunks -> thunks:first(100) -> primi 100 primi
 
 
 
