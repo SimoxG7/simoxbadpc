@@ -37,23 +37,54 @@ ASCII Art generated from: https://patorjk.com/software/taag/#p=display&f=Doh&t=S
 #define ANSI_COLOR_BLUE    "\x1b[34m" 
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
-//each functions has a small description in their implementantions (under the main)
+#define MAX_LENGTH 16
+#define SQUARE_SIZE 4
 
-bool is_cell_ok(int table[9][9], int x, int y, int num);
-bool is_row_ok(int table[9][9], int row, int num);
-bool is_column_ok(int table[9][9], int column, int num);
-bool is_square_ok(int table[9][9], int squarex, int squarey, int num);
-bool is_solved(int table[9][9], int* cont);
-bool find_not_valued_cell(int table[9][9], int* row, int* col);
-void pretty_printer_before(int table[9][9]);
-void pretty_printer_after(int table_before[9][9], int table_after[9][9]);
-void basic_printer(int table[9][9]);
-void test(int table[9][9]);
+//each function has a small description in their implementantions (under the main)
+
+bool is_cell_ok(int table[MAX_LENGTH][MAX_LENGTH], int x, int y, int num);
+bool is_row_ok(int table[MAX_LENGTH][MAX_LENGTH], int row, int num);
+bool is_column_ok(int table[MAX_LENGTH][MAX_LENGTH], int column, int num);
+bool is_square_ok(int table[MAX_LENGTH][MAX_LENGTH], int squarex, int squarey, int num);
+bool is_solved(int table[MAX_LENGTH][MAX_LENGTH], int* cont);
+bool find_not_valued_cell(int table[MAX_LENGTH][MAX_LENGTH], int* row, int* col);
+void pretty_printer_before(int table[MAX_LENGTH][MAX_LENGTH]);
+void pretty_printer_after(int table_before[MAX_LENGTH][MAX_LENGTH], int table_after[MAX_LENGTH][MAX_LENGTH]);
+void basic_printer(int table[MAX_LENGTH][MAX_LENGTH]);
+void test(int table[MAX_LENGTH][MAX_LENGTH]);
+int num_length(int num);
+void pretty_printer_before_no_squares(int table[MAX_LENGTH][MAX_LENGTH]);
+void pretty_printer_after_no_squares(int table_before[MAX_LENGTH][MAX_LENGTH], int table_after[MAX_LENGTH][MAX_LENGTH]);
+
 
 int main(void) {
 
+  //the pretty printers are thought for the 3x3 version, with other versions they 
+  //don't print a perfect output.
   //insert the puzzle here
-  int table[9][9] = {
+  //4x4
+  int table[MAX_LENGTH][MAX_LENGTH] = {
+    {0, 15, 0, 1, 0, 2, 10, 14, 12, 0, 0, 0, 0, 0, 0, 0},
+    {0, 6, 3, 16, 12, 0, 8, 4, 14, 15, 1, 0, 2, 0, 0, 0},
+    {14, 0, 9, 7, 11, 3, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {4, 13, 2, 12, 0, 0, 0, 0, 6, 0, 0, 0, 0, 15, 0, 0},
+    {0, 0, 0, 0, 14, 1, 11, 7, 3, 5, 10, 0, 0, 8, 0, 12},
+    {3, 16, 0, 0, 2, 4, 0, 0, 0, 14, 7, 13, 0, 0, 5, 15},
+    {11, 0, 5, 0, 0, 0, 0, 0, 0, 9, 4, 0, 0, 6, 0, 0},
+    {0, 0, 0, 0, 13, 0, 16, 5, 15, 0, 0, 12, 0, 0, 0, 0},
+    {0, 0, 0, 0, 9, 0, 1, 12, 0, 8, 3, 10, 11, 0, 15, 0},
+    {2, 12, 0, 11, 0, 0, 14, 3, 5, 4, 0, 0, 0, 0, 9, 0},
+    {6, 3, 0, 4, 0, 0, 13, 0, 0, 11, 9, 1, 0, 12, 16, 2},
+    {0, 0, 10, 9, 0, 0, 0, 0, 0, 0, 12, 0, 8, 0, 6, 7},
+    {12, 8, 0, 0, 16, 0, 0, 10, 0, 13, 0, 0, 0, 5, 0, 0},
+    {5, 0, 0, 0, 3, 0, 4, 6, 0, 1, 15, 0, 0, 0, 0, 0},
+    {0, 9, 1, 6, 0, 14, 0, 11, 0, 0, 2, 0, 0, 0, 10, 8},
+    {0, 14, 0, 0, 0, 13, 9, 0, 4, 12, 11, 8, 0, 0, 2, 0}
+  };
+
+
+  /* 3x3 
+  int table[MAX_LENGTH][MAX_LENGTH] = {
     { 8, 0, 0, 0, 0, 0, 0, 0, 0 }, 
     { 0, 0, 0, 0, 0, 5, 7, 0, 0 }, 
     { 0, 0, 0, 0, 3, 0, 0, 9, 1 }, 
@@ -64,16 +95,17 @@ int main(void) {
     { 0, 1, 0, 0, 0, 4, 0, 0, 0 }, 
     { 0, 0, 3, 1, 0, 0, 0, 5, 0 }
   };
+  */
 
   int cont = 0, *cont_ptr;
   cont_ptr = &cont;
 
   //accessing with pointers: *(*(matrix + row) + column)); //ranging from 0 to 8
 
-  int table_copy[9][9];
+  int table_copy[MAX_LENGTH][MAX_LENGTH];
 
-  for (int i = 0; i < 9; i++) {
-    for (int j = 0; j < 9; j++) {
+  for (int i = 0; i < MAX_LENGTH; i++) {
+    for (int j = 0; j < MAX_LENGTH; j++) {
       *(*(table_copy + i) + j) = *(*(table + i) + j);
     }
   }
@@ -81,7 +113,7 @@ int main(void) {
   //test(table);
 
   printf("Trying to solve this table: \n");
-  pretty_printer_before(table_copy);
+  pretty_printer_before_no_squares(table_copy);
   printf("\nStarting to compute the solution...\n\n");
 
   clock_t begin = clock();
@@ -91,7 +123,7 @@ int main(void) {
     clock_t end = clock();
     time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     printf("Found solution!\n\n");
-    pretty_printer_after(table_copy, table);
+    pretty_printer_after_no_squares(table_copy, table);
   } else {
     clock_t end = clock();
     time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
@@ -105,32 +137,32 @@ int main(void) {
 //functions
 
 //checks if num can be put in the given cell of coordinates x, y 
-bool is_cell_ok(int table[9][9], int x, int y, int num) {
-  int squarex = x - (x % 3);
-  int squarey = y - (y % 3);
+bool is_cell_ok(int table[MAX_LENGTH][MAX_LENGTH], int x, int y, int num) {
+  int squarex = x - (x % SQUARE_SIZE);
+  int squarey = y - (y % SQUARE_SIZE);
   return (is_row_ok(table, x, num) && is_column_ok(table, y, num) && is_square_ok(table, squarex, squarey, num));
 }
 
 //checks if num can be put in the given row 
-bool is_row_ok(int table[9][9], int row, int num) {
-  for (int i = 0; i < 9; i++) {
+bool is_row_ok(int table[MAX_LENGTH][MAX_LENGTH], int row, int num) {
+  for (int i = 0; i < MAX_LENGTH; i++) {
     if (*(*(table + row) + i) == num) return false;
   }
   return true;
 }
 
 //checks if num can be put in the given column
-bool is_column_ok(int table[9][9], int column, int num) {
-  for (int i = 0; i < 9; i++) {
+bool is_column_ok(int table[MAX_LENGTH][MAX_LENGTH], int column, int num) {
+  for (int i = 0; i < MAX_LENGTH; i++) {
     if (*(*(table + i) + column) == num) return false;
   }
   return true;
 }
 
 //checks if the num can be put in the given square ((squarex;squarey) to (squarex+2;squarey+2))
-bool is_square_ok(int table[9][9], int squarex, int squarey, int num) {
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) {
+bool is_square_ok(int table[MAX_LENGTH][MAX_LENGTH], int squarex, int squarey, int num) {
+  for (int i = 0; i < SQUARE_SIZE; i++) {
+    for (int j = 0; j < SQUARE_SIZE; j++) {
       if (*(*(table + squarex + i) + squarey + j) == num) return false;
     }
   }
@@ -138,7 +170,7 @@ bool is_square_ok(int table[9][9], int squarex, int squarey, int num) {
 }
 
 //recursive function used to apply the backtracking and solving the puzzle
-bool is_solved(int table[9][9], int* cont_ptr) {
+bool is_solved(int table[MAX_LENGTH][MAX_LENGTH], int* cont_ptr) {
   int row, col, num;
   (*cont_ptr)++;
   
@@ -151,7 +183,7 @@ bool is_solved(int table[9][9], int* cont_ptr) {
 
   //recursion here; gives the value to the unvalued cell, then calls itself 
   //which finds the next not valued cell and gives it a value, exc... 
-  for (num = 1; num < 10; num++) {
+  for (num = 1; num < MAX_LENGTH+1; num++) {
     if (is_cell_ok(table, row, col, num)) {
       //cell in row and col appears to be ok for num 
       *(*(table + row) + col) = num;
@@ -169,9 +201,9 @@ bool is_solved(int table[9][9], int* cont_ptr) {
 }
 
 //checks if there is a not valued cell and returns its coordinates through pointers
-bool find_not_valued_cell(int table[9][9], int *row, int *col) {
-  for (*row = 0; *row < 9; (*row)++) {
-    for (*col = 0; *col < 9; (*col)++) {
+bool find_not_valued_cell(int table[MAX_LENGTH][MAX_LENGTH], int *row, int *col) {
+  for (*row = 0; *row < MAX_LENGTH; (*row)++) {
+    for (*col = 0; *col < MAX_LENGTH; (*col)++) {
       if (*(*(table + *row) + *col) == 0) return true;
     }
   }
@@ -180,60 +212,95 @@ bool find_not_valued_cell(int table[9][9], int *row, int *col) {
 
 
 //pretty printer for unsolved table
-void pretty_printer_before(int table[9][9]) {
-  for (int x = 0; x < 9; x++) {
-    for (int y = 0; y < 9; y++) {
+void pretty_printer_before(int table[MAX_LENGTH][MAX_LENGTH]) {
+  int spaces_needed = num_length(MAX_LENGTH);
+  for (int x = 0; x < MAX_LENGTH; x++) {
+    for (int y = 0; y < MAX_LENGTH; y++) {
       if (*(*(table + x) + y) == 0) {
         printf(ANSI_COLOR_RED "?" ANSI_COLOR_RESET);
       } else {
         printf(ANSI_COLOR_YELLOW "%d" ANSI_COLOR_RESET, *(*(table + x) + y));
       }
-      if (y != 8) printf(" | ");
+      for (int k = 0; k < (spaces_needed - num_length(*(*(table + x) + y))); k++) {
+        printf(" ");
+      }
+      if (y != MAX_LENGTH-1) printf(" | ");
     }
     printf("\n");
-    if (x != 8) {
-      for (int k = 0; k < 8; k++) {
-        if ((k + 1) % 3 == 0) printf("- ■ ");
-        else if ((x + 1) % 3 == 0 && x != 8) printf("- ■ "); //todo? fix?
-        else printf("-   ");
+    if (x != MAX_LENGTH-1) {
+      for (int k = 0; k < MAX_LENGTH-1; k++) {
+        if ((k + 1) % SQUARE_SIZE == 0) {
+          for (int h = 0; h < spaces_needed; h++) {
+            printf("-");
+          }
+          printf(" ■ ");  
+        } else if ((x + 1) % SQUARE_SIZE == 0 && x != MAX_LENGTH-1) {
+          for (int h = 0; h < spaces_needed; h++) {
+            printf("-");
+          }
+          printf(" ■ "); 
+        } else {
+          for (int h = 0; h < spaces_needed; h++) {
+            printf("-");
+          }
+          printf("   ");
+        }
       } 
-      printf("- \n");
+      for (int h = 0; h < spaces_needed; h++) printf("-");
+      printf("\n");
     }
   }
 }
 
 
 //pretty printer for solved table
-void pretty_printer_after(int table_before[9][9], int table_after[9][9]) {
-  for (int x = 0; x < 9; x++) {
-    for (int y = 0; y < 9; y++) {
+void pretty_printer_after(int table_before[MAX_LENGTH][MAX_LENGTH], int table_after[MAX_LENGTH][MAX_LENGTH]) {
+  int spaces_needed = num_length(MAX_LENGTH);
+  for (int x = 0; x < MAX_LENGTH; x++) {
+    for (int y = 0; y < MAX_LENGTH; y++) {
       
       if (*(*(table_before + x) + y) == *(*(table_after + x) + y)) {
         printf(ANSI_COLOR_YELLOW "%d" ANSI_COLOR_RESET, *(*(table_after + x) + y));
       } else if (*(*(table_before + x) + y) != *(*(table_after + x) + y)) {
         printf(ANSI_COLOR_BLUE "%d" ANSI_COLOR_RESET, *(*(table_after + x) + y));
       } else { //should never go in the else branch
-        printf(ANSI_COLOR_YELLOW "%d" ANSI_COLOR_RESET, *(*(table_after + x) + y));
         printf(ANSI_COLOR_RED "?" ANSI_COLOR_RESET);
       }
-      if (y != 8) printf(" | ");
+      for (int k = 0; k < (spaces_needed - num_length(*(*(table_after + x) + y))); k++) {
+        printf(" ");
+      }
+      if (y != MAX_LENGTH-1) printf(" | ");
     }
     printf("\n");
-    if (x != 8) {
-      for (int k = 0; k < 8; k++) {
-        if ((k + 1) % 3 == 0) printf("- ■ ");
-        else if ((x + 1) % 3 == 0 && x != 8) printf("- ■ "); //todo? fix?
-        else printf("-   ");
+    if (x != MAX_LENGTH-1) {
+      for (int k = 0; k < MAX_LENGTH-1; k++) {
+        if ((k + 1) % SQUARE_SIZE == 0) {
+          for (int h = 0; h < spaces_needed; h++) {
+            printf("-");
+          }
+          printf(" ■ ");
+        } else if ((x + 1) % SQUARE_SIZE == 0 && x != MAX_LENGTH-1) {
+          for (int h = 0; h < spaces_needed; h++) {
+            printf("-");
+          }
+          printf(" ■ ");
+        } else {
+          for (int h = 0; h < spaces_needed; h++) {
+            printf("-");
+          }
+          printf("   ");
+        }
       } 
-      printf("- \n");
+      for (int h = 0; h < spaces_needed; h++) printf("-");
+      printf("\n");
     }
   }
 }
 
 //basic printer created for debugging
-void basic_printer(int table[9][9]) {
-  for (int i = 0; i < 9; i++) {
-    for (int j = 0; j < 9; j++) {
+void basic_printer(int table[MAX_LENGTH][MAX_LENGTH]) {
+  for (int i = 0; i < MAX_LENGTH; i++) {
+    for (int j = 0; j < MAX_LENGTH; j++) {
       printf("%d ", *(*(table + i) + j));
     }
     printf("\n");
@@ -242,24 +309,24 @@ void basic_printer(int table[9][9]) {
 }
 
 //used to test the functions
-void test(int table[9][9]) {
-  for (int i = 0; i < 9; i++) {
+void test(int table[MAX_LENGTH][MAX_LENGTH]) {
+  for (int i = 0; i < MAX_LENGTH; i++) {
     printf("isrow0okay num: %d, res: %d\n", i+1, is_row_ok(table, 0, i+1));
   }
 
-  for (int i = 0; i < 9; i++) {
+  for (int i = 0; i < MAX_LENGTH; i++) {
     printf("iscolumn0okay num: %d, res: %d\n", i+1, is_column_ok(table, 0, i+1));
   }
 
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) {
+  for (int i = 0; i < SQUARE_SIZE; i++) {
+    for (int j = 0; j < SQUARE_SIZE; j++) {
       printf("issquareok sqx: %d, sqy: %d, num: %d, res: %d\n", 6+i, 0+j, i*3 + j + 1, is_square_ok(table, 6, 0, i*3 + j +1));
     }
   }
 
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) {
-      for (int k = 1; k < 10; k++) {
+  for (int i = 0; i < SQUARE_SIZE; i++) {
+    for (int j = 0; j < SQUARE_SIZE; j++) {
+      for (int k = 1; k < MAX_LENGTH+1; k++) {
         if (!is_cell_ok(table, i, j, k)) printf("iscellok cell: %d-%d, num: %d, res: %d\n", i, j, k, is_cell_ok(table, i, j, k));
       }
     }
@@ -267,5 +334,105 @@ void test(int table[9][9]) {
 
   basic_printer(table);
 
+  printf("Numlength: %d, %d\n", 18, num_length(18));
+  printf("Numlength: %d, %d\n", 9, num_length(9));
+  printf("Numlength: %d, %d\n", 180, num_length(180));
+
+
   return;
+}
+
+int num_length(int num) {
+  int cifre = 1;
+  while(num/10 > 0) {
+    cifre++;
+    num /= 10;
+  }
+  return cifre; 
+}
+
+//pretty printer for unsolved table
+void pretty_printer_before_no_squares(int table[MAX_LENGTH][MAX_LENGTH]) {
+  int spaces_needed = num_length(MAX_LENGTH);
+  for (int x = 0; x < MAX_LENGTH; x++) {
+    for (int y = 0; y < MAX_LENGTH; y++) {
+      if (*(*(table + x) + y) == 0) {
+        printf(ANSI_COLOR_RED "?" ANSI_COLOR_RESET);
+      } else {
+        printf(ANSI_COLOR_YELLOW "%d" ANSI_COLOR_RESET, *(*(table + x) + y));
+      }
+      for (int k = 0; k < (spaces_needed - num_length(*(*(table + x) + y))); k++) {
+        printf(" ");
+      }
+      if (y != MAX_LENGTH-1) printf(" | ");
+    }
+    printf("\n");
+    if (x != MAX_LENGTH-1) {
+      for (int k = 0; k < MAX_LENGTH-1; k++) {
+        if ((k + 1) % SQUARE_SIZE == 0) {
+          for (int h = 0; h < spaces_needed; h++) {
+            printf("-");
+          }
+          printf(" ║ ");  
+        } else if ((x + 1) % SQUARE_SIZE == 0 && x != MAX_LENGTH-1) {
+          for (int h = 0; h < spaces_needed; h++) {
+            printf("-");
+          }
+          printf(" ═ "); 
+        } else {
+          for (int h = 0; h < spaces_needed; h++) {
+            printf("-");
+          }
+          printf("   ");
+        }
+      } 
+      for (int h = 0; h < spaces_needed; h++) printf("-");
+      printf("\n");
+    }
+  }
+}
+
+
+//pretty printer for solved table
+void pretty_printer_after_no_squares(int table_before[MAX_LENGTH][MAX_LENGTH], int table_after[MAX_LENGTH][MAX_LENGTH]) {
+  int spaces_needed = num_length(MAX_LENGTH);
+  for (int x = 0; x < MAX_LENGTH; x++) {
+    for (int y = 0; y < MAX_LENGTH; y++) {
+      
+      if (*(*(table_before + x) + y) == *(*(table_after + x) + y)) {
+        printf(ANSI_COLOR_YELLOW "%d" ANSI_COLOR_RESET, *(*(table_after + x) + y));
+      } else if (*(*(table_before + x) + y) != *(*(table_after + x) + y)) {
+        printf(ANSI_COLOR_BLUE "%d" ANSI_COLOR_RESET, *(*(table_after + x) + y));
+      } else { //should never go in the else branch
+        printf(ANSI_COLOR_RED "?" ANSI_COLOR_RESET);
+      }
+      for (int k = 0; k < (spaces_needed - num_length(*(*(table_after + x) + y))); k++) {
+        printf(" ");
+      }
+      if (y != MAX_LENGTH-1) printf(" | ");
+    }
+    printf("\n");
+    if (x != MAX_LENGTH-1) {
+      for (int k = 0; k < MAX_LENGTH-1; k++) {
+        if ((k + 1) % SQUARE_SIZE == 0) {
+          for (int h = 0; h < spaces_needed; h++) {
+            printf("-");
+          }
+          printf(" ║ ");  
+        } else if ((x + 1) % SQUARE_SIZE == 0 && x != MAX_LENGTH-1) {
+          for (int h = 0; h < spaces_needed; h++) {
+            printf("-");
+          }
+          printf(" ═ "); 
+        } else {
+          for (int h = 0; h < spaces_needed; h++) {
+            printf("-");
+          }
+          printf("   ");
+        }
+      } 
+      for (int h = 0; h < spaces_needed; h++) printf("-");
+      printf("\n");
+    }
+  }
 }
