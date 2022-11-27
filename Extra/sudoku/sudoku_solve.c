@@ -1,6 +1,5 @@
 /*
-Created by:
-                                                                                      
+Created by:                                                                  
                                                                                       
    SSSSSSSSSSSSSSS   iiii                                                             
  SS:::::::::::::::S i::::i                                                            
@@ -30,12 +29,23 @@ ASCII Art generated from: https://patorjk.com/software/taag/#p=testall&f=Crawfor
 #include <stdio.h>
 #include <stdbool.h>
 
-bool is_cell_ok(int** table, int x, int y, int num);
-bool is_row_ok(int** table, int row, int num);
-bool is_column_ok(int** table, int column, int num);
-bool is_square_ok(int** table, int squarex, int squarey, int num);
-bool is_solved(int** table);
+#define ANSI_COLOR_RED     "\x1b[31m"
+#define ANSI_COLOR_YELLOW  "\x1b[33m"
+#define ANSI_COLOR_BLUE    "\x1b[34m" 
+#define ANSI_COLOR_RESET   "\x1b[0m"
 
+//each functions has a small description in their implementantions (under the main)
+
+bool is_cell_ok(int table[9][9], int x, int y, int num);
+bool is_row_ok(int table[9][9], int row, int num);
+bool is_column_ok(int table[9][9], int column, int num);
+bool is_square_ok(int table[9][9], int squarex, int squarey, int num);
+bool is_solved(int table[9][9]);
+bool find_not_valued_cell(int table[9][9], int *row, int *col);
+void pretty_printer_before(int table[9][9]);
+void pretty_printer_after(int table[9][9]);
+void basic_printer(int table[9][9]);
+void test(int table[9][9]);
 
 int main(void) {
 
@@ -57,43 +67,151 @@ int main(void) {
   int table_copy[9][9];
 
   for (int i = 0; i < 9; i++) {
-    for (int j = 0; j < 0; j++) {
+    for (int j = 0; j < 9; j++) {
       *(*(table_copy + i) + j) = *(*(table + i) + j);
     }
   }
 
-  printf("isrowokay: %d", is_row_ok(table, 0, 3));
+  //test(table);
+
+  printf("Trying to solve this table: \n");
+  basic_printer(table_copy);
+  printf("\n");
 
   if(is_solved(table)) {
     printf("Found solution!\n");
+    basic_printer(table);
   } else {
     printf("There is no solution for the table.\n");
   }
  return 0; 
 }
 
-bool is_cell_ok(int** table, int x, int y, int num) {
-  return (is_row_ok(table, x, num) && is_column_ok(table, y, num) && is_square_ok(table, squarex, squarey));
+
+//functions
+
+//checks if num can be put in the given cell of coordinates x, y 
+bool is_cell_ok(int table[9][9], int x, int y, int num) {
+  int squarex = x - (x % 3);
+  int squarey = y - (y % 3);
+  return (is_row_ok(table, x, num) && is_column_ok(table, y, num) && is_square_ok(table, squarex, squarey, num));
 }
 
-bool is_row_ok(int** table, int row, int num) {
+//checks if num can be put in the given row 
+bool is_row_ok(int table[9][9], int row, int num) {
   for (int i = 0; i < 9; i++) {
-    if (table + (sizeof(int) * row * 9) + i == num) return false;
+    if (*(*(table + row) + i) == num) return false;
   }
   return true;
 }
 
-bool is_column_ok(int** table, int column, int num) {
+//checks if num can be put in the given column
+bool is_column_ok(int table[9][9], int column, int num) {
   for (int i = 0; i < 9; i++) {
-    return false;
+    if (*(*(table + i) + column) == num) return false;
+  }
+  return true;
+}
+
+//checks if the num can be put in the given square ((squarex;squarey) to (squarex+2;squarey+2))
+bool is_square_ok(int table[9][9], int squarex, int squarey, int num) {
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      if (*(*(table + squarex + i) + squarey + j) == num) return false;
+    }
+  }
+  return true;
+}
+
+//recursive function used to apply the backtracking and solving the puzzle
+bool is_solved(int table[9][9]) {
+  int row, col, num;
+  
+  //if there is no cell with a 0, then the puzzle is solved. The call to 
+  //this function modifies the row and col values through pointers, so that 
+  //they point to the row and col of the cell not valued (has a 0).
+  if (!find_not_valued_cell(table, &row, &col)) {
+    return true;
+  } 
+
+  //recursion here; gives the value to the unvalued cell, then calls itself 
+  //which finds the next not valued cell and gives it a value, exc... 
+  for (num = 1; num < 10; num++) {
+    if (is_cell_ok(table, row, col, num)) {
+      //cell in row and col appears to be ok for num 
+      *(*(table + row) + col) = num;
+      //if it returns true, break the recursion (the true is given from the 
+      //previous lines of code, in which no unvalued cell is found)
+      if (is_solved(table)) return true;
+    }
+    //the cell is not ok for the number, resetting to 0. With the use of 
+    //pointers this makes the backtracking reset the previous attemps of 
+    //giving values to a cell aswell.
+    *(*(table + row) + col) = 0;
+  }
+  //only reached if exhausted and sudoku isn't solved
+  return false;
+}
+
+//checks if there is a not valued cell and returns its coordinates through pointers
+bool find_not_valued_cell(int table[9][9], int *row, int *col) {
+  for (*row = 0; *row < 9; (*row)++) {
+    for (*col = 0; *col < 9; (*col)++) {
+      if (*(*(table + *row) + *col) == 0) return true;
+    }
+  }
+  return false;
+}
+
+
+//pretty printer for unsolved table
+void pretty_printer_before(int table[9][9]) {
+  for (int i = 0; i < 9; i++) {
+    
   }
 }
 
-bool is_square_ok(int** table, int squarex, int squarey, int num) {
-  return false;
+//pretty printer for solved table
+void pretty_printer_after(int table[9][9]) {
+  return;
 }
 
-bool is_solved(int** table) {
-  return false;
+//basic printer created for debugging
+void basic_printer(int table[9][9]) {
+  for (int i = 0; i < 9; i++) {
+    for (int j = 0; j < 9; j++) {
+      printf("%d ", *(*(table + i) + j));
+    }
+    printf("\n");
+  }
+  return;
 }
 
+//used to test the functions
+void test(int table[9][9]) {
+  for (int i = 0; i < 9; i++) {
+    printf("isrow0okay num: %d, res: %d\n", i+1, is_row_ok(table, 0, i+1));
+  }
+
+  for (int i = 0; i < 9; i++) {
+    printf("iscolumn0okay num: %d, res: %d\n", i+1, is_column_ok(table, 0, i+1));
+  }
+
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      printf("issquareok sqx: %d, sqy: %d, num: %d, res: %d\n", 6+i, 0+j, i*3 + j + 1, is_square_ok(table, 6, 0, i*3 + j +1));
+    }
+  }
+
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      for (int k = 1; k < 10; k++) {
+        if (!is_cell_ok(table, i, j, k)) printf("iscellok cell: %d-%d, num: %d, res: %d\n", i, j, k, is_cell_ok(table, i, j, k));
+      }
+    }
+  }
+
+  basic_printer(table);
+
+  return;
+}
