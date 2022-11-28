@@ -5,25 +5,41 @@
 % Try to solve the exercise in both manners. Note, when writing your program, make sure your code has many io:format statements in every loop iteration; this will give you a complete overview of what is happening (or not happening) and should help you solve the exercise.
 
 -module(ring).
--export([start/3, create_ring/5, await_message/2]).
+-compile(export_all).
 
-start(M, N, Message) -> 
-  create_ring(M, N, Message, self(), self()).
+start(NumMessages, NumProcesses, Message) -> 
+  io:format("Spawning first process~n"),
+  spawn(ring, start_proc, [NumMessages, NumProcesses, Message]).
+
+start_proc(NumMessages, NumProcesses, Message) -> 
+  NextPid = proc_spawn(self(), sefl(), NumProcesses-1),
+  LastPid = receive 
+    {Pid, ring_complete} -> Pid
+  end,
+  start_loop(NextPid, LastPid, NumMessages, Message).
 
 
-create_ring(_, 0, _, Father, Godfather) -> 
-  io:format("Reached end of ring.~n"),
-  await_message(Father, Godfather);
-create_ring(M, N, Message, Father, Godfather) -> 
-  Next = spawn_link(ring, create_ring, [M, N-1, Message, Father, Godfather]),
-  await_message(Father, Next).
-
-await_message(Father, Next) -> 
+start_loop(NextPid, LastPid, NumMessages, Message) when NumMessages > 0 -> 
+  NextPid ! {self(), Message},
   receive 
-    {Father, Message} -> io:format("process ~p received \"~p\" from ~p. Inoltrating to ~p~n", [self(), Message, Father, Next]),
-    Next ! Message
+    {LastPid, Message} -> 
+      io:format("Completed one cycle~n"),
+      start_loop(NextPid, LastPid, NumMessages-1, Message)
+  end
+;
+start_loop(NextPid, LastPid, 0, _) -> 
+  NextPid ! {self(), stop},
+  receive
+    {LastPid, stop} -> 
+      io:format("Stopping processes~n")
   end
 .
+  
+proc_spawn(FirstPid, PrevPid, 0) -> 
+  loop(FirstPid);
+proc_spawn(FirstPid, PrevPid, NumProcesses) when NumProcesses > 0 -> 
+  NextPid = spawn(ring, proc_spawn, [FirstPid, self(), NumProcesses-1]),
+  %todo
 
 
 
@@ -31,6 +47,79 @@ await_message(Father, Next) ->
 
 
 
+
+
+
+% create_ring(_, 0, _, Father) ->
+%   io:format("Reached end of ring.~n"),
+%   await_message(Father, whereis(godfather));
+% create_ring(NumMessages, NumProcesses, Message, Father) -> 
+%   Next = spawn_link(ring, create_ring, [NumMessages, NumProcesses-1, Message, self( )]),
+%   await_message(Father, Next).
+
+% await_message(Father, Next) -> 
+%   receive 
+%     {Father, Message} -> io:format("process ~p received \"~p\" from ~p. Inoltrating to ~p~n", [self(), Message, Father, Next]),
+%     Next ! Message
+%   end
+% .
+
+
+
+
+
+% https://gist.github.com/stiiifff/3928673
+
+% -module (ring).
+% -export ([start/3, first_proc/3, first_loop/4, proc_start/3, proc_loop/2]).
+
+% start(MsgCount, ProcCount, Msg) ->
+% 	spawn(ring, first_proc, [MsgCount, ProcCount, Msg]).
+
+% first_proc(MsgCount, ProcCount, Msg) ->
+% 	io:format("First process ~w created, setting up the rest of the ring ...~n", [self()]),
+% 	NextPid = spawn(ring, proc_start, [self(), self(), ProcCount-1]),
+% 	LastPid = receive
+% 				{Pid, ready} -> Pid
+% 			  end,
+% 	io:format("Received ready message from last process ~w, about to send messages around the ring ...~n", [LastPid]),
+% 	first_loop(NextPid, LastPid, MsgCount, Msg).
+
+% first_loop(NextPid, LastPid, MsgCount, Msg) ->
+% 	case MsgCount of
+% 		MsgCount when MsgCount > 0 ->
+% 			NextPid ! {self(), Msg},
+% 			receive
+% 				{LastPid, Msg} ->
+% 					first_loop(NextPid, LastPid, MsgCount-1, Msg)
+% 			end;
+% 		0 ->
+% 			NextPid ! {self(), stop},
+% 			receive
+% 				{LastPid, stop} -> ok
+% 			end
+% 	end.
+
+% proc_start(FirstPid, PrevPid, ProcCount) when ProcCount > 0 ->
+% 	NextPid = spawn(ring, proc_start, [FirstPid, self(), ProcCount-1]),
+% 	io:format("Created process ~w, ~w processes to go.~n", [NextPid, ProcCount]),
+% 	proc_loop(PrevPid, NextPid);
+
+% proc_start(FirstPid, PrevPid, 0) ->
+% 	io:format("Last process ~w reached, linking back to first process ~w.~n", [self(), FirstPid]),
+% 	FirstPid ! {self(), ready},
+% 	proc_loop(PrevPid, FirstPid).
+
+% proc_loop(PrevPid, NextPid) ->
+% 	receive
+% 		{PrevPid, Msg} ->
+% 			NextPid ! {self(), Msg},
+% 			io:format("Forwarded msg ~w to process ~w.~n", [Msg, NextPid]),
+% 			proc_loop(PrevPid, NextPid);
+% 		{PrevPid, stop} ->
+% 			NextPid ! {self(), stop},
+% 			ok
+% 	end.
 
 
 
