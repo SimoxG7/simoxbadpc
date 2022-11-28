@@ -9,37 +9,46 @@
 
 start(NumMessages, NumProcesses, Message) -> 
   io:format("Spawning first process~n"),
-  spawn(ring, start_proc, [NumMessages, NumProcesses, Message]).
+  spawn(ring, start_processes, [NumMessages, NumProcesses, Message]).
 
-start_proc(NumMessages, NumProcesses, Message) -> 
-  NextPid = proc_spawn(self(), sefl(), NumProcesses-1),
+start_processes(NumMessages, NumProcesses, Message) -> 
+  NextPid = spawn_processes(self(), self(), NumProcesses-1),
   LastPid = receive 
     {Pid, ring_complete} -> Pid
   end,
-  start_loop(NextPid, LastPid, NumMessages, Message).
+  start_loop(NextPid, LastPid, NumMessages, Message). 
+
+spawn_processes(FirstPid, PrevPid, 0) -> 
+  FirstPid ! {self(), ring_complete};
+spawn_processes(FirstPid, PrevPid, NumProcesses) -> 
+  NextPid = spawn(ring, spawn_processes, [FirstPid, self(), NumProcesses-1]),
+  %todo
+  false.
 
 
-start_loop(NextPid, LastPid, NumMessages, Message) when NumMessages > 0 -> 
-  NextPid ! {self(), Message},
-  receive 
-    {LastPid, Message} -> 
-      io:format("Completed one cycle~n"),
-      start_loop(NextPid, LastPid, NumMessages-1, Message)
-  end
-;
 start_loop(NextPid, LastPid, 0, _) -> 
   NextPid ! {self(), stop},
   receive
     {LastPid, stop} -> 
-      io:format("Stopping processes~n")
+      io:format("Stopped processes~n")
+  end
+;
+start_loop(NextPid, LastPid, NumMessages, Message) -> 
+  NextPid ! {self(), Message},
+  receive 
+    {LastPid, Message} -> 
+      loop(NextPid),
+      %fix
+      io:format("Completed one cycle~n"),
+      start_loop(NextPid, LastPid, NumMessages-1, Message)
   end
 .
+
+loop(NextPid) -> 
+  lol  
+. % todo
   
-proc_spawn(FirstPid, PrevPid, 0) -> 
-  loop(FirstPid);
-proc_spawn(FirstPid, PrevPid, NumProcesses) when NumProcesses > 0 -> 
-  NextPid = spawn(ring, proc_spawn, [FirstPid, self(), NumProcesses-1]),
-  %todo
+
 
 
 
