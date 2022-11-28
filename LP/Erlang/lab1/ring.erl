@@ -5,22 +5,63 @@
 % Try to solve the exercise in both manners. Note, when writing your program, make sure your code has many io:format statements in every loop iteration; this will give you a complete overview of what is happening (or not happening) and should help you solve the exercise.
 
 -module(ring).
--export([start1/3, start2/3]).
+-export([start/3, create_ring/5, await_message/2]).
 
-start1(N, M, Message) -> 
-  FirstPid = spawn(ring, generate_next, [N-1, M, Message]), false.
+start(M, N, Message) -> 
+  create_ring(M, N, Message, self(), self()).
 
-generate_loop(0, LastPid) -> LastPid;
-generate_loop(N, LastPid) -> 
-  io:format("Spawning ~p~n", [N]),
-  Pid = spawn(ring, initiate, []),
-  Pid ! {LastPid, spawn},
-  generate_loop(N-1, Pid).
 
-initiate() -> receive
-  {LastPid,spawn} -> spawn_link(ring, spawn, Arg3)  
+create_ring(_, 0, _, Father, Godfather) -> 
+  io:format("Reached end of ring.~n"),
+  await_message(Father, Godfather);
+create_ring(M, N, Message, Father, Godfather) -> 
+  Next = spawn_link(ring, create_ring, [M, N-1, Message, Father, Godfather]),
+  await_message(Father, Next).
 
-generate_next(0, M, Message) -> LastPid;
-generate_next(N, M, Message) -> spawn(ring, generate_next, [N-1, M, Message]), generate_next(N-1, M, Message).
+await_message(Father, Next) -> 
+  receive 
+    {Father, Message} -> io:format("process ~p received \"~p\" from ~p. Inoltrating to ~p~n", [self(), Message, Father, Next]),
+    Next ! Message
+  end
+.
 
-start2(N, M, Message) -> false.
+
+
+
+
+
+
+
+
+
+
+
+% start_loop(M, N, Message) ->
+%   New = spawn_link(ring, loop, [M, N, Message, self(), self()]),
+%   New ! Message,
+%   receive 
+%     Message -> io:format("Godfather received message, exiting~n")
+%   end.
+
+
+% loop(_, 0, Message, Godfather, _) -> 
+%   io:format("Reached end of ring, linking to father?~n"),
+%   Godfather ! Message;
+% loop(M, N, Message, Godfather, Father) -> 
+%   %io:format("process: ~p, father: ~p, godfather: ~p~n", [self(), Father, Godfather]),
+%   New = spawn_link(ring, loop, [M, N-1, Message, Godfather, self()]),
+%   receive 
+%     Message -> io:format("process: ~p, father: ~p, godfather: ~p, message: ~p~n", [self(), Father, Godfather, Message]),
+%     New ! Message,
+%     exit("did my job")
+%   end
+% .
+
+
+
+
+
+  
+  
+
+
