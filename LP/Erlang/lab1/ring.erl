@@ -7,50 +7,113 @@
 -module(ring).
 -compile(export_all).
 
-start(NumMessages, NumProcesses, Message) -> 
-  spawn(ring, start_processes, [NumMessages, NumProcesses, Message]).
+start(N, M, Msg) -> 
+  spawn(ring, father_generate, [N, M, Msg]).
 
-start_processes(NumMessages, NumProcesses, Message) -> 
-  io:format("Spawning first process, which is ~p~n", [self()]),
-  NextPid = spawn_processes(self(), self(), NumProcesses-1),
+
+father_generate(N, M, Msg) ->
+  NextPid = spawn_link(ring, generate, [self(), self(), N]),
   LastPid = receive 
-    {Pid, complete} -> io:format("Ring completed~n"), Pid
+    {Pid, complete} -> Pid, io:format("Completed the ring.~n")
   end,
-  start_loop(NextPid, LastPid, NumMessages, Message). 
-
-spawn_processes(FirstPid, PrevPid, 0) -> 
-  io:format("Reached last process, which is ~p~n", [self()]),
-  FirstPid ! {self(), complete};
-  %loop(PrevPid, FirstPid);
-spawn_processes(FirstPid, PrevPid, NumProcesses) -> 
-  io:format("Spawning process ~p~n", [self()]),
-  NextPid = spawn(ring, spawn_processes, [FirstPid, self(), NumProcesses-1]).
-  %loop(PrevPid, NextPid).
-
-start_loop(NextPid, LastPid, 0, _) -> 
-  NextPid ! {self(), stop},
+  %doesnt reach here
+  father_loop(LastPid, NextPid, Msg, M),
   receive
-    {LastPid, stop} -> 
-      io:format("Stopped processes~n")
-  end
-;
-start_loop(NextPid, LastPid, NumMessages, Message) ->
-  io:format("Starting cycle. ~p more to end~n", [NumMessages]),
-  NextPid ! {self(), Message},
+    {LastPid, Message} -> NextPid ! Message
+  end.
+
+
+father_loop(_, _, _, 0) -> 
+  io:format("stopping"),
+  exit(stopped);
+father_loop(LastPid, NextPid, Message, M) -> 
+  NextPid ! Message,
   receive 
     {LastPid, Message} -> 
-      io:format("Completed one cycle~n"),
-      start_loop(NextPid, LastPid, NumMessages-1, Message)
+      father_loop(LastPid, NextPid, Message, M-1),
+      io:format("Started a cycle")
   end
 .
 
+
+generate(FirstPid, PrevPid, 0) -> 
+  io:format("reached last process, which is ~p~n", [self()]),
+  FirstPid ! {self(), complete},
+  loop(PrevPid, FirstPid);
+generate(FirstPid, PrevPid, N) ->
+  NextPid = spawn_link(ring, generate, [FirstPid, self(), N-1]),
+  io:format("process ~p generated the process ~p~n", [self(), NextPid]),
+  loop(PrevPid, NextPid).
+
 loop(PrevPid, NextPid) -> 
-  receive 
-    {PrevPid, Message} -> 
-      io:format("Process ~p received the message ~p from the process ~p~n", [self(), Message, PrevPid]),
-      NextPid ! {self(), Message}
-  end
-. 
+  io:format("process ~p in loop waiting for message from ~p to send to ~p~n", [self(), PrevPid, NextPid]),
+  receive
+    {PrevPid, Message} -> io:format("process ~p received message '~p' from process ~p~n", [self(), Message, PrevPid]),
+    NextPid ! Message, 
+    io:format("inoltrated message to ~p~n", [NextPid])
+  end.
+
+
+%erlang:process_info(x, messages). 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% start(NumMessages, NumProcesses, Message) -> 
+%   spawn(ring, start_processes, [NumMessages, NumProcesses, Message]).
+
+% start_processes(NumMessages, NumProcesses, Message) -> 
+%   io:format("Spawning first process, which is ~p~n", [self()]),
+%   NextPid = spawn_processes(self(), self(), NumProcesses-1),
+%   LastPid = receive 
+%     {Pid, complete} -> io:format("Ring completed~n"), Pid
+%   end,
+%   start_loop(NextPid, LastPid, NumMessages, Message). 
+
+% spawn_processes(FirstPid, PrevPid, 0) -> 
+%   io:format("Reached last process, which is ~p~n", [self()]),
+%   FirstPid ! {self(), complete},
+%   loop(PrevPid, FirstPid);
+% spawn_processes(FirstPid, PrevPid, NumProcesses) -> 
+%   io:format("Spawning process ~p~n", [self()]),
+%   NextPid = spawn(ring, spawn_processes, [FirstPid, self(), NumProcesses-1]),
+%   loop(PrevPid, NextPid).
+
+% start_loop(NextPid, LastPid, 0, _) -> 
+%   NextPid ! {self(), stop},
+%   receive
+%     {LastPid, stop} -> 
+%       io:format("Stopped processes~n")
+%   end
+% ;
+% start_loop(NextPid, LastPid, NumMessages, Message) ->
+%   io:format("Starting cycle. ~p more to end~n", [NumMessages]),
+%   NextPid ! {self(), Message},
+%   receive 
+%     {LastPid, Message} -> 
+%       io:format("Completed one cycle~n"),
+%       start_loop(NextPid, LastPid, NumMessages-1, Message)
+%   end
+% .
+
+% loop(PrevPid, NextPid) -> 
+%   receive 
+%     {PrevPid, Message} -> 
+%       NextPid ! {self(), Message},
+%       io:format("Process ~p received the message ~p from the process ~p; forwarding to ~p~n", [self(), Message, PrevPid, NextPid]),
+%       NextPid ! {self(), stop}
+%   end
+% . 
   
 
 
@@ -59,23 +122,6 @@ loop(PrevPid, NextPid) ->
 
 
 
-
-
-
-
-% create_ring(_, 0, _, Father) ->
-%   io:format("Reached end of ring.~n"),
-%   await_message(Father, whereis(godfather));
-% create_ring(NumMessages, NumProcesses, Message, Father) -> 
-%   Next = spawn_link(ring, create_ring, [NumMessages, NumProcesses-1, Message, self( )]),
-%   await_message(Father, Next).
-
-% await_message(Father, Next) -> 
-%   receive 
-%     {Father, Message} -> io:format("process ~p received \"~p\" from ~p. Inoltrating to ~p~n", [self(), Message, Father, Next]),
-%     Next ! Message
-%   end
-% .
 
 
 
