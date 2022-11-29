@@ -13,11 +13,13 @@ start(N, M, Msg) ->
 
 father_generate(N, M, Msg) ->
   NextPid = spawn_link(ring, generate, [self(), self(), N]),
+  %register(first, NextPid),
+  %io:format("set ~p as father process~n", [NextPid]),
   LastPid = receive 
     {Pid, complete} -> Pid, io:format("Completed the ring.~n")
   end,
   %doesnt reach here
-  father_loop(LastPid, NextPid, Msg, M),
+  father_loop(LastPid, whereis(first), Msg, M),
   receive
     {LastPid, Message} -> NextPid ! Message
   end.
@@ -46,7 +48,7 @@ generate(FirstPid, PrevPid, N) ->
   loop(PrevPid, NextPid).
 
 loop(PrevPid, NextPid) -> 
-  io:format("process ~p in loop waiting for message from ~p to send to ~p~n", [self(), PrevPid, NextPid]),
+  io:format("from ~p, actual ~p, to ~p~n", [PrevPid, self(), NextPid]),
   receive
     {PrevPid, Message} -> io:format("process ~p received message '~p' from process ~p~n", [self(), Message, PrevPid]),
     NextPid ! Message, 

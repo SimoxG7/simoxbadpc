@@ -760,8 +760,19 @@ Con regola dell'allineamento:
 
 -----------------------------------------------------------------------------------------------------------------
 
-Lezione 09 - 
-	
+Lezione 09 - 29/11/22 
+
+syllabus ariel -> altri esercizi.
+
+packet tracer.
+
+CLI del router. Router non è plug-n-play come gli switch, quindi necessitano di essere configurati.
+
+Per cambiare modalità di privilegi -> enable (+1) / disable (-1).
+
+Ping ha ttl misurato in numero di hop. 
+
+
 
 
 
