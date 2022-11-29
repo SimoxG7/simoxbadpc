@@ -58,7 +58,7 @@ void pretty_printer_after_no_squares(int table_before[MAX_LENGTH][MAX_LENGTH], i
 //void replace_with_0(int table[MAX_LENGTH][MAX_LENGTH]);
 
 
-int main(void) {
+int main(int argc, char** argv) {
 
   //the pretty printers are thought for the 3x3 version, with other versions they 
   //don't print a perfect output.
@@ -138,7 +138,6 @@ int main(void) {
     { 0, 1, 0, 0, 0, 4, 0, 0, 0 },
     { 0, 0, 3, 1, 0, 0, 0, 5, 0 }
   };
-  
 
   int cont = 0, *cont_ptr;
   cont_ptr = &cont;

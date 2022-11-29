@@ -834,7 +834,9 @@ configuro ciascuna sottointerfaccia per vlan con ipaddress.
 //seminario su robe
 
 
+------------------------------------------------------------------------------------------------------
 
+Lezione 10 - 02/12/22
 
 
 
