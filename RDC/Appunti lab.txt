@@ -772,10 +772,66 @@ Per cambiare modalità di privilegi -> enable (+1) / disable (-1).
 
 Ping ha ttl misurato in numero di hop. 
 
+ctrl-alt-6 equivalente di ctrl-c (in linux).
 
+traceroute google.com
 
+telnet -> strumento di terminale remoto via rete, fa girare tutto in chiaro, se qualcuno fa sniffing sono fottuto.
 
+ssh -> secure shell -> cifrata.
 
+comando show -> mostra cosa fa un comando.
+
+comando config -> verrà usato molto.
+
+router hanno filesystem -> comando file.
+
+aaa -> 3 regole d'oro -> authentication, authorization, accounting.
+
+startup-config -> mostra i contenuti della configurazione di startup.
+
+comandi ip, interfaces 
+
+show interfaces -> informazioni su tutte le interfacce. 
+
+config -> entro in modalità di configurazione
+
+? -> fa vedere cosa posso configurare
+
+interface ? -> fa vedere che interfacce posso configurare
+
+interface FastEthernet 0/0 -> entro in config-if 
+
+comando ip address <indirizzo> -> può essere configurato tramite dhcp o a.b.c.d/m
+
+ip address 192.168.0.254 255.0.0.0
+
+vanno poi messi anche i gateway predefiniti nei pc
+
+configurazione sia per switch che per router su dispositivo in fase di configurazione delle vlan. Configurare prima le vlan, poi vlan attraverso il router. Comando write dice dove scrivere -> write mem ... -> scrive in memoria permanente
+
+come faccio a mettere in comunicazione le vlan? devo usare il router.
+
+modificare l'ip dei pc per far si che stiano in vlan differenti, modificare anche il gateway.
+
+ma non va bene, devo modificare interfaccia.
+
+conf t (configura da terminale)
+interface FastEthernet 0/0 
+
+posso dire che ha una sottointerfaccia con lo stesso vlanid che usiamo sullo switch.
+
+interface FastEthernet 0/0.12 (12 id del rosso)
+
+entro in configurazione della sottointerfaccia (config-subif).
+
+encapsulation dot1Q 12 (vlanid).
+
+ip address 192.168.0.254 255.255.255.0 
+
+configuro ciascuna sottointerfaccia per vlan con ipaddress.
+
+//seminario su robe
 
 
 
