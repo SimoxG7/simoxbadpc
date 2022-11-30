@@ -1,5 +1,6 @@
 package it.unimi.di.sweng.reverseindex;
 
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,7 +9,7 @@ public class ReverseIndex {
 
     List<String> lines = new ArrayList<>();
 
-    public ReverseIndex(String input) {
+    public ReverseIndex(StringReader input) {
         Scanner scanner = new Scanner(input);
 
         while(scanner.hasNextLine()) {
