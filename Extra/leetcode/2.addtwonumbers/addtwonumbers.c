@@ -1,10 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
-
-
 /**
  * Definition for singly-linked list.
 */
@@ -13,59 +9,74 @@ struct ListNode {
   struct ListNode *next;
 };
 
-
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     struct ListNode *next;
- * };
- */
-
-void addlast(struct ListNode* node, int val) {
-  while(node->next != NULL) {
-    node = node->next;
-  }
-  struct ListNode* next = malloc(sizeof(struct ListNode));
-  node->next = next;
-  next->next = NULL;
-  //node->next = NULL;
-  node->val = val;
-  printf("inserting %d\n", val);
-}
-
-struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
-  int n1 = 0, n2 = 0;
-  int n1mult = 1, n2mult = 1;
+struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){ //funziona, fixare problemi con int -> aggiungere direttamente a lista man mano
   
-  while(l1 != NULL) {
-    n1 += n1mult * l1->val;
-    n1mult *= 10;
+  struct ListNode* head = malloc(sizeof(struct ListNode));
+  head->next = NULL;
+  int first = (l1->val + l2->val);
+  int carry = 0;
+  head->val = first%10;
+  if (first > 9) carry = 1;
+  l1 = l1->next;
+  l2 = l2->next;
+  
+  while(l1 != NULL && l2 != NULL) {
+    struct ListNode* node = head;
+    while(node->next != NULL) {
+      node = node->next;
+    }
+    node->next = malloc(sizeof(struct ListNode));
+    int res = (l1->val + l2->val) + carry;
+    if (res > 9) carry = 1;
+    else carry = 0;
+    node->next->val = res %10;
+    node->next->next = NULL;
     l1 = l1->next;
-  }
-  
-  while(l2 != NULL) {
-    n2 += n2mult * l2->val;
-    n2mult *= 10;
     l2 = l2->next;
   }
-  
-  int res = n1 + n2;
-  
-  printf("%d, %d, %d\n", n1, n2, res);
-  
-  struct ListNode* resl = malloc(sizeof(struct ListNode));
-  resl->next = NULL;
-  
-  while(res != 0) {
-    int rem = res%10;
-    res /= 10;
-    addlast(resl, rem);
+
+  while (l1 != NULL) {
+    struct ListNode* node = head;
+    while(node->next != NULL) {
+      node = node->next;
+    }
+    node->next = malloc(sizeof(struct ListNode));
+    int res = l1->val + carry;
+    if (res > 9) carry = 1;
+    else carry = 0;
+    node->next->val = res %10;
+    node->next->next = NULL;
+    l1 = l1->next;
+  } 
+  while (l2 != NULL) {
+    struct ListNode* node = head;
+    while(node->next != NULL) {
+      node = node->next;
+    }
+    node->next = malloc(sizeof(struct ListNode));
+    int res = l2->val + carry;
+    if (res > 9) carry = 1;
+    else carry = 0;
+    node->next->val = res %10;
+    node->next->next = NULL;
+    l2 = l2->next;
   }
-  
-  return resl;
+
+  if (carry == 1) {
+    struct ListNode* node = head;
+    while(node->next != NULL) {
+      node = node->next;
+    }
+    node->next = malloc(sizeof(struct ListNode));
+    node->next->val = carry;
+    node->next->next = NULL;
+  }
+
+  return head;
 }
 
+
+//TESTING
 int main(void) {
   struct ListNode* l1 = malloc(sizeof(struct ListNode));
   l1->val = 2;
@@ -101,99 +112,19 @@ int main(void) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+//THIS WAS KINDA WORKING
 /*
-//struct ListNode* addlast(struct ListNode* node, int val) {
-void addlast(struct ListNode* node, int val) {
-  while(node->next != NULL) {
-    node = node->next;
-  }
-  struct ListNode* next = malloc(sizeof(struct ListNode));
-  next->next == NULL;
-  node->next = next;
-  next->val = val;
-  //return next;
-}
-
-int main(void) {
-  struct ListNode* l1 = malloc(sizeof(struct ListNode));
-  l1->val = 2;
-  struct ListNode* l2 = malloc(sizeof(struct ListNode));
-  l1->next = l2;
-  l2->val = 5;
-  l2->next = NULL;
-
-  while (l1 != NULL) {
-    printf("%d\n", l1->val);
-    l1 = l1->next;  
-  }
-
-  int num = 123;
-  
-  struct ListNode* res = malloc(sizeof(struct ListNode));
-
-  while(num != 0) {
-    int rem = num%10;
-    num /= 10;
-    //struct ListNode* next = addlast(res, rem);
-    addlast(res, rem);
-    //printf("%d\n", next->val);
-  }
-
-  while(res != NULL) {
-    printf("%d\n", res->val);
-    res = res->next;
-  }
-
-  return 0;
-}
-
-
-
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     struct ListNode *next;
- * };
- */
-
-/*
-void addlast(struct ListNode* node, int val) {
-  while(node->next != NULL) {
-    node = node->next;
-  }
-  struct ListNode* next = malloc(sizeof(struct ListNode));
-  node->next = next;
-  next->val = val;
-}
-*/
-
-
-
-/*
-struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
+struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){ //funziona, fixare problemi con int -> aggiungere direttamente a lista man mano
   int n1 = 0, n2 = 0;
   int n1mult = 1, n2mult = 1;
   
-  while(l1->next != NULL) {
+  while(l1 != NULL) {
     n1 += n1mult * l1->val;
     n1mult *= 10;
     l1 = l1->next;
   }
   
-  while(l2->next != NULL) {
+  while(l2 != NULL) {
     n2 += n2mult * l2->val;
     n2mult *= 10;
     l2 = l2->next;
@@ -201,18 +132,22 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
   
   int res = n1 + n2;
   
-  struct ListNode* resl = malloc(sizeof(struct ListNode));
-  resl->next = NULL;
+  struct ListNode* head = malloc(sizeof(struct ListNode));
+  head->next = NULL;
+  head->val = res%10;
+  res /= 10;
   
-  while(res != 0) {
+  while(res!=0) {
     int rem = res%10;
     res /= 10;
-    addlast(resl, rem);
+    struct ListNode* node = head;
+    while(node->next != NULL) {
+      node = node->next;
+    }
+    node->next = malloc(sizeof(struct ListNode));
+    node->next->val = rem;
+    node->next->next = NULL;
   }
-  
-  return resl;
+  return head;
 }
-
 */
-
-
