@@ -5,7 +5,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ReverseIndex {
+    public ReverseIndex(String input) {
 
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+    /* OLD
     private final List<WordOccurrence> words = new ArrayList<>();
 
     public void readDoc(String s) {
@@ -47,4 +56,6 @@ public class ReverseIndex {
         sb.deleteCharAt(sb.length()-1);
         return sb.toString();
     }
+    */
+
 }
