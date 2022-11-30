@@ -15,7 +15,7 @@ public class ReverseIndexTest {
 
     @Test
     public void name() {
-        String input = "Sopra la panca la capra camp\n" +
+        String input = "Sopra la panca la capra campa\n" +
                 "sotto la panca\n" +
                 "la capra crepa";
         ReverseIndex index = new ReverseIndex(input);

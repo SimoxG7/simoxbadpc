@@ -5,13 +5,28 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ReverseIndex {
-    public ReverseIndex(String input) {
 
+    List<String> lines = new ArrayList<>();
+
+    public ReverseIndex(String input) {
+        Scanner scanner = new Scanner(input);
+
+        while(scanner.hasNextLine()) {
+            lines.add(scanner.nextLine());
+        }
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < lines.size(); i++) {
+            sb.append(i)
+                    .append(": ")
+                    .append(lines.get(i))
+                    .append("\n");
+        }
+        sb.deleteCharAt(sb.length() -1);
+        return sb.toString();
     }
 
     /* OLD
