@@ -1,0 +1,19 @@
+Dscription
+
+We intercept a traffic packet from CCIT HQ.
+
+Can you get the flag?
+
+s3cret.pcapng
+
+We managed to dump the traffic from a real bad hacker, and its private keys.
+
+We know he's receiving a secret information, can you retrieve it?
+
+challenge-ssl.keys challenge.pcap
+
+flag ha il formato:
+
+CCIT{flag}
+
+
