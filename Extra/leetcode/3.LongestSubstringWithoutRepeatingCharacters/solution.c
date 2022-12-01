@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-
 int size(char* s) {
   int i = 0;
   while(*(s + i) != '\0') {
@@ -79,4 +78,48 @@ int main(void) {
   return 0;
 }
 
+
+
+
+
+/*
+
+bool contains(char arr[], char c) {
+  for (int i = 0; arr[i] != '\0'; i++) {
+    if (arr[i] == c) return true;
+  }
+  return false;
+}
+
+int lengthOfLongestSubstring(char * s){
+  char* s1;
+  char* s2;
+  int arrsize = 1;
+  s1 = malloc(arrsize * sizeof(char));
+  s2 = malloc(arrsize * sizeof(char));
+
+  for (int i = 0; s[i] != '\0'; i++) {
+    if (i+1 > arrsize) {
+      arrsize *= 2;
+      s1 = realloc(s1, arrsize);
+      s2 = realloc(s2, arrsize);
+    }
+    s1[i] = s[i];
+    s2[i] = s[i];
+  }
+
+  for (int i = 0; s1[i] != '\0'; i++) {
+    for (int j = 0; s2[j] !0 '\0'; j++) {
+      return 0;
+    }
+  }
+
+  return 0;
+}
+
+int main(void) {
+  lengthOfLongestSubstring("hello");
+  return 0;
+}
+*/
 
