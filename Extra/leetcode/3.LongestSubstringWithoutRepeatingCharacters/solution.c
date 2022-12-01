@@ -24,21 +24,22 @@ int lengthOfLongestSubstring(char * s){
   int index = 0;
   int cont = 0;
   int bestcont = 0;
-  char* curr = malloc(arrsize);
+  char* curr = calloc(arrsize, sizeof(char));
   
   for (int index = 0; *(s + index) != '\0'; index++) {
     printf("%d\n", index);
     if (cont+1 > arrsize) {
       arrsize *= 2;
       curr = realloc(curr, arrsize);
+      printf("here\n");
     }
     //issue in this if/else, maybe even in the contains
     //seems like issue is in the contains
-    if (contains(curr, *(s + index)), size(curr)) {
+    if (contains(curr, *(s + index), size(curr))) {
       arrsize = 1;
-      curr = malloc(arrsize);
+      curr = calloc(arrsize, sizeof(char));
       cont = 0;
-    } else {x
+    } else {
       *(curr + cont) = *(s + index);
       cont++;
     }
