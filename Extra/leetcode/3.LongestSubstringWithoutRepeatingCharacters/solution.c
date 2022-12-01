@@ -27,11 +27,11 @@ int lengthOfLongestSubstring(char * s){
   char* curr = calloc(arrsize, sizeof(char));
   
   for (int index = 0; *(s + index) != '\0'; index++) {
-    printf("%d\n", index);
+    //printf("%d\n", index);
     if (cont+1 > arrsize) {
       arrsize *= 2;
       curr = realloc(curr, arrsize);
-      printf("here\n");
+      //printf("here\n");
     }
     //issue in this if/else, maybe even in the contains
     //seems like issue is in the contains
@@ -70,6 +70,11 @@ int main(void) {
   printf("%d\n", lengthOfLongestSubstring(s));
 
   printf("%d\n", size("simox"));
+
+  char* word = malloc(25);
+  *(word) = 'C';
+  *(word + 1) = 'd';
+  printf("%d\n", size(word));
 
   return 0;
 }

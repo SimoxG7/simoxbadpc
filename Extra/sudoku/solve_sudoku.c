@@ -37,8 +37,8 @@ ASCII Art generated from: https://patorjk.com/software/taag/#p=display&f=Doh&t=S
 #define ANSI_COLOR_BLUE    "\x1b[34m" 
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
-#define MAX_LENGTH 9
-#define SQUARE_SIZE 3
+#define MAX_LENGTH 16
+#define SQUARE_SIZE 4
 
 //each function has a small description in their implementantions (under the main)
 
@@ -97,7 +97,7 @@ int main(int argc, char** argv) {
   };
   */
 
-  /*
+
   //this specific table makes 14579935 recursive calls. 
   //takes around 12 seconds on a Ryzen 5 3600 machine to finish.
   //takes around 27 seconds on a Intel Core Duo machine to finish.
@@ -120,9 +120,9 @@ int main(int argc, char** argv) {
     {0, 9, 1, 6, 0, 14, 0, 11, 0, 0, 2, 0, 0, 0, 10, 8},
     {0, 14, 0, 0, 0, 13, 9, 0, 4, 12, 11, 8, 0, 0, 2, 0}
   };
-  */
   
   
+  /*
   //this specific table makes 119595 recursive calls.
   //takes around 0.0352 seconds on a Ryzen 5 3600 machine.
   //takes around 0.1121 seconds on a Intel Core Duo machine.
@@ -138,6 +138,7 @@ int main(int argc, char** argv) {
     { 0, 1, 0, 0, 0, 4, 0, 0, 0 },
     { 0, 0, 3, 1, 0, 0, 0, 5, 0 }
   };
+  */
 
   int cont = 0, *cont_ptr;
   cont_ptr = &cont;
