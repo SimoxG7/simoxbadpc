@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Solution {
-  public static void main(String[] args) {
+
+public class Solution2 {
+    public static void main(String[] args) {
     Path path = Paths.get("input.txt");
     int points = 0;    
     List<String> lst1 = new ArrayList<>();
@@ -30,22 +31,25 @@ public class Solution {
         String[] vals = line.split(" ");
 
         int index1 = lst1.indexOf(vals[0]);
-        int index2 = lst2.indexOf(vals[1]);
+        int outcome = lst2.indexOf(vals[1]);
+        int chosen = 0;
 
-        if ((index1 == 0 && index2 == 2)) {
+        if (outcome == 0) {
+          if (index1 > 0) chosen = index1-1;
+          else chosen = 2;
           win1 = true;
-        } else if (index2 == 0 && index1 == 2) {
-          win2 = true;
-        } else if (index1 == index2) {
+        } else if (outcome == 1) {
+          chosen = index1;
           draw = true;
-        } else if (index1 > index2) {
-          win1 = true;
         } else {
+          if (index1 < 2) chosen = index1+1;
+          else index1 = 0;
           win2 = true;
         }
+        
 
         //System.out.println(points);
-        points += index2 + 1;
+        points += chosen + 1;
         if (win1) points += 0;
         else if (draw) points += 3;  
         else if (win2) points += 6;

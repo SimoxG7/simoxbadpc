@@ -838,10 +838,26 @@ configuro ciascuna sottointerfaccia per vlan con ipaddress.
 
 Lezione 10 - 02/12/22
 
+Continuando sul file della scorsa volta in pt.
 
+Switch viene usato per rompere i domini di broadcast, ma allo stesso tempo partizioniamo i domini di broadcast sotto lo stesso switch (?)
 
+Come faccio a passare da un dominio di broadcast all'altro? Gli switch non sono in grado di farlo, dobbiamo passare per forza da un router. 
 
+Colleghiamo gli switch tra di loro, possono gestire le vlan senza troppi problemi -> una vlan che ha delle sottovlan.
 
+Configurare vlan -> conf t -> eccetera.
+
+Abbiamo compilato excel, creato struttura, aggiunte vlan ai database, collegato in access le porte degli switch ai relativi host con modalità accesss alla vlan, trunk tra i due switch, colleghiamo al router in trunk lo switch.
+
+Salvare configurazione degli switch -> write memory -> salva.
+
+Router CLI -> interface FastEthernet 4/0.numvlan -> sottointerfaccia -> encapsulation dot1Q numvlan -> ip address 192.168.0.254 255.255.255.0 -> no shutdown -> exit
+
+Server dhcp nella rete. Ha k indirizzi dinamici da assegnare.
+
+Proxy -> ARP proxy -> procuratore -> configurare il router perchè opera come DHCP proxy -> nella CLi del router:
+enable -> conf t -> interface FastEthernet 4/0.numvlan (della vlan senza dhcp server) -> ip helper-address indirizzoserverdestinazione -> ovvero: ip helper-address 192.168.1.3 .
 
 
 
