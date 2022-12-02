@@ -854,12 +854,31 @@ Salvare configurazione degli switch -> write memory -> salva.
 
 Router CLI -> interface FastEthernet 4/0.numvlan -> sottointerfaccia -> encapsulation dot1Q numvlan -> ip address 192.168.0.254 255.255.255.0 -> no shutdown -> exit
 
+Robe su server dhcp (discover). 
+
 Server dhcp nella rete. Ha k indirizzi dinamici da assegnare.
 
 Proxy -> ARP proxy -> procuratore -> configurare il router perchè opera come DHCP proxy -> nella CLi del router:
 enable -> conf t -> interface FastEthernet 4/0.numvlan (della vlan senza dhcp server) -> ip helper-address indirizzoserverdestinazione -> ovvero: ip helper-address 192.168.1.3 .
 
+Tutti i server hanno indirizzi statici.
 
+Rotte statiche -> pt.
+
+host -> desktop -> command prompt per testare ping.
+
+Contare quante reti conosce un router per capire se ho configurato bene o meno.
+
+Creazione rotte statiche (slide) attraverso router via cli -> modalità privilegiata, configurare le rotte -> 
+ip route <prefissodestinazione> <netmask> <vicino> <metrica, di default numero di hop>
+questo comando va fatto per tutte le reti che questo router non conosce. 
+
+La rotta deve essere anche settata per il ritorno poi.
+
+
+----------------------------------------------------------------------------------------------------
+
+Lezione 11 - 
 
 
 
