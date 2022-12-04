@@ -8,9 +8,10 @@ class Solution {
     StringBuilder res = new StringBuilder();
     int i = 0;
     int j = 0;
-    int matrix[][] = new int[s.length()][numRows];
+    int len = s.length()/2 + 1;
+    int matrix[][] = new int[len][numRows];
 
-    while (cont != s.length()) {
+    while (cont != s.length()) { //this is O(n)
       if (j == numRows -1) {
         while (j != 0) {
           if (cont == s.length()) break;
@@ -21,8 +22,8 @@ class Solution {
       }
     }
 
-    for (int h = 0; h < numRows; h++) {
-      for (int k = 0; k < s.length(); k++) {
+    for (int h = 0; h < numRows; h++) { //this is O(n * m)
+      for (int k = 0; k < len; k++) {
         if (matrix[k][h] != 0) res.append(Character.toChars(matrix[k][h]));
       }
     }
