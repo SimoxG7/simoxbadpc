@@ -1,11 +1,61 @@
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Solution {
 
+  public String frequencySort(String s) {
+  
+    List<Character> lst = new ArrayList<>();
+    int occ[] = new int[62];
+
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      lst.add(c);
+      
+      if (Character.isLowerCase(c)) {
+        occ[c - 'a']++;
+      } else if (Character.isUpperCase(c)) {
+        occ[c - 'A' + 26]++;
+      } else {
+        occ[c - '0' + 52]++;
+      }
+    }
+
+    //System.out.println(Arrays.toString(occ));
+
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < s.length(); i++) {
+      int max = 0;
+      int index = 0;
+      for (int j = 0; j < occ.length; j++) {
+        if (occ[j] > max) {
+          max = occ[j];
+          index = j;
+        }        
+      }
+      occ[index] = 0;
+        char c;
+        if (index >= 52) {
+          c = (char) (index + '0' - 52);
+        } else if (index >= 26) {
+          c = (char) (index + 'A' - 26);
+        } else {
+          c = (char) (index + 'a');
+        }
+        for (int k = 0; k < max; k++) {
+          sb.append(c);
+        }
+        if (max == 0) break;
+        max = 0;
+    }
+
+    return sb.toString();
+  }
+}
+
+
+
+  /* 
   private Map<Character, Integer> map = new LinkedHashMap<>();
   private Map<Integer, Character> pam = new LinkedHashMap<>();
   
@@ -47,4 +97,5 @@ public class Solution {
 
     return sb.toString();
   }
-}
+  */
+
