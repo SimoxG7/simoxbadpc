@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class Solution {
+public class Solution2 {
   public static void main(String[] args) {
     Path path = Paths.get("input.txt");
     List<Stack<Character>> lst = new ArrayList<>();
@@ -52,9 +52,15 @@ public class Solution {
 
         Stack<Character> fromStack = lst.get(from-1);
         Stack<Character> toStack = lst.get(to-1);
-        
+
+        List<Character> tomove = new ArrayList<>();
+
         for (int i = 0; i < num; i++) {
-          toStack.push(fromStack.pop());   
+          tomove.add(fromStack.pop());   
+        }
+
+        for (int i = tomove.size()-1; i >= 0; i--) {
+          toStack.push(tomove.get(i));
         }
       }      
       scanner.close();
