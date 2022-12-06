@@ -878,7 +878,105 @@ La rotta deve essere anche settata per il ritorno poi.
 
 ----------------------------------------------------------------------------------------------------
 
-Lezione 11 - 
+Lezione 11 - 06/12/22
+
+Packet tracer, griglia anche.
+
+Se ogni host fa ping con il suo router le lan sono ok. Facciamo write mem per ogni router.
+
+Poi in cli: router 0 
+ 
+ip route 192.168.10.0 255.255.255.0 192.168.0.2 
+ip route 192.168.20.0 255.255.255.0 192.168.0.6
+ip route 192.168.0.8 255.255.255.252 192.168.0.2
+
+per ogni router fare routing dell'ip a ip adatto e poi altro.
+
+show ip route mostra cose.
+
+se il collegamento tra due router va giu, non abbiamo più modo per far passare dati, in quanto ha rotta statica.
+
+Dobbiamo usare instradamento dinamico -> rip oppure ospf 
+
+router0 -> routing -> static -> remove tutte quante.
+ per
+Come configuriamo rip? 
+
+cli di router0 -> conf t -> comando router -> fa partire process di routing -> router <algoritmo di instradamento> -> 
+router rip -> entro in sottomodulo di configurazione (come al solito ? per i comandi)
+di default siamo in versione 1, quindi netmask è settata a 24 senza esplicitarla 
+ci interessa di più il comando network <indirizzo base rete> -> network 192.168.1.0 
+network 192.168.0.0
+
+//diciamo al router che deve annunciare le reti che conosce
+
+router1 -> router rip -> network 192.168.10.0 , network 192.168.0.0 
+
+router2 -> router rip -> network 192.168.20.0 , network 192.168.0.0
+
+CAMBIAMENTI HANNO EFFETTO SOLO ALL'USCITA DELLA MODALITA' DI SOTTOCONFIGURAZIONE.
+
+Se ispezioniamo routing table del router0, ora dovrebbe conoscere 6 reti, ma ne conosce 7, infatti ha capito che c'è un altro percorso per raggiungere il router 2. (S per statico, R per rip).
+
+Se simulo un guasto, dovrebbero riuscire a mandare i messaggi comunque, grazie ai distance vector che vengono mandati e dunque viene imparato un nuovo cammino. 
+
+Per utilizzare rip in versione classless:
+cancellare per ogni router le rotte rip v1 (config, rip, remove su tutte). 
+
+router0 -> 
+conf t 
+router rip 
+//cambia nel sottomodulo di configurazione
+version 2
+//annunciamo le reti 
+network 192.168.1.0 //rete a cui è connesso il router	
+network 192.168.0.0 //r0-r1
+network 192.168.0.4 //r0-r2
+
+//router con versioni diverse non si possono parlare!
+
+Non vogliamo che vengano mandati i distance vector sulla lan 192.168.0.0
+
+router 0 -> conf t -> router rip -> passive-interface FastEthernet0/0 (interfaccia della rete normale). 
+
+E così per gli altri router. In questo modo non vengono mandati distance vector agli host, ma solo ai router. 
+
+OSPF: scelta algoritmo di routing e destinazioni a cui applicarlo
+
+[slide]
+
+wildcard e netmask sommate devono dare 255.255.255.255. (wildcard è la negazione della mask, qualsiasi sia la mask).
+
+router 0 -> conf t -> router ospf 1 -> area 1 stub -> 
+network 192.168.1.0 0.0.0.255 area 1
+					^ bit di wildcard
+networl 192.168.0.0 0.0.0.3 area 1
+network 192.168.0.4 0.0.0.3 area 1 
+
+stessa cosa per gli altri 2 router:
+router1 -> conf t -> router ospf 1 -> area 1 stub ->
+//sue 3 reti vanno annunciate 
+network 192.168.10.0 0.0.0.255 area 1
+network 192.168.0.0 0.0.0.3 area 1 
+network 192.168.0.8 0.0.0.3 area 1 
+
+router2 -> conf t -> router ospf 1 -> area 1 stub ->
+network 192.168.20.0 0.0.0.255 area 1
+network 192.168.0.4 0.0.0.3 area 1
+network 192.168.0.8 0.0.0.3 area 1
+
+si scambiano i messaggi e dopo un po' compariranno i cammini OSPF. 
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+Lezione 12 - 13/12/22
+
+
+
+
+
+
 
 
 
