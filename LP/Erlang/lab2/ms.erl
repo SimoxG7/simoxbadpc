@@ -13,9 +13,9 @@ create_n(Curr, N) ->
 
 master_loop(N) -> 
   receive 
-    {'EXIT', OldPid, die} -> 
-      io:format("Slave process with pid ~p died~n", [OldPid]),
-      spawn_link(?MODULE, slave_func, [N]),
+    {'EXIT', OldPid, {die, Name}} -> 
+      io:format("Slave process with pid ~p died, restarting~n", [OldPid]),
+      spawn_link(?MODULE, slave_func, [Name]),
       master_loop(N+1);
     {stop} -> 
       unregister(master_proc),
@@ -27,17 +27,16 @@ master_loop(N) ->
 
 slave_func(N) -> 
   S = self(),
-  global:register_name(N, S),
+  global:re_register_name(N, S),
   io:format("Slave process ~p, registered as ~p~n", [S, N]),
-  loop().
+  loop(N).
 
-loop() -> 
+loop(N) -> 
   receive 
     die ->
       io:format("Slave ~p dies~n", [self()]), 
-      global:unregister_name(global:whereis_name(self())), 
-      exit(die);
-    Other -> io:format("Slave ~p received ~p~n", [self(), Other]), loop()
+      exit({die, N});
+    Other -> io:format("Slave ~p received ~p~n", [self(), Other]), loop(N)
   end.
 
 to_slave(Msg, N) -> 
