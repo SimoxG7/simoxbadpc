@@ -1037,17 +1037,50 @@ Non vogliamo che arrivano al server privato e a quello ci pensa il deny IP any a
 
 In questo modo possiamo accedere al server pubblico (alla porta 80) e non possiamo fare nient'altro. 
 
+Aggiungiamo server in internet, host lo raggiunge da 10.0.0.3 in browser. 
+
+Se un host delle VLAN invece chiede accesso al server di internet, non riesce a raggiungerlo. 
+
+Le richieste riescono a uscire dalla lan, ma le response del server vengono bloccate dalla acl settata a in sull'interfaccia FastEthernet 0/0 del router. 
+
+Il pacchetto tcp di risposta va verso la porta 1025 (del browser web) e dunque non riesce a passare oltre la ACL (in quanto non va sulla porta 80). 
+
+Per farlo passare: sfruttiamo il threeway handshake, i segmenti che passano avranno il flag di ack alzato. 
+
+In router -> conf t -> ip access-list extended 120 -> entro in sottoconfigurazione
+-> 15 permit tcp any any established (ovvero permette passaggio di tcp se è una connessione stabilita)
+-> exit, exit -> show ip access-list per vedere la regola 
+
+E poi testiamo usando il web browser degli host interni alla LAN. 
+
+
+NAT -> nat.pkt -> faccio remove delle acl -> no ip access-list extended 120 -> rimossa 
+
+Configurazione di NAT: diciamo quale interfaccia è interna e quale è esterna 
+Per noi interna è 1/0, esterna è 0/0 
+
+router -> conf t -> interface FastEthernet 1/0 -> ip nat inside , interface FastEthernet 0/0 -> ip nat outside .
+
+Stabiliamo poi una acl -> access-list 130 permit IP any any 
+
+Specifichiamo nel router che quello che esce deve essere rimarcato con il nostro indirizzo. 
+
+ip nat inside source list 130 interface FastEthernet 0/0 (//diciamo che prende le reogle dalla acl e mappa sull'interfaccia esterna 0/0)
+
+forse sta roba va fatta anche per ogni sub del router -> dire che ciascuna subinterface è inside.
+
+Dobbiamo aggiungere un port forwarding -> mappaggio statico. Indirizzo interno viene fatto corrispondere (staticamente) a un indirizzo esterno. 
+
+interface FastEthernet 0/0
+
+ip nat inside source static tcp 192.168.200.200 80 10.0.0.1 80 
 
 
 
 
+---------------------------------------------------------------------------------------------
 
-
-
-
-
-
-
+Lezione 13 - 
 
 
 
