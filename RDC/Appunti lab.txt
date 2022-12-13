@@ -1008,8 +1008,34 @@ Le righe della ACL sono numerate, perchè la prima cosa che fa il router è guar
 Apparato di livello 3 che guarda caratteristiche di livello 4 (relativo a livello 7). Gateway capiscono dettagli di livello più alto, router no. 
 
 Nella ACL c'è una riga implicita che fa: <deny IP any any> -> ovvero è come il default di uno switch -> qualsiasi cosa che non matcha un'altra riga della ACL, allora sicuramente butta via il pacchetto. A tale scopo se amministratore di rete deve poter accedere, deve aggiungere un'ultima riga che dice <permit IP hostadmin any>. 
+ 
+Andiamo in CLI del router -> conf t -> interface FastEthernet 0/0 -> ip access-group 110 in (//o out) 
+ovvero applico i filtri della ACL 110 a tutto ciò che è in ingresos nella FastEthernet 0/0. 
 
+In questo modo il pc a sinistra può andare sul web e accedere alle porte, ma non può fare ping a nessuno nella rete. 
 
+Si può vedere testando i ping con simple PDU e andando sul browser dell'host e vedere che può accedere alle pagine dall'indirizzo ip del server http://192.168.200.200.
+
+Si possono anche ottenere informazioni sul traffico del router facendo -> show ip interface FastEthernet 0/0 .
+
+Aggiunto server privato (acl2.pkg) e aggiunto alla relativa lan.
+
+Router -> interface FastEthernet 0/0 -> no ip access-group 110 in (tolgo access-list) 
+
+access-list -> per le named extended access list. 
+
+Da config -> ip access-list extended 120  (creazione ACL, poi si entra in sottomodulo) 
+
+da sottomodulo config-ext-nacl (config extended named acl) -> 
+Vogliamo che chiunque arrivi al nostro server pubblico -> permit tcp any host 192.168.200.200 eq 80
+deny IP any any 
+exit
+
+E lo applichiamo al router su cui vogliamo sia applicata -> interface FastEthernet 0/0 -> ip access-group 120 in 
+
+Non vogliamo che arrivano al server privato e a quello ci pensa il deny IP any any. 
+
+In questo modo possiamo accedere al server pubblico (alla porta 80) e non possiamo fare nient'altro. 
 
 
 
