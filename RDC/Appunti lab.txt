@@ -972,27 +972,42 @@ si scambiano i messaggi e dopo un po' compariranno i cammini OSPF.
 
 Lezione 12 - 13/12/22
 
+//ultimo argomento di packet tracer: ACL e NAT 
 
+Per setup della rete: //sub
+host con gateway uguale a ip dell'interfaccia del router. Aggiungere vlan allo switch. Fare gateway per ciascuna vlan e settare quei gateway come indirizzi ip delle sottointerfacce dell'interfaccia del router. Mettere in trunk il collegamento tra router e switch e mettere in access con specifica vlan il collegamento tra host e switch. Fare ping ICMP per testare. 
 
+ACL -> Access Control List -> meccanismo per controllare accessi alla rete.
 
+ACL sono applicate su un'interfaccia sola, con scopo di limitare traffico in ingresso o in uscita. 
 
+ACL standard (ID 1-99) -> seleziono solo IP sorgente dei pacchetti da non fare passare
 
+ACL extended (ID 100-199) -> posso selezionare:
+	- protocollo di livello network o trasporto
+	- indirizzo sorgente e/o destinazione //wildcard any
+	- (insiemi di) porte //e quindi servizi well-known
+	- modalità permit/deny 
+	- established -> segmenti TCP con ack flag a 1 (dal secondo passo del threeway handshake)
 
+ACL named extended -> come extendend, ma modificabili successivamente.
 
+Server -> services -> http -> on -> possiamo anche editare la pagina
 
+configurazione di access list:
 
+Router -> conf t -> access-list 110 permit ? -> access-list 110 permit tcp any host 192.168.200.200 (//server) eq 80 (//equal to porta 80, quella del web) 
+access-list 110 permit tcp any host 192.168.200.200 eq 80 
 
+Al di fuori della modalità di conf posso fare show access-lists -> mostra numero di riga
 
+conf t -> access-list 110 deny ICMP any any 
 
+Le righe della ACL sono numerate, perchè la prima cosa che fa il router è guardare le ACL in ordine di identificatore recente e confronta le caratteristiche del pacchetto con riga per riga quelle contenute nella ACL.
 
+Apparato di livello 3 che guarda caratteristiche di livello 4 (relativo a livello 7). Gateway capiscono dettagli di livello più alto, router no. 
 
-
-
-
-
-
-
-
+Nella ACL c'è una riga implicita che fa: <deny IP any any> -> ovvero è come il default di uno switch -> qualsiasi cosa che non matcha un'altra riga della ACL, allora sicuramente butta via il pacchetto. A tale scopo se amministratore di rete deve poter accedere, deve aggiungere un'ultima riga che dice <permit IP hostadmin any>. 
 
 
 
