@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="it.unimi.di.sweng.temperature.model.TestPresenter" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-12-15T16:17:32" hostname="c18omeg-011-23.linux.unicloud.unimi.it" time="0.09">
+  <properties/>
+  <testcase name="testFtoC()" classname="it.unimi.di.sweng.temperature.model.TestPresenter" time="0.09"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
