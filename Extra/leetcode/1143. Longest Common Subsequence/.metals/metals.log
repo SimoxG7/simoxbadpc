@@ -1,0 +1,450 @@
+2022.12.15 10:35:18 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/.metals/lsp.trace.json or /home/simox/.cache/metals/lsp.trace.json[0m
+2022.12.15 10:35:21 INFO  logging to file /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/.metals/metals.log[0m
+2022.12.15 10:35:21 INFO  Started: Metals version 0.11.9 in workspace '/home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence' for client Visual Studio Code 1.74.0.[0m
+2022.12.15 10:35:31 INFO  time: initialize in 9.97s[0m
+2022.12.15 10:35:40 WARN  Build server is not auto-connectable.[0m
+2022.12.15 10:35:40 WARN  no build tool detected in workspace '/home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+2022.12.15 10:35:40 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:35:40 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:35:44 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:35:44 INFO  time: code lens generation in 2.27s[0m
+2022.12.15 10:35:44 INFO  time: code lens generation in 3.53s[0m
+2022.12.15 10:36:30 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:36:33 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:36:34 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+
+/home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java:7: error: missing return statement
+    return 0;
+ ^
+1 error[0m
+2022.12.15 10:36:36 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:36:40 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:36:43 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:36:44 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:36:59 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:37:02 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+
+/home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java:5: error: illegal start of statement
+    }
+    ^
+1 error[0m
+2022.12.15 10:37:05 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:37:08 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+
+/home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java:5: error: illegal start of statement
+    }
+    ^
+1 error[0m
+2022.12.15 10:37:43 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:37:45 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:37:46 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+
+/home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java:7: error: illegal start of statement
+    }
+    ^
+1 error[0m
+2022.12.15 10:37:47 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+
+/home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java:7: error: illegal start of statement
+    }
+    ^
+1 error[0m
+2022.12.15 10:37:47 INFO  time: code lens generation in 3.12s[0m
+2022.12.15 10:37:58 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:38:01 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:38:01 INFO  time: code lens generation in 1.43s[0m
+2022.12.15 10:38:01 INFO  time: code lens generation in 3.46s[0m
+2022.12.15 10:38:02 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:38:04 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+
+/home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java:7: error: not a statement
+      else (j++)
+           ^
+/home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java:7: error: ';' expected
+      else (j++)
+                ^
+2 errors[0m
+2022.12.15 10:38:06 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:38:07 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:38:09 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:38:11 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:38:11 INFO  time: code lens generation in 4.46s[0m
+2022.12.15 10:38:11 INFO  time: code lens generation in 3.29s[0m
+2022.12.15 10:38:11 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:38:13 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:38:13 INFO  time: code lens generation in 1.82s[0m
+2022.12.15 10:39:07 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:39:10 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:39:10 INFO  time: code lens generation in 2.17s[0m
+2022.12.15 10:39:14 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:39:17 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:39:17 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:39:19 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:39:19 INFO  time: code lens generation in 4.04s[0m
+2022.12.15 10:39:19 INFO  time: code lens generation in 1.72s[0m
+dic 15, 2022 10:39:22 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 300
+dic 15, 2022 10:39:22 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 301
+2022.12.15 10:39:33 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:39:35 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:39:41 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:39:42 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:39:54 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:40:27 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:40:30 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:40:32 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:40:34 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:40:34 INFO  time: code lens generation in 1.08s[0m
+2022.12.15 10:40:36 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:40:39 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:40:39 INFO  time: code lens generation in 1.48s[0m
+2022.12.15 10:40:39 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:40:42 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:40:42 INFO  time: code lens generation in 2.13s[0m
+2022.12.15 10:40:47 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:40:49 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:41:24 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:41:28 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:41:28 INFO  time: code lens generation in 1.65s[0m
+2022.12.15 10:41:28 INFO  time: code lens generation in 3.11s[0m
+2022.12.15 10:42:27 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:42:30 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:42:32 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:42:34 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:42:55 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:42:57 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:43:35 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:43:37 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:43:45 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:43:46 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+dic 15, 2022 10:43:48 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 691
+2022.12.15 10:43:52 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:43:54 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:44:19 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:44:21 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:44:28 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:44:29 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:44:31 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:44:32 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:44:32 INFO  time: code lens generation in 2.1s[0m
+2022.12.15 10:44:32 INFO  time: code lens generation in 3.3s[0m
+2022.12.15 10:45:08 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:45:11 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:45:25 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:45:26 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:45:26 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+
+/home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java:13: error: ';' expected
+      sb.append(text2.charAt(j));
+                                ^
+1 error[0m
+2022.12.15 10:45:28 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:45:28 INFO  time: code lens generation in 2.26s[0m
+2022.12.15 10:45:34 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:45:36 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:46:00 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:46:02 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:46:03 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:46:04 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:46:04 INFO  time: code lens generation in 3.09s[0m
+2022.12.15 10:46:04 INFO  time: code lens generation in 3.43s[0m
+2022.12.15 10:46:04 INFO  time: code lens generation in 3.71s[0m
+dic 15, 2022 10:48:29 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 983
+2022.12.15 10:48:40 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:48:42 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
+2022.12.15 10:49:49 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:49:51 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+
+/home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java:28: error: illegal start of statement
+    }
+    ^
+1 error[0m
+2022.12.15 10:49:51 INFO  time: code lens generation in 1.94s[0m
+2022.12.15 10:49:51 INFO  time: code lens generation in 1.16s[0m
+2022.12.15 10:50:03 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:50:05 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+
+/home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java:29: error: illegal start of statement
+      }
+      ^
+1 error[0m
+2022.12.15 10:50:26 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:50:28 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+
+/home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java:28: error: incompatible types: char cannot be converted to CharSequence
+        if (text1.contains(text2.charAt(i))) return 1;
+                                       ^
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+1 error[0m
+2022.12.15 10:50:51 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:50:53 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+
+/home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java:28: error: incompatible types: char cannot be converted to CharSequence
+        if (text1.contains(text2.charAt(i)) + "") return 1;
+                                       ^
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+1 error[0m
+2022.12.15 10:51:53 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/1143. Longest Common Subsequence/Solution.java[0m
+2022.12.15 10:51:55 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/1143.%20Longest%20Common%20Subsequence/Solution.java. Output:
+semanticdb-javac: unknown flag 'Longest'
+
+semanticdb-javac: unknown flag 'Common'
+
+semanticdb-javac: unknown flag 'Subsequence'
+[0m
