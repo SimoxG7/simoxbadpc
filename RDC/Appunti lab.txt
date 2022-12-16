@@ -1080,7 +1080,12 @@ ip nat inside source static tcp 192.168.200.200 80 10.0.0.1 80
 
 ---------------------------------------------------------------------------------------------
 
-Lezione 13 - 
+Lezione 13 - 16/12/22
+
+//javasocket? Java SE doc - libro -> introduzione alla programmazione client-server 
+
+
+
 
 
 
