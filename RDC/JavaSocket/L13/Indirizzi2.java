@@ -5,10 +5,10 @@ import java.net.UnknownHostException;
 /**
  * Indirizzi
  */
-public class Indirizzi {
+public class Indirizzi2 {
   public static void main(String[] args) {
     
-    String nome = "www.unimi.it"; //da convertire in IP
+    String nome = "localhost"; //da convertire in IP
 
     try {
       InetAddress ia = InetAddress.getByName(nome);

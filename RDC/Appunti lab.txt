@@ -1159,9 +1159,13 @@ getLocalHost ritorna la seconda riga di /etc/hosts, ovvero il nome simbolico con
 
 L13 folder. 
 
+nslookup per lookup del nameserver.
 
 
 
+--------------------------------------------------------------------------------
+
+Lezione 14 - 
 
 
 
