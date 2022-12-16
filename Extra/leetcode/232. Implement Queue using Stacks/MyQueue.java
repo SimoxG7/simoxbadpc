@@ -1,28 +1,36 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 
 class MyQueue {
 
-  List<Integer> lst;
+  Stack<Integer> s1;
+  Stack<Integer> s2;
 
   public MyQueue() {
-    lst = new ArrayList<>();
+    s1 = new Stack<>();
+    s2 = new Stack<>();
   }
 
   public void push(int x) {
-    lst.add(x);
+    //aggiungi in coda -> svuota s1 in s2, push in s1 e poi risvuota s2 
+    while (!s1.empty()) {
+      s2.push(s1.pop());
+    }
+    s1.push(x);
+    while(!s2.empty()) {
+      s1.push(s2.pop());
+    }
   }
 
   public int pop() {
-    return lst.remove(0);
+    return s1.pop();
   }
 
   public int peek() {
-    return lst.get(0);
+    return s1.peek();
   }
 
   public boolean empty() {
-    return lst.size() == 0;
+    return s1.empty();
   }
 }
 

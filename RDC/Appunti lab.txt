@@ -1084,6 +1084,83 @@ Lezione 13 - 16/12/22
 
 //javasocket? Java SE doc - libro -> introduzione alla programmazione client-server 
 
+programmazione event-driven -> operazioni di un programma dipendono da un input ricevuto dalla rete che può arrivare in un qualsiasi momento. 
+
+modello -> definizione funzionale del comportamento di un sistema.
+
+modello client-server -> presuppone esistenza di due entità: client richiede un servizio, server eroga un servizio. 
+
+server deve usare il paradigma AAA -> Authentication, Authorization, Accounting.
+
+processi sul medesimo host:
+- C -> pipe, FIFO (named pipe), memoria condivisa.
+- Java -> RMI (remote method invocation), CORBA (common object request broker architecture).
+- Socket -> più flessibili -> bidirezionali, comunicazioni tra più parti, diversi tipi di servizi (con connessione o meno). 
+
+processi su host differenti: 
+- Socket.
+
+
+Socket: insieme di comandi che permettono di rihciedere i servizi dei protocolli della rete e modificarne il comportamento. Multiplexing sullo stesso host. 
+
+[slide]
+
+Porte effimere -> quelle utilizzate dai client, porte dinamiche assegnate dal SO, grazie alla quale insieme all'ip il client si presenta al server. 
+
+Socket -> presa elettrica -> punto a cui ci si collega per usufruire di servizio (scambio dati).
+Socket -> libreria di funzioni (metodi / system call) che permettono di accedere ai servizi di kernel di SO per la rete (forniscono API).
+
+socket: dominio -> determina contesto in cui si vuole suare la socket.
+
+Dominio Unix: per comunicazione tra processi sul medesimo host (indirizzamento tramite pathname).
+
+Dominio internet: dà accesso ai servizi di TCP/UDP/IP (usa indirizzamento di rete).
+
+Addressing: connessione tra 2 processi invece che tra 2 host. 
+
+distinzione tra diversi processi src/dest di dati su un host. 
+
+Non cablare porte sotto le 1024. 
+
+Port: ID unico legato al processo 
+	- well know per servizi standard (Da 0 a 1023). 
+	- in TCP/IP unsigned short.
+	- registered per servizi di rete (Da 1024 a 49151) 
+	- dynamic (liberamente usabili) (Da 49152 a 65535)
+
+Il server deve esistere a un indirizzo facilmente individuabile. Tutti i servizi web si trovano alla porta 80. -> Ip + più porta 80. 
+
+Il client si presenta al server con il proprio indirizzo nel momento in cui lo contatta (?). 
+
+Socket definita da una quintupla:
+	<protocollo, IP(src), port(src), IP(dest), port(dest)>
+	
+protocollo viene definito a creazione socket -> creazione di una struttura di SO. 
+
+Indirizzo locale definito quando si lega (binding) la socket al processo che la usa. Indirizzo peer -> dipende da modello e tipo servizio. 
+
+myariel (?)
+
+- 
+
+Package java.net 
+SocketAddress è la sovraclasse.
+
+InetAddress -> classe che rappresenta generico indirizzo IP.
+InetSocketAddress -> classe che implementa IP socket (indirizzo IP + numero di porta). Può anche essere hostname + numero di porta.
+
+InetAddress non ha costruttori. InetAddress manipola i resource record dei DNS, dunque dobbiamo richiedere al DNS di restituirci un oggetto di tipo InetAddress. 
+
+https://docs.oracle.com/javase/7/docs/api/java/net/InetAddress.html
+
+getAllByName -> ritorna tutti gli indirizzi IP associati a quel nome simbolico. 
+
+getLocalHost ritorna la seconda riga di /etc/hosts, ovvero il nome simbolico con cui mi presento in internet e il relativo indirizzo. 
+
+L13 folder. 
+
+
+
 
 
 
