@@ -1,0 +1,4 @@
+
+node_addr(Name) ->
+  {_,Host} = inet:gethostname(),
+  list_to_atom(Name++[$@]++Host).
