@@ -4,7 +4,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class esempio2 {
+public class esempio3 {
   public static void main(String[] args) {
     
     Socket sClient;
@@ -17,11 +17,13 @@ public class esempio2 {
       //prendiamo indirizzo di rete associato all'interfaccia di rete alzata 
       ia = InetAddress.getLocalHost(); 
     
-      //usiamo quindi la porta 0 per fare binding esplicito -> SO sceglie numero di porta libero
-      isa = new InetSocketAddress(ia, 0); 
+      //porta server da inserire
+      isa = new InetSocketAddress(ia, 57195); 
       try {
-        sClient.bind(isa);
-        System.out.println("Porta allocata: " + sClient.getLocalPort());
+        //bind implicito
+        sClient.connect(isa);
+        System.out.println("Porta locale: " + sClient.getLocalPort());
+        System.out.println("Indirizzo: " + sClient.getInetAddress() + "; porta: " + sClient.getPort());
         //blocca processo per due minuti per poter fare lsof
         Thread.sleep(120 * 1000); 
         sClient.close();

@@ -1202,6 +1202,24 @@ Primitive di servizio TCP [slide]
 
 Classe Socket -> ha un bel po' di costruttori. https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html
 
+esempio2.java
+
+Per evitare collisioni: lasciare che anche il server si faccia dare dal SO una porta effimera, stampare a video la porta del server e passarla al client come argomento da linea di comando. In questo modo non ho necessità di ricompilare e non ho collisioni di porte.
+
+classe ServerSocket -> https://docs.oracle.com/javase/6/docs/api/java/net/ServerSocket.html
+
+Devono esistere due socket:
+
+- la passiva che è la ServerSocket 
+- l'attiva che è la Socket 
+
+//accept di ServerSocket ritorna Socket
+
+ServerSocket -> quintupla -> <TCP, IP local, Port local, indefinito, indefinito>, perchè sta aspettando connessione da parte del client. Esegue la accept(), quando arriva un messaggio da parte del client -> viene ritornato un nuovo oggetto Socket, sul quale viene eseguita la procedura di 3way handshake. Socket nuovo diventa quintupla -> <TCP, IP local, Port local, IP remoto, Port remota> (remota -> del client). 
+Nella ServerSocket gli elementi 4 e 5 della quintupla saranno sempre indefiniti! Ad ogni richiesta di connessione viene creata una nuova Socket. Al termine della comunicazione col client, viene distrutta la Socket creata dal server. ServerSocket rimane sempre slegata (4 e 5 elemento) e accetterà solo richieste di connessione. 
+
+//accept() è bloccante (processo rimane in wait finchè non viene svegliato dal SO).
+
 
 
 
