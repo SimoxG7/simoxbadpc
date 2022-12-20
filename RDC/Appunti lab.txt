@@ -1161,15 +1161,46 @@ L13 folder.
 
 nslookup per lookup del nameserver.
 
+[slide]
 
 
 --------------------------------------------------------------------------------
 
-Lezione 14 - 20/12/22
+Lezione 14 - 20/12/22	
 
+InetSocketAddress.
 
+In java 3 classi per creare canali di comunicazione:
+	- DatagramSocket -> canale di comunicazione che non sarà mai connesso a nessun'altro (?). 
+	- Socket -> 
+	- ServerSocket -> socket passiva, lato server. 
 
+Socket attiva -> terminale di comunicazione lato client, è lui che inizia l'interazione quando deve contattare il server. Client prende un indirizzo di rete e chiede al server quello di cui ha bisogno. 
 
+Lato server di una connessione è la parte passiva, sempre esistente e in attesa che qualcuno gli chieda qualche cosa. 
+
+Lato server la prima cosa che fa è mettersi in listen -> si mette in attesa e crea una coda piccola (64 posti di solito) in cui risiedono le richieste di connessione (i segmenti di SYN della prima fase del threeway handshake, segmenti con SYN bit a 1 e ACK bit a 0).
+Dopodichè il server chiama una system call o metodo accept -> processo viene messo in wait finchè non arriva un segmento SYN nella coda (da parte di TCP, che fa parte del kernel del SO).
+
+esempio1.java
+
+[slide]
+
+socket: tipi di serviizo: 
+- connection-oriented 
+- connection-less 
+
+Connectionless: fasi di comunicazione:
+Server | creazione socket -> scambio dati 
+Client | creazione socket -> scambio dati -> chiusura canale (?)
+
+Connection-oriented: fasi di comunicazione:
+Server | creazione socket -> ricezione connessione -> scambio dati -> chiusura canale (torna a ricezione connessione)
+Client | creazione socket -> richiesta connessione -> scambio dati -> chiusura canale 
+
+Primitive di servizio TCP [slide]
+
+Classe Socket -> ha un bel po' di costruttori. https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html
 
 
 
