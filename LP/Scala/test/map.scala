@@ -8,4 +8,9 @@ object Map {
   } 
 
   var newlist:List[Int] = map(((num:Int) => num * 2), List(1,2,3)) 
+
+  var list = List.range(1,10)
+
+  var newlist = list.map((num:Int) => num * num)
+
 }

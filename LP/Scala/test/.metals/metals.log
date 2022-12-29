@@ -569,3 +569,11 @@ AVVERTENZA: Unmatched cancel notification for request id 674
 2022.12.29 18:09:35 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
 2022.12.29 18:10:27 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
 2022.12.29 18:10:45 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+dic 29, 2022 6:12:23 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 920
+2022.12.29 18:12:32 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:12:39 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:13:04 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:13:21 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:13:31 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:13:45 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
