@@ -28,3 +28,4 @@ AVVERTENZA: Unmatched cancel notification for request id 40
 2022.12.29 12:04:09 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/9. Palindrome Number/Solution.scala[0m
 2022.12.29 12:05:38 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/9. Palindrome Number/Solution.scala[0m
 2022.12.29 12:05:39 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/9. Palindrome Number/Solution.scala[0m
+2022.12.29 12:07:45 INFO  shutting down Metals[0m
