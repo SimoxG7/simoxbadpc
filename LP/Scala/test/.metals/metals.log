@@ -486,3 +486,86 @@ dic 29, 2022 1:00:41 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellat
 AVVERTENZA: Unmatched cancel notification for request id 2918
 2022.12.29 13:00:46 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
 2022.12.29 13:03:44 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 17:56:40 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/simox/Desktop/LP/Scala/test/.metals/lsp.trace.json or /home/simox/.cache/metals/lsp.trace.json[0m
+2022.12.29 17:56:42 INFO  logging to file /home/simox/Desktop/LP/Scala/test/.metals/metals.log[0m
+2022.12.29 17:56:42 INFO  Started: Metals version 0.11.9 in workspace '/home/simox/Desktop/LP/Scala/test' for client Visual Studio Code 1.74.2.[0m
+2022.12.29 17:56:47 INFO  time: initialize in 5.46s[0m
+2022.12.29 17:56:55 WARN  Build server is not auto-connectable.[0m
+2022.12.29 17:56:55 WARN  no build tool detected in workspace '/home/simox/Desktop/LP/Scala/test'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+2022.12.29 17:56:55 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 17:57:14 INFO  no build target found for /home/simox/Desktop/LP/Scala/test/map.scala. Using presentation compiler with project's scala-library version: 3.2.0[0m
+dic 29, 2022 5:57:16 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 2
+dic 29, 2022 5:57:16 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 6
+dic 29, 2022 5:57:16 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 3
+2022.12.29 17:57:17 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+dic 29, 2022 5:57:17 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 1
+dic 29, 2022 5:57:17 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 11
+dic 29, 2022 5:57:17 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 13
+dic 29, 2022 5:57:17 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 17
+dic 29, 2022 5:57:17 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 9
+dic 29, 2022 5:57:18 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 23
+dic 29, 2022 5:57:18 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 31
+dic 29, 2022 5:57:18 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 38
+2022.12.29 17:57:18 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+dic 29, 2022 5:57:19 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 41
+dic 29, 2022 5:57:19 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 45
+dic 29, 2022 5:57:19 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 39
+2022.12.29 17:57:19 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+dic 29, 2022 5:57:19 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 12
+dic 29, 2022 5:57:19 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 48
+2022.12.29 17:57:29 INFO  time: code lens generation in 10s[0m
+2022.12.29 17:57:29 INFO  time: code lens generation in 12s[0m
+2022.12.29 17:57:29 INFO  time: code lens generation in 11s[0m
+2022.12.29 17:57:29 INFO  time: code lens generation in 10s[0m
+2022.12.29 17:57:29 INFO  time: code lens generation in 10s[0m
+2022.12.29 17:57:29 INFO  time: code lens generation in 10s[0m
+2022.12.29 17:57:29 INFO  time: code lens generation in 11s[0m
+2022.12.29 17:57:29 INFO  time: code lens generation in 11s[0m
+2022.12.29 17:57:29 INFO  time: code lens generation in 10s[0m
+2022.12.29 17:57:29 INFO  time: code lens generation in 10s[0m
+2022.12.29 17:57:29 INFO  time: code lens generation in 31s[0m
+2022.12.29 17:58:54 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 17:59:44 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:00:16 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:00:57 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:02:11 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:02:51 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:03:07 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:03:09 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:03:23 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:03:25 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+dic 29, 2022 6:03:53 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 338
+2022.12.29 18:04:18 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:04:26 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:04:33 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+dic 29, 2022 6:05:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 528
+2022.12.29 18:05:23 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:05:36 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:06:08 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:07:11 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:08:20 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+dic 29, 2022 6:08:22 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 674
+2022.12.29 18:08:28 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:08:38 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:09:35 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:10:27 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
+2022.12.29 18:10:45 WARN  no build target for: /home/simox/Desktop/LP/Scala/test/map.scala[0m
