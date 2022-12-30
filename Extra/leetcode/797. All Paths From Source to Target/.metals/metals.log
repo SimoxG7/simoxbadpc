@@ -1,0 +1,189 @@
+2022.12.30 08:04:50 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/.metals/lsp.trace.json or /home/simox/.cache/metals/lsp.trace.json[0m
+2022.12.30 08:04:56 INFO  logging to file /home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/.metals/metals.log[0m
+2022.12.30 08:04:56 INFO  Started: Metals version 0.11.9 in workspace '/home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target' for client Visual Studio Code 1.74.2.[0m
+2022.12.30 08:05:07 INFO  time: initialize in 11s[0m
+2022.12.30 08:05:21 WARN  Build server is not auto-connectable.[0m
+2022.12.30 08:05:21 WARN  no build tool detected in workspace '/home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+2022.12.30 08:05:21 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/Solution.java[0m
+dic 30, 2022 8:05:23 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 2
+dic 30, 2022 8:05:24 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 6
+dic 30, 2022 8:05:24 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 7
+dic 30, 2022 8:05:24 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 11
+dic 30, 2022 8:05:25 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 12
+dic 30, 2022 8:05:25 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 18
+dic 30, 2022 8:05:25 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 16
+dic 30, 2022 8:05:25 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 21
+dic 30, 2022 8:05:25 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 19
+dic 30, 2022 8:05:25 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 9
+dic 30, 2022 8:05:26 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 22
+dic 30, 2022 8:05:26 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 26
+2022.12.30 08:05:26 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/Solution.java[0m
+dic 30, 2022 8:05:26 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 1
+dic 30, 2022 8:05:26 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 27
+dic 30, 2022 8:05:26 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 33
+2022.12.30 08:05:26 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/Solution.java[0m
+dic 30, 2022 8:05:26 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 34
+dic 30, 2022 8:05:26 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+AVVERTENZA: Unmatched cancel notification for request id 31
+2022.12.30 08:05:29 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/797.%20All%20Paths%20From%20Source%20to%20Target/Solution.java. Output:
+semanticdb-javac: unknown flag 'All'
+
+semanticdb-javac: unknown flag 'Paths'
+
+semanticdb-javac: unknown flag 'From'
+
+semanticdb-javac: unknown flag 'Source'
+
+semanticdb-javac: unknown flag 'to'
+
+semanticdb-javac: unknown flag 'Target'
+
+/home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/Solution.java:2: error: cannot find symbol
+  public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+         ^
+  symbol:   class List
+  location: class Solution
+/home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/Solution.java:2: error: cannot find symbol
+  public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+              ^
+  symbol:   class List
+  location: class Solution
+/home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/Solution.java:3: error: cannot find symbol
+    List<List<Integer>> res = new ArrayList<>();     
+    ^
+  symbol:   class List
+  location: class Solution
+/home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/Solution.java:3: error: cannot find symbol
+    List<List<Integer>> res = new ArrayList<>();     
+         ^
+  symbol:   class List
+  location: class Solution
+/home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/Solution.java:3: error: cannot find symbol
+    List<List<Integer>> res = new ArrayList<>();     
+                                  ^
+  symbol:   class ArrayList
+  location: class Solution
+5 errors[0m
+2022.12.30 08:05:29 INFO  time: code lens generation in 3.86s[0m
+2022.12.30 08:05:29 INFO  time: code lens generation in 3.12s[0m
+2022.12.30 08:05:29 INFO  time: code lens generation in 6.19s[0m
+2022.12.30 08:05:29 INFO  time: code lens generation in 3.65s[0m
+2022.12.30 08:05:29 INFO  time: code lens generation in 4.03s[0m
+2022.12.30 08:05:29 INFO  time: code lens generation in 4.36s[0m
+2022.12.30 08:05:29 INFO  time: code lens generation in 4.6s[0m
+2022.12.30 08:05:38 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/Solution.java[0m
+2022.12.30 08:05:42 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/797.%20All%20Paths%20From%20Source%20to%20Target/Solution.java. Output:
+semanticdb-javac: unknown flag 'All'
+
+semanticdb-javac: unknown flag 'Paths'
+
+semanticdb-javac: unknown flag 'From'
+
+semanticdb-javac: unknown flag 'Source'
+
+semanticdb-javac: unknown flag 'to'
+
+semanticdb-javac: unknown flag 'Target'
+
+/home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/Solution.java:7: error: missing return statement
+  }
+  ^
+1 error[0m
+2022.12.30 08:05:56 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/Solution.java[0m
+2022.12.30 08:05:57 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/Solution.java[0m
+2022.12.30 08:05:58 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/797.%20All%20Paths%20From%20Source%20to%20Target/Solution.java. Output:
+semanticdb-javac: unknown flag 'All'
+
+semanticdb-javac: unknown flag 'Paths'
+
+semanticdb-javac: unknown flag 'From'
+
+semanticdb-javac: unknown flag 'Source'
+
+semanticdb-javac: unknown flag 'to'
+
+semanticdb-javac: unknown flag 'Target'
+
+/home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/Solution.java:9: error: illegal start of statement
+  }
+  ^
+1 error[0m
+2022.12.30 08:05:59 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/Solution.java[0m
+2022.12.30 08:06:01 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/797.%20All%20Paths%20From%20Source%20to%20Target/Solution.java. Output:
+semanticdb-javac: unknown flag 'All'
+
+semanticdb-javac: unknown flag 'Paths'
+
+semanticdb-javac: unknown flag 'From'
+
+semanticdb-javac: unknown flag 'Source'
+
+semanticdb-javac: unknown flag 'to'
+
+semanticdb-javac: unknown flag 'Target'
+
+/home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/Solution.java:11: error: missing return statement
+  }
+  ^
+1 error[0m
+2022.12.30 08:06:03 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/797.%20All%20Paths%20From%20Source%20to%20Target/Solution.java. Output:
+semanticdb-javac: unknown flag 'All'
+
+semanticdb-javac: unknown flag 'Paths'
+
+semanticdb-javac: unknown flag 'From'
+
+semanticdb-javac: unknown flag 'Source'
+
+semanticdb-javac: unknown flag 'to'
+
+semanticdb-javac: unknown flag 'Target'
+
+/home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/Solution.java:11: error: missing return statement
+  }
+  ^
+1 error[0m
+2022.12.30 08:07:04 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/Solution.java[0m
+2022.12.30 08:07:08 WARN  no build target for: /home/simox/Desktop/Extra/leetcode/797. All Paths From Source to Target/Solution.java[0m
+2022.12.30 08:07:08 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/797.%20All%20Paths%20From%20Source%20to%20Target/Solution.java. Output:
+semanticdb-javac: unknown flag 'All'
+
+semanticdb-javac: unknown flag 'Paths'
+
+semanticdb-javac: unknown flag 'From'
+
+semanticdb-javac: unknown flag 'Source'
+
+semanticdb-javac: unknown flag 'to'
+
+semanticdb-javac: unknown flag 'Target'
+[0m
+2022.12.30 08:07:11 WARN  Running javac-semanticdb failed for file:///home/simox/Desktop/Extra/leetcode/797.%20All%20Paths%20From%20Source%20to%20Target/Solution.java. Output:
+semanticdb-javac: unknown flag 'All'
+
+semanticdb-javac: unknown flag 'Paths'
+
+semanticdb-javac: unknown flag 'From'
+
+semanticdb-javac: unknown flag 'Source'
+
+semanticdb-javac: unknown flag 'to'
+
+semanticdb-javac: unknown flag 'Target'
+[0m
