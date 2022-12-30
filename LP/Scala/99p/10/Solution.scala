@@ -1,6 +1,6 @@
 object Solution {
-  
-  def pack(lst:List[Any]):List[Any] = {
+
+  def pack[A](lst:List[A]):List[List[A]] = {
     val (packed, next) = lst.span(_ == lst.head)
     next match {
       case Nil => List(packed)
@@ -8,6 +8,8 @@ object Solution {
     }
   }
 
-  List(1,1,1,1,2,2,2,2,3,2,2,2,3,1)
+  def encode[A](lst:List[A]):List[(Int, A)] = {
+    pack(lst).map(e => (e.length, e.head))
+  }
 
 }

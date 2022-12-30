@@ -18,6 +18,17 @@ flatMap
 
 dropWhile(Boolean) -> while condition is true, drops elements of the list. 
 
+span(Boolean) -> splits the list in 2 lists until the boolean is satisfied (like takeWhile) 
+
+List.fill(times)(value) -> creates a list of value repeated times times. 
+
+List.make(numtimes, value) -> as above, useful for tuples: tuple._1, tuple._2 element of tuples.
+
+list.splitAt(n) -> splits the list into 2 lists 
+
+lst.slice(start, end) -> slice of a list
+
+
 
 
 
