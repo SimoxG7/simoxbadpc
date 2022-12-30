@@ -1,3 +1,5 @@
+*.metals/*
+*.metals
 trash-can.desktop
 code.desktop
 computer.desktop
