@@ -1,0 +1,26 @@
+list.takeRight(n), gets a list of the last n elements. If you do .head on the result, you get the last nth. 
+
+list.init -> returns the starting list without the last element. If you do .last on the result you get the penultimate. 
+
+list(n) -> like list.get(n) 
+
+:: prepends a single item whereas ::: prepends a complete list. So, if you put a List in front of :: it is taken as one item, which results in a nested structure. Example:
+	val list1 = List(1,2)
+	val list2 = List(3,4)
+
+	list1::list2 returns: List[Any] = List(List(1, 2), 3, 4)
+	list1:::list2 returns: List[Int] = List(1, 2, 3, 4)
+
+flatten() 
+map()
+
+flatMap 
+
+dropWhile(Boolean) -> while condition is true, drops elements of the list. 
+
+
+
+
+
+
+
