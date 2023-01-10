@@ -1227,7 +1227,92 @@ Lezione 15 - 10/01/23
 
 Rete: insieme interconnesso di calcolatori autonomi ed eterogenei. 
 
-Marshaling è lo scambio di dati.	
+Marshaling è lo scambio di dati. [slide]
+
+Non tutti gli host memorizzano i byte all'interno di una parola nello stesso ordine. Possono essere:
+- Big endian: high order | low order 
+- Little endian: low order | high order 
+
+La rete ha solo coscienza che sposta dati. Il programmatore di applicazione deve provvedere ad eventuali conversioni:
+	formato host1 -> formato Internet -> formato host2 
+	
+Nel caso di byte-stream, il programmatore di applicazione deve gestire il formato PDU:
+- lettura numero fisso byte se PDU è di taglia costante 
+- lettura byte header, e successivamente dati (per lunghezza indicata in header), se PDU è di taglia variabile
+
+//Nei PC in aula i messaggi hanno il bit di push alzato (?)
+
+javadoc Socket -> https://docs.oracle.com/javase/6/docs/api/java/net/Socket.html , setTCPNoDelay -> https://docs.oracle.com/javase/6/docs/api/java/net/Socket.html#setTcpNoDelay(boolean)
+
+
+Tutti i dati devono essere convertiti a/da sequenze dy byte:
+	- caratteri: cast a tipo byte (unicode -> ASCII)
+	- stringhe: facendo attenzione a carriage return \r e line feed \n, eventualmente sostitubili con String.replace() per sostituire con blank "".
+	- numeri: il formato dipende dall'architettura. Ci sono due modi: 
+		- il metodo toString della classe di base
+		- String str = "" + numero 
+		per l'inverso invece usare i metodi parse.
+	- dati strutturati: conversione dei singoli campi o struttura definita come implementazione di Serializable
+
+Serializable -> un po' complicato, è una sorta di unmarshalling.
+
+Per esame:
+metodo String trim()
+metodo String split(String regex, int limit)
+classe StringTokenizer -> costruttore per sottostringhe delimitate da separatore, usare il metodo nextToken() per ottenere la successiva sottostringa.
+
+
+Terminali canali di comunicazione (unidirezionali) da:
+- InputStream Socket.getInputStream()
+- OutputStream Socket.getOutputStream()
+dai quali si può scrivere/leggere con write/read 
+- write passa dati a livello Transport (non al canale) e ritorna il numero di parametri scritti.
+- read è bloccante finchè non legge dei byte dal canale:
+	- in quel caso rende il numero di byte effettivamente letti. Con byte stream, non sono necessariamente tutti i byte del messaggio, serve protocollo di applicazione per sapere quanto o fino a quando leggere
+	- se il canale è chiuso da peer, read si blocca tornando <0 
+	
+[codice su slide 9/13]
+
+In lato server guardo l'intero di ritorno della read. mi serve a capire l'esito della read, ma anche a non lavorare su tutto il buffer inutilmente. 
+
+[codice su slide 10/13 e 11/13]
+
+[slide homework]
+
+metodo close() non permette ulteriore utilizzo del canale, ma non vuol dire che rilascio tutte le strutture! 
+
+
+
+
+Servizio connection-less ha le seguenti fasi:
+1) creazione socket
+2) binding -> gestione indirizzi host + #porta
+3) scambio dati (datagram)
+4) chiusura 
+
+classi utilizzate: package java.net
+- class DatagramSocket; DatagramPacket
+- class InetAddress, ... 
+
+[slide]
+
+
+
+--------------------------------------------------------------------------------
+
+Lezione 16 - 13/01/23
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
