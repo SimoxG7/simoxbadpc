@@ -1221,6 +1221,13 @@ Nella ServerSocket gli elementi 4 e 5 della quintupla saranno sempre indefiniti!
 //accept() è bloccante (processo rimane in wait finchè non viene svegliato dal SO).
 
 
+--------------------------------------------------------------------------------
+
+Lezione 15 - 10/01/23
+
+Rete: insieme interconnesso di calcolatori autonomi ed eterogenei. 
+
+Marshaling è lo scambio di dati.	
 
 
 
