@@ -9,3 +9,7 @@ gpg --full-generate-key
 gpg --list-keys
 gpg --version per vedere cosa posso usare
 
+per gestire numeri grandi gmp
+
+
+
