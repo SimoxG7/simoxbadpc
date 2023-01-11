@@ -1,0 +1,11 @@
+Appunti della lezione di Crittografia I del 11/01/23
+
+generazione chiavi di elgamal o rsa: usare l'entropia della macchina per usare un seed casuale sicuro
+cat /dev/random 
+cat /dev/urandom 
+
+gpg --full-generate-key
+
+gpg --list-keys
+gpg --version per vedere cosa posso usare
+
