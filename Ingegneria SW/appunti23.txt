@@ -1,0 +1,33 @@
+Modellare con reti TB
+
+Diverse famiglie di specifiche: dichiarative (logici) o operazionali (modellano fisicamente una possibile rappresentazione del sistema senza vincolarlo a quella struttura).
+
+Soluzione del problema di modellare un passaggio a livello con una rete di Petri. Aggiunta dei tempi per avere garanzia che la sbarra sia abbassata all'arrivo del treno. Da quando il treno entra in R, per entrare in L deve essere passato almeno un tempo T1. [slide]
+
+Serve inoltre una sorta di zona di mutua esclusione tra treni.
+
+
+Tempo come concetto derivato
+Il tempo è una variabile associata ai gettoni (chronos). I predicati determinano la possibilità di scatto di una transizione a partire dai valori dei gettoni (incluso il chronos). Le azioni determinano i valori dei gettoni creati (incluso il valore della variabile chronos). Le azioni devono produrre però lo stesso valore per i chronos di tutti i gettoni creati (birth date) e devono essere non minori dei valori dei chronos dei gettoni rimossi. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
