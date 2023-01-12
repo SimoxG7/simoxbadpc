@@ -11,6 +11,52 @@ Tempo come concetto derivato
 Il tempo è una variabile associata ai gettoni (chronos). I predicati determinano la possibilità di scatto di una transizione a partire dai valori dei gettoni (incluso il chronos). Le azioni determinano i valori dei gettoni creati (incluso il valore della variabile chronos). Le azioni devono produrre però lo stesso valore per i chronos di tutti i gettoni creati (birth date) e devono essere non minori dei valori dei chronos dei gettoni rimossi. 
 
 
+Semantiche temporali nelle ER nets
+- chronos + assiomi 1,3 = WTS 
+- chronos + assiomi 1,2,3 = MWTS
+- chronos + assiomi 1,2,3,4,5 = STS
+
+
+HLTPN (High Level Timed Petri Net, TER net)
+Sono reti che possono modellare:
+- Aspetti funzionali (high-level petri nets: er net)
+- Aspetti temporali (time petri nets: tb net)
+- Dipendenze di aspetti funzionali da aspetti temporali
+- Dipendenze di aspetti temporali da aspetti funzionali
+Le reti HLTPN possono essere analizzate con gli stessi limiti delle reti TB.
+
+
+Analisi di reti temporizzate
+Analisi di raggiungibilità: consiste nell'enumerazione degli stati finiti raggiungibili
+Però ha dei problemi: 
+- Lo scatto di una transizione può produrre infiniti stati che si differneziano tra loro per il tempo associato ai gettoni prodotti (tempo di scatto).
+- La rete può evolvere all'infinito, poichè il tempo avanza
+Pertanto l'albero di ragigungibilità è infinito e non trattabile come nelle reti non limitate usando l'albero di copertura (in quel caso avevamo dei gettoni anonimi, invece in questo caso abbiamo dei gettoni che si distinguono l'uno dall'altro).
+
+
+Analisi di raggiungibilità temporale per le reti TB
+Rappresentazione simbolica degli stati 
+Uno stato simbolico rappresenta un insieme di possibili stati con in comune lo stesso numero di gettoni in ogni posto (marcatura P/T). 
+Uno stato simbolico è una coppia [miu, C], dove:
+- miu = marcatura simbolica: associa multiset di identificatori simbolici di posti.
+- C = vincoli: (dis)equazioni che rappresentano le relazioni tra gli identificatori simbolici. 
+
+
+Funzioni temporali: 
+assumiamo che tf_t sia un intervallo con estremi inclusi esprimibili mediante espressioni lineari funzioni dei tempi di token in ingresso e di tempi assoluti. tmin_t limite inferiroe, tmax_t limite superiore.
+tf_t = {X | X >= tmin_t ^ X <= tmax_t}
+
+
+Sample reachability tree [slide]
+non una marcatura, ma un insieme di marcature possibili. 
+fasi: 
+- inizializzazione
+- identificazione degli enabling
+- aggiornamento di marcatura e vincoli
+[slide]
+
+
+
 
 
 
