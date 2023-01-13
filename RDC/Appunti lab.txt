@@ -1302,6 +1302,16 @@ classi utilizzate: package java.net
 
 Lezione 16 - 13/01/23
 
+Servizio connectionless, fasi:
+1) creazione socket
+2) binding -> gestione indirizzi host + #porta 
+3) scambio dati (datagram)
+4) chiusura
+
+In connectionless sia server che client creano una socket. 
+
+Classe DatagramSocket: 
+
 
 
 
