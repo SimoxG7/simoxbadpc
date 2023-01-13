@@ -56,6 +56,14 @@ fasi:
 [slide]
 
 
+//aggiornamento del constraint 
+
+- Non abbiamo forma normale con cui esprimere questi stati, li abbiamo espressi aggiungendo al constraint degli altri constraint, perciò non possiamo confrontare stati e scoprire se li abbiamo già visitati. 
+- Albero infinito
+- Possiamo verificare proprietà entro un limite finito di tempo:
+ 	- bounded invariance
+ 	- bounded liveness 
+ 	//con bounded dico: "entro un certo tempo"
 
 
 
