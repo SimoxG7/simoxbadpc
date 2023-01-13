@@ -1310,15 +1310,105 @@ Servizio connectionless, fasi:
 
 In connectionless sia server che client creano una socket. 
 
-Classe DatagramSocket: 
+Classe DatagramSocket: https://docs.oracle.com/javase/7/docs/api/java/net/DatagramSocket.html 
+
+//In TCP la chiamata del metodo connect fa iniziare la threeway handshake. 
+
+Metodi receive e send in DatagramSocket lavorano con DatagramPacket, contenente un array di byte (il payload) e un solo indirizzo, quello della destinazione nel caso della send (con anche la porta remota) e quello del sender nel caso della receive. 
+
+Receive è bloccante, la send no (ovviamente).
+
+//setSOtimeout
+
+[slide]
+
+/*
+{
+...
+
+ServerSocket sSrv = new ServerSocket(0); //è un puntatore, se fosse dentro il while continuo 
+										 //ad assegnare allo stesso indirizzo di memoria
+while (true) {
+	toClient = sSrv.accpet();
+	//dialoga attraverso toClient
+	toClient.close();
+}
+sSrv.close();
+return;
+} //end main
+*/
+
+
+Gestione client multipli:
+[slide]
+
+Server iterativo può essere vulnerabile a DoS a causa della sua struttura. 
+
+[slide]
+
+Concorrenza dell'erogazione è apparente (tipo round robin).
+
+[slide, diagramma del tempo in server iterativo]
+
+
+Connectionless iterativo (???)
+
+SERVER
+crea datagram socket ds
+while (true) {
+	ds.receive(pkt)
+	contacaratteri
+	ds.send(#byte)
+	
+}
+
+CLIENT 
+crea datagram socket cs
+while (true) {
+leggi da tastiera
+if (letto != '.') 
+	cs.send(stringa letta)
+	cs.receive(risposta server)
+else 
+	cs.send(chiudo)
+	return
+}
+
+
+Connection-oriented iterativo
+
+SERVER
+crea server socket ss
+while (true) {
+	ds = ss.accept
+	do {
+		ds.receive(pkt)
+		if (!chiudo) 
+			contacaratteri
+			ds.send(#byte)
+		else 
+			ds.close
+	} while (!chiudo)
+}
+
+CLIENT 
+crea socket cs
+cs.connect
+while (true) {
+leggi da tastiera
+if (letto != '.') 
+	cs.send(stringa letta)
+	cs.receive(risposta server)
+else 
+	cs.send(chiudo)
+	return
+}
 
 
 
+-------------------------------------------------------------------------
 
-
-
-
-
+Lezione 17 - 17/01/23
 
 
 
