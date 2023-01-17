@@ -1411,7 +1411,38 @@ else
 Lezione 17 - 17/01/23
 
 
+Connection-oriented iterativo:
 
+SERVER
+
+crea server socket ss
+while(true) {
+	ds = ss.accept
+	do {
+		ds.read(pkt)
+		if (!'.') {
+			//contacaratteri
+			ds.write(#byte)
+		} else {
+			ds.close
+		}
+	} while (!'.')
+} 
+
+
+CLIENT 
+
+crea socket cs 
+cs.connect 
+while (true) {
+	leggi da tastiera
+	cs.write(stringa letta)
+	if (letto != '.') {
+		cs.read(risposta server)
+	} else {
+		return 
+	}
+}
 
 
 
