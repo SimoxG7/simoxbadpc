@@ -1444,6 +1444,19 @@ while (true) {
 	}
 }
 
+-
+
+Sulle slide tipi di server: iterativo, concorrente, multithread, chiascuno che connection-oriented o connectionless
+
+Il server connection-oriented concorrente si può fare usando il setoOTimeout(int timeoutInMs). Il cliente è uguale, cambia solo il codice del server.
+
+Codice su slide. 
+
+[slide, era mutata]
+
+
+
+
 
 
 
