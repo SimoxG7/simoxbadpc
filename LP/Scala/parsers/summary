@@ -1,0 +1,9 @@
+"..." literal
+"...".r regular expression
+P~Q sequential composition
+P <~ Q, P ~> Q sequential composition; keep left/right only
+P | Q alternative
+opt(P) option
+rep(P) repetition
+repsep(P, Q) interleaved repetition
+P ˆˆ f result conversion
