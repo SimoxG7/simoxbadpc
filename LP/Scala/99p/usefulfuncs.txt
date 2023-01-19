@@ -28,7 +28,7 @@ list.splitAt(n) -> splits the list into 2 lists
 
 lst.slice(start, end) -> slice of a list
 
-
+filterNote
 
 
 

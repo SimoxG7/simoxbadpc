@@ -7,7 +7,7 @@ object Solution {
   def is_anagram(str:String, strlist:List[String]):Boolean = {
     strlist match {
       case Nil => false
-      case h::t => h.sorted == str.sorted match {
+      case h::t => h.sorted.equals(str.sorted) match {
         case true => true 
         case false => is_anagram(str, t)
       }
