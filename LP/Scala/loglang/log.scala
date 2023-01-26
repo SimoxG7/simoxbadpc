@@ -2,7 +2,6 @@ import scala.util.parsing.combinator._
 import scala.collection.mutable._
 import util.Try
 import java.io.{File, FileOutputStream, FileInputStream}
-import java.io.PrintWriter
 import scala.io.Source
 
 /*
@@ -15,7 +14,7 @@ import scala.io.Source
 
  */
 
-class LogLang extends JavaTokenParsers {
+class LogLang() extends JavaTokenParsers {
 
   def program = rep1(task)
 
@@ -32,63 +31,36 @@ class LogLang extends JavaTokenParsers {
   }
 
   def merge = "merge" ~> unquoted ~ unquoted ~ unquoted ^^ { case s1 ~ s2 ~ t =>
-    Try({ () =>
+    Try((() => { 
       new FileOutputStream(new File(t)).getChannel.transferFrom(
         new FileInputStream(new File(s1)).getChannel,
         0,
         Long.MaxValue
       );
-      new FileOutputStream(new File(t)).getChannel.transferFrom(
+      new FileOutputStream(new File(t), true).getChannel.transferFrom(
         new FileInputStream(new File(s2)).getChannel,
         0,
         Long.MaxValue
       );
       true
-    }).getOrElse(false)
+    })()).getOrElse(false)
   }
 
   def backup = "backup" ~> unquoted ~ unquoted ^^ { case s ~ b =>
-    Try({ () =>
+    Try((() => { 
       new FileOutputStream(new File(b)).getChannel.transferFrom(
         new FileInputStream(new File(s)).getChannel,
         0,
         Long.MaxValue
       );
       true
-    }).getOrElse(false)
+    })()).getOrElse(false)
   }
 
   def unquoted = stringLiteral ^^ { case s => s.substring(1, s.length - 1) }
 
 }
 
-object LogLang {
-  def main(args: Array[String]): Unit = {
-    val p = new LogLang()
-    args.foreach { filename =>
-      val src = scala.io.Source.fromFile(filename)
-      val lines = src.mkString
-      p.parseAll(p.program, lines) match {
-        case p.Success(s, _) =>
-          /*
-          s.foreach {
-            _ match {
-              case p.~(s1, l) => {
-                println("Task " + s1);
-                l.zipWithIndex.foreach { case (e, i) =>
-                  println(" [op" + (i + 1) + "] " + e)
-                }
-              }
-            }
-          }
-          */ 
-          println("correct interpretation")
-        case x => print(x.toString)
-      }
-      src.close()
-    }
-  }
-}
 
 
 /*
@@ -119,7 +91,7 @@ object LogLang {
 }
  */
 
- /*
+
 object LogLang {
   def main(args: Array[String]): Unit = {
     val p = new LogLang()
@@ -128,6 +100,7 @@ object LogLang {
       val lines = src.mkString
       p.parseAll(p.program, lines) match {
         case p.Success(s, _) =>
+          println(s)
           s.foreach {
             _ match {
               case p.~(s1, l) => {
@@ -144,4 +117,4 @@ object LogLang {
     }
   }
 }
-*/
+
