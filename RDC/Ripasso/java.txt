@@ -1,0 +1,91 @@
+Connectionless server:
+
+DatagramSocket sServer
+alloco buffer
+creo DatagramPacket(buffer, buffer.length)
+inizio while
+sServer.receive(dp)
+String line = new String(dp.getData(), 0, dp.getLength())
+InetAddress ia = dp.getAddress()
+int port = dp.getPort()
+//creo dati da mandare con datagrampacket
+DatagramPacket p = new DatagramPacket(toClient.getBytes(), toClient.length(), receivedpacket.getSocketAddress())
+sServer.send(p)
+fine while 
+cleanup 
+
+---------------------------
+
+Connectionless client:
+
+DatagramSocket sClient
+InetSocketAddress isa = new InetSocketAddress(sClient.getInetAddress, porta server)
+InputStreamReader isr = new InputStreamReader(System.in)
+BufferedReader br = new BufferedReader(isr)
+inizio while
+line = br.readLine()
+creo buffer
+creo DatagramSocket con buffer
+dp.setSocketAddress(isa)
+sClient.send(dp)
+eventualmente attendi receive
+fine while
+cleanup
+
+---------------------------
+
+Connection-oriented client:
+
+Socket client
+InetAddress ia
+InetSocketAddress isa
+client = new Socket()
+ia = InetAddress.getLocalHost() 
+isa = new InetSocketAddress(ia, 54321)
+client.connect(isa) //client.getLocalPort(), client.getInetAddress(), client.getPort()
+InputStreamReader isr = new InputStreamReader(System.in)
+BufferedReader br = new BufferedReader(isr)
+OutputStream toServer = client.getOutputStream()
+inizio while
+line = br.readLine()
+toServer.write(line.getBytes(), 0, line.length())
+fine while
+cleanup
+
+---------------------------
+
+Connection-oriented server:
+
+ServerSocket ss
+Socket toClient
+ss = new ServerSocket(54321)
+toClient = ss.accept()
+int dimbuffer = 100
+byte buffer[] = new byte[dimbuffer]
+InputStream fromClient = toClient.getInputStream()
+inizio while
+int letti = fromClient.read(buffer)
+if letti > 0 msg = new String(buffer, 0, letti) 
+fine while
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

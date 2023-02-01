@@ -26,7 +26,7 @@ public class Client {
           line = br.readLine();
           byte[] buffer = line.getBytes();
           DatagramPacket dp = new DatagramPacket(buffer, buffer.length);
-          //dp.setSocketAddress(isa);
+          dp.setSocketAddress(isa);
           sClient.send(dp);
         }
       } catch (Exception e) {
