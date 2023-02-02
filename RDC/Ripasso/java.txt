@@ -9,6 +9,7 @@ String line = new String(dp.getData(), 0, dp.getLength())
 InetAddress ia = dp.getAddress()
 int port = dp.getPort()
 //creo dati da mandare con datagrampacket
+String toClient = new String(dati, 0, dati.length())
 DatagramPacket p = new DatagramPacket(toClient.getBytes(), toClient.length(), receivedpacket.getSocketAddress())
 sServer.send(p)
 fine while 
@@ -24,13 +25,31 @@ InputStreamReader isr = new InputStreamReader(System.in)
 BufferedReader br = new BufferedReader(isr)
 inizio while
 line = br.readLine()
-creo buffer
-creo DatagramSocket con buffer
+creo buffer -> byte[] buffer = line.getBytes()
+creo DatagramPacket con buffer -> DatagramPacket dp = new DatagramPacket(buffer, buffer.length)
 dp.setSocketAddress(isa)
 sClient.send(dp)
-eventualmente attendi receive
+eventualmente attendi receive -> sClient.receive(fromServer) //fromServer è datagrampacket
 fine while
 cleanup
+
+---------------------------
+
+Connection-oriented server:
+
+ServerSocket ss
+Socket client
+ss = new ServerSocket(54321)
+client = ss.accept()
+InputStream fromClient = client.getInputStream()
+OutputStream toClient = client.getOutputStream()
+inizio while
+int dimbuffer = 100
+byte buffer[] = new byte[dimbuffer]
+int letti = fromClient.read(buffer)
+if letti > 0 msg = new String(buffer, 0, letti), toClient.write(data.getBytes(), 0, data.length())
+fine while
+client.close()
 
 ---------------------------
 
@@ -43,31 +62,17 @@ client = new Socket()
 ia = InetAddress.getLocalHost() 
 isa = new InetSocketAddress(ia, 54321)
 client.connect(isa) //client.getLocalPort(), client.getInetAddress(), client.getPort()
-InputStreamReader isr = new InputStreamReader(System.in)
+InputStreamReader isr = new InputStreamReader(System.in) //per input da tastiera
 BufferedReader br = new BufferedReader(isr)
+byte[] buffer = new byte[100]
 OutputStream toServer = client.getOutputStream()
+InputStream fromServer = client.getInputStream()
 inizio while
 line = br.readLine()
 toServer.write(line.getBytes(), 0, line.length())
+fromServer.read(buffer)
 fine while
 cleanup
-
----------------------------
-
-Connection-oriented server:
-
-ServerSocket ss
-Socket toClient
-ss = new ServerSocket(54321)
-toClient = ss.accept()
-int dimbuffer = 100
-byte buffer[] = new byte[dimbuffer]
-InputStream fromClient = toClient.getInputStream()
-inizio while
-int letti = fromClient.read(buffer)
-if letti > 0 msg = new String(buffer, 0, letti) 
-fine while
-
 
 
 
