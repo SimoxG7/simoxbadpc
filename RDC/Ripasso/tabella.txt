@@ -32,14 +32,14 @@ rete: 14.176.0.0
 broadcast: 14.179.255.255
 apparati: 2^18 -3
 
-164.179.205.82/30 
-netmask:
-rete:
-broadcast:
-apparati:
+164.179.205.82/30 -> 164.179.205.0101 00|10  
+netmask: 255.255.255.252
+rete: 164.179.205.80
+broadcast: 164.179.205.83
+apparati: 2^2 -2
 
-164.179.205.82/30 
-netmask:
+164.179.205.82/30 -> 164.
+netmask: 255.255.255.252 
 rete:
 broadcast:
 apparati:
