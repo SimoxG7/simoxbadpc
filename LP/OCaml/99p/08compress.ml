@@ -1,9 +1,4 @@
-let compress list = 
-  let rec aux list acc = match list with 
-    | [] -> List.rev acc  
-    | [a::b::t] -> match a = b with 
-      | false -> aux t (a::acc)
-      | true -> aux t acc
-    | [h::t] -> aux t (h::acc)
-  in aux list []
+let rec compress = function
+  | a :: (b :: _ as t) -> if a = b then compress t else a :: compress t
+  | smaller -> smaller
 ;;
