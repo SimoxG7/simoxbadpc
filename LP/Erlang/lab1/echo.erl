@@ -1,31 +1,32 @@
 -module(echo).
--export([start/0, print/1, stop/0, loop/0, myexit/0]).
-
-loop() -> 
-  % process_flag(trap_exit, true),
-  receive 
-    {true, stop} -> io:format("Stopping server with pid [~p]~n", [whereis(server)]), exit(normal);
-    {Stuff} -> io:format("Printing: ~p~n", [Stuff]), loop();
-    {'EXIT', From, Reason} -> io:format("Exiting, reason: '~p', from: ~p~n", [Reason, From]);
-    Other -> io:format("Received: ~p~n", [Other]), loop()
-  end. 
+-compile(export_all).
 
 start() -> 
-  Server = spawn(?MODULE, loop, []),
-  io:format("Created a server with pid [~p]~n", [Server]),
-  register(server, Server).
+  register(server, spawn(echo, serverloop, [self()])).
 
-print(Stuff) -> 
-  server ! {Stuff}.
+print(T) -> 
+  whereis(server) ! {print, T},
+  receive 
+    {printed, M} -> io:format("Echo completed for: ~p~n", [M]);
+    Other -> io:format("Echo completed with other: ~p~n", [Other])
+  end.
+
+serverloop(D) -> 
+  receive
+    {print, M} -> 
+      io:format("Server received print: ~p~n", [M]),
+      D ! {printed, M};
+    {stop} -> 
+      io:format("Server stopping~n"),
+      unregister(server),
+      exit(normal);
+    Other -> io:format("Server received other: ~p~n", [Other])
+  end,
+  serverloop(D).
 
 stop() -> 
-  %io:format("Stopped the server with pid [~p]~n", [whereis(server)]),
-  %server ! {true, stop}.
-  spawn(?MODULE, myexit, []).
+  whereis(server) ! {stop}.
 
-myexit() -> 
-  link(whereis(server)),
-  exit("stopping").
 
 
 

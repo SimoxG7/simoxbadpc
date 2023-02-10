@@ -1,55 +1,48 @@
-% is_palindrome: string → bool that checks if the string given as input is palindrome, a string is palindrome when the represented sentence can be read the same way in either directions in spite of spaces, punctual and letter cases, e.g., detartrated, "Do geese see God?", "Rise to vote, sir.", ...;
+-module(sequential). 
+-compile(export_all).
+-export([]).
 
-% is_an_anagram : string → string list → boolean that given a dictionary of strings, checks if the input string is an anagram of one or more of the strings in the dictionary;
+is_palindrome(Str) -> 
+  lists:reverse(string:lowercase(lists:filter((fun(X) -> is_char(X) end), Str))) == string:lowercase(lists:filter((fun(X) -> is_char(X) end), Str)). 
 
-% factors: int → int list that given a number calculates all its prime factors;
+is_char(C) -> ((C >= 97) and (C =< 122)) or ((C >= 65) and (C =< 90)).
 
-% is_proper: int → boolean that given a number calculates if it is a perfect number or not, where a perfect number is a positive integer equal to the sum of its proper positive divisors (excluding itself), e.g., 6 is a perfect number since 1, 2 and 3 are the proper divisors of 6 and 6 is equal to 1+2+3;
+% my_filter([]) -> [];
+% my_filter([H|_]=L) -> my_filter(is_char(H), L).
 
--module(sequential).
--export([is_palindrome/1, is_an_anagram/2, factors/1, is_proper/1, generate_propers/1]).
-
-is_palindrome(S) -> filter_alpha(S) == lists:reverse(filter_alpha(S)).
-
-is_alpha(C) -> ((C >= 65) and (C =< 90)) or ((C >= 97) and (C =< 122)).
-
-filter_alpha(S) -> string:lowercase([X || X <- S, (is_alpha(X))]).
-
-is_an_anagram(S, Slist) -> loop(S, Slist).
-
-match_strings(S, H) -> lists:sort(string:lowercase(S)) == lists:sort(string:lowercase(H)).
-
-% loop(_, []) -> false;
-% loop(S, [H|T]) -> 
-%   case (match_strings(S, H)) of 
-%     true -> true; 
-%     false -> loop(S, T) 
-%   end
-% .
-
-loop(_, []) -> false;
-loop(S, [H|T]) -> loop(match_strings(S, H), S, T).
-
-loop(true, _, _) -> true;
-loop(false, S, T) -> loop(S, T).
-
-factors(N) when N < 2 -> [];
-factors(N) -> scompose(N, 2).
-
-scompose(N, D) when (N >= D) -> scompose((N rem D == 0), N, D);
-scompose(_, _) -> [].
-
-scompose(true, N, D) -> [D|scompose(N div D, D)];
-scompose(false, N, D) -> scompose(N, D+1).
-
-is_proper(N) -> perfect_number(N, [X || X <- lists:seq(1, N-1), (N rem X == 0)], 0). %is a perfect number? -> integer sum of its positive divisors, 6 divisibile per 1,2,3 e la somma di 1,2,3 è 6
-
-perfect_number(N, [], Acc) -> N == Acc;
-perfect_number(N, [H|T], Acc) -> perfect_number(N, T, Acc + H).
-
-generate_propers(N) -> [X || X <- lists:seq(2, N), is_proper(X)].
+% my_filter(true, [H|T]) -> [H|my_filter(T)];
+% my_filter(false, [_|T]) -> my_filter(T).
 
 
+is_an_anagram(Str, StrList) -> check_anagram(lists:sort(Str), StrList).
+
+check_anagram(_, []) -> false;
+check_anagram(Str, [H|T]) -> check_anagram(Str == lists:sort(H), Str, T).
+
+check_anagram(true, _, _) -> true;
+check_anagram(false, Str, T) -> check_anagram(Str, T).
+ 
+
+factors(1) -> [1];
+factors(N) -> factors(N, 2).
+
+factors(1, _) -> [];
+factors(N, D) -> factors(N rem D == 0, N, D).
+
+factors(true, N, D) -> [D|factors(N div D, D)];
+factors(false, N, D) -> factors(N, D+1).
+
+
+% is_proper(N) -> lists:foldl(fun(X, Y) -> X + Y end, 0, [1|factors(N)]) == N.
+is_proper(N) -> is_proper(N, 0, lists:seq(1, N div 2)).
+
+is_proper(N, Acc, []) -> N == Acc;
+is_proper(N, Acc, [H|T]) -> is_proper(N rem H == 0, N, H, Acc, T).
+
+is_proper(true, N, H, Acc, T) -> is_proper(N, Acc + H, T);
+is_proper(false, N, _, Acc, T) -> is_proper(N, Acc, T).
+
+generate_propers(N) -> [X || X <- lists:seq(1, N+1), is_proper(X)].
 
 
 
