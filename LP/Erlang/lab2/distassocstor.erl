@@ -1,6 +1,7 @@
 -module(distassocstor).
 -compile(export_all).
 
+%fare ping prima di far iniziare il tutto
 
 %dividere in più file
 start_client() -> 
@@ -85,6 +86,7 @@ serverloop2() ->
     Other -> io:format("Server2 received other: ~p~n", [Other])
   end,
   serverloop2().
+
 
 
 
