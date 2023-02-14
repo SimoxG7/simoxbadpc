@@ -17,8 +17,8 @@ loop(G, Ns, S) ->
     {msg, M, path, [HP | TP]} ->
       case lists:keyfind(HP, 1, Ns) of
         {HP, P} ->
-            P ! {msg, {src, HP, msg, M}, path, TP},
-            loop(G, Ns, S);
+          P ! {msg, {src, HP, msg, M}, path, TP},
+          loop(G, Ns, S);
         Other ->
           io:format("~p~n", [Other])
       end

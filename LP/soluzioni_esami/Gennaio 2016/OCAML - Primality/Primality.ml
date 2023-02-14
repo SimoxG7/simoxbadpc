@@ -1,5 +1,3 @@
-
-
 let range ?step:(s=1) i j =
   let rec range' n acc =
     if n > j then (List.rev acc) else range' (n+s) (n::acc)

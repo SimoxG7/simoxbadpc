@@ -13,7 +13,7 @@ module Interval(Endpoint: Comparable): (IntervalI with type endpoint = Endpoint.
     else if Endpoint.compare low high == 0 then Empty
     else Interval (low,high)
 
-    (** Returns true iff the interval is empty *)
+  (** Returns true iff the interval is empty *)
   let is_empty = function
   | Empty -> true
   | Interval _ -> false
