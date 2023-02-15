@@ -1,0 +1,164 @@
+- leggere readme.md e i test
+- guardare codice esistente
+- cercare se ci sono classi di libreria utilizzabili
+
+passo 1 -> identificare classi principali: -> guidato dal pattern (mi aspetto un model, dei presenter, ecc.)
+- applicando encapsulation, information hiding, solid
+- creare astrazioni significative 
+
+treno caratterizzato da:
+- codice treno 
+- destinazione finale
+- orario programmato di partenza (non comprensivo del ritardo)
+- ritardo stimato
+
+
+public class Train {
+	private final String code;
+	private final String destination;
+	private final int departureTimeInMinutes;
+	private final int delay;
+}
+
+o meglio:
+import java.time.Duration;
+import java.time.LocalTime;
+public class Train {
+	private final String code;
+	private final String destination;
+	private final LocalTime departureTime;
+	private final Duration delay;
+}
+
+oppure costruendo la classe tempo:
+
+public class Time implements Comparable<Time> {
+	public final int  minutes;
+	public Time(String fromString) {
+		String[] parts = fromString.split(":");
+		this.minutes = Integer.parseInt(parts[0]) * 60 + Integer.parseInt(parts[0]);
+	}
+	private Time(int minutes) {
+		this.minutes = minutes;
+	}
+	@Override 
+	public String toString() {
+		return String.format("%d:%2d", minutes / 60, minutes % 60);
+	}
+	public Time addDelay(int delay) {
+		return new Time(this.minutes + delay);
+	}
+	@Override
+	public int compareTo(@NotNull Model.Time o) {
+		return Integer.compare(minutes, o.minutes);
+	}
+}
+
+passo 2 -> fare bene TDD:
+- usare gitflow 
+- scrivere test prima di qualcosa di significativo 
+- svilupparlo 
+- rifattorizzarlo 
+
+controllare mano a mano la copertura -> se non è sopra al 90% sia comandi che decisioni porsi le domande:
+- come mai ho scritto tante righe di codice che non servono a far passare i test?
+- posso rimediare aggiungendo almeno adesso dei test che coprano le righe/decisioni scoperte?
+
+sfruttare test di integrazioni già dati:
+- sono specifiche aggiuntive
+- sono una guida a volte dell'ordine di sviluppo
+- sono verificatori di casi a cui non abbiamo pensato 
+
+cosa va a controlalre il prof nei compiti:
+- reference escaping/leak 
+- definizione/uso delle interfacce (interface segregation e liskov)
+- attenzione alla nullability (annotazioni, Optional, ...)
+- duplicazione del codice e come evitarla (template, strategy, lambda)
+- uso di pattern in maniera opportuna
+- isolamento del test di unità e uso del mocking in maniera corretta
+//lo spy si fa di oggetti reali di solito 
+
+-----------------------------------------------
+
+svolgimento codice
+
+hashmap anzichè list in questo caso, per ordinarlo poi farò un ordinamento
+
+creo record train, specifico nome e tipo degli attributi -> è come classe con attributi, costruttore, getter, equals, hashcode, tostring. 
+all'interno posso implementare metodi. nome con parentesi code() -> è il getter.
+
+torno a modello e lo rendo Observable<List<Train>>. Creo interfaccia Observable dentro la folder model.
+
+Ad Observable aggiungo il metodo T getState().
+
+In model aggiungo getstate.
+
+Creo cartella di test aggiungendo cartella e rendendola di test, poi creo classe di test dalla classe Model (letteralmente schiacciando su Model) -> ModelTest.
+
+code -> inspectcode, mettere i @NotNull.
+
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+
+test getStateEmpty()
+
+aggiungo alla classe del modello l'attributo hashmap che mappa da stringa (codice) a oggetto treno. 
+
+dalla mappa posso farmi dare l'entryset, il keyset o la collezione dei valori values(), ma modificando gli oggetti di questa collezione modificano anche la mappa. usiamo dunque un return new ArrayList(trains.values()), ho un nuovo modo di citare gli stessi oggetti, senza modificare la mappa. 
+
+test getStateAfterReadFile() -> ho fatto un'unica cosa, ma ho più assert perchè verifico più aspetti di ciò che ho fatto. 
+
+assertThat(trains).extracting("code", "destination").contains(tuple("TN 10471", "STRADELLA")); -> estraggo solo quei due campi e vedo che contengano la tupla.
+
+questo test ancora non funziona, modifichiamo il readFile.
+
+aggiungiamo che ciò che viene letto viene aggiunto alla mappa.
+
+non ci piace come viene stampato il delay -> lo modifichiamo dal record Train mettendo delay.toMinutes() 
+
+nel main mettiamo model.notifyOberservers() -> creiamo il metodo nell'interfaccia Observable e lo facciamo implementare anche dal modello. 
+
+A questo punto creo il campo observers nel modello -> List<Observer<List<Train>>> observers;
+
+creo interfaccia Observer e la metto sotto presenter. 
+
+Aggiungo all'interfaccia Observer il metodo void update(), decidendo noi se pull o push. Facciamo push in questo caso: void update(@NotNull T state)
+
+e ora completo il notifyObservers facendo che per ogni observer in observers (campo di Model) faccio observer.update(getState()).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

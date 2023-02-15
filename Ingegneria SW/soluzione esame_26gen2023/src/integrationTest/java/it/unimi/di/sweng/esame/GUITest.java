@@ -1,10 +1,5 @@
 package it.unimi.di.sweng.esame;
 
-import static org.assertj.core.api.Assumptions.assumeThat;
-import static org.hamcrest.Matchers.matchesPattern;
-import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.control.LabeledMatchers.hasText;
-
 import it.unimi.di.sweng.esame.view.DepartureView;
 import it.unimi.di.sweng.esame.view.SetDelayView;
 import javafx.collections.ObservableList;
@@ -20,10 +15,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
-
-
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
+
+import static org.assertj.core.api.Assumptions.assumeThat;
+import static org.hamcrest.Matchers.matchesPattern;
+import static org.testfx.api.FxAssert.verifyThat;
+import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
 @ExtendWith(ApplicationExtension.class)
 @TestMethodOrder(MethodOrderer.MethodName.class)
@@ -107,7 +105,7 @@ public class GUITest {
     robot.clickOn(delayButton);
 
     assumeThat(leftLabels[2].getText().trim()).startsWith("TN 2170");
-    verifyThat(leftLabels[2], hasText(matchesPattern("\sTN 2170.*\s6\s*")));
+    verifyThat(leftLabels[2], hasText(matchesPattern("\s*TN 2170.*\s6\s*")));
   }
 
   @Test

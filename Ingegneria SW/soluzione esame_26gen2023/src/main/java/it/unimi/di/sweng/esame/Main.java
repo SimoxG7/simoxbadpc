@@ -47,6 +47,8 @@ public class Main extends Application {
     Model model = new Model();
     model.readFile();
 
+    model.notifyObservers();
+
     Scene scene = new Scene(gridPane);
     primaryStage.setScene(scene);
     primaryStage.show();
