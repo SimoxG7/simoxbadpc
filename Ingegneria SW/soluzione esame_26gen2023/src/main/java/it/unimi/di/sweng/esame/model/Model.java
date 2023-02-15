@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class Model implements Observable<List<Train>> {
 
   private @NotNull final Map<String, Train> trains = new HashMap<>();
-  private @NotNull List<Observer<List<Train>>> observers;
+  private @NotNull final List<Observer<List<Train>>> observers = new ArrayList<>();
 
   public void readFile() {
     InputStream is = Main.class.getResourceAsStream("/trains.csv");
@@ -51,4 +51,26 @@ public class Model implements Observable<List<Train>> {
       observer.update(getState());
     }
   }
+
+  @Override
+  public void addObserver(@NotNull Observer<List<Train>> observer) {
+    observers.add(observer);
+  }
+
+  public void departed(String code) {
+    if (trains.remove(code) != null) notifyObservers();
+  }
+
+  public void changeDelay(String code, int delay) {
+    if (trains.containsKey(code)) {
+      Train t = trains.get(code);
+      Train t1 = t.newDelay(Duration.ofMinutes(delay));
+      if (!t.equals(t1)) {
+        trains.put(code, t1);
+        notifyObservers();
+      }
+    }
+  }
+
+
 }

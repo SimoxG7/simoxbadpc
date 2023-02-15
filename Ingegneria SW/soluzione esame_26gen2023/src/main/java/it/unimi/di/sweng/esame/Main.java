@@ -1,6 +1,7 @@
 package it.unimi.di.sweng.esame;
 
 import it.unimi.di.sweng.esame.model.Model;
+import it.unimi.di.sweng.esame.presenter.DeparturePresenter;
 import it.unimi.di.sweng.esame.view.DepartureView;
 import it.unimi.di.sweng.esame.view.SetDelayView;
 import javafx.application.Application;
@@ -46,6 +47,9 @@ public class Main extends Application {
 
     Model model = new Model();
     model.readFile();
+
+    model.addObserver(new DeparturePresenter(command[0], 0));
+    model.addObserver(new DeparturePresenter(command[1], 8));
 
     model.notifyObservers();
 

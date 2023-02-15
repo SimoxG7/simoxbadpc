@@ -126,6 +126,39 @@ Aggiungo all'interfaccia Observer il metodo void update(), decidendo noi se pull
 
 e ora completo il notifyObservers facendo che per ogni observer in observers (campo di Model) faccio observer.update(getState()).
 
+Aggiungere addObserver(Observer<T> observer) nell'interfaccia Observable e poi in in Model.
+
+Creo in presenter la classe DeparturePresenter che implementa Observer<List<Train>>. Dalla classe faccio generare la classe di test DeparturePresenterTest. Creo test updateTest().
+
+import org.junit.jupiter.api.Test;
+
+alla creazione di un presentre gli devo passare la view, quindi aggiungo costruttore che inizializza il campo DepartureView in DeparturePresenter.
+
+mockando i treni dico che userò cosa viene tornato dal tostring del treno. 
+
+Implementiamo update nel nostro Departure presenter, itera sullo stato e ottieni i treni, setta nella view indice e train.
+
+fatto l'update, ma il presenter non è collegato alla view. Modifico il main creando un presenter dep1. Ogni istanza di presenter è dedicato ad una istanza di vista. 
+
+DeparturePresenter dep1 = new DeparturePresenter(command[0]);
+model.addObserver(new DeparturePresenter(command[0]));
+
+Devo renderlo ordinabile -> rendo i treni Comparable. Creo compareTo in train, creo classe di test trainTest per testare il compareTo dei treni. 
+
+Creato test parametrizzato con csv. 
+
+implemento ora il compareTo dei treni. 
+
+per avere il sort, dentro update faccio state.sort(null), null perchè vuol dire che utilizza il comparatore naturale.
+
+per fare la seconda vista potrei fare il copia e incolla della classe DeparturePresenter, ma è poco sensato. Conviene usare un template. 
+
+DeparturePresenter implementa anche InputPresenter. Implemento il metodo action di InputPresenter. Aggiungo metodo model.departed(String) in Model.
+
+Rimuovere dalla mappa -> chiamo il notifyObservers solo se effettivamente rimuovo dalla mappa, altrimenti in realtà lo stato non è cambiato. 
+
+
+
 
 
 
