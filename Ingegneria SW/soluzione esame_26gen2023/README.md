@@ -1,8 +1,8 @@
 # CORSO INGEGNERIA DEL SOFTWARE A.A. 2022/23
 
-# Esame del 26 gennaio 2023
+# Esame del 26 gennaio 2023 (Rifatto)
 
-* `<Cognome> <Nome> <matricola>`
+* `Gioè Simone 931106`
 
 Dopo avere effettuato il **fork** su `gitlab.di.unimi.it` e il **clone** in
 locale, modificate questo README
