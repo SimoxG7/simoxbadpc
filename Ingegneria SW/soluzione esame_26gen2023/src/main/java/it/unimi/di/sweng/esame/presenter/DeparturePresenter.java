@@ -36,3 +36,29 @@ public class DeparturePresenter implements Observer<List<Train>>, InputPresenter
     model.departed(text1.substring(0,9).trim());
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+Model model = new Model();
+    model.readFile();
+    DisplayView left = mock(DisplayView.class);
+    DisplayView right = mock(DisplayView.class);
+    NextNationView next = mock(NextNationView.class);
+    ScorePresenter SUT = new ScorePresenter(next, model, left, right);
+
+    NazionePunteggio np = new NazionePunteggio("IT", "Italia", 1000);
+    SUT.action(np.code() + " " + np.fullname(), "" + np.points());
+    assertThat(model.getState().toString()).contains(np.toString());
+*/
