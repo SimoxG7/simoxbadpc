@@ -1,0 +1,50 @@
+Lezione 1 - Introduzione 
+
+Spring -> per applicazioni di tipo Enterprise (complesse, destinate al mondo aziendale). In questo contesto vi sono requisiti di: scalabilità, sicurezza, affidabilità, gestione di grandi quantità di dati. 
+
+//Java EE (Enterprise Edition), divenuto Jakarta 
+
+Java Beans -> componenti utilizzati per realizzare applicazioni Enterprise. 
+
+Spring è un framework più leggero di Java EE, che invece aveva forte dipendenza con i Java Beans. Basato su classi POJO (Plain Old Java Object, più leggere) con utilizzo di Dependency Injection per la gestione delle dipendenze e utilizzando classi/interfacce riutilizzabili.
+
+Spring è un framework modulare, possiamo scegliere le componenti necessarie per soddisfare i requisiti della nostra applicazione. C'è un Core con le funzionalità principali e una serie di microframework per le altre funzionalità non presenti nel Core. 
+
+Framework opinionated -> framework in cui sono state prese delle scelte che dovrebbero essere adatte alla maggior parte dei casi d'uso. 
+
+Classi POJO -> classi con campi, setter e getter, costruttori... Delle classi che non vanno a implementare interfacce particolari o estendere altre classi e pertanto estraibili e riutilizzabili ovunque. 
+
+Spring cerca di ridurre l'accoppiamento tra i componenti (Loose Coupling) usando l'idea dell'Invertion of Control, implementato con la Dependency Injection. L'idea di base è che un componente che ha bisogno di un altro componente non deve essere strettamente connesso all'altro componente. In questo modo un componente non deve "portarsi dietro l'altro". 
+
+Si utilizzano inoltre molte interfacce e meno implementazioni in Spring. 
+
+Si fa un uso pesante delle Annotazioni in modo da avere un approccio più dichiarativo, dichiarando ciò che vogliamo ottenere. Non diciamo a Spring come fare il suo lavoro, ma semplicemente che abbiamo una necessità e lasciamo fare a Spring ciò che è necessario. 
+
+Si possono utilizzare anche dei template per eliminare il boiler code (codice ripetuto).
+
+Spring Boot permette la semplificazione ulteriore di applicazioni Spring. E' un modulo che semplifica ulteriormente un'applicazione Spring, ma non indipendente e fortemente legato al framework di base. 
+
+--------------------------------------------------------------------------
+
+Lezione 2 - Convention over configuration
+
+Convention over configuration è l'approccio usato dal framework Spring. Inizialmente un progetto Spring andava configurato attraverso dei file .xml attraverso un approccio di programmazione dichiarativa. Sono state poi introdotte le annotazioni Java che hanno rimpiazzato l'approccio dei file .xml. 
+
+Un'applicazione utilizzerà dunque una configurazione di tipo convenzionale, ovvero si impostano delle configurazioni di default che permettono di avere un'applicazione operativa in poco tempo, seguendo delle linee guide date dal team. Magari l'applicazione non è perfettamente aderente ai nostri requisiti, ma è operativo in un tempo minimo. 
+
+Se ne può fare in seguito l'overriding delle configurazioni di base, in modo tale da adattare l'applicazione alle nostre necessità.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
