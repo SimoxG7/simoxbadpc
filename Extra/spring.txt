@@ -34,6 +34,130 @@ Un'applicazione utilizzerà dunque una configurazione di tipo convenzionale, ovv
 
 Se ne può fare in seguito l'overriding delle configurazioni di base, in modo tale da adattare l'applicazione alle nostre necessità.
 
+Starter -> contenitore di dipendenze.
+
+Aggiungiamo alle dipendenze il modulo che vogliamo, un singolo starter. 
+
+//default di framework security -> username: user, password: generata e visibile dai log della console 
+
+Anche se l'applicazione non è come la vorremmo, è già funzionante e possiamo abilitare/disabilitare con le annotazioni le varie impostazioni. 
+
+E' un partire da qualcosa di già fatto e modificarlo, anzichè partire da zero e fare tutto. 
+
+--------------------------------------------------------------------------
+
+Lezione 3 - Inversion of Control e Dependency Injection
+
+Il problema delle dipendenze è alla base di questi concetti: immaginiamo di avere un classe Veicolo che utilizza al suo interno un'istanza della classe Motore (creandola con l'operatore New). Il Veicolo dunque utilizzerà anche delle funzionalità della classe Motore. Vi è dunque un accoppiamento forte tra la classe Veicolo e la classe Motore, infatti la classe Veicolo dipende dalla classe Motore (ha una dipendenza dalla classe Motore). Ciò comporta problemi anche in fase di testing. 
+
+Inversion of Control (è un pattern): anzichè creare le dipendenze all'interno della classe che ne ha bisogno, la gestione di queste dipendenze viene delegata ad un framework al di fuori della classe. In questo modo la classe Veicolo avrà ancora bisogno della classe Motore, ma non ne creerà più un'istanza al suo interno. Con Inversion of Control la creazione di questa istanza che causa dipendenza viene invece effettuata al di fuori della classe Veicolo, con delega al framework. 
+
+//Service Locator
+
+Dependency Injection (possibile implementazione di IoC): il framework crea l'istanza di Motore e la inietta all'interno della classe Veicolo che ne ha bisogno. Ovviamente la classe Veicolo deve specificare che ha bisogno dell'istanza di Motore. Vi sono diversi tipi di iniezione in Spring: tramite costruttore, setter, ... 
+
+In questo modo Veicolo non deve portarsi dietro la dipendenza, che verrà iniettata dal framework. 
+
+//IoC è pattern, DI è implementazione 
+
+Dependency Injection è la D dei principi SOLID.
+
+Bean: classi il cui ciclo di vita è gestito da Spring. 
+
+--------------------------------------------------------------------------
+
+Lezione 4 - Bean 
+
+Spring si basa sulla Dependency Injection, ovvero un meccanismo attraverso il quale si delega la gestione delle dipendenze al framework. 
+
+Un Bean è un oggetto il cui ciclo di vita è gestito dal framework (in questo caso Spring). Un Bean è un'istanza di una classe che viene creata, gestita e distrutta dal framework. 
+
+Il compito del programmatore è quello di dichiarare la necessità di utilizzo di determinati Bean e lasciarli gestire da Spring. 
+
+Due modalità essenziali per dichiarare Bean:
+- Classe annotata con @Component: andiamo a dire a Spring che quella classe è un componente e dunque Spring andrà a creare quella classe e gestirla con un application context. I Bean creati da Spring vivono dentro un IoC Container. E' necessario anche abilitare la scansione dei componenti per fare istanziare queste classi allo startup. 
+//classe annotata con stereotipi 
+- @Bean all'interno di una classe @Configuration: si crea una classe @Configuration per dire che rappresenta una classe di configurazione e all'interno di essa definiremo dei metodi annotati con @Bean in cui ciascun metodo va a istanziare con una new la classe di cui vogliamo ottenere un Bean. 
+
+Di default Spring crea una singola istanza di un Bean (singleton), ma è anche possibile specificare la modalità per avere più Bean, gestibili attraverso il Bean Scope. 
+
+Perchè usare @Bean se abbiamo @Component? La notazione @Component è utilizzabile solo se le classi scritte sono classi create da noi, ma non esterne. Se invece usiamo classi esterne usiamo @Bean. 
+
+--------------------------------------------------------------------------
+
+Lezione 5 - Bean (esempi pratici)
+
+Partiamo avendo una classe POJO Student.
+
+Avendo una classe: 
+
+import org.springframework.context.annotation.Bean;
+@Configuration
+public class BeanConfig {
+  @Bean(name = "student1") //senza specificare l'attributo prendeva il nome del metodo 
+  public Student getStudent1() {
+    return new Student("pinco", "pallino");
+  }
+}
+
+Classe con il main:
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+//@Configuration
+//@ComponentScan
+public class SpringBeansExample {
+  public static void main(String[] args) {
+    AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(BeanConfig.class);
+
+    Student s1 = (Student) ctx.getBean("student1");
+    //Student s1 = ctx.getBean("student", Student.class);
+
+    for (String beanName : ctx.getBeanDefinitionNames()) {
+      System.out.println("Bean --> " + beanName);
+    }
+    ctx.close();
+  }
+}
+
+E' necessario avere il contesto, messo in ctx. getBeanDefinitionNames ritorna la lista dei nomi dei Bean creati dall'applicazione, anche quelli non creati da noi. Viene creata un'istanza anche dalla classe annotata con @Configuration.
+
+Se rendiamo invece la classe POJO annotata con @Component e la classe principale SpringBeansExample l'annotiamo con @Configuration e @ComponentScan, allora funziona anche senza l'apposita classe di configurazione. 
+
+@Component
+public class Student {
+  ...
+}
+
+Classe con il main:
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+@Configuration
+@ComponentScan
+public class SpringBeansExample {
+  public static void main(String[] args) {
+    AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(SpringBeansExample.class);
+
+    for (String beanName : ctx.getBeanDefinitionNames()) {
+      System.out.println("Bean --> " + beanName);
+    }
+    ctx.close();
+  }
+}
+
+In questo modo viene creato un Bean che è istanza della classe Student. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
