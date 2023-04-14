@@ -1,3 +1,220 @@
+embryoio_level1:
+cd /challenge
+./embryoio_level1
+
+embryoio_level2: //password over stdin
+cd /challenge
+./embryoio_level2 
+//inserire password all'interno
+
+embryoio_level3: //argomento a comando
+cd /challenge
+./embryoio_level3 <vnafzqlxec> 
+
+embryoio_level4: //variabile d'ambiente
+cd /challenge
+export gizpoq='tkikjioeyj'
+./embryoio_level4 
+
+embryoio_level5: //redirezione input
+cd /challenge
+cat > /tmp/anspoc << EOF 
+hhmbyljb
+EOF
+./embryoio_level5 < /tmp/anspoc
+
+embryoio_level6: //redirezione output
+cd /challenge
+./embryoio_level6 > /tmp/ejynbf
+cat /tmp/ejynbf
+
+embryoio_level7: //lanciare con 0 variabili d'ambiente
+cd /challenge
+env -i ./embryoio_level7
+
+embryoio_level8: //lanciare da shellscript
+touch my_script.sh
+vi my_script.sh
+  #!/bin/bash
+  cd /challenge
+  ./embryoio_level8
+bash my_script.sh
+
+embryoio_level9: //lanciare da shellscript con password in stdin
+touch my_script.sh
+vi my_script.sh
+  #!/bin/bash
+  cd /challenge
+  echo "password" | ./embryoio_level9
+bash my_script.sh
+
+embryoio_level10: //lanciare da shellscript con argomento
+touch my_script.sh
+vi my_script.sh
+  #!/bin/bash
+  cd /challenge
+  ./embryoio_level10 xolzrhbfsw
+bash my_script.sh
+
+embryoio_level11: //lanciare da shellscript variabile d'ambiente
+touch my_script.sh
+vi my_script.sh
+  #!/bin/bash
+  export anfzwf=vzsqapifsw
+  cd /challenge
+  ./embryoio_level11
+bash my_script.sh
+
+embryoio_level12: //lanciare da shellscript con input redirezionato e password da stdin
+echo 'udyvxcaz' > /tmp/dlmzuc 
+vi my_script.sh
+  #!/bin/bash
+  cd /challenge
+  ./embryoio_level12 < /tmp/dlmzuc
+bash my_script.sh
+
+embryoio_level13: //lanciare da shellscript con output redirezionato 
+nano my_script.sh
+  #!/bin/bash
+  cd /challenge
+  ./embryoio_level13 > /tmp/xudcli
+bash my_script.sh
+cat /tmp/xudcli
+
+embryoio_level14: //lanciare da shellscript 0 variabili d'ambiente
+nano my_script.sh
+  #!/bin/bash
+  cd /challenge
+  env -i ./embryoio_level14
+bash my_script.sh
+
+embryoio_level15: //lanciare da ipython
+//import subprocess
+//# for simple commands
+//#subprocess.run(["ls", "-l"]) 
+//# for complex commands, with many args, use string + `shell=True`:
+//cmd_str = "bash embroyo_level15"
+//subprocess.run(cmd_str, shell=True)
+nano ipython.py
+import subprocess
+subprocess.run(["/challenge/embryoio_level15"])
+//oppure lancio ipython eccetera
+
+embryoio_level16: //lanciare da ipython con password su stdin
+ipython
+import subprocess
+subprocess.run(["/challenge/embryoio_level16", "bcyrqkaq"])
+
+embryoio_level17: //lanciare da ipython con valore come argomento
+ipython
+import subprocess
+subprocess.run(["/challenge/embryoio_level17", "vsysfxifjh"])
+
+embryoio_level18: //lanciare da ipython con variabile d'ambiente con valore particolare
+export key=value
+ipython
+import subprocess
+subprocess.run(["/challenge/embryoio_level18"])
+
+embryoio_level19: //lanciare da ipython con input redirezionato da file e con password da stdin
+ipython
+import subprocess
+import os
+file = open("/tmp/gtnmqs", 'w') #filename gtnmqs
+file.write('mcxavvqg') #password mcxavvqg
+file = open("/tmp/gtnmqs", 'r')
+subprocess.run(['/challenge/embryoio_level19'], stdin=file)
+
+embryoio_level20: //lanciare da ipython con output redirezionato a file
+ipython
+import subprocess
+import os
+file = open("/tmp/yjcqvm", 'w')
+subprocess.run(['/challenge/embryoio_level20'], stdout=file)
+cat /tmp/yjcqv
+
+embryoio_level21: //lanciare da ipython con 0 variabili d'ambiente
+env -i ipython
+import subprocess
+subprocess.run(['/challenge/embryoio_level21'])
+
+embryoio_level22: //lanciare da python script
+nano my_script.py
+  import subprocess
+  subprocess.run(['/challenge/embryoio_level22'])
+python my_script.py
+
+embryoio_level23: //lanciare da python script con password in stdin
+nano my_script.py
+  import subprocess
+  subprocess.run(['/challenge/embryoio_level23'])
+python my_script.py
+//input password btjdiomm
+
+embryoio_level24: //lanciare da python script con argomento specifico
+nano my_script.py
+  import subprocess
+  subprocess.run(['/challenge/embryoio_level24', 'mpdgmpmibd'])
+python my_script.py
+
+embryoio_level25: //lanciare da python script con variabile d'ambiente specifica
+export dzocab=pxciuoestb
+nano my_script.py
+  import subprocess
+  subprocess.run(['/challenge/embryoio_level25'])
+python my_script.py
+
+embryoio_level26: //lanciare da python script con input redirezionato da specifico file con password specifica
+nano my_script.py
+  import subprocess
+  import os
+  file = open("/tmp/sjfilu", 'w') 
+  file.write("ptawmldj") 
+  file = open("/tmp/sjfilu", 'r')
+  subprocess.run(["/challenge/embryoio_level26"], stdin=file)
+python my_script.py
+
+embryoio_level27: //lanciare da python script con output redirezionato in specifico file
+nano my_script.py
+  import subprocess
+  import os
+  file = open("/tmp/hueodj", "w") 
+  subprocess.run(["/challenge/embryoio_level27"], stdout=file)
+python my_script.py
+cat /tmp/hueodj
+
+embryoio_level28: //lanciare da python script con 0 variabili d'ambiente
+nano my_script.py
+  import subprocess
+  subprocess.run(["/challenge/embryoio_level28"])
+env -i python my_script.py
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://r30blogs.com/2022/06/22/embryoio%20level15~level28/
+https://r30blogs.com/2022/06/22/embryoio%20level15~level28/#embryoio-level22-level28
+
+
+
+
 
 
 
