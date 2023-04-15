@@ -1,21 +1,26 @@
+-----------------------------------------------------------------------------------
 embryoio_level1:
 cd /challenge
 ./embryoio_level1
 
+-----------------------------------------------------------------------------------
 embryoio_level2: //password over stdin
 cd /challenge
 ./embryoio_level2 
 //inserire password all'interno
 
+-----------------------------------------------------------------------------------
 embryoio_level3: //argomento a comando
 cd /challenge
 ./embryoio_level3 <vnafzqlxec> 
 
+-----------------------------------------------------------------------------------
 embryoio_level4: //variabile d'ambiente
 cd /challenge
 export gizpoq='tkikjioeyj'
 ./embryoio_level4 
 
+-----------------------------------------------------------------------------------
 embryoio_level5: //redirezione input
 cd /challenge
 cat > /tmp/anspoc << EOF 
@@ -23,15 +28,18 @@ hhmbyljb
 EOF
 ./embryoio_level5 < /tmp/anspoc
 
+-----------------------------------------------------------------------------------
 embryoio_level6: //redirezione output
 cd /challenge
 ./embryoio_level6 > /tmp/ejynbf
 cat /tmp/ejynbf
 
+-----------------------------------------------------------------------------------
 embryoio_level7: //lanciare con 0 variabili d'ambiente
 cd /challenge
 env -i ./embryoio_level7
 
+-----------------------------------------------------------------------------------
 embryoio_level8: //lanciare da shellscript
 touch my_script.sh
 vi my_script.sh
@@ -40,6 +48,7 @@ vi my_script.sh
   ./embryoio_level8
 bash my_script.sh
 
+-----------------------------------------------------------------------------------
 embryoio_level9: //lanciare da shellscript con password in stdin
 touch my_script.sh
 vi my_script.sh
@@ -48,6 +57,7 @@ vi my_script.sh
   echo "password" | ./embryoio_level9
 bash my_script.sh
 
+-----------------------------------------------------------------------------------
 embryoio_level10: //lanciare da shellscript con argomento
 touch my_script.sh
 vi my_script.sh
@@ -56,6 +66,7 @@ vi my_script.sh
   ./embryoio_level10 xolzrhbfsw
 bash my_script.sh
 
+-----------------------------------------------------------------------------------
 embryoio_level11: //lanciare da shellscript variabile d'ambiente
 touch my_script.sh
 vi my_script.sh
@@ -65,6 +76,7 @@ vi my_script.sh
   ./embryoio_level11
 bash my_script.sh
 
+-----------------------------------------------------------------------------------
 embryoio_level12: //lanciare da shellscript con input redirezionato e password da stdin
 echo 'udyvxcaz' > /tmp/dlmzuc 
 vi my_script.sh
@@ -73,6 +85,7 @@ vi my_script.sh
   ./embryoio_level12 < /tmp/dlmzuc
 bash my_script.sh
 
+-----------------------------------------------------------------------------------
 embryoio_level13: //lanciare da shellscript con output redirezionato 
 nano my_script.sh
   #!/bin/bash
@@ -81,6 +94,7 @@ nano my_script.sh
 bash my_script.sh
 cat /tmp/xudcli
 
+-----------------------------------------------------------------------------------
 embryoio_level14: //lanciare da shellscript 0 variabili d'ambiente
 nano my_script.sh
   #!/bin/bash
@@ -88,62 +102,71 @@ nano my_script.sh
   env -i ./embryoio_level14
 bash my_script.sh
 
+-----------------------------------------------------------------------------------
 embryoio_level15: //lanciare da ipython
 //import subprocess
 //# for simple commands
 //#subprocess.run(["ls", "-l"]) 
 //# for complex commands, with many args, use string + `shell=True`:
-//cmd_str = "bash embroyo_level15"
+//cmd_str = "bash embryoio_level15"
 //subprocess.run(cmd_str, shell=True)
 nano ipython.py
-import subprocess
-subprocess.run(["/challenge/embryoio_level15"])
+  import subprocess
+  subprocess.run(["/challenge/embryoio_level15"])
 //oppure lancio ipython eccetera
 
+-----------------------------------------------------------------------------------
 embryoio_level16: //lanciare da ipython con password su stdin
 ipython
-import subprocess
-subprocess.run(["/challenge/embryoio_level16", "bcyrqkaq"])
+  import subprocess
+  subprocess.run(["/challenge/embryoio_level16", "bcyrqkaq"])
 
+-----------------------------------------------------------------------------------
 embryoio_level17: //lanciare da ipython con valore come argomento
 ipython
-import subprocess
-subprocess.run(["/challenge/embryoio_level17", "vsysfxifjh"])
+  import subprocess
+  subprocess.run(["/challenge/embryoio_level17", "vsysfxifjh"])
 
+-----------------------------------------------------------------------------------
 embryoio_level18: //lanciare da ipython con variabile d'ambiente con valore particolare
 export key=value
 ipython
-import subprocess
-subprocess.run(["/challenge/embryoio_level18"])
+  import subprocess
+  subprocess.run(["/challenge/embryoio_level18"])
 
+-----------------------------------------------------------------------------------
 embryoio_level19: //lanciare da ipython con input redirezionato da file e con password da stdin
 ipython
-import subprocess
-import os
-file = open("/tmp/gtnmqs", 'w') #filename gtnmqs
-file.write('mcxavvqg') #password mcxavvqg
-file = open("/tmp/gtnmqs", 'r')
-subprocess.run(['/challenge/embryoio_level19'], stdin=file)
+  import subprocess
+  import os
+  file = open("/tmp/gtnmqs", 'w') #filename gtnmqs
+  file.write('mcxavvqg') #password mcxavvqg
+  file = open("/tmp/gtnmqs", 'r')
+  subprocess.run(['/challenge/embryoio_level19'], stdin=file)
 
+-----------------------------------------------------------------------------------
 embryoio_level20: //lanciare da ipython con output redirezionato a file
 ipython
-import subprocess
-import os
-file = open("/tmp/yjcqvm", 'w')
-subprocess.run(['/challenge/embryoio_level20'], stdout=file)
+  import subprocess
+  import os
+  file = open("/tmp/yjcqvm", 'w')
+  subprocess.run(['/challenge/embryoio_level20'], stdout=file)
 cat /tmp/yjcqv
 
+-----------------------------------------------------------------------------------
 embryoio_level21: //lanciare da ipython con 0 variabili d'ambiente
 env -i ipython
-import subprocess
-subprocess.run(['/challenge/embryoio_level21'])
+  import subprocess
+  subprocess.run(['/challenge/embryoio_level21'])
 
+-----------------------------------------------------------------------------------
 embryoio_level22: //lanciare da python script
 nano my_script.py
   import subprocess
   subprocess.run(['/challenge/embryoio_level22'])
 python my_script.py
 
+-----------------------------------------------------------------------------------
 embryoio_level23: //lanciare da python script con password in stdin
 nano my_script.py
   import subprocess
@@ -151,12 +174,14 @@ nano my_script.py
 python my_script.py
 //input password btjdiomm
 
+-----------------------------------------------------------------------------------
 embryoio_level24: //lanciare da python script con argomento specifico
 nano my_script.py
   import subprocess
   subprocess.run(['/challenge/embryoio_level24', 'mpdgmpmibd'])
 python my_script.py
 
+-----------------------------------------------------------------------------------
 embryoio_level25: //lanciare da python script con variabile d'ambiente specifica
 export dzocab=pxciuoestb
 nano my_script.py
@@ -164,6 +189,7 @@ nano my_script.py
   subprocess.run(['/challenge/embryoio_level25'])
 python my_script.py
 
+-----------------------------------------------------------------------------------
 embryoio_level26: //lanciare da python script con input redirezionato da specifico file con password specifica
 nano my_script.py
   import subprocess
@@ -174,6 +200,7 @@ nano my_script.py
   subprocess.run(["/challenge/embryoio_level26"], stdin=file)
 python my_script.py
 
+-----------------------------------------------------------------------------------
 embryoio_level27: //lanciare da python script con output redirezionato in specifico file
 nano my_script.py
   import subprocess
@@ -183,11 +210,465 @@ nano my_script.py
 python my_script.py
 cat /tmp/hueodj
 
+-----------------------------------------------------------------------------------
 embryoio_level28: //lanciare da python script con 0 variabili d'ambiente
 nano my_script.py
   import subprocess
   subprocess.run(["/challenge/embryoio_level28"])
 env -i python my_script.py
+
+-----------------------------------------------------------------------------------
+embryoio_level29: //lanciare da binary
+nano run.c
+  #include <stdio.h>
+  #include <unistd.h>
+
+  void pwncollege(char* argv[], char *env[]){
+  execve("/challenge/embryoio_level29", argv, env);
+    return ;
+  }
+
+  int main(int argc, char* argv[], char* env[]){
+    pid_t fpid;
+    fpid = fork();
+    if (fpid < 0)
+      printf("error in fork!\n");
+    else if (fpid == 0) {
+      printf("Ok\n");
+      pwncollege(argv, env);
+    }
+    else{
+      printf("Not ok\n");
+      wait(NULL);
+    }
+    return 0;
+  }
+gcc run.c -o run
+./run 
+ 
+-----------------------------------------------------------------------------------
+embryoio_level30: //lanciare da binary con password in stdin wjwiejcb
+nano run.c
+  #include <stdio.h>
+  #include <unistd.h>
+
+  void pwncollege(char* argv[], char *env[]){
+  execve("/challenge/embryoio_level30", argv, env);
+    return;
+  }
+
+  int main(int argc, char* argv[], char* env[]){
+    pid_t fpid;
+    fpid = fork();
+    if (fpid < 0)
+      printf("error in fork!\n");
+    else if (fpid == 0) {
+      printf("Ok\n");
+      pwncollege(argv, env);
+    }
+    else {
+      printf("Not ok\n");
+      wait(NULL);
+    }
+    return 0;
+  }
+gcc run.c -o run
+./run 
+//inserire password da terminale, vuole argc == 0
+
+-----------------------------------------------------------------------------------
+embryoio_level31: //lanciare da binary con valore in argv 1:nlhrekavwx
+nano run.c
+  #include <stdio.h>
+  #include <unistd.h>
+
+  void pwncollege(char* argv[], char *env[]){
+  execve("/challenge/embryoio_level31", argv, env);
+    return;
+  }
+
+  int main(int argc, char* argv[], char* env[]){
+    pid_t fpid;
+    fpid = fork();
+    if (fpid < 0)
+      printf("error in fork!\n");
+    else if (fpid == 0) {
+      printf("Ok\n");
+      argv[1] = "nlhrekavwx";
+      pwncollege(argv, env);
+    }
+    else {
+      printf("Not ok\n");
+      wait(NULL);
+    }
+    return 0;
+  }
+gcc run.c -o run
+./run 
+
+-----------------------------------------------------------------------------------
+embryoio_level32: //lanciare da binary con valore in env: iypurm:injynbnrmg
+export iypurm=injynbnrmg
+nano run.c
+  #include <stdio.h>
+  #include <unistd.h>
+
+  void pwncollege(char* argv[], char *env[]){
+  execve("/challenge/embryoio_level32", argv, env);
+    return;
+  }
+
+  int main(int argc, char* argv[], char* env[]){
+    pid_t fpid;
+    fpid = fork();
+    if (fpid < 0)
+      printf("error in fork!\n");
+    else if (fpid == 0) {
+      printf("Ok\n");
+      pwncollege(argv, env);
+    }
+    else {
+      printf("Not ok\n");
+      wait(NULL);
+    }
+    return 0;
+  }
+gcc run.c -o run
+./run 
+
+-----------------------------------------------------------------------------------
+embryoio_level33: //lanciare da binary con input redirezionato da file /tmp/pojgrq con valore igizdfha 
+echo "igizdfha" > /tmp/pojgrq
+nano run.c
+  #include <stdio.h>
+  #include <unistd.h>
+
+  void pwncollege(char* argv[], char *env[]){
+  execve("/challenge/embryoio_level33", argv, env);
+    return;
+  }
+
+  int main(int argc, char* argv[], char* env[]){
+    pid_t fpid;
+    fpid = fork();
+    if (fpid < 0)
+      printf("error in fork!\n");
+    else if (fpid == 0) {
+      printf("Ok\n");
+      pwncollege(argv, env);
+    }
+    else {
+      printf("Not ok\n");
+      wait(NULL);
+    }
+    return 0;
+  }
+gcc run.c -o run
+./run < /tmp/pojgrq 
+
+-----------------------------------------------------------------------------------
+embryoio_level34: //lanciare da binary con output redirezionato a /tmp/jzcnuz 
+nano run.c
+  #include <stdio.h>
+  #include <unistd.h>
+
+  void pwncollege(char* argv[], char *env[]){
+  execve("/challenge/embryoio_level34", argv, env);
+    return;
+  }
+
+  int main(int argc, char* argv[], char* env[]){
+    pid_t fpid;
+    fpid = fork();
+    if (fpid < 0)
+      printf("error in fork!\n");
+    else if (fpid == 0) {
+      printf("Ok\n");
+      pwncollege(argv, env);
+    }
+    else {
+      printf("Not ok\n");
+      wait(NULL);
+    }
+    return 0;
+  }
+gcc run.c -o run
+./run > /tmp/jzcnuz 
+cat /tmp/jzcnuz 
+
+-----------------------------------------------------------------------------------
+embryoio_level35: //lanciare da binary con output redirezionato a /tmp/jzcnuz 
+nano run.c
+  #include <stdio.h>
+  #include <unistd.h>
+
+  void pwncollege(char* argv[], char *env[]){
+  execve("/challenge/embryoio_level35", argv, env);
+    return;
+  }
+
+  int main(int argc, char* argv[], char* env[]){
+    pid_t fpid;
+    fpid = fork();
+    if (fpid < 0)
+      printf("error in fork!\n");
+    else if (fpid == 0) {
+      printf("Ok\n");
+      pwncollege(argv, env);
+    }
+    else {
+      printf("Not ok\n");
+      wait(NULL);
+    }
+    return 0;
+  }
+gcc run.c -o run
+env -i ./run
+
+-----------------------------------------------------------------------------------
+embryoio_level36: //eseguire con pipe in cat 
+/bin/bash
+./embryoio_level36 | cat 
+
+-----------------------------------------------------------------------------------
+embryoio_level37: //eseguire con pipe in grep 
+/bin/bash
+./embryoio_level37 | grep ''
+
+-----------------------------------------------------------------------------------
+embryoio_level38: //eseguire con pipe in sed 
+/bin/bash
+./embryoio_level38 | sed ''
+
+-----------------------------------------------------------------------------------
+embryoio_level39: //eseguire con pipe in rev 
+/bin/bash
+./embryoio_level38 | rev | rev 
+
+-----------------------------------------------------------------------------------
+embryoio_level40: //eseguire cat per stdin con password over stdin
+/bin/bash
+cat | /challenge|embryoio_level40 
+//inserire password in stdin
+
+-----------------------------------------------------------------------------------
+embryoio_level41: //eseguire con rev in stdin, password in stdin
+/bin/bash
+rev | rev | /challenge/embryoio_level41 
+//stdin mzpvwxwu + CTRL+D
+
+-----------------------------------------------------------------------------------
+embryoio_level42: //shellscript con cat a fine di stdout
+cd /home/hacker/
+nano my_script.sh
+  #!/bin/bash
+  /challenge/embryoio_level42 | cat  
+bash my_script.sh 
+
+-----------------------------------------------------------------------------------
+embryoio_level43: //shellscript con grep a fine di stdout
+cd /home/hacker/
+nano my_script.sh
+  #!/bin/bash
+  /challenge/embryoio_level43 | grep ''
+bash my_script.sh 
+
+-----------------------------------------------------------------------------------
+embryoio_level44: //shellscript con sed a fine di stdout
+cd /home/hacker/
+nano my_script.sh
+  #!/bin/bash
+  /challenge/embryoio_level44 | sed ''
+bash my_script.sh 
+
+-----------------------------------------------------------------------------------
+embryoio_level45: //shellscript con rev a fine di stdout
+nano /home/hacker/my_script.sh
+  #!/bin/bash
+  /challenge/embryoio_level45 | rev | rev
+bash /home/hacker/my_script.sh 
+
+-----------------------------------------------------------------------------------
+embryoio_level46: //shellscript con cat a stdin, password in stdin
+nano /home/hacker/my_script.sh
+  #!/bin/bash
+  cat | /challenge/embryoio_level46
+bash /home/hacker/my_script.sh 
+yedfcjwk
+
+-----------------------------------------------------------------------------------
+embryoio_level47: //shellscript con cat a stdin, password in stdin
+nano /home/hacker/my_script.sh
+  #!/bin/bash
+  rev | rev | /challenge/embryoio_level47
+bash /home/hacker/my_script.sh 
+uqrunmyq //password in stdin + CTRL+D
+
+-----------------------------------------------------------------------------------
+embryoio_level48: //ipython con cat in stdout
+ipython 
+  from pwn import *
+  io1 = subprocess.Popen("/challenge/embryoio_level48", stdout=PIPE)
+  io2 = subprocess.Popen("cat", stdin=io1.stdout, stdout=PIPE)
+  output = io2.communicate()[0]
+  print(output)
+
+-----------------------------------------------------------------------------------
+embryoio_level49: //ipython con grep in stdout
+ipython 
+  from pwn import *
+  io1 = subprocess.Popen("/challenge/embryoio_level49", stdout=PIPE)
+  io2 = subprocess.Popen(["grep", ""], stdin=io1.stdout, stdout=PIPE)
+  output = io2.communicate()[0]
+  print(output)
+
+-----------------------------------------------------------------------------------
+embryoio_level50: //ipython con sed in stdout
+ipython 
+  from pwn import *
+  io1 = subprocess.Popen("/challenge/embryoio_level50", stdout=PIPE)
+  io2 = subprocess.Popen(["sed", ""], stdin=io1.stdout, stdout=PIPE)
+  output = io2.communicate()[0]
+  print(output)
+
+-----------------------------------------------------------------------------------
+embryoio_level51: //ipython con rev in stdout
+ipython 
+  from pwn import *
+  io1 = subprocess.Popen("/challenge/embryoio_level51", stdout=PIPE)
+  io2 = subprocess.Popen("rev", stdin=io1.stdout, stdout=PIPE)
+  io3 = subprocess.Popen("rev", stdin=io2.stdout, stdout=PIPE)
+  output = io3.communicate()[0]
+  print(output)
+
+-----------------------------------------------------------------------------------
+embryoio_level52: //ipython con cat in stdin, password in stdin nlcncamf
+ipython 
+  from pwn import *
+  io1 = subprocess.Popen("cat", stdout=PIPE)
+  io2 = subprocess.Popen("/challenge/embryoio_level52", stdin=io1.stdout)
+  output = io1.communicate()[0]
+  print(output)
+//inserire pass in stdin 
+
+-----------------------------------------------------------------------------------
+embryoio_level53: //ipython con rev in stdin, con password in stdin
+ipython 
+  from pwn import *
+  io1 = subprocess.Popen("rev", stdout=PIPE)
+  io2 = subprocess.Popen("rev", stdin=io1.stdout, stdout=PIPE)
+  io3 = subprocess.Popen("/challenge/embryoio_level53", stdin=io2.stdout)
+  output = io3.communicate()[0]
+  print(output)
+//inserire password in stdin + CTRL+D
+
+-----------------------------------------------------------------------------------
+embryoio_level54: //python script con cat in stdout
+nano my_script.py
+  from pwn import *
+  io1 = subprocess.Popen("/challenge/embryoio_level54", stdout=PIPE)
+  io2 = subprocess.Popen("cat", stdin=io1.stdout)
+  output = io2.communicate()[0]
+  print(output)
+python my_script.py 
+
+-----------------------------------------------------------------------------------
+embryoio_level55: //python script con grep in stdout
+nano my_script.py
+  from pwn import *
+  io1 = subprocess.Popen("/challenge/embryoio_level55", stdout=PIPE)
+  io2 = subprocess.Popen(["grep", ""], stdin=io1.stdout)
+  output = io2.communicate()[0]
+python my_script.py 
+
+-----------------------------------------------------------------------------------
+embryoio_level56: //python script con sed in stdout
+nano my_script.py
+  from pwn import *
+  io1 = subprocess.Popen("/challenge/embryoio_level56", stdout=PIPE)
+  io2 = subprocess.Popen(["sed", ""], stdin=io1.stdout)
+  output = io2.communicate()[0]
+python my_script.py 
+
+-----------------------------------------------------------------------------------
+embryoio_level57: //python script con rev in stdout
+nano my_script.py
+  from pwn import *
+  io1 = subprocess.Popen("/challenge/embryoio_level57", stdout=PIPE)
+  io2 = subprocess.Popen("rev", stdin=io1.stdout, stdout=PIPE)
+  io3 = subprocess.Popen("rev", stdin=io2.stdout)
+  output = io3.communicate()[0]
+python my_script.py 
+
+-----------------------------------------------------------------------------------
+embryoio_level58: //python script con cat in stdin, password in stdin: qipsnryg
+nano my_script.py
+  from pwn import *
+  io1 = subprocess.Popen("cat", stdout=PIPE)
+  io2 = subprocess.Popen("/challenge/embryoio_level58", stdin=io1.stdout)
+  output = io1.communicate()[0]
+  print(output)
+python my_script.py 
+//inserire pass in stdin
+
+-----------------------------------------------------------------------------------
+embryoio_level59: //python script con rev in stdin, password in stdin: djwabzsx
+nano my_script.py
+  from pwn import *
+  io1 = subprocess.Popen("rev", stdout=PIPE)
+  io2 = subprocess.Popen("rev", stdin=io1.stdout, stdout=PIPE)
+  io3 = subprocess.Popen("/challenge/embryoio_level59", stdin=io2.stdout)
+  output = io3.communicate()[0]
+  print(output)
+python my_script.py 
+//inserire pass in stdin
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
