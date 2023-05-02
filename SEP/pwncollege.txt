@@ -497,7 +497,7 @@ bash /home/hacker/my_script.sh
 yedfcjwk
 
 -----------------------------------------------------------------------------------
-embryoio_level47: //shellscript con cat a stdin, password in stdin
+embryoio_level47: //shellscript con rev a stdin, password in stdin
 nano /home/hacker/my_script.sh
   #!/bin/bash
   rev | rev | /challenge/embryoio_level47
@@ -619,9 +619,164 @@ nano my_script.py
   io2 = subprocess.Popen("rev", stdin=io1.stdout, stdout=PIPE)
   io3 = subprocess.Popen("/challenge/embryoio_level59", stdin=io2.stdout)
   output = io3.communicate()[0]
-  print(output)
 python my_script.py 
 //inserire pass in stdin
+//bugged, doesnt get stdin ???
+
+-----------------------------------------------------------------------------------
+embryoio_level60: //binary con cat in stdout
+nano run.c
+  #include <stdio.h>
+  #include <unistd.h>
+
+  void pwncollege(char* argv[], char *env[]){
+    execve("/challenge/embryoio_level60", argv, env);
+    return;
+  }
+
+  int main(int argc, char* argv[], char* env[]){
+    pid_t fpid;
+    fpid = fork();
+    if (fpid < 0)
+      printf("error in fork!\n");
+    else if (fpid == 0) {
+      printf("Ok\n");
+      pwncollege(argv, env);
+    }
+    else {
+      printf("Not ok\n");
+      wait(NULL);
+    }
+    return 0;
+  }
+gcc run.c -o run
+./run | cat
+
+-----------------------------------------------------------------------------------
+embryoio_level61: //binary con grep in stdout
+nano run.c
+  #include <stdio.h>
+  #include <unistd.h>
+
+  void pwncollege(char* argv[], char *env[]){
+    execve("/challenge/embryoio_level61", argv, env);
+    return;
+  }
+
+  int main(int argc, char* argv[], char* env[]){
+    pid_t fpid;
+    fpid = fork();
+    if (fpid < 0)
+      printf("error in fork!\n");
+    else if (fpid == 0) {
+      printf("Ok\n");
+      pwncollege(argv, env);
+    }
+    else {
+      printf("Not ok\n");
+      wait(NULL);
+    }
+    return 0;
+  }
+gcc run.c -o run
+./run | grep ''
+
+-----------------------------------------------------------------------------------
+embryoio_level62: //binary con grep in stdout
+nano run.c
+  #include <stdio.h>
+  #include <unistd.h>
+
+  void pwncollege(char* argv[], char *env[]){
+    execve("/challenge/embryoio_level62", argv, env);
+    return;
+  }
+
+  int main(int argc, char* argv[], char* env[]){
+    pid_t fpid;
+    fpid = fork();
+    if (fpid < 0)
+      printf("error in fork!\n");
+    else if (fpid == 0) {
+      printf("Ok\n");
+      pwncollege(argv, env);
+    }
+    else {
+      printf("Not ok\n");
+      wait(NULL);
+    }
+    return 0;
+  }
+gcc run.c -o run
+./run | sed ''
+
+-----------------------------------------------------------------------------------
+embryoio_level63: //binary con grep in stdout
+nano run.c
+  #include <stdio.h>
+  #include <unistd.h>
+
+  void pwncollege(char* argv[], char *env[]){
+    execve("/challenge/embryoio_level63", argv, env);
+    return;
+  }
+
+  int main(int argc, char* argv[], char* env[]){
+    pid_t fpid;
+    fpid = fork();
+    if (fpid < 0)
+      printf("error in fork!\n");
+    else if (fpid == 0) {
+      printf("Ok\n");
+      pwncollege(argv, env);
+    }
+    else {
+      printf("Not ok\n");
+      wait(NULL);
+    }
+    return 0;
+  }
+gcc run.c -o run
+./run | rev | rev
+
+-----------------------------------------------------------------------------------
+embryoio_level64: //binary con cat in stdin hardcoded password
+??????????????????????????????????????? non ho sbatti di imparare le pipe in C
+
+-----------------------------------------------------------------------------------
+embryoio_level65: //binary con rev in stdin hardcoded password
+??????????????????????????????????????? non ho sbatti di imparare le pipe in C
+
+-----------------------------------------------------------------------------------
+embryoio_level66: //parent process find
+???
+
+-----------------------------------------------------------------------------------
+embryoio_level67: //parent process find, con argv: 1:ggphqthd
+???
+
+-----------------------------------------------------------------------------------
+embryoio_level68: //shellscript con argv 172:defqwqwwdc
+touch my_script.sh
+nano my_script.sh
+  #!/bin/bash
+  cd /challenge
+  ./embryoio_level68 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 defqwqwwdc
+bash my_script.sh
+
+-----------------------------------------------------------------------------------
+embryoio_level69: //shellscript con argv empty, argc == 0
+????
+
+
+
+
+
+
+
+
+
+
 
 
 
