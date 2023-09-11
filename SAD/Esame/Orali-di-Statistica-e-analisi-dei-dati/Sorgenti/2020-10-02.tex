@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
+\newcommand{\bb}{\textbf}
+\newcommand{\ii}{\textit}
+
+\title{Orali del 2 ottobre 2020}
+\author{Alessandro Di Gioacchino}
+
+\begin{document}
+
+    \maketitle
+    
+    Teorema di Bayes. \\
+    $ P ( A \mid B ) $ vuole quantificare il rapporto di causalità tra $ A $ e $ B $? No. Il teorema di Bayes stesso indica che non è stato $ B $ a scatenare $ A $, perché considera
+    anche $ P ( B \mid A ) $ \\
+    \[
+        P ( A \mid B ) = \frac{ P ( B \mid A ) P ( A ) }{ P ( B ) }
+    \]
+    Esercizio: ho un'urna con $ 10 $ palline, di cui $ 5 $ bianche e le altre nere. Estraiamo (senza re-immissione) due palline: $ E_1 $ è l'esito della prima estrazione, $ E_2 $
+    l'esito della seconda. Qual è la probabilità che $ E_2 $ sia bianca, dato che $ E_1 $ è bianca? \\
+    Stimatore non deviato per il parametro di un modello bernoulliano. \\
+    
+    Abbiamo un campione in cui ogni osservazione è una coppia. Vogliamo calcolare le frequenze congiunte di questo campione. Dopo averle calcolate, come le organizzeremmo per
+    mostrarle? La matrice in cui organizziamo le frequenze è di dimensioni $ n \cdot n $, posto che $ n $ sia la taglia del campione? No, è una matrice $ a \cdot b $ dove $ a $ sono i
+    valori osservabili del primo carattere e $ b $ quelli del secondo. Cosa indica un generico elemento della matrice? Se indicasse la frequenza totale in cui queste coppie si ripetono,
+    di che frequenza staremmo parlando? Assoluta. Che succede se sommo una colonna di quella matrice? Ottengo la frequenza marginale di un carattere della coppia; in altri 
+    termini, stiamo tenendo costante un elemento della coppia e facendo variare l'altro. \\
+    Immaginiamo di avere una coppia di variabili aleatorie. Il concetto di valore atteso si può estendere in modo da coinvolgerle entrambe: come? \\
+    Il valore atteso di una variabile aleatoria è aleatorio o costante? È costante. Un'espressione che coinvolge qualcosa di aleatorio ha come risultato qualcosa di aleatorio:
+    quindi, siccome il valore atteso di una variabile aleatoria è costante, non compare alcuna variabile aleatoria nel calcolo di $ \mathcal E ( X + Y ) $ \\
+    Come calcoliamo $ \mathcal E ( X + Y ) $ \\
+    In quale caso possiamo scrivere la funzione di massa congiunta come prodotto delle marginali?
+    Nel seguente passaggio, scriviamo la doppia sommatoria di una somma come la somma di due sommatorie:
+    \[
+        \sum_{ x } \sum_{ y } ( x P ( X = x ) + y P ( Y = y )) = \sum_{ x } \sum_{ y } x P ( X = x ) + \sum_{ x } \sum_{ y } y P ( Y = y )
+    \]
+    Nel caso più generale possibile, cosa cambia se al posto della somma avessimo una generica funzione $ g $? \\
+    Vogliamo stimare il valore atteso di una popolazione. Cos'è $ \tau (\Theta) $? Una quantità ignota che dipende dal parametro $ \Theta $ \\
+    Il valore atteso che vogliamo stimare è $ \Theta $ o $ \tau (\Theta) $? Sicuramente è $ \tau (\Theta) $, eventualmente anche $ \Theta $ (se il parametro della distribuzione è
+    il valore atteso). Come stimiamo il valore atteso? Come ottengo la stima? Calcolando lo stimatore. Che stimatore utilizziamo di solito per il valore atteso? Com'è definita la
+    media campionaria? Perché utilizziamo proprio lei? Dimostriamo che è uno stimatore non deviato per il valore atteso di una popolazione. Perché è desiderabile che uno stimatore
+    sia non distorto? Cosa vuol dire che il valore atteso della popolazione è esattamente quanto voglio stimare? Cosa posso dire di una distribuzione, se conosco il suo valore
+    atteso?
+    
+\end{document}

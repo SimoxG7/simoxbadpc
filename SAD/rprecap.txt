@@ -1,0 +1,699 @@
+3.1 - INTRODUZIONE ---------------------------------------------------------------------
+
+Le due interpretazioni della probabilità di un evento sono interpretazione frequentista e interpretazione soggettiva della probabilità. 
+
+Nell'interpretazione frequentista, la probabilità di un esito di un esperimento è considerata come una proprietà di quell'esito. 
+
+Nell'interpretazione soggettivista, la probabilità di un esito non viene pensato come una proprietà dell'esito, ma piuttosto come un'affermazione sulle credenza della persona che sta stimando la probabilità. 
+
+3.2 - SPAZI CAMPIONE ED EVENTI ---------------------------------------------------------
+
+Possiamo definire lo spazio di tutti i possibili esiti come spazio campione di un esperimento e viene indicato come S. 
+
+//matematicamente usando {x1, x2, ...}
+
+Ogni sottoinsieme dello spazio campione S è noto come un evento e viene indicato come E. Un evento è un insieme consistenti di alcuni esiti dell'esperimento. Se l'esito dell'esperimento è contenuto in E, allora l'evento E è avvenuto. 
+
+Per ogni due eventi E e F di uno spazio campione S, possiamo definire il nuovo evento E ∪ F, ovvero l'unione dei due eventi.
+
+Per ogni due eventi E e F di uno spazio campione S, possiamo definire il nuovo evento E, scritto anche come E ∩ F, ovvero l'interesezione dei due eventi.
+Se EF = ∅, allora E e F sono mutuamente esclusivi. 
+
+Per ogni evento E definiamo il suo complemento come E^c o -E.  //S^c = ∅ 
+
+Per ogni due eventi E e F di uno spazio campione S, se tutti gli esiti di E sono contenuti in F, allora si dice che E è contenuto in F e si scrive E ⊂ F (oppure F ⊃ E).
+
+3.3 - DIAGRAMMI DI VENN E ALGEBRA DEGLI EVENTI -----------------------------------------
+
+//se davvero non sai cosa sono i diagrammi di venn torna alle elemntari o guarda il libro per l'amor di dio 
+
+L'algebra degli eventi (unione, intersezione e complementi) comprende le leggi di commutatività, associatività, distributività., De Morgan. 
+
+Commutatività: E ∪ F = F ∪ E , EF = FE
+Associatività: (E ∪ F ) ∪ G = E ∪ (F ∪ G) , (EF) G = E (FG)
+Distributività: (E ∪ F) G = EG ∪ FG , EF ∪ G = (E ∪ G)(F ∪ G) 
+De Morgan: (E ∪ F)^c = E^c F^c
+           (EF)^c = E^c ∪ F^c
+
+3.4 - ASSIOMI DI PROBABILITA' ----------------------------------------------------------
+
+Supponiamo che ad ogni evento E di un esperimento abbia uno spazio campione S, sia associato un numero P(E) rispettante i 3 seguenti assiomi:
+ASSIOMA 1: 0 <= P(E) <= 1 
+ASSIOMA 2: P(S) = 1
+ASSIOMA 3: Per ogni sequenza di eventi mutamente esclusivi E1, E2, ... la probabilità dell'unione degli eventi è uguale alla sommatoria della probabilità degli eventi. 
+
+Chiamiamo P(E) la probabilità dell'evento E. 
+
+Da questi assiomi possiamo derivare che:
+    1 = P(S) = P(E ∪ E^c) = P(E) + P(E^c) , ovvero: P(E^c) = 1 − P(E) 
+Ovvero che la probabilità che un evento non avvenga è 1 meno la probabilità che l'evento avvenga. 
+
+Possiamo anche derivare che:
+    P(E ∪ F) = P(E) + P(F) − P(EF)
+
+//dimostrabile con diagramma di Venn
+    
+3.5 - SPAZI CAMPIONI AVENDO ESITI EQUIPROBABILI ----------------------------------
+
+Ha senso assumere che alcuni eventi siano equiprobabili, ovvero che per S = {1, 2, ..., n} abbiamo che P({1}) = P({2}) = ... = P({n} = p
+
+Dagli assiomi 2 e 3 possiamo conseguire:
+    1 = P(S) = P({1}) + P({2}) + ... + P({n}) = np 
+e dunque:
+    P({i}) = p = 1/N 
+. Da ciò possiamo derivare dall'assioma 3 che per ogni evento E:
+    P(E) = numero di punti in E / n 
+, ovvero che ogni esito è equiprobabile. 
+
+Combinazioni: 
+Se abbiamo r esperimenti che devono essere svolti e il primo ha n1 esiti, il secondo ha n2 esiti, ...., e l'ultimo ha nr esiti, allora vi sono in totale n1 * n2 * ... * nr possibili combinazioni. 
+
+Permutazioni: 
+Supponendo di avere n oggetti, siamo in grado di permutarli in n! permutazioni. 
+
+Disposizioni:
+Supponiamo di voler determinare il numero di gruppi differenti di r oggetti che possono essere disposti in un totale di n oggetti. Questo equivale a:
+    n! / ((n - r)! r!)
+
+Definiamo (n r) come coefficiente binomiale n! / ((n - r)! r!) e chiamiamo il risultato le possibili combinazioni di n oggetti presi 3. 
+
+3.6 - PROBABILITA' CONDIZIONATA --------------------------------------------------------
+
+La probabilità condizionata di un evento E dato F viene indicata come P(E | F).
+
+Una forma per ottenere P(E | F) è:
+    P(E | F) = P(EF) / P(F)   // definita solo per P(F) > 0 
+. 
+
+E dunque:
+    P(EF) = P(F) P(E | F)
+.
+
+3.7 - FORMULA DI BAYES -----------------------------------------------------------------
+
+Siano E e F eventi. Possiamo esprimere E come:
+    E = EF ∪ EF^c //complementare 
+.
+
+Figure 3.6, E = EF ∪ EF^c.
+
+Perciò, dall'assioma 3 otteniamo:
+    P(E) = P(EF) + P(EF^c) 
+    = P(E|F) P(F) + P(E|F^c) P(F^c)
+    = P(E|F) P(F) + P(E|F^c) [1−P(F)]
+.
+
+Considerate le partizioni F1, F2, ..., Fn che sono mutualmente esclusive tale che l'unione delle partizione va a comporre S. Per la natura delle partizioni, può avvenire solo uno degli eventi F1, F2, ..., Fn. 
+
+Possiamo definire dunque che:
+    E = UNIONE [i=1 to n] EFi //intersezione tra E e la partizione Fi 
+.
+
+Sfruttando il fatto che gli eventi EFi, i = 1 ... n sono mutualmente esclusivi, otteniamo che: 
+    P(E) = SOMMATORIA [i=1 to n] P(EFi) = SOMMATORIA [i=1 to n] P(E|Fi) P(Fi) 
+.
+
+Data l'equazione sopracitata, possiamo ottenere la formula di Bayes:
+    P(Fj|E) = P(EFj) / P(E)
+    = P(E|Fj) P(Fj) / SOMMATORIA [i=1 to n] P(E|Fi) P(Fi)
+.
+
+3.8 - EVENTI INDIPENDENTI ---------------------------------------------------------------
+
+La probabilità condizionata P(E|F), ovvero la probabilità condizionata di E dato F, non è generalmente uguale a P(E), ovvero la probabilità incondizionata di E.
+
+Nei casi speciali in cui però P(E|F) equivale infatti a P(E), allora E è indipendente da F. Ovvero E è indipendente da F se la conoscenza che F sia occorso o meno non cambia la probabilità che succeda E.
+
+Poichè P(E|F) = P(EF) / P(F), allora E è indipendente da F se:
+    P(EF) = P(E) P(F)
+.
+
+Poichè questa equazione è simmetrica in E e F, allora se E è indipendente da F, allora anche F è indipendente da E. 
+
+Se E e F sono indipendenti, allora lo sono anche E e F^c. 
+
+//dimostrazione sul libro, pg 76, pg pdf 141 
+
+Per l'indipendenza tra 3 eventi invece, abbiamo una situazione più complicata. 
+
+Tre eventi E, F e G sono indipendenti se: 
+    P(EFG) = P(E)P(F)P(G)
+    P(EF) = P(E)P(F)
+    P(EG) = P(E)P(G)
+    P(FG) = P(F)P(G)
+.
+
+4.1 - VARIABILI CASUALI ----------------------------------------------------------------
+
+Le quantità di interesse determinate da un risultato dell'esperimento sono note come variabili casuali. 
+
+Poichè il valore di una variabile casuale è determinato dal risultato dell'esperimento, potremmo assgnare probabilità a tutti i suoi possibili valori. 
+
+Ad esempio, con due dadi a 6 facce:
+P{X = 4} = P{(1,3) (2,2) (3,1)} = 3/36.
+
+In altre parole, la variabile casuale X può ottenere un qualsiasi valore intero tra 2 e 12 e la probabilità che prenda ciascun valore è data dalla seguente equazione.
+    1 = P(S) = P( UNIONE [i=2 to 12] {X = i}) = SOMMATORIA [i=2 to 12] P{X = i} 
+.
+
+Le variabili casuali possono avere un numero finito di valori (x1, ..., xn) o infinito (x1, ...). In tali casi vengono dette discrete.
+
+Vi sono però anche variabili casuali che possono assumere un continuo di valori e vengono dette pertanto variabili casuali continue. 
+
+La funzione di distribuzione cumulativa (o semplicemente funzione di distribuzione) F della variabile casuale X è definita per un qualsiasi numero reale x da:
+    F(x) = P{X <= x}
+, ovvero F(x) è la probabilità che la variabile casuale X assuma un valore che è minore o uguale a x. 
+
+Si può usare anche la notazione "X ∼ F" per indicare che F è la funzione di distribuzione di X.
+
+Tutte le probabilità riguardanti X possono essere espresse per mezzo della sua funzione di distribuzione F. 
+
+4.2 - TIPI DI VARIABILI CASUALI ---------------------------------------------------------
+
+Se una variabile aleatoria ha un insieme di possibili valori che è una sequenza, allora viene detta discreta. 
+
+Per una variabile discreta X definiamo la funzione di massa di probabilità p(a) di X come:
+    p(a) = P{X = a}
+. 
+
+La funzione di massa di probabilità p(a) è positiva per al massimo un numero di valori finito di a; ovvero: se X deve assumere uno dei valori x1, x2, ... , allora 
+    p(xi) > 0 , i = 1, 2, ...
+    p(x) = 0 , per tutti gli altri valori di x
+.
+
+Poichè X deve prendere uno dei valori xi, abbiamo:
+    SOMMATORIA [i=1 to inf] p(xi) = 1
+.
+
+//Example 4.2a sul libro è come quello fatto in classe.
+
+Dove l'insieme di possibili valori di una variabile casuale discreta è una sequenza, dobbiamo spesso considerare variabili casuali il cui possibile insieme di valori è un intervallo. 
+
+Sia X una tale variabile aleatoria. X è una variabile aleatoria continua se esiste una funzione non negativa f(x), definita per tutti i reali x appartenenti a (-inf, +inf), avente la proprietà che per un qualsiasi insieme B di numeri reali:
+    P{X ∈ B} = INTEGRALE[B lower bound] f(x) dx 
+.
+
+Tutte le propisizioni sulla probabilità riguardante X possono essere risposte in termini di f(x). Se utilizziamo B = [a, b] infatti:
+    P{a <= X <= b} = INTEGRALE [a -> b] f(x) dx 
+. 
+
+Se a = b nell'integrale sopra, allora P{X = a} = 0, ovvero che la probabilità che una variabile aleatoria continua assuma un qualsiasi particolare valore è 0. 
+
+4.3 - VARIABILI ALEATORIE DISTRIBUITE CONGIUNTAMENTE -------------------------------------
+
+Per specificare la relazione tra due variabili aleatorie, definiamo la funzione di distribuzione di probabilità cumulativa congiunta di X e Y come:
+    F(x, y) = P{X <= x, Y <= y}
+.
+
+4.3.1 - VARIABILI ALEATORIE INDIPENDENTI ------------------------------------------------
+
+Due variabili aleatorie X e Y sono dette indipendenti se per un qualsiasi insieme di numeri reali A e B:
+    P{X ∈ A, Y ∈ B} = P{X ∈ A} P{Y ∈ B} //condizione di indipendenza 
+, ovvero: X e Y sono indipendenti se, per tutti gli A e B, gli eventi EA = {X ∈ A} e FB = {Y ∈ B} sono indipendenti. 
+
+Dunque, in termini della funzione di distribuzione F di X e Y, abbiamo che X e Y sono indipendenti se:
+    F(a, b) = FX(a) FY(b) , per tutti gli a e b
+.
+
+Quando X e Y sono variabili aleatorie discrete, la condizione di indipendenza è equivalente a :
+    p(x, y) = pX(x) pY(y)  , for all x, y
+, dove pX e pY sono la funzione di massa di probabilità di X e Y. 
+
+[... libro e quad]
+
+4.3.2 - DISTRIBUZIONI CONDIZIONALI -------------------------------------------------------
+
+La relazione tra due variabili aleatorie può essere chiarita considerando la distribuzione condizionale di un valore dato dell'altro. 
+
+Richiamando che per due eventi E e F, la probabilità condizionale di E dato F è definito, avendo P(F) > 0, da:
+    P(E|F) = P(EF) / P(F)
+. 
+
+Perciò se X e Y sono variabili aleatorie discrete, è naturale definire la funzione di massa di probabilità condizionale di X dato che Y = y, come:
+    pX|Y (x|y) = P{X = x|Y = y} = P{X = x, Y = y} / P{Y = y} = p(x, y) / pY(y)
+, per tutti i valori di y tali che pY(y) > 0.
+
+4.4 - VALORE ATTESO ----------------------------------------------------------------------
+
+Se X è una variabile aleatoria discreta che può assumere i valori x1, x2, ..., allora il valore atteso di X, denotato come E[X], è definito come:
+    E[X] = SOMMATORIA[i] xi P{X = xi}
+. Ovvero: il valore atteso di X è una media pesata dei possibili valori che X può assumere, ciascun valore pesato dalla probabilità che X lo assuma. 
+
+4.5 - PROPRIETA' DEL VALORE ATTESO -------------------------------------------------------
+
+Supponiamo una variabile aleatoria X e la sua distribuzione di probabilità; supponiamo di essere interessati a calcolare non il valore atteso di X, bensì il valore di una funzione di X, ad esempio g(X). 
+
+Poichè g(X) stessa è una variabile aleatoria, deve avere una distribuzione di probabilità, calcolabile dalla conoscenza della distribuzione di X. Una volta ottenuta la distribuzione di g(X), possiamo calcolare E[g(X)] con la definizione del valore atteso. 
+
+Vi è però un modo migliore per fare ciò. Poichè g(X) prende il valore g(x) quando X = x, allora E[g(X)] dovrebbe essere la media pesata dei possibili valori g(x) con, dato un x, il peso dato a g(x) è uguale alla probabilità che X sia uguale a x. 
+
+Otteniamo dunque la seguente propisizione:
+a) se X è una variabile aleatoria discreta con funzione di massa di probabilità p(x), allora per una qualsiasi funzione g con valore reale:
+    E[g(X)] = SOMMATORIA[x] (g(x)p(x))
+
+b) se X è una variabile aleatoria continua con funzione di densità di probabilità f(x), allora per ogni funzione g con valore reale:
+    E[g(X)] = INTEGRALE[−∞ to ∞] (g(x)f(x) dx)
+.
+
+Dalla proposizione otteniamo il corollario:
+Se a e b sono costanti, allora:
+    E[aX + b] = aE[X] + b
+.
+
+Se nel corollario a = 0, otteniamo: 
+    E[b] = b
+. Se b = 0 otteniamo:
+    E[aX] = aE[X]
+, ovvero il valore atteso di una costante moltiplicata per una variabile aleatoria è semplicemente la costante moltiplicata per il valore atteso della variabile aleatoria. 
+
+4.5.1 - VALORE ATTESO DI SOMME DI VARIABILI ALEATORIE -----------------------------------
+
+Per due variabili aleatorie X e Y abbiamo che:
+    E[X + Y] = E[X] + E[Y]
+.
+
+Inoltre:
+    E[X + Y + Z] = E[(X + Y) + Z] = E[X + Y] + E[Z] = E[X] + E[Y] + E[Z]
+e in generale, per un qualsiasi n:
+    E[X1 + X2 + ... + Xn] = E[X1] + E[X2] + ... + E[Xn]
+.
+
+Supponiamo che il valore di una variabile aleatoria X debba essere predetto. Se prediciamo che X sia uguale a c, allora il quadrato "dell'errore" coinvolto sarà (X - c)^2.
+
+Inoltre:
+    E[(X − c)^2] >= E[(X − μ)^2]
+.
+
+4.6 - VARIANZA ---------------------------------------------------------------------------
+
+Se X è una variabile aleatoria con μ = E[X], allora la varianza di X, denotata come Var(X), è definita come:
+    Var(X) = E[(X − μ)^2]
+o anche:
+    Var(X) = E[X^2] − (E[X])^2
+.
+
+Un'utile identità per le varianze è quella per qualsiasi costanti a e b:
+    Var(aX + b) = a^2 * Var(X)
+.
+
+La √Var(X) è detta deviazione standard, che ha la stessa unità di misura del mean.
+
+4.7 - COVARIANZA E VARIANZA DI SOMME DI VARIABILI ALEATORIE -----------------------------
+
+Generalmente:
+    Var(X + X) = 4 Var(X) != Var(X) + Var(X)
+; vi è però un caso particolare in cui la varianza di una somma di variabili aleatoria è uguale alla somma delle varianze. Ciò avviene quando le variabili aleatorie sono indipendenti. 
+
+Def: la covarianza di due variabili aleatorie X e Y, scritta come Cov(X, Y), è definita come:
+    Cov(X, Y) = E[(X − μx)(Y − μy)]
+, dove μx e μy sono i valori medi (mean) di X e Y, rispettivamente. 
+
+Un'espressione utile per la Cov(X, Y) si può ottenere espandendo il lato destro della definizione, ottenendo:
+    Cov(X, Y) = E[XY] − E[X]E[Y]
+. Dalla definizione possiamo esservare le seguenti proprietà:
+    1) Cov(X, Y) = Cov(Y, X)
+    2) Cov(X, X) = Var(X)
+    3) Cov(aX, Y) = a Cov(X, Y)
+.
+
+La covarianza possiete anche una proprietà additiva:
+    Cov(X1 + X2, Y) = Cov(X1, Y) + Cov(X2, Y)
+.
+
+Il lemma può essere generalizzato per mostrare che:
+    Cov (Σ[i=1 to n] Xi, Y) = Σ[i=1 to n] Cov(Xi , Y)
+, da cui segue:
+    Cov (Σ[i=1 to n] Xi, Σ[j=1 to m] Xj) = Σ[i=1 to n] Σ[j=1 to m] Cov(Xi, Yj)
+.
+
+Da ciò deriva il seguente corollario:
+    Var(Σ [i=1 to n] Xi) = Σ[i=1 to n] Var(Xi) + Σ[i=1 to n] Σ[j=1, j!=i to n] Cov(Xi, Xj)
+.
+
+Nel caso in cui n sia uguale a 2 otteniamo:
+    Var(X + Y) = Var(X) + Var(Y) + Cov(X, Y) + Cov(Y , X)
+oppure 
+    Var(X + Y) = Var(X) + Var(Y) + 2Cov(X, Y)
+.
+
+Teorema:
+Se X e Y sono variabili indipendenti, allora Cov(X, Y) = 0 e pertanto per le variabili indipendenti X1, ..., Xn:
+    Var(Σ[i=1 to n] Xi) = Σ[i=1 to n] Var(Xi)
+.
+
+La forza di una relazione tra X e Y è una quantità senza dimensione ottenuta dividendo la covarianza per il prodotto delle deviazioni standard di X e Y, ovvero:
+    Corr(X, Y) = Cov(X, Y) / √( Var(X) Var(Y) )
+.
+
+4.9 - DISUGUAGLIANZA DI CHEBYSHEV E LA LEGGE DEBOLE DEI GRANDI NUMERI --------------------
+
+Disuguaglianza di Markov: 
+Se X è una variabile aleatoria che ottiene solo valori positivi, allora per ongi valore a > 0:
+    P{X >= a} <= E[X] / a 
+.
+
+//si dimostra con integrali.
+
+Come corollario della disuguaglianza di Markov otteniamo la disuguaglianza di Chebyshev.
+
+Disuguaglianza di Chebyshev:
+Se X è una variabile aleatoria con media μ e varianza σ^2, allora per qualsiasi valore k > 0: 
+    P{|X − μ| >= k} <= σ^2 / k^2
+.
+
+Le due disuguaglianze sono importanti perchè ci permettono di derivare dei bound sulle probabilità quando solo la media (o sia la media che la varianza) della distribuzione di probabilità sono note. 
+
+Rimpiazzando k con kσ nella disuguaglianza di Chebyshev, possiamo scriverla come:
+    P{|X − μ| >= kσ} <= 1 / k^2
+, ovvero la probabilità che una variabile aleatoria differisca dalla sua media di più di k deviazioni standard è limitata a 1/k^2.
+
+La legge debole dei grandi numeri:
+Siano X1, X2, ..., una sequenza di variabili aleatorie indipendenti e identicamente distribuite, ciascuna avente E[Xi] = μ. Allora, per ogni ε > 0:
+    P { | (X1 + ... + Xn)/n -μ | > ε } -> 0 , per n -> ∞ 
+.
+
+//dimostrazione su libro 
+
+Per applicare la suddetta, supponiamo che una sequenza di prove indipendenti sia effettuata. Sia E un evento fissato e P(E) la probabilità che E avvenga in una prova. Essendo:
+    Xi = {
+        1 se E avviene nella prova i,
+        0 se E non avviene nella prova i    
+    }
+segue che X1 + X2 + ... + Xn rappresentano il numero di volte che E è avvenuto nelle prime n prove. 
+
+Poichè E[Xi] = P(E), allora ne conseuge dalla legge debole dei grandi numeri che per un qualsiasi numero positivo ε, non importa quanto piccolo, la probabilità che la proporzione delle prime n prove in cui E avviene differisce da P(E) di più di ε tende a 0 man mano che n incrementa. 
+
+5.1 - VARIABILI ALEATORIE DI BERNOULLI E BINOMIALI ----------------------------------------
+
+Supponiamo che un esperimento il cui risultato può essere successo o fallimento viene effettuato. Se il risultato è successo allora X = 1, se il risultato è fallimento allora X = 0, allora la funzione di massa di probabilità di X è data da:
+    P{X = 0} = 1 − p 
+    P{X = 1} = p
+, dove p (0 <= p <= 1) è la probabilità che l'esperimento sia un successo.
+
+Una variabile X è detta una variabile aleatoria di Bernoulli se la sua funzione di massa di probabilità è data dalle sue due equazioni di sopra per un qualche p appartenente a (0, 1).
+
+Il suo valore atteso è:
+    E[X] = 1 · P{X = 1} + 0 · P{X = 0} = p
+, ovvero il valore atteso di una variabile aleatoria di Bernoulli è la probabilità che la variabile aleatoria valga 1. 
+
+Supponiamo di svolgere n esperimenti indipendenti, ciascuno dei quali risulti in un successo con probabilità p e in un fallimento con probabilità 1-p. Se X rappresenta il numero di successi che occorrono in n esperimenti, allora X è detto essere una variabile aleatoria binomiale con parametri (n, p).
+
+La funzione di massa di probabilità di una variabile aleatoria binomiale con parametri n e p è data da:
+    P{X = i} = (n   i) p^i (1-p)^(n-i) , i = 0, 1, ..., n     //(n   i) binomio
+dove (n   i) = n! / [i!(n-i)!] è il numero di gruppi di i oggetti che possono essere scelti da un insieme di n oggetti.
+
+Poichè una variabile aleatoria binomiale X, con parametri n e p, rappresenta il numero di successi in n test indipendenti, ciascuno avente probabilità di successo p, possiamo rappresentare X come:
+    X = SOMMATORIA[i=1 to n] Xi
+, dove:
+    Xi = 1 se l'i-esimo esperiemnto è un successo, 
+    Xi = 0 altrimenti.
+.
+
+Poichè le Xi (i = 1, ..., n) sono variabili aleatorie di Bernoulli indipendenti, abbiamo che:
+    E[Xi] = p ,
+    Var(Xi) = p(1-p)
+.
+
+Se consideriamo E[X] = np, allora Var(X) = np(1 - p). 
+
+5.1.1 - COMPUTANDO LA FUNZIONE DI DISTRIBUZIONE BINOMIALE -------------------------------
+
+Supponiamo che X sia binomiale con parametri (n, p). Per computare la sua funzione di distribuzione P[X <= i] serve utilizzare la relazione tra P[X = k + 1] e P[X = k]:
+    P[X = k + 1] = p/(1-p) * (n-k)/(k+1) * P[X = k]
+.
+
+5.2 - VARIABILE ALEATORIA DI POISSON ----------------------------------------------------
+
+Una variabile aleatoria X, che assume uno dei valori 0, 1, 2, ... viene detta una variabile aleatoria di Poisson con parametro λ, λ > 0, se la sua funzione di massa di probabilità è data da:
+    P{X = i} = e^(−λ) * λi/i! , i = 0, 1, ...
+, dove e sta per la costante di nepero. 
+
+Una variabile aleatoria di Poisson X ha:
+    E[X] = λ,
+    Var(X) = λ
+.
+
+5.3 - VARIABILE ALEATORIA IPERGEOMETRICA -----------------------------------------------
+
+Data X una variabile aleatoria ipergeometrica, la sua funzione di massa di probabilità è:
+    P{X = i} = [(N   i)*(M   n-i)]/(N+M   n), i = 0,1,...,min(N, n)
+.
+
+Sia :
+    Xi = 1 se la i-esima selezione è un successo,
+    Xi = 0 altrimenti. 
+Abbiamo che:
+    P{Xi = 1} = N/(N + M).
+Inoltre per i != j, 
+    P{Xi = 1, Xj = 1} = P{Xi = 1} P{Xj = 1|Xi = 1} = N/(N+M) * (N-1)/(N+M-1)
+.
+
+E[X] = nN/(N + M).
+
+Var(X) = N/(N+M) * M/(N+M).
+
+//altre info comprendenti covarianza.
+
+5.4 - VARIABILE ALEATORIA UNIFORME -----------------------------------------------------
+
+Una variabile aleatoria X viene detta distribuita uniformemente su un intervallo [α, β] se la sua funzione di densità di probabilità è data da:
+    f(x) = 1/(β − α) se α ≤ x ≤ β,
+    f(x) = 0 altrimenti.
+.
+
+E[X] = (α + β)/2.
+
+E[X^2] = (β^2 + αβ + α^2)/3.
+
+Var(X) = E[X^2] - E[X]^2 = (β − α)^2 /12.
+
+5.5 - VARIABILI ALEATORIE NORMALI ------------------------------------------------------
+
+Una variabile aleatoria viene detta distribuita normalmente con parametri μ e σ^2 e scriviamo X ∼ N(μ, σ^2), se la sua densità è:
+    f (x) = (1/√2πσ) * e^(−(x−μ)^2 / 2σ^2) , per −∞ < x < ∞∗
+.
+
+La funzione di densità f(x) per una normale è una curva  campana simmetrica rispetto a μ e che ottiene il suo massimo valore in x = μ.
+
+E[X] = μ.
+
+Var(X) = σ^2.
+
+Un'importante proprietà delle variabili aleatorie normali è che se X è una normale con valore atteso μ e varianza σ^2, allora per qualsiasi costanti a e b, b != 0, la variabile aleatoria Y = a + bX è anch'esssa una variabile aleatoria normale con parametri:
+    E[Y] = E[a + bX] = a + bE[X] = a + bμ
+e 
+    Var(Y ) = Var(a + bX) = b^2 Var(X) = b^2 σ^2
+.
+
+Ne consegue che se X ∼ N(μ, σ^2), allora:
+    Z = (X - μ)/σ
+è una variabile aleatoria normale con valore atteso 0 e varianza 1. Una tale variabile aleatoria Z è detta avere una distribuzione normale standard. Sia Φ denotante la sua funzione di distribuzione, ovvero:
+    Φ(x) = 1/√2π * INTEGRALE[-∞, x] {e^((-y^2)/2) dy}, −∞ < x < ∞
+.
+
+Ciò permette di calcolare:
+    P{X < b} = P {(X − μ)/σ  <  (b − μ)/σ } = Φ(b − μ)/σ 
+.
+
+Analogamente, per ogni a < b:
+    P{a < X < b} = ... = Φ(b − μ)/σ - Φ(a − μ)/σ 
+.
+
+5.6 - VARIABILI ALEATORIE ESPONENZIALI ---------------------------------------------------
+
+Una variabile aleatoria continua la cui funzione di densità di probabilità è data, per un qualche λ > 0, da:
+    f(x) = λe^(−λx) , se x ≥ 0 
+    f(x) = 0 , se x < 0
+viene detta variabile aleatoria esponenziale (o esponenzialmente distribuita) con parametro λ.
+
+La sua funzione di distribuzione cumulativa F(x) è data da:
+    F(x) = P {X <= x} = 1 - e^(−λx) , per x ≥ 0
+.
+
+La funzione del momento generante dell'esponenziale è data da:
+    φ(t) = λ / (λ − t) , per t < λ
+.
+
+E[X] = 1/λ .
+
+Var(X) = 1/λ^2 .
+
+Le variabili aleatorie esponenziali sono dette prive di memoria. Una variabile aleatoria X non negativa viene detta priva di memoria se:
+    P {X > s + t | X > t} = P{X > s} , per ogni s, t ≥ 0
+.
+
+L'equazione sopra è equivalente a: P{X > s + t} = P{X > s}P{X > t} .
+
+Quando X è una variabile aleatoria esponenziale, allora:
+    P{X > x} = e^(−λx), x > 0
+.
+
+5.6.1 - IL PROCESSO DI POISSON ----------------------------------------------------------
+
+Supponimao che degli eventi stiano occorrendo a momenti casuali e sia N(t) il numero di eventi occorsi nell'intervallo di tempo [0, t]. Questi eventi vengono detti costituenti di un processo di Poisson avente rateo λ, λ > 0, se:
+a) N(0) = 0.
+b) Il numero di eventi che è occorso in intervalli di tempo disgiunti sono indipendenti. 
+c) La distribuzione del numero di eventi che occorrono in un dato intervallo dipende solo dalla lunghezza dell'intervallo e non dalla sua posizione.
+d) lim [h -> 0] P{N(h) = 1} / h = λ
+e) lim [h -> 0] P{N(h) ≥ 2} / h = 0
+
+
+//sul quad penso sia meglio
+...
+
+
+6.1 - INTRODUZIONE -----------------------------------------------------------------------
+
+Se X1, ..., Xn sono variabili aleatorie indipendenti avente una distribuzione comune F, allora diciamo che constituiscono un campione (detto anche campione casuale) della distribuzione F.
+
+In molte applicazioni, la popolazione F non sarà completamente specificata e si proverà ad usare i dati per fare inferenza su F. 
+
+6.2 - LA MEDIA DEL CAMPIONE --------------------------------------------------------------
+
+Consideriamo una popolazione di elementi, ciascuno con un valore numerico associato. Spesso supponiamo che un valore associato con un qualsiasi membro della popolazione possa essere considerato come il valore di una variabile aleatoria avente valore atteso μ e varianza σ^2. 
+
+μ viene detto valore atteso/media della popolazione e σ^2 viene detto varianza della popolazione. 
+
+Siano X1, ..., Xn un campione di valori da questa popolazione. La media del campione viene definita come:
+    X̄ = (X1 + ... + Xn) / n 
+.
+
+E[X̄] = μ .
+
+Var(X̄) = σ^2 / n .
+
+6.3 - TEOREMA DEL LIMITE CENTRALE ------------------------------------------------------
+
+Teorema Centrale del Limite (TCL):
+Siano X1, ..., Xn una sequenza di variabili aleatorie indipendenti e identicamente distribuite ciascune aventi media μ e varianza σ^2. Allora per un n grande, la distribuzione di X1 + .... + Xn è approssimatamente normale con la media nμ e la varianza nσ^2.
+
+Ne consegue che:
+    (X1 + ... + Xn − nμ) / σ√n
+è approssimatamente una variabile aleatoria normale standard; perciò per un n grande,
+    P {((X1 + ... + Xn − nμ) / σ√n) < x} ≈ P{Z < x}
+dove Z è una variabile aleatoria normale standard.
+
+//altro su libro e testo
+
+6.4 - LA VARIANZA DEL CAMPIONE --------------------------------------------------------
+
+Sia X1, ..., Xn un campione casuale da una distribuzione con media μ e varianza σ^2. Sia X̄ la media del campione.
+
+La statistica S^2, definita da:
+    S^2 = (Σ [i = 1 to n] {(Xi - X̄)^2} ) / (n-1)
+viene chiamato varianza di campione. S = √S^2 viene chiamata deviazione standard campionaria. 
+
+E[S^2] = σ^2 .
+
+----------------------------------------
+
+7.7  ?????? wtf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

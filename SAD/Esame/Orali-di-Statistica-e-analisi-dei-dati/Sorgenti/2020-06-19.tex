@@ -1,0 +1,46 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
+\newcommand{\bb}{\textbf}
+\newcommand{\ii}{\textit}
+
+\title{Orali del 19 giugno 2020}
+\author{Alessandro Di Gioacchino}
+
+\begin{document}
+
+    \maketitle
+
+    A cosa serve un classificatore binario? Come faccio a valutarne la performance? Quale potrebbe essere una matrice di confusione ideale? Approssimativamente una diagonale, con
+    tutti i valori che non sono sulla diagonale molto vicini a zero. Cosa usiamo se volessimo 'comprimere' la matrice in un numero più basso di valori? Cosa ci racconta la
+    specificità? Esprime sempre le volte in cui il classificatore ha indovinato? La specificità, che ha veri positivi al numeratore e veri positivi più falsi negativi al
+    denominatore, è la probabilità di quale evento? È la probabilità che, se il classificatore risponde “è positivo”, l'oggetto in esame è effettivamente positivo. In altri 
+    termini, ci dice quale frazione di casi positivi il classificatore riesce ad indovinare? Di cosa tratta l'altro indice, la sensitività? Idealmente, sarei contento per quali
+    valori di sensitività e specificità? Curva ROC. Perché il punto $ ( 0 , 1 ) $ indica il classificatore ideale? Cosa posso dire del numero di falsi positivi e del numero di
+    falsi negativi se il classificatore si posiziona in tale punto? A cosa serve la diagonale nella grafico della curva? È possibile ottenere una curva degenere che giace su di
+    essa? Sì, con un classificatore che sceglie in modo casuale. \\
+    Conosciamo solo il grafico della funzione di ripartizione di due v.a. \\
+    Disegna il grafico della funzione di ripartizione di una v.a. discreta. Cosa si intende con il simbolo di intervallo aperto all'inizio di ciascun tratto? Tracciamo nello stesso
+    grafico la funzione di ripartizione di una v.a. continua, definita sull'intervallo da zero a tre (come le specificazioni della v.a. discreta di cui sopra). Anzi, riferiamoci ad
+    una v.a. uniforme con specificazioni zero, uno, due. Guardando questo grafico, possiamo dire qualcosa sulla relazione tra i valori attesi delle due variabili aleatorie? Quella
+    discreta potrebbe essere una binomiale? Quali specificazione ha? Una variabile con specificazioni uno, due, tre può essere una binomiale? No, dovrebbe esserci anche zero. Il
+    ragionamento che dobbiamo fare coinvolge solo quanto il grafico esprime visivamente. Possiamo legare il grafico della funzione di ripartizione al valore atteso? Detto questo,
+    siamo in grado di dire se c'è una particolare relazione tra il valore atteso della v.a. continua e della v.a. discreta? Sì: il valore atteso della v.a. discreta è maggiore. \\
+    Abbiamo un campione aleatorio descritto da $ n $ v.a., $ X_1 , \dots , X_n $, e vogliamo stimare il valore atteso della popolazione. Normalmente cosa useremmo? Proviamo invece
+    a stimarlo con la varianza campionaria. Qual è la sua definizione? Supponendo di avere già il valore della varianza campionaria, in quali situazioni usarlo per stimare il
+    valore atteso potrebbe avere senso? Ce ne potrebbero essere alcune in cui tale stimatore non è neanche deviato, per esempio se la distribuzione ha valore atteso e varianza
+    uguali. Quale distribuzione ha questa caratteristica? Se il valore atteso è invece funzione della varianza, lo stimatore potrebbe essere deviato: perché? Pensiamo
+    all'esponenziale, in cui la varianza è il quadrato del valore atteso: in questo caso, per ottenere il valore atteso data la varianza campionaria, ne dovremmo estrarre la
+    radice quadrata. Cosa possiamo dire circa le proprietà di questo stimatore? Cosa vuol dire che uno stimatore è corretto? Qual è il valore atteso di $ S $, cioè della deviazione
+    standard campionaria (radice della varianza campionaria)? $ 1 / \lambda $ \\
+    Sappiamo quindi che $ \mathcal E [ S ] = \frac{ 1 }{ \lambda } $, perché $ S^2 $ è uno stimatore non deviato della varianza. Come indichiamo analiticamente questa cosa?
+    Sappiamo che la varianza campionaria è sempre uno stimatore non deviato della varianza della popolazione. A partire dalla seconda equazione,
+    $ \mathcal E [ S^2 ] = \frac{ 1 }{ \lambda^2 } $, possiamo ricavare la prima? No, perché il valore atteso è lineare. Tornando al punto di partenza, possiamo quindi dire che la
+    varianza campionaria è uno stimatore non deviato del valore atteso in quali casi? Quando la trasformazione che porta la varianza nel valore atteso è lineare, perché basta
+    applicare la stessa trasformazione allo stimatore della varianza. \\
+
+\end{document}

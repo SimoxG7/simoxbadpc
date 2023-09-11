@@ -1,0 +1,124 @@
+import pandas as pd
+import numpy as np
+import math
+import scipy.stats as st
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('Comune_Bergamo_-_Incidenti_stradali.csv') //apro csv 
+file.columns
+lunghezza record: len(file) //in csv
+file.info() // da info sui record e i loro tipi
+file.get("Anno") //prendo record dell'attributo anno
+file['Anno'].value_counts(sort=False) //.plot.bar() //o meglio cosi
+
+//fa grafico a barre e lo stampa
+file['Anno'].value_counts(sort=False).plot.bar()
+plt.show()
+
+nferiti = file["N_Feriti"].value_counts() //freq assoluta
+nferiti = file["N_Feriti"].value_counts(normalize=True) //freq relativa
+
+n_feriti.cumsum().plot() //ottimo per grafico di frequenze cumulative 
+plt.show()
+
+almeno un ... -> lavora con 1 - P(...)
+
+file["N_Feriti"].mean() //media di feriti -> valore atteso
+
+file['N_Feriti'].describe() //informazioni utilissime
+
+per stima del parametro del modello uso le formule di valore atteso con attuale valore atteso
+
+//modello geometrico
+X = st.geom(p,loc=-1)
+x = np.arange(11) #numero max di incidenti
+plt.plot(x,X.pmf(x),'o') //funzione di massa di prob pmf
+plt.show()
+
+plt.scatter(df['N_Feriti'],df['N_Illesi'],color="brown") //scatterplot 
+plt.xlabel('Feriti') //nome a x 
+plt.ylabel('Illesi') //nome a y
+plt.show()
+
+df['N_Feriti'].corr(df['N_Illesi']) //indice di correlazione tra due vettori
+
+per stimatore posso usare la media
+
+df['N_Illesi'].var() // per calcolare varianza
+
+Z = st.norm() //crea normale
+Z.ppf(0.995) //percent point function, inverso di cdf (cumulative disitribution function, ovvero fi)
+
+df = pd.read_csv('DATI-AMBIENTE.txt', sep=";", decimal=",", na_values=' ') //separatore è importante
+
+print(df["CO"].median()) //mediana
+
+medici.hist(bins=20) //istogramma con 20 colonne
+plt.show()
+
+
+from statsmodels.distributions.empirical_distribution import ECDF //funzione cumulativa empirica 
+dist = ECDF(medici)
+plt.plot(dist.x, dist.y)
+plt.show()
+
+
+l = 5
+x = range(15)
+p_x = list(map(lambda _: p_poisson(_, l), x))
+plt.vlines(x, [0]*len(x), p_x)
+plt.plot(x, p_x, 'o')
+plt.show() //a bastoncini
+
+
+import scipy.stats as st
+X = st.poisson(l)
+
+X.pmf(x) //funzione di massa di probabilità 
+
+acqua['NomeSorgente'].unique() //ritorna i valori unici del campo nomesorgente del dataframe -> len = quanti valori unici
+
+//gini
+def gini(series):
+    return 1 - sum(series.value_counts(normalize=True).map(lambda f: f**2))
+
+def normalized_gini(series):
+    s = num_values(series)
+    return s * gini(series) / (s-1)
+
+normalized_gini(acqua['NomeSorgente'])
+
+acqua['Oro'].value_counts(normalize=True, sort=False)
+
+plt.vlines(gold_rel_freq.index, 0, gold_rel_freq.values) //bastoncini
+plt.plot(gold_rel_freq.index, gold_rel_freq.values, 'o')
+plt.show()
+
+media e mediana simili -> possibile poisson, inoltre in poisson //inoltre strettamente decrescente oppure con carattere di diminuizione non lineare allontanandosi dal massimo
+
+
+
+import statsmodels.api as sm
+
+sm.qqplot(acqua['DurezzaAcqua'], fit=True, line='45') //qqplot, se simile a bisettrice, allora è modello normale
+plt.show()
+
+
+
+acqua.plot.scatter('Oro', 'DurezzaAcqua') //scatter plot per valutare relazione tra due elementi 
+plt.show()
+
+acqua['Oro'].corr(acqua['DurezzaAcqua']) //o anche indice di correlazione
+
+acqua.groupby('NomeSorgente').mean() //groupby permette di dividere un dataframe in base a istanze dell'argomento del groupby
+
+t = np.arange(0, 10, .1) //crea array
+
+np.select
+
+np.where
+
+
+
+
+
