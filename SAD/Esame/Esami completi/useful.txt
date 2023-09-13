@@ -1,0 +1,191 @@
+import pandas as pd 
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy.stats as st
+
+df = pd.read_csv("carsharing.csv",delimiter=";",decimal=",",index_col="CarIdentifier")
+df[:5]
+
+#grafico a barre
+#Permette di rappresentare meglio  i dati nominali o categorici, calcolare la frequenza oppure fare groupby.sum. questo grafico prendi in input la tabella delle frequenze e mostra sull'asse delle x i valori, su quello delle y le frequenze.
+plt.subplot(1,2,1) 
+df.TimeFrame.value_counts().plot.bar()
+plt.subplot(1,2,2)
+df.Time.plot.bar()
+plt.show()
+
+#istogramma
+#Suddivide la popolazione in classi e ne rappresenta le frequenze. Mette in risalto: simmetria, dispersione, intervalli di concentrazione, vuoti nei dati, distacco tra i dati
+plt.subplot(1,2,1) 
+df.TimeFrame.hist()
+plt.subplot(1,2,2)
+df.Time.hist()
+plt.show()
+
+#boxplot
+#Mostra chiaramente come è distribuita la frequenza: la linea centrale indica la mediana, i lati orizzonatali del rettangolo il primo e terzo quantile, i baffi indicano il terzo quartile - la distanza interquartile e il primo quartile - la distanza interquartile, i pallini indicano gli outlier. Grafico utile per il colpo d'occhio, permette di individuare il range di variazione
+plt.boxplot([df.TimeFrame.value_counts(),df.Time], labels=['Nominale','Numerico']) 
+plt.show()
+
+#qqplot 
+#Serve per stimare se dei campioni sono estratti dalla stessa popolazione oppure se la popolazione segue una normale. Rappresenta i quantili della distribuzione
+import statsmodels.api as sm 
+sm.qqplot(df.Time.dropna(), fit=True, line='45')
+plt.show()
+
+#scatterplot
+#Serve per determinare la relazione tra più attributi di uno stesso dataframe
+plt.scatter(df.Time,df.Distance) 
+plt.show()
+
+#ECDF, Funzione di ripartizione empirica
+#Permette di evidenziare: valori mancanti, distribuzione unimodale e/o simmetria, distribuzione asimmetrica a sinistra (mediana < media), distribuzione asimmetrica a destra (mediana > media).
+import statsmodels.distributions as dm 
+dist = dm.ECDF(df.Distance.dropna())
+plt.plot(dist.x,dist.y)
+plt.show()
+
+---
+
+df = pd.read_csv('Comune_Bergamo_-_Incidenti_stradali.csv')
+df.columns
+len(df)
+df.info()
+
+df['Anno'].value_counts(sort=False).plot.bar()
+plt.show()
+
+n_feriti = pd.crosstab(index=df['N_Feriti'],columns="Frequenza Relativa",colnames=[''],normalize=True)
+
+n_feriti.cumsum().plot()
+plt.show()
+
+df['N_Feriti'].mean()
+
+df['N_Feriti'].describe()
+
+from statsmodels.distributions.empirical_distribution import ECDF
+dist = ECDF(df['N_Feriti'].dropna())
+plt.plot(dist.x, dist.y)
+plt.show()
+
+plt.scatter(df['N_Feriti'],df['N_Illesi'],color="brown")
+plt.xlabel('Feriti')
+plt.ylabel('Illesi')
+plt.show()
+
+df['N_Feriti'].corr(df['N_Illesi'])
+
+std = (df['N_Illesi'].var()/df['N_Illesi'].dropna().count())**0.5
+
+Z = st.norm()
+Z.ppf(0.995)
+
+def gini(series):
+  return 1 - sum(series.value_counts(normalize=True).map(lambda f: f**2))
+
+def normalized_gini(series):
+  s = len(series.unique())
+  return s * gini(series)/(s-1)
+
+normalized_gini(df['PROVINCIA'].dropna())
+
+df['SO2'].value_counts().describe()
+
+df['O3'].value_counts(normalize=True)
+
+mask1 = df['O3'] > 45
+mask2 = df['O3'] < 50
+len(df[mask1 & mask2]) + len(df[df['O3'] == 45]) + len(df[df['O3'] == 50])
+
+tn = df['O3_GIORNI_SUPERAMENTO_TOLLERANZA'].mean() #valore atteso
+dvn = df['O3_GIORNI_SUPERAMENTO_TOLLERANZA'].std()
+
+df['O3_GIORNI_SUPERAMENTO_TOLLERANZA'].hist()
+plt.show()
+
+età = cani['EtaAnni']
+bins = np.arange(0,età.max(),1)
+età.hist(bins = np.hstack(bins))
+plt.show()
+
+print(età.min(),età.mean(),età.var(),età.max())
+
+mask1 = età < 13
+mask2 = età >= 12
+len(età[ mask1 & mask2])
+
+cani[cani.MORTE == 1].MC.isna().value_counts()
+
+fgip = pd.crosstab(index=gip,colnames=[''],columns=['Frequenza Relativa'],normalize=True)
+
+bins = np.arange(0,surv.max(),120)
+surv.hist(bins = np.hstack(bins))
+plt.show()
+
+surv.value_counts(normalize=True).sort_index().cumsum().plot()
+plt.show()
+
+Z = st.norm()
+sigma = math.sqrt(3)
+alpha = 0.9
+epsilon = 0.25
+(Z.ppf((alpha+1)/2)*sigma/epsilon)**2
+# n >= 130
+
+df = pd.read_csv("mtcars.txt",sep="\t",decimal=",")
+df.info()
+
+df.peso.mode()
+
+df[df.peso == df.peso.max()].modello
+
+pd.crosstab(index=df.marce, columns=df.trasmissione,margins=True) #frequenze congiuntive
+pd.crosstab(index=df.marce, columns=df.trasmissione, normalize=True,margins=True) #frequenze congiuntive relative
+
+import statsmodels.api as sm
+sm.qqplot(df.test400metri.dropna(), fit=True, line='45')
+plt.show()
+
+nobolidi  = df[df.cilindrata <= 180]
+data = [bolidi.consumo, nobolidi.consumo]
+
+# Multiple box plots on one Axes
+fig, ax = plt.subplots()
+ax.boxplot(data)
+plt.show()
+
+plt.scatter(df.cilindrata, df.test400metri)
+plt.xlabel('cilindrata')
+plt.ylabel('test400metri')
+plt.show()
+
+sigma = df.test400metri.std()
+n = len(df.test400metri.dropna())
+Z = st.norm()
+2*Z.cdf(0.25*(n**0.5)/sigma) - 1
+
+nu = 0.1
+y = st.expon(nu)
+x = np.arange(y.ppf(0.01),y.ppf(0.99))
+plt.plot(x,y.pdf(x))
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
